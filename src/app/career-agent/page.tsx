@@ -53,11 +53,9 @@ interface Message {
 // ── Suggested Prompts ─────────────────────────────────────────────
 const suggestions = [
   "Fix Profile Photo",
-  "Fix LinkedIn Highlights",
+  "Fix LinkedIn",
   "ATS Score Check",
-  "Build New Resume",
-  "Career Roadmap 2026",
-  "Ikigai Analysis",
+  "2026 Roadmap"
 ];
 
 // ── Flowchart ─────────────────────────────────────────────────────
@@ -283,10 +281,10 @@ export default function CareerAgent() {
                <div className="p-2 bg-black text-white shadow-[3px_3px_0px_0px_rgba(37,99,235,1)]">
                   <Brain className="w-8 h-8" />
                </div>
-               <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">Market Intelligence</span>
+               <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">Active Career Sync</span>
             </div>
             <h1 className="text-6xl md:text-[100px] font-black tracking-tighter leading-none italic uppercase">
-               DreamSync AI <br /> <span className="text-[#2563EB] drop-shadow-[5px_5px_0px_rgba(0,0,0,1)]">Career Guide</span>
+               DreamSync <br /> <span className="text-[#2563EB] drop-shadow-[5px_5px_0px_rgba(0,0,0,1)]">Strategist v2</span>
             </h1>
           </div>
           <div className="flex flex-wrap gap-3 justify-end max-w-md">
@@ -304,8 +302,8 @@ export default function CareerAgent() {
                    <Sparkles className="w-8 h-8 text-white" />
                 </div>
                  <div className="space-y-4">
-                    <h2 className="text-5xl font-black uppercase tracking-tighter italic">Hi! I am your DreamSync AI Guide.</h2>
-                    <p className="text-gray-400 font-bold uppercase tracking-widest text-xs">How can I help you today? I can help you find tools, fix issues, or explore career paths.</p>
+                    <h2 className="text-5xl font-black uppercase tracking-tighter italic">Strategist</h2>
+                    <p className="text-gray-400 font-bold uppercase tracking-widest text-xs leading-relaxed max-w-xl mx-auto">Hi! I am your DreamSync AI Guide. How can I help you today? I can help you find tools, fix issues, or explore career paths.</p>
                  </div>
              </div>
            ) : (
