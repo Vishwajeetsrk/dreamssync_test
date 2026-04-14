@@ -172,8 +172,8 @@ export default function IkigaiPage() {
           {/* Details */}
           <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} className="space-y-8">
             {/* Primary Path */}
-            <div className="bg-black text-white border-4 border-black p-8 neo-box shadow-[8px_8px_0px_0px_rgba(79,70,229,1)]">
-              <div className="text-primary font-black uppercase text-xs tracking-widest mb-2 flex items-center gap-2">
+            <div className="bg-black text-white border-4 border-black p-8 neo-box shadow-[8px_8px_0px_0px_rgba(124,58,237,1)]">
+              <div className="text-[#FACC15] font-black uppercase text-xs tracking-widest mb-2 flex items-center gap-2">
                 <Rocket className="w-4 h-4" /> Recommended Ikigai Path
               </div>
               <h2 className="text-4xl font-black mb-4">{result.primaryPath.title}</h2>
@@ -254,11 +254,11 @@ export default function IkigaiPage() {
 
             {/* Integration CTAs */}
             <div className="flex flex-col gap-4">
-               <Link href="/resume-builder" className="w-full flex items-center justify-between p-4 bg-emerald-500 text-white font-black border-4 border-black neo-box hover:-translate-x-1 hover:-translate-y-1 transition-all">
-                 Build Resume for this Path <ArrowRight className="w-5 h-5 text-white" />
+               <Link href="/resume-builder" className="w-full flex items-center justify-between p-5 bg-[#7C3AED] text-white font-black border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all uppercase italic">
+                 Build Resume for this Path <ArrowRight className="w-6 h-6 text-white" />
                </Link>
-               <Link href="/roadmap" className="w-full flex items-center justify-between p-4 bg-indigo-500 text-white font-black border-4 border-black neo-box hover:-translate-x-1 hover:-translate-y-1 transition-all">
-                 Generate Technical Roadmap <ArrowRight className="w-5 h-5 text-white" />
+               <Link href="/roadmap" className="w-full flex items-center justify-between p-5 bg-black text-white font-black border-4 border-black shadow-[6px_6px_0px_0px_rgba(124,58,237,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all uppercase italic">
+                 Generate Technical Roadmap <ArrowRight className="w-6 h-6 text-white" />
                </Link>
             </div>
 
