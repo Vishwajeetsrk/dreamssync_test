@@ -36,6 +36,7 @@ function ProfileContent() {
   const [avatarUrl, setAvatarUrl] = useState('');
   const [activeTab, setActiveTab] = useState('profile');
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+  const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
   const router = useRouter();
@@ -145,8 +146,9 @@ function ProfileContent() {
     setLoading(true);
     try {
       await updatePassword(auth.currentUser!, newPassword);
-      setMessage({ type: 'success', text: 'SECURITY CREDENTIALS HARDENED.' });
+      setMessage({ type: 'success', text: 'SECURITY SETTINGS UPDATED SUCCESSFULLY.' });
       setNewPassword('');
+      setCurrentPassword('');
     } catch (err: any) {
       setMessage({ type: 'error', text: err.message });
     } finally {
@@ -329,21 +331,31 @@ function ProfileContent() {
             >
               <div className="neo-box p-16 bg-white">
                 <h2 className="text-3xl font-black uppercase mb-16 flex items-center gap-6 tracking-tighter">
-                  <Lock className="w-10 h-10 text-[#2563EB]" /> SECURITY HARDENING
+                  <Lock className="w-10 h-10 text-[#2563EB]" /> SECURITY SETTINGS
                 </h2>
-                <form onSubmit={handleChangePassword} className="space-y-12 max-w-2xl">
+                <form onSubmit={handleChangePassword} className="space-y-12 max-w-2xl text-black">
                   <div className="space-y-6">
-                    <label className="text-xs font-black uppercase tracking-widest text-[#2563EB] block">NEW ACCESS PROTOCOL KEY</label>
+                    <label className="text-xs font-black uppercase tracking-widest text-[#2563EB] block">Current Password</label>
+                    <input 
+                      type="password" 
+                      value={currentPassword} 
+                      onChange={(e) => setCurrentPassword(e.target.value)} 
+                      placeholder="••••••••••••••••"
+                      className="neo-input text-2xl" 
+                    />
+                  </div>
+                  <div className="space-y-6">
+                    <label className="text-xs font-black uppercase tracking-widest text-[#2563EB] block">New Password</label>
                     <input 
                       type="password" 
                       value={newPassword} 
                       onChange={(e) => setNewPassword(e.target.value)} 
-                      placeholder="••••••••••••••••••••••••••••••••••••"
+                      placeholder="••••••••••••••••"
                       className="neo-input text-2xl" 
                     />
                   </div>
                   <button type="submit" className="neo-btn-primary px-16 py-6 text-xl flex items-center gap-6 group">
-                    <Shield className="w-8 h-8 group-hover:scale-110 transition-transform" /> AUTHORIZE HARDENING
+                    <Shield className="w-8 h-8 group-hover:scale-110 transition-transform" /> AUTHORIZE UPDATE
                   </button>
                 </form>
               </div>
@@ -351,9 +363,9 @@ function ProfileContent() {
               {/* Termination Zone Architecture */}
               <div className="neo-box p-16 bg-red-50 border-red-600 flex flex-col xl:flex-row xl:items-center justify-between gap-16">
                 <div className="space-y-6">
-                  <h3 className="text-4xl font-black uppercase tracking-tighter text-red-600">CRITICAL TERMINATION</h3>
+                  <h3 className="text-4xl font-black uppercase tracking-tighter text-red-600">DANGER ZONE</h3>
                   <p className="text-lg font-bold text-red-600/60 max-w-xl leading-snug uppercase">
-                    WARNING: Full de-authorization of identity node and permanent erasure of all career synchronization logs within the infrastructure.
+                    WARNING: Full de-authorization of account and permanent erasure of all career synchronization data within the system.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-8">
@@ -367,7 +379,7 @@ function ProfileContent() {
                     onClick={handleDeleteAccount}
                     className={`px-12 py-6 border-4 border-black font-black uppercase text-sm tracking-widest transition-all shadow-[6px_6px_0px_rgba(0,0,0,1)] ${confirmDelete ? 'bg-red-600 text-white animate-pulse' : 'bg-transparent text-red-600 hover:bg-red-600 hover:text-white'}`}
                   >
-                    {confirmDelete ? 'CONFIRM ERASURE?' : 'PURGE NODE'}
+                    {confirmDelete ? 'CONFIRM ERASURE?' : 'PURGE ACCOUNT'}
                   </button>
                 </div>
               </div>
