@@ -72,22 +72,7 @@ export default function Roadmap() {
   return (
     <div className="min-h-screen bg-[#F3F4F6] text-black selection:bg-[#FACC15]/40 font-bold uppercase overflow-x-hidden">
       
-      {/* 🚀 BLACK MARQUEE TICKER (Audit Recap State) */}
-      <div className="marquee-neo mt-[88px]">
-        <motion.div 
-          animate={{ x: [0, -1200] }}
-          transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
-          className="flex whitespace-nowrap gap-20 font-black text-xs uppercase tracking-[0.3em] items-center"
-        >
-          <div className="flex items-center gap-3"><Map className="w-5 h-5 text-[#FACC15] fill-current" /> NODE: PLOTTING SYNTHETIC CAREER TRAJECTORIES</div>
-          <div className="flex items-center gap-3"><Globe className="w-5 h-5 text-[#2563EB]" /> GLOBAL SYNC: 2026 MARKET INTELLIGENCE ARCHIVES LOADED</div>
-          <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-emerald-600" /> ROADMAP: 100% SUCCESS RATE IN FAANG ALIGNMENT</div>
-          
-          {/* Duplicates for loop */}
-          <div className="flex items-center gap-3"><Map className="w-5 h-5 text-[#FACC15] fill-current" /> NODE: PLOTTING SYNTHETIC CAREER TRAJECTORIES</div>
-          <div className="flex items-center gap-3"><Globe className="w-5 h-5 text-[#2563EB]" /> GLOBAL SYNC: 2026 MARKET INTELLIGENCE ARCHIVES LOADED</div>
-        </motion.div>
-      </div>
+      <div className="mt-[88px]" />
 
       <div className="max-w-7xl mx-auto px-6 py-20">
         

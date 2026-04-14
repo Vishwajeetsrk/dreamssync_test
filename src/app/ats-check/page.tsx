@@ -97,22 +97,7 @@ export default function AdvancedATS() {
   return (
     <div className="min-h-screen bg-[#F3F4F6] text-black selection:bg-[#FACC15]/40 font-bold uppercase">
       
-      {/* 🚀 BLACK MARQUEE TICKER (Audit Recap State) */}
-      <div className="marquee-neo mt-[88px]">
-        <motion.div 
-          animate={{ x: [0, -1200] }}
-          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-          className="flex whitespace-nowrap gap-20 font-black text-xs uppercase tracking-[0.3em] items-center"
-        >
-          <div className="flex items-center gap-3"><Zap className="w-5 h-5 text-[#FACC15] fill-current" /> NODE: SCANNING FOR GOOGLE RECRUITER PATTERNS</div>
-          <div className="flex items-center gap-3"><Globe className="w-5 h-5 text-[#2563EB]" /> GLOBAL SYNC: 1400+ COMPANY ELIGIBILITY PROFILES LOADED</div>
-          <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-emerald-600" /> ATS v4.0: 99.8% PRECISION IN FAANG KEYWORD DETECTION</div>
-          
-          {/* Duplicates for loop */}
-          <div className="flex items-center gap-3"><Zap className="w-5 h-5 text-[#FACC15] fill-current" /> NODE: SCANNING FOR GOOGLE RECRUITER PATTERNS</div>
-          <div className="flex items-center gap-3"><Globe className="w-5 h-5 text-[#2563EB]" /> GLOBAL SYNC: 1400+ COMPANY ELIGIBILITY PROFILES LOADED</div>
-        </motion.div>
-      </div>
+      <div className="mt-[88px]" />
 
       <div className="max-w-7xl mx-auto px-6 py-20">
         

@@ -25,18 +25,33 @@ export default function Home() {
   return (
     <div className="flex flex-col bg-[#F3F4F6] selection:bg-[#FACC15]/40 min-h-screen">
       
-      {/* 🚀 BLACK MARQUEE TICKER */}
-      <div className="marquee-neo mt-[88px]">
+      {/* 🚀 CLICKABLE MARQUEE TICKER (Exclusive to Home) */}
+      <div className="marquee-neo mt-[88px] overflow-hidden border-b-4 border-black">
         <motion.div 
           animate={{ x: [0, -1200] }}
-          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-          className="flex whitespace-nowrap gap-20 font-black text-xs uppercase tracking-[0.3em] items-center"
+          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+          className="flex whitespace-nowrap gap-20 font-black text-xs uppercase tracking-[0.3em] items-center py-4"
         >
-          <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-[#2563EB]" /> AI CAREER AGENT LIVE WITH 2026 INSIGHTS</div>
-          <div className="flex items-center gap-3"><Brain className="w-5 h-5 text-[#FACC15]" /> PREMIUM "IKIGAI" CAREER FINDER NOW ACTIVE</div>
-          <div className="flex items-center gap-3"><FileText className="w-5 h-5 text-emerald-400" /> AI RESUME BUILDER: 100% FREE FOR STUDENTS</div>
+          <Link href="/career-agent" className="flex items-center gap-3 hover:text-[#2563EB] transition-colors">
+            <TrendingUp className="w-5 h-5 text-[#2563EB]" /> AI CAREER AGENT LIVE WITH 2026 INSIGHTS
+          </Link>
+          <Link href="/ikigai" className="flex items-center gap-3 hover:text-[#7C3AED] transition-colors">
+            <Brain className="w-5 h-5 text-[#FACC15] fill-current" /> PREMIUM "IKIGAI" CAREER FINDER NOW ACTIVE
+          </Link>
+          <Link href="/resume-builder" className="flex items-center gap-3 hover:text-emerald-600 transition-colors">
+            <FileText className="w-5 h-5 text-emerald-400" /> AI RESUME BUILDER: 100% FREE FOR STUDENTS
+          </Link>
           
-          <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-[#2563EB]" /> AI CAREER AGENT LIVE WITH 2026 INSIGHTS</div>
+          {/* Duplicate loop */}
+          <Link href="/career-agent" className="flex items-center gap-3 hover:text-[#2563EB] transition-colors">
+            <TrendingUp className="w-5 h-5 text-[#2563EB]" /> AI CAREER AGENT LIVE WITH 2026 INSIGHTS
+          </Link>
+          <Link href="/ikigai" className="flex items-center gap-3 hover:text-[#7C3AED] transition-colors">
+            <Brain className="w-5 h-5 text-[#FACC15] fill-current" /> PREMIUM "IKIGAI" CAREER FINDER NOW ACTIVE
+          </Link>
+          <Link href="/resume-builder" className="flex items-center gap-3 hover:text-emerald-600 transition-colors">
+            <FileText className="w-5 h-5 text-emerald-400" /> AI RESUME BUILDER: 100% FREE FOR STUDENTS
+          </Link>
         </motion.div>
       </div>
 
