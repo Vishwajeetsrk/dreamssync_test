@@ -115,10 +115,6 @@ export default function AdvancedATS() {
               </h1>
            </div>
            <div className="hidden lg:block">
-              <div className="neo-box bg-white px-10 py-6 max-w-sm space-y-2">
-                 <h4 className="text-[10px] font-black uppercase text-[#2563EB]">Protocol Status</h4>
-                 <p className="text-sm font-black leading-tight italic">Analyzing existing nodes for FAANG compatibility...</p>
-              </div>
            </div>
         </div>
 
@@ -186,8 +182,8 @@ export default function AdvancedATS() {
             {!result && !loading && (
               <div className="h-full neo-box bg-white/50 border-dashed p-20 flex flex-col items-center justify-center text-center opacity-20 grayscale">
                 <BarChart3 className="w-24 h-24 mb-6" />
-                <p className="text-4xl font-black uppercase tracking-tighter">Results Locked</p>
-                <p className="text-sm font-black mt-4">INITIALIZE SCAN TO DECRYPT ELIGIBILITY NODES</p>
+                <p className="text-4xl font-black uppercase tracking-tighter">Analysis Locked</p>
+                <p className="text-sm font-black mt-4">Perform scan to evaluate candidate eligibility</p>
               </div>
             )}
 
