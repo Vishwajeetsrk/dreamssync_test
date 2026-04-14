@@ -34,7 +34,7 @@ export default function Dashboard() {
       <div className="min-h-screen bg-[#F3F4F6] flex items-center justify-center p-12">
          <div className="neo-box bg-white p-10 flex flex-col items-center gap-6">
             <div className="w-16 h-16 border-8 border-black border-t-[#FACC15] animate-spin shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"></div>
-            <span className="font-black uppercase tracking-widest text-black">Initializing Node...</span>
+            <span className="font-black uppercase tracking-widest text-black">Loading Dashboard...</span>
          </div>
       </div>
     );
@@ -56,7 +56,7 @@ export default function Dashboard() {
               <div className="p-3 bg-black text-white shadow-[4px_4px_0px_0px_rgba(37,99,235,1)]">
                 <LayoutDashboard className="w-8 h-8" />
               </div>
-              <span className="text-sm font-black uppercase tracking-[0.4em] text-black/40">Command Center</span>
+              <span className="text-sm font-black uppercase tracking-[0.4em] text-black/40">Dashboard Console</span>
             </motion.div>
             <motion.h1 
               initial={{ opacity: 0, x: -20 }}
@@ -104,7 +104,7 @@ export default function Dashboard() {
                         transition={{ duration: 2, repeat: Infinity }}
                         className="text-[8px] font-black bg-[#FACC15] text-black px-3 py-1 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] uppercase tracking-widest"
                       >
-                        SPONSOR NODES
+                        PREMIUM
                       </motion.span>
                     )}
                 </div>

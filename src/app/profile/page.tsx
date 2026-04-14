@@ -77,7 +77,7 @@ function ProfileContent() {
           last_sync: new Date().toISOString()
         }, { merge: true });
         setAvatarUrl(currentPhoto);
-        setMessage({ type: 'success', text: 'IDENTITY SYNCHRONIZATION COMPLETE.' });
+        setMessage({ type: 'success', text: 'PROFILE SYNC COMPLETE.' });
       } else {
         setMessage({ type: 'error', text: 'NO SOURCE PHOTO DETECTED. MANUAL UPDATE REQUIRED.' });
       }
@@ -99,7 +99,7 @@ function ProfileContent() {
         avatar_url: avatarUrl,
         updated_at: new Date().toISOString(),
       }, { merge: true });
-      setMessage({ type: 'success', text: 'IDENTITY RECORDS COMMITTED SUCCESSFULLY.' });
+      setMessage({ type: 'success', text: 'PROFILE UPDATED SUCCESSFULLY.' });
     } catch (err: any) {
       setMessage({ type: 'error', text: err.message });
     } finally {
@@ -118,7 +118,7 @@ function ProfileContent() {
       const url = await getDownloadURL(storageRef);
       setAvatarUrl(url);
       await setDoc(doc(db, 'users', user.uid), { avatar_url: url }, { merge: true });
-      setMessage({ type: 'success', text: 'IDENTITY PHOTO SYNCED TO NODES.' });
+      setMessage({ type: 'success', text: 'PROFILE PHOTO UPDATED.' });
     } catch (err: any) {
       console.warn('Storage blocked, fallback sync initiated...');
       const reader = new FileReader();
@@ -128,7 +128,7 @@ function ProfileContent() {
         try {
           setAvatarUrl(base64data);
           await setDoc(doc(db, 'users', user.uid), { avatar_url: base64data }, { merge: true });
-          setMessage({ type: 'success', text: 'IDENTITY SYNCED VIA DIRECT UPLOAD.' });
+          setMessage({ type: 'success', text: 'PROFILE PHOTO UPLOADED.' });
         } catch (dbErr: any) {
           setMessage({ type: 'error', text: 'SYNC FAILED. FILE SIZE EXCEEDS BUFFER.' });
         } finally {
@@ -168,7 +168,7 @@ function ProfileContent() {
       await deleteUser(auth.currentUser!);
       router.push('/signup');
     } catch (err: any) {
-      setMessage({ type: 'error', text: 'PROTOCOL REQUIRE FRESH RE-AUTH FOR ERASURE.' });
+      setMessage({ type: 'error', text: 'PLEASE RE-LOGIN TO DELETE ACCOUNT.' });
     } finally {
       setLoading(false);
     }
@@ -213,7 +213,7 @@ function ProfileContent() {
               onClick={() => setActiveTab('profile')}
               className={`px-8 py-4 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'profile' ? 'bg-[#2563EB] text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'text-black/40 hover:text-black'}`}
             >
-              IDENTITY
+              PROFILE
             </button>
             <button 
               onClick={() => setActiveTab('settings')}
@@ -257,13 +257,13 @@ function ProfileContent() {
 
                   <div className="space-y-4">
                     <h3 className="text-4xl font-black tracking-tighter text-black uppercase leading-none">{name || 'Vishwajeet Srk'}</h3>
-                    <div className="px-5 py-1.5 bg-black text-white text-[10px] font-black uppercase tracking-[0.3em] inline-block">AUTHENTICATED</div>
+                    <div className="px-5 py-1.5 bg-black text-white text-[10px] font-black uppercase tracking-[0.3em] inline-block">VERIFIED</div>
                     <p className="text-xs font-black text-black/30 uppercase tracking-widest block pt-2">{user?.email}</p>
                   </div>
 
                   <div className="w-full pt-10 border-t-4 border-black grid grid-cols-2 gap-8">
                     <div className="text-center">
-                      <div className="text-[10px] font-black uppercase text-black/20 mb-2 tracking-widest">PROTOCOL</div>
+                      <div className="text-[10px] font-black uppercase text-black/20 mb-2 tracking-widest">ACCESS</div>
                       <div className="text-xs font-black text-[#2563EB] uppercase">STANDARD</div>
                     </div>
                     <div className="text-center">
@@ -279,7 +279,7 @@ function ProfileContent() {
                   href="/donate" 
                   className="w-full bg-[#FACC15] border-4 border-black p-6 font-black uppercase text-center flex items-center justify-center gap-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all"
                 >
-                   <Coffee className="w-6 h-6 fill-current" /> SPONSOR NODES
+                   <Coffee className="w-6 h-6 fill-current" /> SUPPORT DREAMSYNC
                 </Link>
               </div>
 
@@ -287,12 +287,12 @@ function ProfileContent() {
               <div className="lg:col-span-8 space-y-12">
                 <div className="neo-box p-16 bg-white">
                   <h3 className="text-sm font-black uppercase tracking-[0.4em] text-black/30 mb-12 flex items-center gap-4">
-                    <Settings className="w-6 h-6 text-black" /> PERSONNEL PROTOCOL
+                    <Settings className="w-6 h-6 text-black" /> PROFILE INFORMATION
                   </h3>
                   
                   <form onSubmit={handleUpdateProfile} className="space-y-12">
                     <div className="space-y-6">
-                      <label className="text-xs font-black uppercase tracking-widest text-[#2563EB] block">OFFICIAL IDENTITY NAME</label>
+                      <label className="text-xs font-black uppercase tracking-widest text-[#2563EB] block">FULL NAME</label>
                       <input 
                         type="text" 
                         value={name} 
@@ -304,7 +304,7 @@ function ProfileContent() {
 
                     <div className="pt-8">
                        <button type="submit" className="neo-btn-primary w-full md:w-auto px-16 py-6 text-xl flex items-center justify-center gap-6 group">
-                         <Save className="w-8 h-8 group-hover:rotate-12 transition-transform" /> COMMIT CONFIGURATION
+                         <Save className="w-8 h-8 group-hover:rotate-12 transition-transform" /> SAVE CHANGES
                        </button>
                     </div>
                   </form>
@@ -314,7 +314,7 @@ function ProfileContent() {
                   <div className="flex items-start gap-8">
                     <ShieldCheck className="w-12 h-12 shrink-0" strokeWidth={3} />
                     <div className="space-y-4">
-                       <h4 className="text-sm font-black uppercase tracking-widest">Identity Infrastructure Notice</h4>
+                       <h4 className="text-sm font-black uppercase tracking-widest">Data Privacy Notice</h4>
                        <p className="text-lg font-bold leading-tight">Your profile data is protected via the DreamSync Security Protocol. Identity updates are synchronized across our redundant systems in milliseconds.</p>
                     </div>
                   </div>

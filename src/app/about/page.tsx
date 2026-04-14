@@ -17,7 +17,7 @@ export default function About() {
         >
           <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-[#2563EB]" /> CORE MISSION: ACCESSIBILITY THROUGH AI</div>
           <div className="flex items-center gap-3"><Link href="/career-agent" className="flex items-center gap-3 hover:text-[#2563EB] transition-colors"><Briefcase className="w-5 h-5 text-[#FACC15]" /> ADVANCED CAREER ENGINEERING</Link></div>
-          <div className="flex items-center gap-3"><FileText className="w-5 h-5 text-emerald-400" /> 100% FREE FOR STUDENT NODES</div>
+          <div className="flex items-center gap-3"><FileText className="w-5 h-5 text-emerald-400" /> 100% FREE FOR STUDENTS</div>
           <div className="flex items-center gap-3"><HeartHandshake className="w-5 h-5 text-rose-400" /> COMMUNITY-DRIVEN GROWTH</div>
           
           <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-[#2563EB]" /> CORE MISSION: ACCESSIBILITY THROUGH AI</div>
@@ -28,7 +28,7 @@ export default function About() {
         {/* Hero */}
         <section className="text-center space-y-10 group">
           <div className="inline-block px-8 py-2 border-4 border-black bg-white text-black font-black text-[10px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] uppercase tracking-[0.4em]">
-             Our Identity Protocol
+             Our Platform
           </div>
           <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-none uppercase text-black">
             About <br /> <span className="italic"><span className="text-[#2563EB]">Dream</span>Sync</span>
@@ -63,7 +63,7 @@ export default function About() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
-              { title: "Accessibility", desc: "Top-tier career guidance should be affordable and accessible to every node in the network.", icon: Globe, color: "bg-blue-100 text-blue-700" },
+              { title: "Accessibility", desc: "Top-tier career guidance should be affordable and accessible to every student in the network.", icon: Globe, color: "bg-blue-100 text-blue-700" },
               { title: "AI-Driven", desc: "We leverage synthetic intelligence to provide personalized, high-precision career feedback.", icon: Zap, color: "bg-yellow-100 text-yellow-700" },
               { title: "Community First", desc: "Built by care-experienced individuals for the next generation of Indian professionals.", icon: Heart, color: "bg-pink-100 text-pink-700" },
             ].map((value, i) => (
