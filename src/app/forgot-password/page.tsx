@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { auth } from '@/lib/firebase';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import Link from 'next/link';
-import { ArrowLeft, Mail, CheckCircle2, AlertCircle, ShieldCheck, Loader2 } from 'lucide-react';
+import { ArrowLeft, Mail, CheckCircle2, AlertCircle, ShieldCheck, Loader2, Zap } from 'lucide-react';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
