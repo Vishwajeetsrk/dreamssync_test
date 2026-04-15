@@ -514,7 +514,7 @@ export default function ResumeBuilder() {
 
                  {/* Strategy & Bullet Reform */}
                  <div className="space-y-4">
-                    <p className="text-[9px] font-black text-gray-400 uppercase italic tracking-widest">AI Strategy Node</p>
+                    <p className="text-[9px] font-black text-gray-400 uppercase italic tracking-widest">AI Strategic Roadmap</p>
                     {atsAnalysis.improvements.map((imp, idx) => (
                       <div key={idx} className="bg-[#2563EB] text-white p-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] space-y-2">
                          <p className="text-[9px] font-black italic opacity-60">REWRITE SUGGESTION:</p>

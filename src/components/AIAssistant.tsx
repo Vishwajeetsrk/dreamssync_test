@@ -92,7 +92,7 @@ export default function AIAssistant() {
                   <Sparkles className="w-6 h-6 text-black" fill="currentColor" />
                 </div>
                 <div>
-                  <h3 className="font-black text-xs tracking-[0.2em] text-black uppercase">DreamSync Strategist v2</h3>
+                  <h3 className="font-black text-xs tracking-[0.2em] text-black uppercase">AI Guide</h3>
                   <div className="flex items-center gap-2">
                     <div className="w-2.5 h-2.5 bg-green-500 rounded-full border border-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] animate-pulse" />
                     <span className="text-[10px] uppercase font-black text-gray-500 tracking-wider">Active Career Sync</span>
@@ -112,7 +112,7 @@ export default function AIAssistant() {
               {messages.map((msg, i) => (
                 <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
                    <div className={`text-[10px] font-black uppercase tracking-widest mb-2 ${msg.role === 'user' ? 'text-[#2563EB]' : 'text-gray-400'}`}>
-                    {msg.role === 'user' ? 'Sync Request' : 'Strategy Node'}
+                    {msg.role === 'user' ? 'Professional Sync' : 'Strategic Roadmap'}
                   </div>
                   <motion.div 
                     initial={{ opacity: 0, x: msg.role === 'user' ? 20 : -20 }}
@@ -152,7 +152,7 @@ export default function AIAssistant() {
 
             {/* Quick Suggestions - Action Protocol */}
             <div className="px-6 py-4 flex gap-3 overflow-x-auto border-t-2 border-black bg-white no-scrollbar">
-            {['Fix Profile Photo', 'Fix LinkedIn', 'ATS Score Check', 'Find My Ikigai'].map((txt) => (
+            {['Fix Profile Photo', 'LinkedIn Analysis', 'ATS Score Check', 'Find My Ikigai'].map((txt) => (
                 <button 
                   key={txt}
                   onClick={() => setInput(txt)}
