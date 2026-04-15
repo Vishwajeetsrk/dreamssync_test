@@ -5,6 +5,7 @@ import { auth, db } from '@/lib/firebase';
 import { signInWithEmailAndPassword, GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
 import { Mail, Lock, LogIn, Binary, ArrowRight, ShieldCheck, AlertCircle, Sparkles, Zap, Globe, Fingerprint, Eye, EyeOff } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
@@ -47,47 +48,11 @@ export default function Login() {
     setLoading(true);
     setError('');
     try {
-      let provider;
-      if (providerName === 'google') {
-        provider = new GoogleAuthProvider();
-      } else if (providerName === 'github') {
-        provider = new GithubAuthProvider();
-      } else {
-        // Use Official Firebase OAuth for LinkedIn
-        const { OAuthProvider } = await import('firebase/auth');
-        provider = new OAuthProvider('linkedin.com');
-        provider.addScope('openid');
-        provider.addScope('profile');
-        provider.addScope('email');
-      }
-
-      const result = await signInWithPopup(auth, provider);
-      
-      // Update Firestore with sync node data
-      const userRef = doc(db, 'users', result.user.uid);
-      const userDoc = await getDoc(userRef);
-      
-      if (!userDoc.exists()) {
-        await setDoc(userRef, {
-          email: result.user.email,
-          fullName: result.user.displayName,
-          photoURL: result.user.photoURL,
-          createdAt: new Date().toISOString(),
-          lastLogin: new Date().toISOString(),
-          provider: providerName
-        });
-      } else {
-        await setDoc(userRef, { lastLogin: new Date().toISOString() }, { merge: true });
-      }
-
-      router.push('/dashboard');
+      // Use NextAuth for Social Login to handle redirect URIs correctly on Vercel
+      await signIn(providerName, { callbackUrl: '/dashboard' });
     } catch (err: any) {
       console.error(`${providerName} login error:`, err);
-      let msg = err.message;
-      if (err.code === 'auth/account-exists-with-different-credential') {
-        msg = "An account already exists with the same email address but different sign-in credentials. Try signing in with Google.";
-      }
-      setError(msg);
+      setError(err.message || `Failed to sign in with ${providerName}`);
     } finally {
       setLoading(false);
     }
