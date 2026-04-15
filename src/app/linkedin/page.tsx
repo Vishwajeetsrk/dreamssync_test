@@ -6,23 +6,23 @@ import {
   Sparkles, Copy, Check, ChevronDown, ChevronUp,
   TrendingUp, Target, Star, MessageSquare, Key, AlertCircle,
   User, Briefcase, BookOpen, Award, RotateCcw, ExternalLink,
-  PenLine, FileText, Wrench, Building2, GraduationCap, Trophy, Sliders
+  PenLine, FileText, Wrench, Building2, GraduationCap, Trophy, Sliders,
+  Upload, Search, Loader2, CheckCircle2, ArrowRight, ShieldCheck, Zap
 } from 'lucide-react';
+import Link from 'next/link';
 import { validateCareerInput } from '@/lib/aiGuard';
 
 // --- Types ---
 interface HeadlineOption { text: string; focus: string; }
 interface ConnectionMessage { occasion: string; message: string; }
 interface Improvement { area: string; priority: 'high' | 'medium' | 'low'; action: string; }
-interface LinkedInResult {
-  profileScore: number;
-  scoreBreakdown: { headline: number; about: number; skills: number; experience: number; completeness: number; };
-  headlines: HeadlineOption[];
-  about: { optimized: string; tips: string[]; };
-  skills: { recommended: string[]; toRemove: string[]; reason: string; };
   connectionMessages: ConnectionMessage[];
   keyImprovements: Improvement[];
   seoKeywords: string[];
+  aiAnalysisSummary: string[];
+  whatToAdd: { add: string[]; improve: string[] };
+  freeResources: { label: string; links: { title: string; url: string; platform: string }[] }[];
+  groupedSkills: { category: string; items: string[] }[];
 }
 
 // --- Copy Button ---
@@ -99,12 +99,39 @@ export default function LinkedInOptimizer() {
     tone: 'professional' as 'professional' | 'creative' | 'technical' | 'friendly',
   });
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isParsing, setIsParsing] = useState(false);
   const [result, setResult] = useState<LinkedInResult | null>(null);
   const [error, setError] = useState('');
   const [selectedHeadline, setSelectedHeadline] = useState(0);
 
   const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm(f => ({ ...f, [k]: e.target.value }));
+
+  const handleImportResume = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIsParsing(true);
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+      const res = await fetch('/api/resume-parse', { method: 'POST', body: formData });
+      const d = await res.json();
+      if (!res.ok) throw new Error(d.error);
+      setForm({
+        targetRole: d.personalInfo?.role || '',
+        currentRole: d.experience?.[0]?.role || '',
+        currentHeadline: `${d.personalInfo?.role} | ${d.skills?.map((s:any) => s.items).slice(0,3).join(' | ')}`,
+        currentAbout: d.summary || '',
+        skills: d.skills?.map((s:any) => s.items).join(', ') || '',
+        experience: d.experience?.map((e:any) => `${e.role} @ ${e.company} - ${e.bullets[0]}`).join('\n') || '',
+        education: d.education?.[0]?.school || '',
+        achievements: d.achievements?.join(', ') || '',
+        tone: 'professional'
+      });
+    } catch (err: any) {
+      setError("Parsing failed: " + err.message);
+    } finally { setIsParsing(false); }
+  };
 
   const handleGenerate = async () => {
     if (!form.targetRole.trim()) { setError('Please enter your target role.'); return; }
@@ -171,11 +198,23 @@ export default function LinkedInOptimizer() {
 
       {/* INPUT FORM */}
       <div className="bg-white border-4 border-black neo-box p-8 space-y-6">
-        <div className="flex items-center gap-3 pb-4 border-b-2 border-black">
-          <div className="p-2 bg-[#0A66C2] border-2 border-black"><User className="w-4 h-4 text-white" /></div>
-          <div>
-            <h2 className="text-2xl font-black">Your Profile Data</h2>
-            <p className="text-sm text-gray-500">The more you fill in, the better the optimization.</p>
+        <div className="flex flex-col md:flex-row items-center gap-6 pb-6 border-b-2 border-black">
+          <div className="flex items-center gap-3">
+             <div className="p-2 bg-[#0A66C2] border-2 border-black"><User className="w-4 h-4 text-white" /></div>
+             <div>
+               <h2 className="text-2xl font-black">Profile Intelligence</h2>
+               <p className="text-sm text-gray-500">Upload resume to auto-fill or enter details manually.</p>
+             </div>
+          </div>
+          <div className="flex-1 flex gap-3 w-full md:w-auto">
+             <label className="flex-1 flex items-center justify-center gap-2 py-3 bg-[#FACC15] text-black font-black uppercase text-[10px] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] cursor-pointer hover:shadow-none transition-all">
+                {isParsing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+                {isParsing ? "PARSING..." : "UPLOAD RESUME"}
+                <input type="file" hidden accept=".pdf" onChange={handleImportResume} />
+             </label>
+             <button onClick={() => setForm({ ...form, targetRole: '' })} className="flex-1 py-3 bg-white text-black font-black uppercase text-[10px] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-all">
+                FILL MANUALLY
+             </button>
           </div>
         </div>
 
@@ -247,6 +286,30 @@ export default function LinkedInOptimizer() {
       {result && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-5">
 
+          {/* AI Analysis Summary */}
+          <div className="bg-black text-white border-4 border-black p-8 neo-box shadow-[8px_8px_0px_0px_rgba(10,102,194,1)]">
+             <div className="flex items-center gap-3 mb-6">
+                <Zap className="w-6 h-6 text-[#FACC15] fill-[#FACC15]" />
+                <h3 className="text-2xl font-black uppercase italic tracking-tighter">AI Profile Analysis Summary</h3>
+             </div>
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-3">
+                   {result.aiAnalysisSummary?.map((s, i) => (
+                     <p key={i} className="flex gap-2 text-sm font-bold text-gray-300">
+                        <ArrowRight className="w-4 h-4 text-[#FACC15] shrink-0 mt-0.5" /> {s}
+                     </p>
+                   ))}
+                </div>
+                <div className="bg-[#FACC15] text-black p-6 border-2 border-black rotate-1">
+                   <h4 className="font-black text-sm uppercase mb-3 underline">What You Should Add</h4>
+                   <ul className="space-y-2">
+                      {result.whatToAdd?.add.map((a, i) => <li key={i} className="text-xs font-black flex gap-2"><span>✔</span> {a}</li>)}
+                      {result.whatToAdd?.improve.map((im, i) => <li key={i} className="text-xs font-black opacity-60 flex gap-2"><span>📈</span> {im}</li>)}
+                   </ul>
+                </div>
+             </div>
+          </div>
+
           {/* Score Banner */}
           <div className={`border-4 border-black p-6 neo-box flex flex-col md:flex-row items-center gap-6 ${scoreBg}`}>
             <div className="text-center">
@@ -256,7 +319,7 @@ export default function LinkedInOptimizer() {
             </div>
             <div className="flex-1">
               <h2 className="text-2xl font-black mb-1">Your LinkedIn Profile Score</h2>
-              <p className="text-gray-600 font-medium mb-4">Analyzed across 5 dimensions. Improve each to rank higher in recruiter searches.</p>
+              <p className="text-gray-600 font-medium mb-4">Analyzed across 5 dimensions. Each improvement boosts your "Recruiter Signal" strength.</p>
               <div className="flex flex-wrap gap-4 justify-start">
                 {Object.entries(result.scoreBreakdown).map(([k, v]) => (
                   <ScoreRing key={k} score={v} label={k} max={20} />
@@ -327,26 +390,43 @@ export default function LinkedInOptimizer() {
             </div>
           </Section>
 
-          {/* Skills */}
-          <Section title="Skills Optimization" icon={TrendingUp}>
-            <div className="space-y-4 pt-4">
+          {/* Skills Cluster Optimization */}
+          <Section title="Intelligence-Driven Skills" icon={TrendingUp}>
+            <div className="space-y-6 pt-4">
               <p className="text-sm text-gray-600 font-medium">{result.skills?.reason}</p>
-              <div>
-                <p className="font-bold text-sm mb-2 text-green-700">✅ Add These Skills ({result.skills?.recommended?.length})</p>
-                <div className="flex flex-wrap gap-2">
-                  {result.skills?.recommended?.map((s, i) => (
-                    <div key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-green-50 border-2 border-green-300 rounded-full text-sm font-bold text-green-800">
-                      {s} <CopyButton text={s} />
+              
+              {result.groupedSkills && result.groupedSkills.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {result.groupedSkills.map((group, idx) => (
+                    <div key={idx} className="bg-gray-50 border-2 border-black p-4 space-y-2">
+                       <p className="text-[10px] font-black uppercase tracking-widest text-[#0A66C2]">{group.category}</p>
+                       <div className="flex flex-wrap gap-2">
+                          {group.items.map((item, i) => (
+                            <span key={i} className="px-2 py-1 bg-white border border-black text-[10px] font-bold shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">{item}</span>
+                          ))}
+                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
-              {result.skills?.toRemove?.filter(Boolean).length > 0 && (
+              ) : (
                 <div>
-                  <p className="font-bold text-sm mb-2 text-red-600">❌ Consider Removing</p>
+                  <p className="font-bold text-sm mb-2 text-green-700">✅ Recommended Core Addition</p>
+                  <div className="flex flex-wrap gap-2">
+                    {result.skills?.recommended?.map((s, i) => (
+                      <div key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-green-50 border-2 border-green-300 rounded-full text-sm font-bold text-green-800">
+                        {s} <CopyButton text={s} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {result.skills?.toRemove?.filter(Boolean).length > 0 && (
+                <div className="pt-2">
+                  <p className="font-bold text-[10px] uppercase tracking-widest mb-2 text-red-600 opacity-60">Low-Impact Skills (Consider Removing)</p>
                   <div className="flex flex-wrap gap-2">
                     {result.skills.toRemove.filter(Boolean).map((s, i) => (
-                      <span key={i} className="px-3 py-1.5 bg-red-50 border-2 border-red-200 rounded-full text-sm font-medium text-red-700 line-through">{s}</span>
+                      <span key={i} className="px-3 py-1 bg-red-50 border border-red-200 rounded text-[10px] font-medium text-red-400 line-through italic">{s}</span>
                     ))}
                   </div>
                 </div>
@@ -373,15 +453,39 @@ export default function LinkedInOptimizer() {
             <div className="space-y-3 pt-4">
               {result.connectionMessages?.map((msg, i) => (
                 <div key={i} className="border-2 border-gray-200 p-4 rounded-lg bg-gray-50">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-black uppercase tracking-wider text-gray-600 bg-white border border-gray-300 px-2 py-0.5 rounded">{msg.occasion}</span>
-                    <CopyButton text={msg.message} />
-                  </div>
-                  <p className="text-sm text-gray-800 font-medium leading-relaxed">{msg.message}</p>
+                   <div className="flex items-center justify-between mb-2">
+                     <span className="text-xs font-black uppercase tracking-wider text-gray-600 bg-white border border-gray-300 px-2 py-0.5 rounded">{msg.occasion}</span>
+                     <CopyButton text={msg.message} />
+                   </div>
+                   <p className="text-sm text-gray-800 font-medium leading-relaxed">{msg.message}</p>
                 </div>
               ))}
             </div>
           </Section>
+
+          {/* Skill Forge & Resources */}
+          <Section title="Skill Forge & Resources" icon={Award} badge="Free Learning">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+               {result.freeResources?.map((res, i) => (
+                 <div key={i} className="bg-[#FACC15]/10 border-4 border-black p-5 space-y-4">
+                    <p className="font-black text-sm uppercase tracking-wider border-b-2 border-black pb-2">{res.label}</p>
+                    <div className="space-y-2">
+                       {res.links.map((l, li) => (
+                         <Link key={li} href={l.url} target="_blank" className="flex items-center justify-between p-3 bg-white border-2 border-black text-xs font-black hover:translate-x-1 transition-all">
+                            {l.title} <span className="opacity-40">{l.platform}</span>
+                         </Link>
+                       ))}
+                    </div>
+                 </div>
+               ))}
+               <div className="bg-blue-600 text-white p-6 border-4 border-black flex flex-col justify-center items-center text-center gap-3">
+                  <Globe className="w-10 h-10" />
+                  <p className="text-lg font-black uppercase tracking-tighter">One-Click Apply Ready</p>
+                  <p className="text-[10px] font-bold opacity-80 uppercase">Optimization standard based on 2026 hiring trends verified.</p>
+               </div>
+            </div>
+          </Section>
+        </motion.div>
 
         </motion.div>
       )}

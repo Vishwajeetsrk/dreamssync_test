@@ -70,19 +70,36 @@ Return EXACTLY this JSON structure:
     "tips": ["<tip 1>", "<tip 2>", "<tip 3>"]
   },
   "skills": {
-    "recommended": ["<skill 1>", "<skill 2>", "<skill 3>", "<skill 4>", "<skill 5>", "<skill 6>", "<skill 7>", "<skill 8>", "<skill 9>", "<skill 10>"],
+    "recommended": ["<skill 1>", "<skill 2>", "<skill 3>", "<skill 4>", "<skill 5>"],
     "toRemove": ["<skill to remove or empty>"],
     "reason": "<why these skills matter for the target role>"
   },
+  "groupedSkills": [
+     {"category": "Frontend", "items": ["React", "CSS"]},
+     {"category": "Backend", "items": ["Node.js", "SQL"]}
+  ],
   "connectionMessages": [
     {"occasion": "Cold Connect to Recruiter", "message": "<50-word personalized message>"},
-    {"occasion": "Connect after Interview", "message": "<50-word thank you message>"},
     {"occasion": "Connect with Peer", "message": "<50-word peer networking message>"}
   ],
   "keyImprovements": [
     {"area": "<area name>", "priority": "high|medium|low", "action": "<specific action>"}
   ],
-  "seoKeywords": ["<keyword 1>", "<keyword 2>", "<keyword 3>", "<keyword 4>", "<keyword 5>"]
+  "seoKeywords": ["<keyword 1>", "<keyword 2>"],
+  "aiAnalysisSummary": [
+     "Profile is currently aligned for junior roles but lacks senior architecture depth.",
+     "Strong technical signal in React, but weak in system design visibility."
+  ],
+  "whatToAdd": {
+     "add": ["2 technical projects with GitHub links", "Measurable performance metrics"],
+     "improve": ["Headline (needs more impact verbs)", "About (add career mission)"]
+  },
+  "freeResources": [
+     {
+       "label": "Master System Design",
+       "links": [{"title": "System Design Primer", "url": "https://github.com/donnemartin/system-design-primer", "platform": "GitHub"}]
+     }
+  ]
 }`;
 }
 
