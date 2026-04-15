@@ -24,8 +24,23 @@ const handler = NextAuth({
     signIn: '/login',
   },
   callbacks: {
+    async signIn({ user, account, profile }) {
+      if (account?.provider === 'google' || account?.provider === 'github' || account?.provider === 'linkedin') {
+        // Here we could sync with Firestore if needed via a fetch to a server action or API
+        // For now, allow sign in
+        return true;
+      }
+      return true;
+    },
     async redirect({ url, baseUrl }) {
-      return url.startsWith(baseUrl) ? url : baseUrl;
+      // Direct back to dashboard after successful sync
+      return baseUrl + '/dashboard';
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        (session.user as any).id = token.sub;
+      }
+      return session;
     },
   },
 });
