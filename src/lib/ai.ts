@@ -10,7 +10,7 @@ export type AIOptions = {
   jsonMode?: boolean;
   maxTokens?: number;
   temperature?: number;
-  /** Timeout in ms per provider attempt. Default: 15000 (15s) */
+  /** Timeout in ms per provider attempt. Default: 45000 (45s) */
   timeoutMs?: number;
 };
 
@@ -68,7 +68,7 @@ async function callGroq(
       },
       body: JSON.stringify(body),
     },
-    opts.timeoutMs ?? 15_000
+    opts.timeoutMs ?? 45_000
   );
 
   if (!res.ok) {
@@ -93,8 +93,9 @@ async function callOpenRouter(
   // Multi-model rotation for OpenRouter resilience
   const models = [
     'openai/gpt-4o-mini',
-    'meta-llama/llama-3.1-70b-instruct',
     'meta-llama/llama-3.3-70b-instruct',
+    'meta-llama/llama-3.1-70b-instruct',
+    'anthropic/claude-3-haiku',
     'google/gemini-flash-1.5-8b',
     'meta-llama/llama-3.1-8b-instruct:free'
   ];
@@ -122,7 +123,7 @@ async function callOpenRouter(
           },
           body: JSON.stringify(body),
         },
-        opts.timeoutMs ?? 15_000
+        opts.timeoutMs ?? 45_000
       );
 
       if (!res.ok) {
@@ -179,7 +180,7 @@ async function callGemini(
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     },
-    opts.timeoutMs ?? 20_000 // Gemini can be slightly slower
+    opts.timeoutMs ?? 45_000 // Gemini can be slightly slower
   );
 
   if (!res.ok) {
