@@ -13,7 +13,7 @@ import {
 const govDocs = [
   {
     title: "PAN Card",
-    desc: "Permanent Account Number is mandatory for receiving salaries, opening bank accounts, and filing taxes in India.",
+    desc: "A PAN Card is needed to get your salary, open a bank account, and pay taxes correctly in India.",
     link: "https://www.protean-tinpan.com/",
     time: "approx 15–20 days",
     fee: "₹107 (approx)",
@@ -33,7 +33,7 @@ const govDocs = [
   },
   {
     title: "Aadhaar Card Update",
-    desc: "Ensure your mobile number is linked to Aadhaar. Many digital verifications (like EPF, Bank) require Aadhaar OTP.",
+    desc: "Make sure your mobile number is connected to your Aadhaar card for easy online verification.",
     link: "https://myaadhaar.uidai.gov.in/",
     time: "approx 5–15 days",
     fee: "₹50 (demographic update)",
@@ -52,8 +52,8 @@ const govDocs = [
     altLinkLabel: "UIDAI Official Website",
   },
   {
-    title: "UAN / EPF Generation",
-    desc: "Universal Account Number for Employee Provident Fund. Your first employer generates this; track it online.",
+    title: "UAN / EPF Number",
+    desc: "Your Employee Provident Fund (EPF) is your savings. Your first employer will create this number for you.",
     link: "https://unifiedportal-mem.epfindia.gov.in/memberinterface/",
     time: "Instant (Digital)",
     fee: "Free",
@@ -73,7 +73,7 @@ const govDocs = [
   },
   {
     title: "Passport",
-    desc: "Crucial for background verifications in top MNCs and for any future onsite opportunities abroad.",
+    desc: "A passport is important for identity checks and if you ever need to travel or work outside of India.",
     link: "https://www.passportindia.gov.in/",
     time: "30–45 days (normal), 7–14 days (Tatkal)",
     fee: "₹1,500 (36 pages) / ₹2,000 (60 pages) | Tatkal: +₹2,000",
@@ -94,7 +94,7 @@ const govDocs = [
   },
   {
     title: "Savings Bank Account",
-    desc: "A zero-balance savings account (Jan Dhan or regular) is needed for salary credit, UPI, and EPF linking.",
+    desc: "You need a bank account to receive your salary, use apps like Google Pay/UPI, and save your money.",
     link: "https://www.jansamarth.in/",
     time: "Instant (Online) / 1–3 days branch",
     fee: "Free (zero-balance)",
@@ -113,8 +113,8 @@ const govDocs = [
     altLinkLabel: "Open SBI Account Online",
   },
   {
-    title: "Form 16 / ITR Filing",
-    desc: "Form 16 is the TDS certificate from your employer. Use it to file your Income Tax Return (ITR) every year.",
+    title: "Tax Filing (ITR)",
+    desc: "ITR filing is a simple way to show the government how much you earn and is great for your legal record.",
     link: "https://www.incometax.gov.in/iec/foportal/",
     time: "Employer issues by June 15 | ITR deadline: July 31",
     fee: "Free (self-filing) / CA charges apply",
@@ -500,7 +500,7 @@ export default function Documents() {
               <div>
                 <h3 className="font-bold text-lg mb-1 text-yellow-900">Important Checklist</h3>
                 <p className="text-yellow-800 font-medium">
-                  Always cross-verify your Name, Date of Birth, and Father&apos;s Name across all documents (10th Marks card, Aadhaar, PAN). Any mismatch can delay BGV at major IT companies.
+                  Important: Make sure your Name, Birthday, and Father&apos;s Name are exactly the same on all your documents!
                 </p>
               </div>
             </div>

@@ -90,23 +90,23 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
 export default function About() {
   const featureCards = [
     { 
-      title: "Document Assistance", 
-      desc: "Get expert help in preparing, organizing, and managing your essential government and professional documents with accuracy.",
+      title: "Document Helper", 
+      desc: "Get easy help in preparing and managing your important ID cards, government forms, and professional papers correctly.",
       icon: FileText
     },
     { 
-      title: "Development Resources", 
-      desc: "Access a curated library of skill-building guides, career roadmaps, and free educational tools tailored for your growth.",
+      title: "Skill Guides", 
+      desc: "Access a library of easy guides, video links, and free learning tools built to help you grow your skills.",
       icon: Zap
     },
     { 
       title: "Community Unity", 
-      desc: "Join a strong network of care-experienced individuals to collaborate, share experiences, and build lasting professional bonds.",
+      desc: "Join a friendly network of people growing up independently to chat, share advice, and build professional friendships.",
       icon: Heart
     },
     { 
-      title: "Mutual Empowerment", 
-      desc: "Participate in sessions designed to uplift your spirit and career, where every member contributes to each other's success.",
+      title: "Career Boosting", 
+      desc: "Take part in live sessions to build your confidence and career, where everyone helps each other succeed.",
       icon: HeartHandshake
     }
   ];
@@ -121,27 +121,27 @@ export default function About() {
   const faqs = [
     {
       q: "What is DreamSync?",
-      a: "DreamSync is a community that connects care-experienced individuals across regions like Bangalore and Kashmir, empowering them through collaboration and support."
+      a: "DreamSync is a professional community for students and young builders to connect, share jobs, and grow their careers together."
     },
     {
-      q: "What is our aim?",
-      a: "Our aim is to unite care-experienced individuals and build a supportive ecosystem that encourages growth, empowerment, and mutual support."
+      q: "What is our main goal?",
+      a: "Our goal is simple: to help you build a great career by providing the right tools, roadmaps, and a supportive community."
     },
     {
-      q: "Why join us?",
-      a: "Join us to be part of a supportive community where individuals empower each other and grow together in a positive environment."
+      q: "Why should I join?",
+      a: "Join us if you want free AI career tools, better resumes, and a network of people who support each other's growth."
     },
     {
       q: "Are there any requirements?",
-      a: "To join DreamSync, you should be a care-experienced individual with a mindset of kindness, openness, and willingness to support others."
+      a: "No special requirements! Just bring a positive attitude, an open mind, and a willingness to help others."
     },
     {
-      q: "How do sessions help?",
-      a: "Our sessions provide life skills, emotional support, and opportunities to connect with others for shared learning and growth."
+      q: "How do our sessions help?",
+      a: "We talk about real things: how to get a job, how to manage stress, and how to build the confidence you need to succeed."
     },
     {
-      q: "Preferred language?",
-      a: "English, Hindi, and local languages are supported across our community communications and sessions."
+      q: "Which language is used?",
+      a: "We use English and Hindi to make sure everyone understands and can participate easily."
     }
   ];
 

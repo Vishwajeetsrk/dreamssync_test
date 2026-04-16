@@ -323,14 +323,14 @@ export default function CareerAgent() {
                <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">AI Agent (Chatbot)</span>
             </div>
             <h1 className="text-6xl md:text-[80px] font-black tracking-tighter leading-none text-black">
-               AI Guide For Career
+               AI Career Guide
             </h1>
             <p className="text-xl md:text-3xl text-black/40 font-black tracking-tighter uppercase mt-2">
-               Active Career Sync
+               Helping You Grow Every Day
             </p>
           </div>
           <div className="flex flex-wrap gap-3 justify-end max-w-md">
-            {['Salary Benchmarks', 'Role Suggestions', 'Visual Roadmap', 'India Market'].map(t => (
+            {['Salary Info', 'Job Suggestions', 'Step-by-Step Path', 'India Jobs'].map(t => (
               <span key={t} className="px-4 py-2 bg-white border-4 border-black text-[10px] font-black uppercase shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] tracking-widest italic">{t}</span>
             ))}
           </div>

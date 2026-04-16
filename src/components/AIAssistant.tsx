@@ -14,7 +14,7 @@ interface Message {
 export default function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: 'Hi! I am your DreamSync AI Guide. How can I help you today? I can help you find tools, fix issues, or explore career paths.' }
+    { role: 'assistant', content: "Hi! I'm your AI Guide. I can help you find jobs, build a great resume, or plan your career step-by-step. What can I do for you today?" }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -191,7 +191,7 @@ export default function AIAssistant() {
 
             {/* Quick Suggestions - Action Protocol */}
             <div className="px-4 md:px-6 py-3 md:py-4 flex gap-2 md:gap-3 overflow-x-auto border-t-2 border-black bg-white no-scrollbar">
-            {['Fix Profile Photo', 'LinkedIn Analysis', 'ATS Score Check', 'Find My Ikigai'].map((txt) => (
+            {['Job Suggestions', 'Build Resume', 'Check Resume Score', 'Find My Vibe'].map((txt) => (
                 <button 
                   key={txt}
                   onClick={() => setInput(txt)}

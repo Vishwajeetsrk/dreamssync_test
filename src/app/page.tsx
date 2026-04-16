@@ -11,15 +11,15 @@ export default function Home() {
   const { user, userData } = useAuth();
 
   const features = [
-    { title: 'IKIGAI Finder', desc: 'Discover your true purpose and ideal career path using AI-powered Ikigai analysis.', icon: Brain, href: "/ikigai" },
-    { title: 'AI Career Agent', desc: 'Detailed roadmaps, salary insights, role suggestions & real job links tailored for India.', icon: Briefcase, href: "/career-agent" },
-    { title: 'Resume Builder', desc: 'Create ATS-friendly resumes that stand out to top recruiters instantly.', icon: FileText, href: "/resume-builder" },
-    { title: 'ATS Checker', desc: 'Upload your PDF and get instant ATS scoring and targeted resume feedback.', icon: CheckCircle, href: "/ats-check" },
-    { title: 'LinkedIn Optimizer', desc: 'AI-generated headlines, summaries, and post ideas to boost your profile.', icon: Zap, href: "/linkedin" },
-    { title: 'Portfolio Generator', desc: 'Auto-generate a beautiful, deployed portfolio site with your details.', icon: Sparkles, href: "/portfolio" },
-    { title: 'AI Roadmap', desc: 'Generate a personalized step-by-step career path based on your exact dream role.', icon: Map, href: "/roadmap" },
-    { title: 'Roadmaps & Docs', desc: 'Step-by-step skill guides, free resources, and essential government docs for India.', icon: BookOpen, href: "/documents" },
-    { title: 'Mental Health', desc: 'Talk to Serenity—your empathetic AI companion for stress, anxiety & burnout.', icon: HeartHandshake, href: "/mental-health" },
+    { title: 'Best Career Finder', desc: 'Find the heart of your career. Discover what you love and what pays well with AI coaching.', icon: Brain, href: "/ikigai" },
+    { title: 'AI Job Guide', desc: 'Get step-by-step career path, local salary info, and real job links from India.', icon: Briefcase, href: "/career-agent" },
+    { title: 'Easy Resume Builder', desc: 'Create professional resumes that help you get noticed by big companies and hiring managers.', icon: FileText, href: "/resume-builder" },
+    { title: 'Resume Score Check', desc: 'Upload your resume and get an instant score. See exactly how to fix it for jobs.', icon: CheckCircle, href: "/ats-check" },
+    { title: 'LinkedIn Helper', desc: 'Get ready-to-use headlines and profile summaries to make your LinkedIn look professional.', icon: Zap, href: "/linkedin" },
+    { title: 'Auto Portfolio', desc: 'Create your own beautiful website showing your work in just a few clicks.', icon: Sparkles, href: "/portfolio" },
+    { title: 'AI Roadmap', desc: 'Get a personalized 90-day plan to reach your dream job, step by step.', icon: Map, href: "/roadmap" },
+    { title: 'Free Resources', desc: 'Access free learning guides, videos, and important government forms for your career.', icon: BookOpen, href: "/documents" },
+    { title: 'Mental Health AI', desc: 'Talk to Serenity—your friendly AI for stress, confidence, and feeling good.', icon: HeartHandshake, href: "/mental-health" },
   ];
 
   return (
