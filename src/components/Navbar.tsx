@@ -97,7 +97,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <Link href="/dashboard" className="hidden md:flex border-4 border-black px-6 py-2 bg-white font-black text-xs uppercase uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+              <Link href="/dashboard" className="hidden lg:flex border-4 border-black px-6 py-2 bg-white font-black text-xs uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
                 DASHBOARD
               </Link>
               <div className="relative group">
@@ -142,8 +142,13 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-x-6 top-32 neo-box bg-white z-40 lg:hidden flex flex-col p-8"
+            className="fixed inset-0 bg-white z-[100] lg:hidden flex flex-col p-6 pt-24 overflow-y-auto"
           >
+            <div className="flex justify-end p-4 absolute top-4 right-4">
+               <button onClick={() => setIsMenuOpen(false)} className="p-2 border-4 border-black bg-white">
+                  <X className="w-6 h-6" />
+               </button>
+            </div>
             <div className="space-y-4">
               {featureLinks.map((link) => (
                 <Link
@@ -163,6 +168,16 @@ export default function Navbar() {
                 >
                   DONATE HUB
                 </Link>
+
+                <div className="pt-8 space-y-4 border-t-4 border-black mt-4">
+                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Account & Settings</p>
+                    <Link href="/profile" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-3 p-4 border-4 border-black font-black uppercase text-sm text-[#2563EB]">
+                       <Settings className="w-5 h-5" /> Profile Settings
+                    </Link>
+                    <button onClick={() => { setIsMenuOpen(false); handleLogout(); }} className="w-full flex items-center gap-3 p-4 border-4 border-black font-black uppercase text-sm text-red-600">
+                       <LogOut className="w-5 h-5" /> Logout
+                    </button>
+                </div>
               </div>
             </div>
           </motion.div>
