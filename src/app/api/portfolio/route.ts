@@ -2,6 +2,7 @@ import { NextResponse, NextRequest } from 'next/server';
 import { z } from 'zod';
 import { Redis } from '@upstash/redis';
 import { validateCareerInput } from '@/lib/aiGuard';
+import { callAI } from '@/lib/ai';
 
 const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL || '',
@@ -110,97 +111,56 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Safety Violation', details: safety.message }, { status: 400 });
     }
 
-    const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-    if (!OPENROUTER_API_KEY) {
-       return NextResponse.json({ error: 'OpenRouter API key missing' }, { status: 500 });
-    }
-
-    const themeGuide = buildThemePrompt(theme);
-
-    const name = data?.fullName?.trim() || 'Your Name';
-    const role = data?.targetRole?.trim() || 'Software Engineer';
-    const profileImage = data?.profileImage || '';
-
-    const sysPrompt = `You are an expert frontend developer. Generate a self-contained single-page HTML portfolio.
-    
-SAFETY MANDATE: You MUST refuse to generate content related to harmful, illegal, unethical, or dangerous activities. Only provide safe and professional career guidance.
-
-Output ONLY this JSON: { "html": "<!DOCTYPE html>...</html>" }
-No markdown. No explanation. Just the JSON object.
-Use Tailwind CSS CDN: <script src="https://cdn.tailwindcss.com"></script>
-Use Google Fonts via @import in <style>.`;
-
-    const userPrompt = `Build a COMPLETE, responsive developer portfolio.\n${themeGuide}\n
-SECTIONS REQUIRED: sticky navbar, hero (name+role+CTA), about, skills grid, projects cards, experience timeline, education, contact section with links, footer.\n
-REAL DATA TO USE:\nName: ${name}\nRole: ${role}\nEmail: ${data?.email || ''}\nPhone: ${data?.phone || ''}\nLinkedIn: ${data?.linkedin || ''}\nGitHub: ${data?.github || ''}\nBio: ${data?.summary || 'Passionate ' + role + '.'}\nSkills: ${data?.skills || 'JavaScript, HTML, CSS'}\nProjects: ${data?.projects || 'See GitHub'}\nExperience: ${data?.experience || 'N/A'}\nEducation: ${data?.education || ''}\nCourses: ${data?.courses || ''}\nAchievements: ${data?.achievements || ''}\nLanguages: ${data?.languages || ''}\nHobbies: ${data?.hobbies || ''}\nProfile Photo (Data URI): ${profileImage || 'NONE'}\n
-RULES: ${profileImage ? 'MANDATORY: Use the Profile Photo Data URI in the hero section.' : ''} No Lorem Ipsum. No placeholders. Use ONLY the data above. Add smooth scroll. Use FontAwesome 6.4.0. Make it look PREMIUM and HIGH-FIDELITY.
-`;
-
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-        'HTTP-Referer': 'https://dreamsync.app',
-        'X-Title': 'DreamSync Portfolio Generator',
-      },
-      body: JSON.stringify({
-        model: 'openai/gpt-4o-mini',
-        response_format: { type: 'json_object' },
-        messages: [
-          { role: 'system', content: sysPrompt },
-          { role: 'user', content: userPrompt }
-        ],
-        temperature: 0.7,
-        max_tokens: 8000,
-      })
-    });
-
-    if (!response.ok) {
-      const errText = await response.text();
-      console.error('OpenRouter error:', errText);
-      let errMsg = 'Failed to communicate with AI API.';
-      try {
-        const errJson = JSON.parse(errText);
-        errMsg = errJson?.error?.message || errMsg;
-      } catch {}
-      return NextResponse.json({ error: errMsg }, { status: 502 });
-    }
-
-    const aiRes = await response.json();
-    const rawContent = aiRes.choices[0]?.message?.content;
-    if (!rawContent) {
-      return NextResponse.json({ error: 'AI returned an empty response. Please try again.' }, { status: 500 });
-    }
-
-    // Try clean JSON parse first
-    let result: any = null;
+    // 5. Call AI with multi-provider fallback
     try {
-      result = JSON.parse(rawContent);
-    } catch {
-      // Fallback: extract HTML between the first { "html": "..." } pattern
-      const match = rawContent.match(/"html"\s*:\s*"([\s\S]+)"\s*\}/);
-      if (match) {
-        result = { html: match[1].replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\\\/g, '\\') };
-      } else {
-        // Second fallback: if it's raw HTML, wrap it
-        if (rawContent.trim().startsWith('<!DOCTYPE') || rawContent.trim().startsWith('<html')) {
-          result = { html: rawContent };
+      const { content, provider } = await callAI([
+        { role: 'system', content: sysPrompt },
+        { role: 'user', content: userPrompt }
+      ], { 
+        jsonMode: true, 
+        maxTokens: 8000, 
+        temperature: 0.7 
+      });
+
+      const rawContent = content.trim();
+
+      // Try clean JSON parse first
+      let result: any = null;
+      try {
+        result = JSON.parse(rawContent);
+      } catch {
+        // Fallback: extract HTML between the first { "html": "..." } pattern
+        const match = rawContent.match(/"html"\s*:\s*"([\s\S]+)"\s*\}/);
+        if (match) {
+          result = { html: match[1].replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\\\/g, '\\') };
         } else {
-          // THIRD FALLBACK: Global HTML extraction (The "Nuclear" Option)
-          const htmlMatch = rawContent.match(/<html[\s\S]*<\/html>/i);
-          if (htmlMatch) {
-             result = { html: htmlMatch[0] };
+          // Second fallback: if it's raw HTML, wrap it
+          if (rawContent.trim().startsWith('<!DOCTYPE') || rawContent.trim().startsWith('<html')) {
+            result = { html: rawContent };
           } else {
-             console.error('Cannot parse AI response:', rawContent.substring(0, 500));
-             return NextResponse.json({ error: 'AI returned malformed content. Please try again.' }, { status: 500 });
+            // THIRD FALLBACK: Global HTML extraction (The "Nuclear" Option)
+            const htmlMatch = rawContent.match(/<html[\s\S]*<\/html>/i);
+            if (htmlMatch) {
+               result = { html: htmlMatch[0] };
+            } else {
+               console.error('Cannot parse AI response:', rawContent.substring(0, 500));
+               return NextResponse.json({ error: 'AI returned malformed content. Please try again.' }, { status: 500 });
+            }
           }
         }
       }
-    }
 
-    if (!result?.html) {
-      return NextResponse.json({ error: 'AI did not return portfolio HTML. Please try again.' }, { status: 500 });
+      if (!result?.html) {
+        return NextResponse.json({ error: 'AI did not return portfolio HTML. Please try again.' }, { status: 500 });
+      }
+
+      return NextResponse.json({ ...result, _provider: provider });
+
+    } catch (error: any) {
+      console.error('Portfolio AI error:', error);
+      return NextResponse.json({ 
+        error: 'AI is currently overloaded with requests in your region. Please try again in 30 seconds.' 
+      }, { status: 503 });
     }
 
     return NextResponse.json(result);
