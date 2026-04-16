@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Coffee, LogOut, ShieldCheck, User as UserIcon, Menu, X, Sparkles, Orbit, Zap, LayoutDashboard, Fingerprint, ArrowRight, Settings } from 'lucide-react';
+import { ChevronDown, Coffee, LogOut, ShieldCheck, User as UserIcon, Menu, X, Sparkles, Orbit, Zap, LayoutDashboard, Fingerprint, ArrowRight, Settings, Instagram, Twitter } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { auth } from '@/lib/firebase';
@@ -87,6 +87,27 @@ export default function Navbar() {
 
         {/* Action Group */}
         <div className="flex items-center gap-4">
+          <div className="hidden xl:flex items-center gap-3 mr-4">
+            <a 
+              href="https://www.instagram.com/dream_sync_hub?igsh=MW50dHk3Znh5eTczcg==" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              title="Follow us on Instagram"
+              className="p-2 border-2 border-black hover:bg-yellow-300 transition-all hover:scale-110"
+            >
+              <Instagram className="w-4 h-4" />
+            </a>
+            <a 
+              href="https://x.com/ADreamsync" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              title="Follow us on X"
+              className="p-2 border-2 border-black hover:bg-yellow-300 transition-all hover:scale-110"
+            >
+              <Twitter className="w-4 h-4" />
+            </a>
+          </div>
+
           <Link 
             href="/donate" 
             className="hidden sm:flex items-center gap-2 bg-[#FACC15] border-4 border-black px-6 py-2 font-black text-xs uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"

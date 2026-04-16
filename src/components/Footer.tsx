@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Coffee, Globe, Shield, Zap, Sparkles } from 'lucide-react';
+import { Coffee, Globe, Shield, Zap, Sparkles, Instagram, Twitter } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Footer() {
@@ -60,12 +60,40 @@ export default function Footer() {
         {/* Connect column */}
         <div className="space-y-6">
           <h4 className="text-xs font-black uppercase tracking-widest text-black">Connect</h4>
-          <ul className="space-y-3 text-[10px] font-bold text-gray-500 uppercase">
-            <li><a href="https://www.linkedin.com/company/dreamsync-community/" target="_blank" rel="noopener noreferrer" className="hover:text-black">LinkedIn</a></li>
-            <li><a href="#" className="hover:text-black">Instagram</a></li>
-            <li><a href="#" className="hover:text-black">Twitter / X</a></li>
-            <li><a href="mailto:dreamsyncbangalore@gmail.com" className="hover:text-black">Email Us</a></li>
-          </ul>
+          <div className="flex flex-col gap-3">
+            <a 
+              href="https://www.instagram.com/dream_sync_hub?igsh=MW50dHk3Znh5eTczcg==" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              title="Follow us on Instagram"
+              className="bg-white border-2 border-black shadow-[4px_4px_0px_black] px-4 py-2 flex items-center gap-2 text-[10px] font-black uppercase hover:bg-yellow-300 hover:scale-105 transition-all w-fit"
+            >
+              <Instagram className="w-4 h-4" /> Instagram
+            </a>
+
+            <a 
+              href="https://x.com/ADreamsync" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              title="Follow us on X"
+              className="bg-white border-2 border-black shadow-[4px_4px_0px_black] px-4 py-2 flex items-center gap-2 text-[10px] font-black uppercase hover:bg-yellow-300 hover:scale-105 transition-all w-fit"
+            >
+              <Twitter className="w-4 h-4" /> X (Twitter)
+            </a>
+
+            <a 
+              href="https://www.linkedin.com/company/dreamsync-community/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-[10px] font-bold text-gray-400 hover:text-black mt-2"
+            >
+              LinkedIn Community
+            </a>
+            
+            <a href="mailto:dreamsyncbangalore@gmail.com" className="text-[10px] font-bold text-gray-400 hover:text-black">
+              Email Us
+            </a>
+          </div>
         </div>
       </div>
       
