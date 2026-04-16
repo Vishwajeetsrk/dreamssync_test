@@ -46,14 +46,6 @@ export default function Footer() {
             <li><Link href="/about" className="hover:text-black">About Us</Link></li>
             <li><Link href="/team" className="hover:text-black">Team</Link></li>
             <li><Link href="/contact" className="hover:text-black">Contact</Link></li>
-            <li className="pt-2">
-              <Link 
-                href="/donate" 
-                className="inline-flex items-center gap-2 bg-[#FACC15] border-2 border-black px-4 py-2 text-[10px] font-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
-              >
-                <Coffee className="w-4 h-4" /> Support Us
-              </Link>
-            </li>
           </ul>
         </div>
 
