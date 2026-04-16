@@ -154,27 +154,37 @@ export async function POST(req: NextRequest) {
       // Try clean JSON parse first
       let result: any = null;
       try {
+        // Attempt 1: Standard JSON
         result = JSON.parse(rawContent);
       } catch {
-        // Fallback: extract HTML between the first { "html": "..." } pattern
-        const match = rawContent.match(/"html"\s*:\s*"([\s\S]+)"\s*\}/);
-        if (match) {
-          result = { html: match[1].replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\\\/g, '\\') };
-        } else {
-          // Second fallback: if it's raw HTML, wrap it
-          if (rawContent.trim().startsWith('<!DOCTYPE') || rawContent.trim().startsWith('<html')) {
-            result = { html: rawContent };
-          } else {
-            // THIRD FALLBACK: Global HTML extraction (The "Nuclear" Option)
-            const htmlMatch = rawContent.match(/<html[\s\S]*<\/html>/i);
-            if (htmlMatch) {
-               result = { html: htmlMatch[0] };
-            } else {
-               console.error('Cannot parse AI response:', rawContent.substring(0, 500));
-               return NextResponse.json({ error: 'AI returned malformed content. Please try again.' }, { status: 500 });
-            }
-          }
+        // Attempt 2: Extract from JSON "html" field via Regex (handles escapes)
+        const jsonFieldMatch = rawContent.match(/"html"\s*:\s*"([\s\S]+?)"\s*[,}]/);
+        if (jsonFieldMatch) {
+           result = { html: jsonFieldMatch[1].replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\\\/g, '\\') };
+        } 
+        // Attempt 3: Extract from Markdown Fences (```html ... ```)
+        else if (rawContent.includes('```html')) {
+           const mdMatch = rawContent.match(/```html\s*([\s\S]+?)\s*```/);
+           if (mdMatch) result = { html: mdMatch[1] };
         }
+        // Attempt 4: Search for a pure <html> tag anywhere
+        else if (rawContent.toLowerCase().includes('<html')) {
+           const htmlMatch = rawContent.match(/<html[\s\S]*<\/html>/i);
+           if (htmlMatch) result = { html: htmlMatch[0] };
+        }
+        // Attempt 5: Search for DOCTYPE
+        else if (rawContent.toLowerCase().includes('<!doctype')) {
+           const docMatch = rawContent.match(/<!doctype[\s\S]*<\/html>/i);
+           if (docMatch) result = { html: docMatch[0] };
+        }
+      }
+
+      if (!result?.html) {
+        console.error('ALLL PARSING ATTEMPTS FAILED. Sample response:', rawContent.substring(0, 300));
+        return NextResponse.json({ 
+          error: 'AI returned malformed content. Please try again.',
+          debug: process.env.NODE_ENV === 'development' ? rawContent.substring(0, 200) : undefined
+        }, { status: 500 });
       }
 
       if (!result?.html) {

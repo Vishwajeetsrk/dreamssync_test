@@ -89,6 +89,8 @@ export default function Login() {
         errorMessage = "This domain is not authorized. Please check your Firebase Authentication settings.";
       } else if (err.code === 'auth/network-request-failed') {
         errorMessage = "Connection error. Please check your internet and try again.";
+      } else if (err.code === 'auth/account-exists-with-different-credential') {
+        errorMessage = "An account already exists with this email but using a different login method (e.g., Google). Please use your original login method.";
       }
 
       setError(errorMessage);
