@@ -260,15 +260,15 @@ export default function ResumeBuilder() {
       {/* Sidebar - Neo-Brutalist Form Editor */}
       <aside className="w-full lg:w-[500px] bg-white border-b-8 lg:border-r-8 lg:border-b-0 border-black p-6 md:p-10 space-y-12 shadow-[8px_0px_0px_0px_rgba(0,0,0,0.05)] lg:h-screen lg:overflow-y-auto">
         
-        <div className="max-w-5xl mx-auto text-center flex flex-col items-center gap-6 mb-12">
+        <div className="max-w-5xl mx-auto text-center flex flex-col items-center gap-4 mb-10">
           <div className="flex items-center gap-3">
              <div className="p-2 bg-[#2563EB] text-white shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-                <FileText className="w-8 h-8" />
+                <FileText className="w-6 h-6" />
              </div>
-             <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">Resume Builder</span>
+             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-black/40">Sovereign Protocol</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-black tracking-tighter uppercase leading-none">
-             Resume <br /> <span className="text-[#2563EB] drop-shadow-[3px_3px_0px_rgba(0,0,0,1)] italic">Builder</span>
+          <h1 className="text-3xl md:text-4xl font-black tracking-tighter uppercase leading-none">
+             Resume <span className="text-[#2563EB] drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] italic">Builder</span>
           </h1>
         </div>
 
@@ -440,9 +440,9 @@ export default function ResumeBuilder() {
            <h3 className="text-xs font-black uppercase tracking-[0.4em] text-black">SELECT TEMPLATE</h3>
            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {[
-                { id: 'google_swe', name: 'Google SWE', desc: 'Optimized for product companies, impact-driven bullets.' },
-                { id: 'microsoft_sde', name: 'Microsoft SDE', desc: 'Balanced format focusing on projects and scalability.' },
-                { id: 'faang_standard', name: 'FAANG Standard', desc: 'High-density metrics, system design, and ATS depth.' }
+                { id: 'google_swe', name: 'Elite SWE', desc: 'Engineered for product-first excellence. Focus: High-impact metrics.' },
+                { id: 'microsoft_sde', name: 'Strategic SDE', desc: 'Balanced architecture for scalability. Focus: Core system depth.' },
+                { id: 'faang_standard', name: 'Global Pro', desc: 'Modern high-density authority. Focus: Peak ATS performance.' }
               ].map((t) => (
                 <div key={t.id} className="space-y-3">
                   <button 
@@ -451,7 +451,7 @@ export default function ResumeBuilder() {
                   >
                      {t.name}
                   </button>
-                  <p className="text-[10px] font-bold text-gray-500 leading-tight">{t.desc}</p>
+                  <p className="text-[9px] font-black text-gray-400 leading-tight uppercase italic">{t.desc}</p>
                 </div>
               ))}
           </div>
