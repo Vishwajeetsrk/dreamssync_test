@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Coffee, Globe, Shield, Zap, Sparkles } from 'lucide-react';
+import { Coffee, Globe, Shield, Zap, Sparkles, Linkedin, Mail } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Footer() {
@@ -66,7 +66,7 @@ export default function Footer() {
               target="_blank" 
               rel="noopener noreferrer"
               title="Follow us on Instagram"
-              className="bg-white border-2 border-black shadow-[4px_4px_0px_black] px-4 py-2 flex items-center gap-2 text-[10px] font-black uppercase hover:bg-yellow-300 hover:scale-105 transition-all w-fit"
+              className="bg-white border-2 border-black shadow-[4px_4px_0px_black] px-4 py-2 flex items-center gap-2 text-[10px] font-black uppercase hover:bg-[#E1306C] hover:text-white hover:scale-105 transition-all w-fit"
             >
               <InstagramIcon className="w-4 h-4" /> Instagram
             </a>
@@ -76,7 +76,7 @@ export default function Footer() {
               target="_blank" 
               rel="noopener noreferrer"
               title="Follow us on X"
-              className="bg-white border-2 border-black shadow-[4px_4px_0px_black] px-4 py-2 flex items-center gap-2 text-[10px] font-black uppercase hover:bg-yellow-300 hover:scale-105 transition-all w-fit"
+              className="bg-white border-2 border-black shadow-[4px_4px_0px_black] px-4 py-2 flex items-center gap-2 text-[10px] font-black uppercase hover:bg-black hover:text-white hover:scale-105 transition-all w-fit"
             >
               <XIcon className="w-4 h-4" /> X (Twitter)
             </a>
@@ -84,14 +84,19 @@ export default function Footer() {
             <a 
               href="https://www.linkedin.com/company/dreamsync-community/" 
               target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-[10px] font-bold text-gray-400 hover:text-black mt-2"
+              rel="noopener noreferrer"
+              title="Join our LinkedIn Community"
+              className="bg-white border-2 border-black shadow-[4px_4px_0px_black] px-4 py-2 flex items-center gap-2 text-[10px] font-black uppercase hover:bg-[#0A66C2] hover:text-white hover:scale-105 transition-all w-fit"
             >
-              LinkedIn Community
+              <Linkedin className="w-4 h-4" /> LinkedIn
             </a>
             
-            <a href="mailto:dreamsyncbangalore@gmail.com" className="text-[10px] font-bold text-gray-400 hover:text-black">
-              Email Us
+            <a 
+              href="mailto:dreamsyncbangalore@gmail.com"
+              title="Email Us"
+              className="bg-white border-2 border-black shadow-[4px_4px_0px_black] px-4 py-2 flex items-center gap-2 text-[10px] font-black uppercase hover:bg-[#EA4335] hover:text-white hover:scale-105 transition-all w-fit"
+            >
+              <Mail className="w-4 h-4" /> Email Us
             </a>
           </div>
         </div>
