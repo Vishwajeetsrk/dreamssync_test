@@ -140,9 +140,33 @@ function ChatBubble({ msg }: { msg: Message }) {
       )}
       <div className="max-w-[85%] space-y-6">
         <div className={`p-8 border-4 border-black ${isUser ? 'bg-black text-white shadow-[6px_6px_0px_0px_rgba(37,99,235,1)]' : 'bg-white shadow-[6px_6px_0px_0px_rgba(250,204,21,1)]'}`}>
-          <p className={`text-lg font-bold whitespace-pre-wrap leading-relaxed italic ${isUser ? 'text-white' : 'text-black'}`}>
-            {isUser ? msg.content : msg.data?.reply || msg.content}
-          </p>
+          <div className={`text-lg font-bold whitespace-pre-wrap leading-relaxed italic ${isUser ? 'text-white' : 'text-black'}`}>
+            {isUser ? msg.content : (
+              <div className="space-y-6">
+                {(msg.data?.reply || msg.content).split('###').map((section, si) => {
+                  if (si === 0 && section.trim()) return <p key={si}>{section.trim()}</p>;
+                  if (!section.trim()) return null;
+
+                  const [title, ...rest] = section.split('\n');
+                  return (
+                    <div key={si} className="space-y-4 pt-4 border-t-4 border-black/5">
+                      <h3 className="text-2xl font-black uppercase tracking-tighter text-[#2563EB] flex items-center gap-3">
+                         <TrendingUp className="w-8 h-8" /> {title.trim()}
+                      </h3>
+                      <div className="text-base font-bold text-gray-700 leading-relaxed uppercase">
+                         {rest.join('\n').split('\n').map((line, li) => {
+                           if (line.trim().startsWith('-')) {
+                             return <div key={li} className="flex gap-4 mb-2"><span className="text-[#2563EB]">🎯</span> {line.replace(/^-/, '').trim()}</div>;
+                           }
+                           return <p key={li} className="mb-4">{line.trim()}</p>;
+                         })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
 
         {!isUser && msg.data && (
