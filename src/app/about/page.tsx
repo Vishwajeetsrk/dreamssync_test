@@ -1,12 +1,33 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useInView, animate } from 'framer-motion';
 import { 
   TrendingUp, Briefcase, FileText, HeartHandshake, 
-  Target, Globe, Zap, Heart, ArrowRight, ChevronDown, CheckCircle 
+  Target, Globe, Zap, Heart, ArrowRight, ChevronDown, CheckCircle,
+  Building2, ShieldCheck, User
 } from 'lucide-react';
 import Link from 'next/link';
+
+const StatCounter = ({ value }: { value: string }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const [display, setDisplay] = useState("0");
+  
+  useEffect(() => {
+    if (isInView) {
+      const num = parseInt(value);
+      const suffix = value.replace(/[0-9]/g, '');
+      const controls = animate(0, num, {
+        duration: 2,
+        onUpdate: (latest) => setDisplay(Math.floor(latest) + suffix)
+      });
+      return () => controls.stop();
+    }
+  }, [value, isInView]);
+
+  return <span ref={ref}>{display}</span>;
+};
 
 // --- COMPONENTS ---
 
@@ -213,6 +234,33 @@ export default function About() {
           </div>
         </section>
 
+
+        {/* SECTION 5 — RESTORED IMPACT STATS */}
+        <section className="bg-black border-8 border-black p-12 md:p-20 shadow-[12px_12px_0px_0px_rgba(37,99,235,1)]">
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+             {[
+               { value: "1+", label: "Working Locations", icon: Building2, color: 'text-[#FACC15]' },
+               { value: "50+", label: "Verified Documents", icon: ShieldCheck, color: 'text-emerald-400' },
+               { value: "6+", label: "Well-being Sessions", icon: HeartHandshake, color: 'text-rose-400' },
+               { value: "30+", label: "Members Connected", icon: User, color: 'text-[#2563EB]' }
+             ].map((stat, i) => (
+               <div key={i} className="space-y-6 flex flex-col items-center">
+                  <div className="p-4 bg-white/10 border-2 border-white/20 rounded-full">
+                     <stat.icon className={`w-8 h-8 ${stat.color}`} strokeWidth={3} />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="text-5xl md:text-7xl font-black text-[#FACC15] tracking-tighter italic">
+                      <StatCounter value={stat.value} />
+                    </div>
+                    <div className="h-1 w-12 bg-white/20 mx-auto rounded-full" />
+                    <p className="text-xs font-black uppercase tracking-widest text-white leading-tight opacity-70">
+                      {stat.label}
+                    </p>
+                  </div>
+               </div>
+             ))}
+           </div>
+        </section>
 
         {/* SECTION 6 — FAQ SECTION */}
         <section className="space-y-20">
