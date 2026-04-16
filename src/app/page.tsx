@@ -100,9 +100,9 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="space-y-8"
         >
-          <h1 className="text-4xl sm:text-5xl md:text-8xl font-black tracking-tighter leading-none text-black uppercase">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter leading-tight text-black uppercase">
              Your Dream Career, <br /> 
-             <span className="text-black drop-shadow-[2px_2px_0px_rgba(255,255,255,1)] md:drop-shadow-[4px_4px_0px_rgba(255,255,255,1)]">Synced Perfectly.</span>
+             <span className="text-black drop-shadow-[2px_2px_0px_rgba(255,255,255,1)] md:drop-shadow-[3px_3px_0px_rgba(255,255,255,1)]">Synced Perfectly.</span>
           </h1>
 
           <p className="text-lg md:text-xl text-gray-500 font-bold max-w-2xl mx-auto leading-relaxed uppercase">
