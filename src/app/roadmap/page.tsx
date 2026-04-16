@@ -139,12 +139,12 @@ export default function Roadmap() {
                  </div>
                  <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">Career Roadmap</span>
               </div>
-              <h1 className="text-6xl md:text-[100px] font-black tracking-tighter leading-none text-black">
+              <h1 className="text-4xl md:text-[100px] font-black tracking-tighter leading-none text-black">
                   Career Roadmap
               </h1>
            </div>
            
-           <div className="neo-box bg-white p-10 space-y-8 min-w-[400px] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+           <div className="neo-box bg-white p-6 md:p-10 space-y-8 min-w-full md:min-w-[400px] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
               <div className="space-y-4">
                  <label className="text-[10px] font-black uppercase text-[#2563EB]">Target Career Goal</label>
                  <input type="text" value={query.role} onChange={e => setQuery({...query, role: e.target.value})} className="neo-input text-lg" placeholder="e.g. DATA SCIENTIST" />
@@ -263,13 +263,13 @@ export default function Roadmap() {
               )}
 
               {/* Timeline Architecture */}
-              <div className="relative border-l-8 border-black ml-4 md:ml-12 pl-12 md:pl-20 space-y-32 py-20">
+              <div className="relative border-l-4 md:border-l-8 border-black ml-2 md:ml-12 pl-6 md:pl-20 space-y-16 md:space-y-32 py-10 md:py-20">
                 {steps.map((step, i) => (
-                  <motion.div key={i} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative neo-box bg-white p-12 border-black group hover:shadow-[12px_12px_0px_0px_rgba(250,204,21,1)] transition-all">
+                  <motion.div key={i} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative neo-box bg-white p-6 md:p-12 border-black group hover:shadow-[12px_12px_0px_0px_rgba(250,204,21,1)] transition-all">
                     
                     {/* Timeline Node Infrastructure */}
-                    <div className="absolute top-1/2 -translate-y-1/2 -left-[5.7rem] w-12 h-12 border-8 border-black bg-white z-10 group-hover:bg-[#FACC15] transition-colors" />
-                    <div className="absolute top-1/2 -translate-y-1/2 -left-16 w-16 h-4 bg-black -z-10 group-hover:bg-[#FACC15]/20 transition-colors" />
+                    <div className="absolute top-1/2 -translate-y-1/2 -left-[1.75rem] md:-left-[5.7rem] w-8 h-8 md:w-12 md:h-12 border-4 md:border-8 border-black bg-white z-10 group-hover:bg-[#FACC15] transition-colors" />
+                    <div className="absolute top-1/2 -translate-y-1/2 -left-8 md:-left-16 w-8 md:w-16 h-2 md:h-4 bg-black -z-10 group-hover:bg-[#FACC15]/20 transition-colors" />
 
                     <div className="flex flex-col lg:flex-row gap-16 items-start">
                       <div className="flex-1 space-y-10">

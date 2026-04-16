@@ -45,7 +45,7 @@ export default function Navbar() {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b-4 border-black px-6 md:px-12 py-5">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b-4 border-black px-4 md:px-12 py-4 md:py-5">
       <nav className="max-w-7xl mx-auto flex items-center justify-between">
         
         {/* Branding */}
