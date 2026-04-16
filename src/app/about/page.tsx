@@ -111,12 +111,6 @@ export default function About() {
     }
   ];
 
-  const stats = [
-    { value: "1+", label: "Working Locations" },
-    { value: "50+", label: "Helping to Create Documents" },
-    { value: "6+", label: "Sessions on Well-being and Personal Growth" },
-    { value: "30+", label: "Members Connected" }
-  ];
 
   const faqs = [
     {
@@ -219,22 +213,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* SECTION 5 — STATS SECTION */}
-        <section className="bg-black border-8 border-black p-12 md:p-20 shadow-[12px_12px_0px_0px_rgba(37,99,235,1)]">
-           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
-             {stats.map((stat, i) => (
-               <div key={i} className="space-y-4">
-                  <div className="text-5xl md:text-7xl font-black text-[#FACC15] tracking-tighter italic">
-                    {stat.value}
-                  </div>
-                  <div className="h-1 w-12 bg-white mx-auto" />
-                  <p className="text-xs font-black uppercase tracking-widest text-white leading-tight">
-                    {stat.label}
-                  </p>
-               </div>
-             ))}
-           </div>
-        </section>
 
         {/* SECTION 6 — FAQ SECTION */}
         <section className="space-y-20">
