@@ -26,6 +26,7 @@ const portfolioSchema = z.object({
     achievements: z.string().optional(),
     hobbies: z.string().optional(),
     summary: z.string().optional(),
+    profileImage: z.string().optional(),
   }).optional(),
 });
 
@@ -40,6 +41,9 @@ THEME: Neo-Brutalism. Use these EXACT styles:
 - Cards: white bg, thick black borders, hard offset shadows
 - Buttons: yellow bg, black border, "hover:translate-y-[-2px]" effect
 - Section dividers: bold black lines
+- Profile Photo: Square frame with 4px black border and hard yellow shadow
+- Stats Section: Grid with bold numbers, primary yellow bg, black borders
+- Icons: Use solid FontAwesome icons only
 `;
   if (theme === 'glass-dark') return `
 THEME: Modern Glass UI (Dark). Use these EXACT styles:
@@ -50,7 +54,9 @@ THEME: Modern Glass UI (Dark). Use these EXACT styles:
 - Buttons: gradient bg from violet to cyan, no border, rounded-full
 - Skill badges: colored gradient pills with glow effect
 - Animations: smooth fade-ins, floating elements
-- Icons: use colored emoji or unicode symbols
+- Icons: use colored/gradient FontAwesome icons
+- Profile Photo: Blurred glass circle with glowing cyan/violet ring
+- Stats Section: Transparent glass cards with glowing borders
 - Give everything a premium, Apple-level dark mode feel
 `;
   if (theme === 'data-pro') return `
@@ -76,10 +82,13 @@ THEME: Minimal Dev Portfolio. Use these EXACT styles:
 - Typography: 'Inter' font, ultra-clean, generous whitespace
 - Accent: black (#000), with subtle gray borders (border-gray-200)
 - Cards: white bg, light gray border, subtle box-shadow: 0 2px 8px rgba(0,0,0,0.08)
+- Profile Photo: Floating circular frame with subtle drop shadow
+- Stats Section: minimalist grid with "Count | Label" pairing
 - Buttons: Black bg white text, pill shape (rounded-full), clean hover
 - Section layout: centered, max-width: 900px, well-padded
 - Skill chips: gray-100 bg, rounded-full, small text
 - Clean, editorial typography: large bold headings, regular body copy
+- Icons: Use regular/solid FontAwesome (e.g., fa-briefcase, fa-graduation-cap)
 `;
 }
 
@@ -110,6 +119,7 @@ export async function POST(req: NextRequest) {
 
     const name = data?.fullName?.trim() || 'Your Name';
     const role = data?.targetRole?.trim() || 'Software Engineer';
+    const profileImage = data?.profileImage || '';
 
     const sysPrompt = `You are an expert frontend developer. Generate a self-contained single-page HTML portfolio.
     
@@ -122,8 +132,9 @@ Use Google Fonts via @import in <style>.`;
 
     const userPrompt = `Build a COMPLETE, responsive developer portfolio.\n${themeGuide}\n
 SECTIONS REQUIRED: sticky navbar, hero (name+role+CTA), about, skills grid, projects cards, experience timeline, education, contact section with links, footer.\n
-REAL DATA TO USE:\nName: ${name}\nRole: ${role}\nEmail: ${data?.email || ''}\nPhone: ${data?.phone || ''}\nLinkedIn: ${data?.linkedin || ''}\nGitHub: ${data?.github || ''}\nBio: ${data?.summary || 'Passionate ' + role + '.'}\nSkills: ${data?.skills || 'JavaScript, HTML, CSS'}\nProjects: ${data?.projects || 'See GitHub'}\nExperience: ${data?.experience || 'N/A'}\nEducation: ${data?.education || ''}\nCourses: ${data?.courses || ''}\nAchievements: ${data?.achievements || ''}\nLanguages: ${data?.languages || ''}\nHobbies: ${data?.hobbies || ''}\n
-RULES: No Lorem Ipsum. No placeholders. Use ONLY the data above. Add smooth scroll. Make it look PREMIUM.`;
+REAL DATA TO USE:\nName: ${name}\nRole: ${role}\nEmail: ${data?.email || ''}\nPhone: ${data?.phone || ''}\nLinkedIn: ${data?.linkedin || ''}\nGitHub: ${data?.github || ''}\nBio: ${data?.summary || 'Passionate ' + role + '.'}\nSkills: ${data?.skills || 'JavaScript, HTML, CSS'}\nProjects: ${data?.projects || 'See GitHub'}\nExperience: ${data?.experience || 'N/A'}\nEducation: ${data?.education || ''}\nCourses: ${data?.courses || ''}\nAchievements: ${data?.achievements || ''}\nLanguages: ${data?.languages || ''}\nHobbies: ${data?.hobbies || ''}\nProfile Photo (Data URI): ${profileImage || 'NONE'}\n
+RULES: ${profileImage ? 'MANDATORY: Use the Profile Photo Data URI in the hero section.' : ''} No Lorem Ipsum. No placeholders. Use ONLY the data above. Add smooth scroll. Use FontAwesome 6.4.0. Make it look PREMIUM and HIGH-FIDELITY.
+`;
 
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',

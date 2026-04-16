@@ -142,6 +142,7 @@ export default function PortfolioGenerator() {
             projects: projectsStr,
             courses: coursesStr,
             experience: expStr,
+            profileImage,
           },
         }),
       });
