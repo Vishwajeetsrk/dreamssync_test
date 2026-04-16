@@ -20,8 +20,10 @@ The platform consists of **specialized AI-powered engines** designed to synchron
 4.  **🗺️ Roadmap Accelerator**: 90-day technical and professional progression paths tailored to the 2026 Indian ecosystem.
 5.  **💼 LinkedIn Pro Optimizer**: AI-driven headline, about section, and keyword tuning to rank in the top 1% of recruiters' searches.
 6.  **🖼️ Portfolio Engine**: Instantly transform professional data into high-performance, responsive web portfolios.
-7.  **🤖 Career Strategist v2**: Expert AI agent synced with real-time salary trends and primary job portals.
-8.  **📑 Global Docs Hub**: Unified guidance on essential identity nodes (Aadhar, PAN, Passport) and legal professional requirements.
+7.  **🤖 AI Strategist v2**: Expert AI agent synced with real-time salary trends and primary job portals.
+8.  **🌱 Community Hub**: A unified ecosystem for care-experienced individuals to connect, collaborate, and empower each other.
+9.  **📑 Global Docs Hub**: Unified guidance on essential identity nodes (Aadhar, PAN, Passport) and legal professional requirements.
+10. **💆 Serenity AI**: Empathetic mental health companion for burnout and professional stress management.
 
 ---
 
@@ -32,7 +34,7 @@ The platform consists of **specialized AI-powered engines** designed to synchron
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (Custom Neo-Brutalist Utility System)
 - **Animation**: [Framer Motion 12+](https://www.framer.com/motion/) (Micro-interactions & Physics)
 - **Database**: [Firebase Cloud Firestore](https://firebase.google.com/) (Real-time Profile Synchronization)
-- **Authentication**: **Hybrid Security Protocol** (Firebase Client Auth + NextAuth.js for OIDC Social login)
+- **Authentication**: **Native Firebase Secure Protocol** (OIDC Social login via Google & GitHub with Popup/Redirect flows)
 - **Storage**: [Firebase Storage](https://firebase.google.com/) (Identity Assets & PDF Blobs)
 - **Edge Cache**: [Upstash Redis](https://upstash.com/) (AI Response Caching & Rate Limiting)
 
