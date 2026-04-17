@@ -48,50 +48,18 @@ export default function Login() {
     setLoading(true);
     setError('');
     try {
-      let provider;
-      if (providerName === 'google') {
-        provider = new GoogleAuthProvider();
-      } else if (providerName === 'github') {
-        provider = new GithubAuthProvider();
-      } else {
-        return;
-      }
+      // Use NextAuth signIn which handles the redirect_uri correctly based on NEXTAUTH_URL
+      const result = await signIn(providerName, { 
+        callbackUrl: '/dashboard',
+        redirect: true 
+      });
       
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      // Sync with Firestore
-      const userRef = doc(db, 'users', user.uid);
-      const snap = await getDoc(userRef);
-      if (!snap.exists()) {
-        await setDoc(userRef, {
-          name: user.displayName || 'DreamSync User',
-          email: user.email,
-          avatar_url: user.photoURL || '',
-          provider: providerName,
-          created_at: new Date().toISOString()
-        });
+      if (result?.error) {
+        throw new Error(result.error);
       }
-
-      router.push('/dashboard');
     } catch (err: any) {
       console.error(`${providerName} login error:`, err);
-      
-      let errorMessage = `Failed to sign in with ${providerName}. Please try again.`;
-      
-      if (err.code === 'auth/popup-closed-by-user') {
-        errorMessage = "Login cancelled. Please ensure you complete the sign-in process in the popup window.";
-      } else if (err.code === 'auth/cancelled-popup-request') {
-        errorMessage = "Verification in progress. Please check your open login windows.";
-      } else if (err.code === 'auth/popup-blocked') {
-        errorMessage = "Popup blocked! Please allow popups for this site in your browser settings.";
-      } else if (err.code === 'auth/unauthorized-domain') {
-        errorMessage = "This domain is not authorized. Please check your Firebase Authentication settings.";
-      } else if (err.code === 'auth/network-request-failed') {
-        errorMessage = "Connection error. Please check your internet and try again.";
-      }
-
-      setError(errorMessage);
+      setError(`Failed to sign in with ${providerName}. Please check your configuration.`);
     } finally {
       setLoading(false);
     }
