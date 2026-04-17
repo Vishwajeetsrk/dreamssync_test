@@ -45,50 +45,50 @@ export default function Contact() {
     }
   };
   return (
-    <div className="space-y-12 max-w-6xl mx-auto py-8">
-      <header className="border-b-4 border-black pb-8 text-center">
-        <h1 className="text-4xl md:text-5xl font-black mb-4 flex items-center justify-center gap-4">
-          <MessageCircle className="w-12 h-12" /> Get in Touch
+    <div className="space-y-12 max-w-6xl mx-auto py-16 px-4 md:px-0 mt-8">
+      <header className="border-b-[8px] border-slate-100 pb-12 text-center space-y-4">
+        <h1 className="text-4xl md:text-7xl font-black mb-4 flex items-center justify-center gap-4 text-slate-900 uppercase italic leading-none">
+          <MessageCircle className="w-12 h-12 text-blue-600" /> Strategic Inquiry
         </h1>
-        <p className="text-xl text-muted-foreground font-medium">Have questions? We're here to help you sync your dreams to reality.</p>
+        <p className="text-lg md:text-2xl text-slate-500 font-semibold uppercase tracking-tight">Facilitating direct communication for vocational growth and community support.</p>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
         {/* Contact Form */}
-        <div className="bg-white border-4 border-black p-8 neo-box">
-          <h2 className="text-3xl font-black mb-6">Send a Message</h2>
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div className="space-y-2">
-              <label className="font-bold">Your Name</label>
+        <div className="bg-white border-4 border-slate-900 p-8 md:p-12 neo-box shadow-[12px_12px_0px_0px_#F1F5F9]">
+          <h2 className="text-3xl font-black mb-10 uppercase italic text-slate-900">Authorized Inquiry</h2>
+          <form className="space-y-8" onSubmit={handleSubmit}>
+            <div className="space-y-3">
+              <label className="text-[10px] font-black uppercase tracking-widest text-blue-600 block">Nominative Identity</label>
               <input 
                 type="text" 
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full p-3 border-2 border-black focus:outline-none focus:ring-4 focus:ring-primary/20 neo-box" 
-                placeholder="John Doe" 
+                className="w-full p-4 border-2 border-slate-900 text-slate-900 font-black uppercase tracking-tight focus:outline-none focus:bg-slate-50 transition-all placeholder:text-slate-300" 
+                placeholder="Full Name Identifier" 
               />
             </div>
-            <div className="space-y-2">
-              <label className="font-bold">Email Address</label>
+            <div className="space-y-3">
+              <label className="text-[10px] font-black uppercase tracking-widest text-blue-600 block">Electronic Address</label>
               <input 
                 type="email" 
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full p-3 border-2 border-black focus:outline-none focus:ring-4 focus:ring-primary/20 neo-box" 
-                placeholder="john@example.com" 
+                className="w-full p-4 border-2 border-slate-900 text-slate-900 font-black uppercase tracking-tight focus:outline-none focus:bg-slate-50 transition-all placeholder:text-slate-300" 
+                placeholder="Official Email Node" 
               />
             </div>
-            <div className="space-y-2">
-              <label className="font-bold">Message</label>
+            <div className="space-y-3">
+              <label className="text-[10px] font-black uppercase tracking-widest text-blue-600 block">Communication Data</label>
               <textarea 
                 required
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 rows={5} 
-                className="w-full p-3 border-2 border-black focus:outline-none focus:ring-4 focus:ring-primary/20 neo-box" 
-                placeholder="How can we help?" 
+                className="w-full p-4 border-2 border-slate-900 text-slate-900 font-black uppercase tracking-tight focus:outline-none focus:bg-slate-50 transition-all placeholder:text-slate-300" 
+                placeholder="Specify Objective / Question" 
               />
             </div>
             
@@ -107,49 +107,49 @@ export default function Contact() {
             <button 
               type="submit" 
               disabled={status === 'loading' || status === 'success'}
-              className="w-full py-4 bg-black text-white font-black text-xl border-4 border-black shadow-[6px_6px_0px_0px_rgba(37,99,235,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all flex justify-center items-center gap-3 disabled:opacity-70 uppercase tracking-tighter"
+              className="w-full py-5 bg-blue-600 text-white font-black text-[12px] uppercase tracking-[0.3em] border-4 border-slate-900 shadow-[8px_8px_0px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex justify-center items-center gap-3 disabled:opacity-70 italic"
             >
               {status === 'loading' ? (
                 <><Loader2 className="w-5 h-5 animate-spin" /> SYNCHRONIZING...</>
               ) : status === 'success' ? (
-                <><CheckCircle2 className="w-5 h-5" /> SENT!</>
+                <><CheckCircle2 className="w-5 h-5" /> AUTHORIZED!</>
               ) : (
-                <><Send className="w-5 h-5" /> Send Message</>
+                <><Send className="w-5 h-5" /> Authorize Transmission</>
               )}
             </button>
           </form>
         </div>
 
         {/* Contact Info Card */}
-        <div className="space-y-8">
-          <div className="bg-accent text-black border-4 border-black p-8 neo-box transform md:rotate-2">
-            <h2 className="text-3xl font-black mb-6 border-b-2 border-black pb-2">Direct Contact</h2>
-            <div className="space-y-6 text-lg font-medium">
-              <a href="mailto:dreamsyncbangalore@gmail.com" className="flex items-center gap-4 hover:underline">
-                <div className="p-3 bg-white border-2 border-black hidden sm:block"><Mail className="w-6 h-6" /></div>
-                <div>
-                  <p className="font-bold">Email Us</p>
-                  dreamsyncbangalore@gmail.com
+        <div className="space-y-12">
+          <div className="bg-slate-900 text-white border-4 border-slate-900 p-8 md:p-12 neo-box transform md:rotate-2 shadow-[12px_12px_0px_0px_#2563EB]">
+            <h2 className="text-3xl font-black mb-8 border-b-4 border-white/10 pb-4 uppercase italic tracking-tighter text-teal-400">Direct Nodes</h2>
+            <div className="space-y-8 text-lg font-bold uppercase italic">
+              <a href="mailto:dreamsyncbangalore@gmail.com" className="flex items-center gap-6 group">
+                <div className="p-3 bg-white text-slate-900 border-2 border-slate-900 group-hover:bg-blue-600 group-hover:text-white transition-colors"><Mail className="w-8 h-8" /></div>
+                <div className="space-y-1">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest not-italic">Official Email Identifier</p>
+                  <span className="text-xl tracking-tighter">dreamsyncbangalore@gmail.com</span>
                 </div>
               </a>
               
-              <a href="https://whatsapp.com/channel/0029VaFRiHbKrWR0L22onC0f" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 hover:underline">
-                <div className="p-3 bg-[#25D366] text-white border-2 border-black hidden sm:block"><Phone className="w-6 h-6" /></div>
-                <div>
-                  <p className="font-bold">WhatsApp Channel</p>
-                  Join Official Channel
+              <a href="https://whatsapp.com/channel/0029VaFRiHbKrWR0L22onC0f" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group">
+                <div className="p-3 bg-teal-500 text-white border-2 border-slate-900 group-hover:bg-blue-600 transition-colors"><Phone className="w-8 h-8" /></div>
+                <div className="space-y-1">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest not-italic">Strategic Communication Channel</p>
+                  <span className="text-xl tracking-tighter uppercase">Authorized WhatsApp Hub</span>
                 </div>
               </a>
             </div>
           </div>
 
-          <div className="bg-white border-4 border-black p-8 neo-box transform md:-rotate-1">
-            <h2 className="text-2xl font-black mb-6 border-b-2 border-black pb-2 flex items-center gap-2"><Globe /> Social Media</h2>
-            <div className="flex flex-col gap-4 font-bold">
-              <a href="https://www.linkedin.com/company/dreamsync-community/" target="_blank" rel="noopener noreferrer" className="p-3 border-2 border-black hover:bg-[#0A66C2] hover:text-white transition-colors text-center">LinkedIn</a>
-              <a href="https://instagram.com/dream_sync_hub" target="_blank" rel="noopener noreferrer" className="p-3 border-2 border-black hover:bg-[#E1306C] hover:text-white transition-colors text-center">Instagram</a>
-              <a href="https://www.facebook.com/groups/605404708473694/" target="_blank" rel="noopener noreferrer" className="p-3 border-2 border-black hover:bg-[#1877F2] hover:text-white transition-colors text-center">Facebook Group</a>
-              <a href="https://twitter.com/ADreamsync" target="_blank" rel="noopener noreferrer" className="p-3 border-2 border-black hover:bg-black hover:text-white transition-colors text-center">X (Twitter)</a>
+          <div className="bg-white border-4 border-slate-900 p-8 md:p-12 neo-box transform md:-rotate-1 shadow-[12px_12px_0px_0px_#F1F5F9]">
+            <h2 className="text-2xl font-black mb-8 border-b-4 border-slate-100 pb-4 flex items-center gap-4 text-slate-900 uppercase italic"><Globe className="text-blue-600" /> Digital Reach</h2>
+            <div className="grid grid-cols-2 gap-4 text-[10px] font-black uppercase tracking-widest">
+              <a href="https://www.linkedin.com/company/dreamsync-community/" target="_blank" rel="noopener noreferrer" className="p-4 border-2 border-slate-900 hover:bg-blue-600 hover:text-white transition-all text-center shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none">LinkedIn</a>
+              <a href="https://instagram.com/dream_sync_hub" target="_blank" rel="noopener noreferrer" className="p-4 border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition-all text-center shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none">Instagram</a>
+              <a href="https://www.facebook.com/groups/605404708473694/" target="_blank" rel="noopener noreferrer" className="p-4 border-2 border-slate-900 hover:bg-blue-800 hover:text-white transition-all text-center shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none">Facebook</a>
+              <a href="https://twitter.com/ADreamsync" target="_blank" rel="noopener noreferrer" className="p-4 border-2 border-slate-900 hover:bg-slate-900 hover:text-white transition-all text-center shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none">X Platform</a>
             </div>
           </div>
         </div>

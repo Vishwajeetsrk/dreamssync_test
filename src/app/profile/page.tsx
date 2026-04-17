@@ -200,28 +200,28 @@ function ProfileContent() {
         <div className="mb-12 md:mb-20 flex flex-col md:flex-row justify-between items-end gap-10 border-b-8 border-black pb-8 md:pb-16">
           <div className="space-y-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-black text-white shadow-[3px_3px_0px_0px_rgba(37,99,235,1)]">
+              <div className="p-2 bg-slate-900 text-white shadow-[3px_3px_0px_0px_#2563EB]">
                 <Fingerprint className="w-8 h-8" />
               </div>
-              <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">User Profile Data</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Identity Audit Hub</span>
             </div>
-            <h1 className="text-3xl md:text-5xl lg:text-7xl xl:text-[80px] font-black tracking-tighter leading-none text-black uppercase">
-              User <br /> <span className="text-[#2563EB] drop-shadow-[5px_5px_0px_rgba(0,0,0,1)] italic">Profile</span>
+            <h1 className="text-3xl md:text-5xl lg:text-7xl xl:text-[80px] font-black tracking-tighter leading-none text-slate-900 uppercase">
+              Strategic <br /> <span className="text-blue-600 drop-shadow-[4px_4px_0px_#F1F5F9] italic">Identity</span>
             </h1>
           </div>
           
-          <div className="flex flex-col sm:flex-row bg-white p-2 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full md:w-auto">
+          <div className="flex flex-col sm:flex-row bg-white p-2 border-4 border-slate-900 shadow-[4px_4px_0px_0px_#F1F5F9] w-full md:w-auto">
             <button 
               onClick={() => setActiveTab('profile')}
-              className={`w-full md:w-auto px-8 py-4 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'profile' ? 'bg-[#2563EB] text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'text-black/40 hover:text-black'}`}
+              className={`w-full md:w-auto px-8 py-4 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'profile' ? 'bg-blue-600 text-white shadow-[4px_4px_0px_0px_#0F172A]' : 'text-slate-400 hover:text-slate-900'}`}
             >
-              PROFILE
+              IDENTITY
             </button>
             <button 
               onClick={() => setActiveTab('settings')}
-              className={`w-full md:w-auto px-8 py-4 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'settings' ? 'bg-[#2563EB] text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'text-black/40 hover:text-black'}`}
+              className={`w-full md:w-auto px-8 py-4 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'settings' ? 'bg-blue-600 text-white shadow-[4px_4px_0px_0px_#0F172A]' : 'text-slate-400 hover:text-slate-900'}`}
             >
-              SETTINGS
+              SECURITY
             </button>
           </div>
         </div>
@@ -237,8 +237,8 @@ function ProfileContent() {
             >
               {/* Profile Context Card */}
               <div className="lg:col-span-4 space-y-10">
-                <div className="neo-box p-6 md:p-12 flex flex-col items-center text-center space-y-10 group overflow-hidden bg-white">
-                  <div className="relative w-56 h-56 border-8 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] group-hover:scale-105 transition-transform overflow-hidden">
+                <div className="neo-box p-6 md:p-12 flex flex-col items-center text-center space-y-10 group overflow-hidden bg-white border-4 border-slate-900 shadow-[10px_10px_0px_0px_#F1F5F9]">
+                  <div className="relative w-56 h-56 border-8 border-slate-900 shadow-[8px_8px_0px_0px_#0F172A] group-hover:scale-105 transition-transform overflow-hidden bg-slate-50">
                     {avatarUrl ? (
                       <img src={avatarUrl} alt="Identity" className="w-full h-full object-cover" />
                     ) : (
@@ -252,25 +252,25 @@ function ProfileContent() {
                       </div>
                     )}
                     <input type="file" id="avatar-upload-profile" hidden accept="image/*" onChange={handleAvatarUpload} />
-                    <label htmlFor="avatar-upload-profile" className="absolute inset-0 bg-[#2563EB]/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer">
+                    <label htmlFor="avatar-upload-profile" className="absolute inset-0 bg-blue-600/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer">
                       <Camera className="w-16 h-16 text-white" />
                     </label>
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="text-4xl font-black tracking-tighter text-black uppercase leading-none">{name || 'Vishwajeet Srk'}</h3>
-                    <div className="px-5 py-1.5 bg-black text-white text-[10px] font-black uppercase tracking-[0.3em] inline-block">VERIFIED</div>
-                    <p className="text-xs font-black text-black/30 uppercase tracking-widest block pt-2">{user?.email}</p>
+                    <h3 className="text-4xl font-black tracking-tighter text-slate-900 uppercase leading-none">{name || 'PROSPECTIVE STUDENT'}</h3>
+                    <div className="px-5 py-1.5 bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.3em] inline-block border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0F172A]">VERIFIED IDENTITY</div>
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] block pt-2">{user?.email}</p>
                   </div>
 
-                  <div className="w-full pt-10 border-t-4 border-black grid grid-cols-2 gap-8">
+                  <div className="w-full pt-10 border-t-4 border-slate-100 grid grid-cols-2 gap-8">
                     <div className="text-center">
-                      <div className="text-[10px] font-black uppercase text-black/20 mb-2 tracking-widest">ACCESS</div>
-                      <div className="text-xs font-black text-[#2563EB] uppercase">STANDARD</div>
+                      <div className="text-[10px] font-black uppercase text-slate-400 mb-2 tracking-widest">ACCESS</div>
+                      <div className="text-xs font-black text-blue-600 uppercase">STANDARD</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-[10px] font-black uppercase text-black/20 mb-2 tracking-widest">STATUS</div>
-                      <div className="text-xs font-black text-green-600 uppercase tracking-widest flex items-center justify-center gap-1">
+                      <div className="text-[10px] font-black uppercase text-slate-400 mb-2 tracking-widest">STATUS</div>
+                      <div className="text-xs font-black text-teal-600 uppercase tracking-widest flex items-center justify-center gap-1">
                          <Zap className="w-3 h-3 fill-current" /> ACTIVE
                       </div>
                     </div>
@@ -279,9 +279,9 @@ function ProfileContent() {
 
                 <Link 
                   href="/donate" 
-                  className="w-full bg-[#FACC15] border-4 border-black p-6 font-black uppercase text-center flex items-center justify-center gap-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all"
+                  className="w-full bg-teal-500 border-4 border-slate-900 p-6 font-black uppercase text-white text-center flex items-center justify-center gap-4 shadow-[6px_6px_0px_0px_#0F172A] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_#0F172A] transition-all"
                 >
-                   <Coffee className="w-6 h-6 fill-current" /> SUPPORT DREAMSYNC
+                   <Coffee className="w-6 h-6 fill-current" /> EMPOWER THE PLATFORM
                 </Link>
               </div>
 
@@ -294,12 +294,12 @@ function ProfileContent() {
                   
                   <form onSubmit={handleUpdateProfile} className="space-y-12">
                     <div className="space-y-6">
-                      <label className="text-xs font-black uppercase tracking-widest text-[#2563EB] block">FULL NAME</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-blue-600 block">NOMINATIVE IDENTITY</label>
                       <input 
                         type="text" 
                         value={name} 
                         onChange={(e) => setName(e.target.value)} 
-                        className="neo-input text-2xl" 
+                        className="neo-input text-2xl border-2 border-slate-900 font-black uppercase" 
                         placeholder="e.g. VISHWAJEET SRK"
                       />
                     </div>
@@ -312,12 +312,12 @@ function ProfileContent() {
                   </form>
                 </div>
 
-                <div className="neo-box p-12 bg-[#FACC15] text-black">
+                <div className="neo-box p-12 bg-slate-900 text-white shadow-[10px_10px_0px_0px_#2563EB] border-4 border-slate-900">
                   <div className="flex items-start gap-8">
-                    <ShieldCheck className="w-12 h-12 shrink-0" strokeWidth={3} />
+                    <ShieldCheck className="w-12 h-12 shrink-0 text-teal-400" strokeWidth={3} />
                     <div className="space-y-4">
-                       <h4 className="text-sm font-black uppercase tracking-widest">Data Privacy Notice</h4>
-                       <p className="text-lg font-bold leading-tight">Your profile data is protected via the DreamSync Security Protocol. Identity updates are synchronized across our redundant systems in milliseconds.</p>
+                       <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-teal-400">Strategic Data Privacy</h4>
+                       <p className="text-lg font-bold leading-tight uppercase italic">Your profile data is protected via the Strategic Security Protocol. Identity updates are synchronized across our redundant systems in real-time.</p>
                     </div>
                   </div>
                 </div>
@@ -337,23 +337,23 @@ function ProfileContent() {
                 </h2>
                 <form onSubmit={handleChangePassword} className="space-y-12 max-w-2xl text-black">
                   <div className="space-y-6">
-                    <label className="text-xs font-black uppercase tracking-widest text-[#2563EB] block">Current Password</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-blue-600 block">System Password</label>
                     <input 
                       type="password" 
                       value={currentPassword} 
                       onChange={(e) => setCurrentPassword(e.target.value)} 
                       placeholder="••••••••••••••••"
-                      className="neo-input text-2xl" 
+                      className="neo-input text-2xl border-2 border-slate-900" 
                     />
                   </div>
                   <div className="space-y-6">
-                    <label className="text-xs font-black uppercase tracking-widest text-[#2563EB] block">New Password</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-blue-600 block">Revised Credential</label>
                     <input 
                       type="password" 
                       value={newPassword} 
                       onChange={(e) => setNewPassword(e.target.value)} 
                       placeholder="••••••••••••••••"
-                      className="neo-input text-2xl" 
+                      className="neo-input text-2xl border-2 border-slate-900" 
                     />
                   </div>
                   <button type="submit" className="neo-btn-primary px-16 py-6 text-xl flex items-center gap-6 group">
@@ -363,25 +363,25 @@ function ProfileContent() {
               </div>
 
               {/* Termination Zone Architecture */}
-              <div className="neo-box p-6 sm:p-10 md:p-16 bg-red-50 border-red-600 flex flex-col xl:flex-row xl:items-center justify-between gap-8 md:gap-16">
+              <div className="neo-box p-6 sm:p-10 md:p-16 bg-slate-50 border-4 border-slate-900 flex flex-col xl:flex-row xl:items-center justify-between gap-8 md:gap-16 shadow-[10px_10px_0px_0px_#F1F5F9]">
                 <div className="space-y-6">
-                  <h3 className="text-4xl font-black uppercase tracking-tighter text-red-600">DANGER ZONE</h3>
-                  <p className="text-lg font-bold text-red-600/60 max-w-xl leading-snug uppercase">
-                    WARNING: Full de-authorization of account and permanent erasure of all career synchronization data within the system.
+                  <h3 className="text-4xl font-black uppercase tracking-tighter text-slate-900 italic">SYSTEM TERMINATION</h3>
+                  <p className="text-base font-bold text-slate-400 max-w-xl leading-snug uppercase tracking-tight">
+                    WARNING: Full de-authorization of account and permanent erasure of all career synchronization tokens within the strategic ecosystem.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-8">
                   <button 
                     onClick={handleSignOut}
-                    className="px-12 py-6 bg-black text-white border-4 border-black font-black uppercase text-sm tracking-widest shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
+                    className="px-12 py-6 bg-slate-100 text-slate-900 border-4 border-slate-900 font-black uppercase text-[11px] tracking-widest shadow-[6px_6px_0px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
                   >
-                    Logout
+                    Logout System
                   </button>
                   <button 
                     onClick={handleDeleteAccount}
-                    className={`px-12 py-6 border-4 border-black font-black uppercase text-sm tracking-widest transition-all shadow-[6px_6px_0px_rgba(0,0,0,1)] ${confirmDelete ? 'bg-red-600 text-white animate-pulse' : 'bg-transparent text-red-600 hover:bg-red-600 hover:text-white'}`}
+                    className={`px-12 py-6 border-4 border-slate-900 font-black uppercase text-[11px] tracking-widest transition-all shadow-[6px_6px_0px_#0F172A] ${confirmDelete ? 'bg-red-600 text-white animate-pulse' : 'bg-white text-red-600 hover:bg-red-600 hover:text-white'}`}
                   >
-                    {confirmDelete ? 'CONFIRM DELETE?' : 'Delete Account'}
+                    {confirmDelete ? 'CONFIRM PURGE?' : 'Purge Identity'}
                   </button>
                 </div>
               </div>
@@ -396,7 +396,7 @@ function ProfileContent() {
               initial={{ opacity: 0, x: 50 }} 
               animate={{ opacity: 1, x: 0 }} 
               exit={{ opacity: 0, x: 50 }}
-              className={`fixed bottom-12 right-12 p-10 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-[100] flex flex-col gap-4 max-w-sm ${message.type === 'success' ? 'bg-[#2563EB] text-white' : 'bg-black text-red-500'}`}
+              className={`fixed bottom-12 right-12 p-10 border-4 border-slate-900 shadow-[8px_8px_0px_0px_#0F172A] z-[100] flex flex-col gap-4 max-w-sm ${message.type === 'success' ? 'bg-blue-600 text-white' : 'bg-slate-900 text-red-400'}`}
             >
               <div className="flex items-center gap-6">
                 {message.type === 'success' ? <CheckCircle2 className="w-10 h-10" /> : <ShieldAlert className="w-10 h-10 animate-pulse" />}

@@ -19,19 +19,19 @@ interface WorkExp { title: string; company: string; points: string; startDate: s
 const THEMES = [
   {
     id: 'minimal-dev',
-    name: 'Minimal Dev',
-    desc: 'Clean • Editorial • Professional',
-    preview: { bg: '#FFFFFF', accent: '#000000', text: '#111111', card: '#F9FAFB' },
-    gradient: 'from-gray-100 to-white',
-    border: 'border-gray-200',
+    name: 'Strategic Editorial',
+    desc: 'Academic • Balanced • Professional',
+    preview: { bg: '#F8FAFC', accent: '#2563EB', text: '#0F172A', card: '#FFFFFF' },
+    gradient: 'from-slate-50 to-white',
+    border: 'border-slate-200',
   },
   {
     id: 'neo-brutalism',
-    name: 'Neo-Brutalism',
-    desc: 'Bold • Expressive • Unforgettable',
-    preview: { bg: '#FFFBF5', accent: '#FFE500', text: '#111111', card: '#FFE500' },
-    gradient: 'from-yellow-50 to-pink-50',
-    border: 'border-black',
+    name: 'Modern Legacy',
+    desc: 'Structured • Authoritative • Accessible',
+    preview: { bg: '#FFFFFF', accent: '#14B8A6', text: '#0F172A', card: '#F1F5F9' },
+    gradient: 'from-teal-50 to-blue-50',
+    border: 'border-slate-900',
   },
   {
     id: 'glass-dark',
@@ -309,14 +309,14 @@ export default function PortfolioGenerator() {
   return (
     <div className={`mx-auto space-y-8 transition-all px-4 sm:px-6 ${activePreview ? 'max-w-[100vw]' : 'max-w-4xl'}`}>
       {/* Header */}
-      <header className="text-center border-b-4 border-black pb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#2563EB] text-white border-2 border-black text-sm font-bold mb-4">
-          <Sparkles className="w-4 h-4" /> AI-Powered
+      <header className="text-center border-b-4 border-slate-900 pb-8">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-600 text-white border-2 border-slate-900 text-[10px] font-bold mb-4 uppercase tracking-widest">
+          <Sparkles className="w-4 h-4" /> Professional Synergy
         </div>
-        <h1 className="text-4xl md:text-6xl font-black mb-3 leading-tight">
-          Portfolio <span className="bg-[#2563EB] text-white px-3">Generator</span>
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black mb-3 leading-none text-slate-900 uppercase">
+          Digital <span className="text-blue-600 italic">Presence</span>
         </h1>
-        <p className="text-xl text-gray-600 font-medium">From your resume to a stunning website in under 60 seconds.</p>
+        <p className="text-base md:text-xl text-slate-500 font-semibold uppercase tracking-tight">Accelerating your professional visibility in seconds.</p>
       </header>
 
       {/* Step Indicator */}
@@ -327,10 +327,10 @@ export default function PortfolioGenerator() {
           const isCurrent = step === s.id;
           return (
             <div key={s.id} className="flex flex-col items-center gap-2">
-              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg border-4 border-black flex items-center justify-center font-black text-xs transition-all ${isDone ? 'bg-[#FACC15] text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]' : isCurrent ? 'bg-[#2563EB] text-white scale-110 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white text-gray-400'}`}>
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg border-[3px] border-slate-900 flex items-center justify-center font-black text-xs transition-all ${isDone ? 'bg-teal-500 text-white shadow-[2px_2px_0px_0px_#0F172A]' : isCurrent ? 'bg-blue-600 text-white scale-110 shadow-[4px_4px_0px_0px_#0F172A]' : 'bg-white text-slate-300'}`}>
                 {isDone ? <Check className="w-6 h-6" /> : <s.icon className="w-5 h-5" />}
               </div>
-              <span className={`text-[10px] uppercase font-black tracking-widest hidden md:block ${isCurrent ? 'text-black' : 'text-gray-400'}`}>{s.label}</span>
+              <span className={`text-[9px] uppercase font-black tracking-widest hidden sm:block ${isCurrent ? 'text-slate-900' : 'text-slate-400'}`}>{s.label}</span>
             </div>
           );
         })}
@@ -355,19 +355,19 @@ export default function PortfolioGenerator() {
             <div className="bg-white border-4 border-black neo-box p-8 space-y-8">
               
               {/* Resume Upload Module */}
-              <div className="p-6 bg-[#FACC15] border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] space-y-4">
+              <div className="p-6 bg-teal-500 border-4 border-slate-900 shadow-[6px_6px_0px_0px_#0F172A] space-y-4">
                  <div className="flex items-center gap-4">
-                    <div className="p-3 bg-white border-2 border-black">
-                       <Upload className="w-8 h-8" />
+                    <div className="p-3 bg-white border-2 border-slate-900">
+                       <Upload className="w-8 h-8 text-blue-600" />
                     </div>
                     <div>
-                       <h3 className="text-xl font-black uppercase italic">AI Auto-Generator</h3>
-                       <p className="text-xs font-bold text-gray-700">Upload your resume and the AI will build your entire portfolio in seconds.</p>
+                       <h3 className="text-xl font-black uppercase italic text-white">AI Sync Engine</h3>
+                       <p className="text-[10px] font-black uppercase text-white/80">Synchronize your professional history instantly.</p>
                     </div>
                  </div>
-                 <label className="w-full flex items-center justify-center gap-3 py-4 bg-black text-white font-black uppercase text-sm cursor-pointer hover:bg-gray-900 transition-all border-2 border-black">
-                    {isParsing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}
-                    {isParsing ? "Analyzing Experience..." : "Upload Resume (PDF)"}
+                 <label className="w-full flex items-center justify-center gap-3 py-4 bg-slate-900 text-white font-black uppercase text-xs cursor-pointer hover:bg-slate-800 transition-all border-2 border-slate-900">
+                    {isParsing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5 text-teal-400" />}
+                    {isParsing ? "Analyzing Data..." : "SYNC VIA RESUME PDF"}
                     <input type="file" hidden accept=".pdf" onChange={handleImportResume} />
                  </label>
               </div>

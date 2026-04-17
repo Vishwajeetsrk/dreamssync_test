@@ -159,9 +159,9 @@ const skillGuides = [
   {
     title: "Generative AI & LLMs",
     icon: Sparkles,
-    color: "bg-violet-100",
-    border: "border-violet-400",
-    level: "2026 High Demand",
+    color: "bg-blue-100",
+    border: "border-blue-400",
+    level: "2026 Strategic Demand",
     duration: "2–3 months",
     skills: ["Prompt Engineering", "Fine-tuning LLMs", "RAG Systems", "Vector DBs", "OpenAI / Claude API"],
     resources: [
@@ -170,13 +170,13 @@ const skillGuides = [
       { name: "Build a Custom RAG (Project)", url: "https://github.com/langchain-ai/langchain" },
     ],
     jobs: "https://www.naukri.com/generative-ai-jobs",
-    salary: "₹8L – ₹25L (Fresher/1yr)",
+    salary: "₹8L – ₹25L (Junior)",
   },
   {
     title: "Agentic AI Developer",
     icon: Brain,
-    color: "bg-indigo-100",
-    border: "border-indigo-400",
+    color: "bg-teal-100",
+    border: "border-teal-400",
     level: "Cutting Edge",
     duration: "3–4 months",
     skills: ["LangChain / LangGraph", "CrewAI / AutoGen", "Tool Selection", "Multi-Agent Systems", "Stateful Agents"],
@@ -264,7 +264,7 @@ function DocCard({ doc, i }: { doc: typeof govDocs[0]; i: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: i * 0.07 }}
-      className="bg-white border-4 border-black flex flex-col neo-box"
+      className="bg-white border-4 border-slate-900 flex flex-col neo-box"
     >
       <div className="p-6 flex-1 space-y-4">
         {/* Header */}
@@ -277,9 +277,9 @@ function DocCard({ doc, i }: { doc: typeof govDocs[0]; i: number }) {
         <p className="font-medium text-muted-foreground">{doc.desc}</p>
 
         {/* Meta */}
-        <div className="bg-gray-50 border-2 border-black p-4 space-y-2">
-          <p className="text-sm font-bold flex gap-2"><Info className="w-4 h-4 text-primary shrink-0" /> Cost: <span className="font-normal text-muted-foreground">{doc.fee}</span></p>
-          <p className="text-sm font-bold flex gap-2"><FileText className="w-4 h-4 text-primary shrink-0" /> Time: <span className="font-normal text-muted-foreground">{doc.time}</span></p>
+        <div className="bg-slate-50 border-2 border-slate-900 p-4 space-y-2">
+          <p className="text-xs font-black uppercase flex gap-2"><Info className="w-4 h-4 text-blue-600 shrink-0" /> Cost Estimate: <span className="font-bold text-slate-500">{doc.fee}</span></p>
+          <p className="text-xs font-black uppercase flex gap-2"><FileText className="w-4 h-4 text-blue-600 shrink-0" /> processing Time: <span className="font-bold text-slate-500">{doc.time}</span></p>
         </div>
 
         {/* Required docs */}
@@ -345,23 +345,23 @@ function DocCard({ doc, i }: { doc: typeof govDocs[0]; i: number }) {
       </div>
 
       {/* Footer actions */}
-      <div className="border-t-4 border-black grid grid-cols-2">
+      <div className="border-t-4 border-slate-900 grid grid-cols-2">
         <button
           onClick={() => setExpanded(e => !e)}
-          className="p-3 font-bold text-sm hover:bg-primary hover:text-white transition-colors border-r-2 border-black flex items-center justify-center gap-1.5"
+          className="p-3 font-black uppercase tracking-tighter text-[11px] hover:bg-blue-600 hover:text-white transition-colors border-r-2 border-slate-900 flex items-center justify-center gap-1.5"
         >
           {expanded
-            ? <><ChevronUp className="w-4 h-4" /> Hide Steps</>
-            : <><ChevronDown className="w-4 h-4" /> How to Apply</>
+            ? <><ChevronUp className="w-4 h-4 text-teal-400" /> Hide Details</>
+            : <><ChevronDown className="w-4 h-4 text-teal-400" /> Application Guide</>
           }
         </button>
         <a
           href={doc.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-3 font-bold text-sm hover:bg-gray-100 transition-colors flex items-center justify-center gap-1.5"
+          className="p-3 font-black uppercase tracking-tighter text-[11px] hover:bg-slate-50 transition-colors flex items-center justify-center gap-1.5"
         >
-          Official Site <ExternalLink className="w-3.5 h-3.5" />
+          Official Portal <ExternalLink className="w-3.5 h-3.5" />
         </a>
       </div>
     </motion.div>
@@ -454,28 +454,28 @@ export default function Documents() {
   return (
     <div className="space-y-10 pb-16 px-4 sm:px-6">
       {/* Header */}
-      <header className="border-b-4 border-black pb-8">
-        <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[80px] font-black mb-3 flex items-center gap-4 uppercase tracking-tighter italic">
-          <BookOpen className="w-10 h-10" /> Roadmaps & Docs
+      <header className="border-b-4 border-slate-900 pb-8">
+        <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[80px] font-black mb-3 flex items-center gap-4 uppercase tracking-tighter italic text-slate-900 leading-none">
+          <BookOpen className="w-10 h-10 text-blue-600" /> Empowerment <br /> Hub
         </h1>
-        <p className="text-xl text-muted-foreground font-medium">
-          Step-by-step skill guides and essential government documents for Indian students & professionals.
+        <p className="text-lg md:text-xl text-slate-500 font-semibold uppercase tracking-tight max-w-3xl">
+          Strategic skill roadmaps and essential guidance for the next generation of professionals.
         </p>
       </header>
 
       {/* Tab Switcher */}
-      <div className="flex flex-col sm:flex-row gap-0 border-4 border-black w-full sm:w-fit neo-box">
+      <div className="flex flex-col sm:flex-row gap-0 border-4 border-slate-900 w-full sm:w-fit neo-box shadow-[6px_6px_0px_0px_#0F172A]">
         <button
           onClick={() => setTab('skills')}
-          className={`px-8 py-3 font-black text-sm uppercase tracking-wider transition-colors flex items-center gap-2 ${tab === 'skills' ? 'bg-[#2563EB] text-white' : 'bg-white hover:bg-gray-100'}`}
+          className={`px-8 py-3 font-black text-[10px] uppercase tracking-wider transition-colors flex items-center gap-2 ${tab === 'skills' ? 'bg-blue-600 text-white' : 'bg-white hover:bg-slate-50'}`}
         >
-          <GraduationCap className="w-4 h-4" /> Skill Guides (Videos/Projects)
+          <GraduationCap className="w-4 h-4" /> Skill Architecture
         </button>
         <button
           onClick={() => setTab('docs')}
-          className={`px-8 py-3 font-black text-sm uppercase tracking-wider transition-colors border-t-4 sm:border-t-0 sm:border-l-4 border-black flex items-center gap-2 ${tab === 'docs' ? 'bg-[#2563EB] text-white' : 'bg-white hover:bg-gray-100'}`}
+          className={`px-8 py-3 font-black text-[10px] uppercase tracking-wider transition-colors border-t-4 sm:border-t-0 sm:border-l-4 border-slate-900 flex items-center gap-2 ${tab === 'docs' ? 'bg-blue-600 text-white' : 'bg-white hover:bg-slate-50'}`}
         >
-          <Landmark className="w-4 h-4" /> Government Docs
+          <Landmark className="w-4 h-4" /> Professional Credentials
         </button>
       </div>
 

@@ -256,20 +256,21 @@ export default function ResumeBuilder() {
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-[#F3F4F6] text-black selection:bg-[#FACC15]/40 overflow-x-hidden">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-[#F3F4F6] text-black selection:bg-teal-200 overflow-x-hidden">
       
       {/* Sidebar - Neo-Brutalist Form Editor */}
-      <aside className="w-full lg:w-[500px] bg-white border-b-8 lg:border-r-8 lg:border-b-0 border-black p-6 md:p-10 space-y-12 shadow-[8px_0px_0px_0px_rgba(0,0,0,0.05)] lg:h-screen lg:overflow-y-auto">
+      <aside className="w-full lg:w-[500px] bg-white border-b-8 lg:border-r-8 lg:border-b-0 border-black p-4 md:p-10 space-y-12 shadow-[8px_0px_0px_0px_rgba(0,0,0,0.05)] lg:h-screen lg:overflow-y-auto">
         
         <header className="space-y-2 border-b-4 border-black pb-8">
-           <div className="flex items-center gap-3 text-[#2563EB]">
-              <FileText className="w-8 h-8" />
-              <h1 className="text-3xl font-black uppercase tracking-tighter italic">Resume Builder</h1>
-           </div>
-           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-black/40">Professional Tier AI Generator</p>
+            <div className="flex items-center gap-3 text-blue-600">
+               <FileText className="w-8 h-8" />
+               <h1 className="text-3xl font-black uppercase tracking-tighter italic">Resume Architect</h1>
+            </div>
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Student Empowerment Initiative</p>
         </header>
 
 
-        {/* 🚀 ELITE TEMPLATE SELECTOR (TOP) */}
+        {/* 🚀 TEMPLATE SELECTOR (TOP) */}
         <section className="space-y-6">
           <h2 className="text-xs font-black uppercase tracking-[0.4em] text-black border-b-4 border-black pb-4 flex items-center justify-between">
             SELECT TEMPLATE <Sparkles className="w-4 h-4 text-[#FACC15] fill-current" />
@@ -278,27 +279,27 @@ export default function ResumeBuilder() {
             {[
               { 
                 id: 'elite', 
-                name: 'Elite Product Pro', 
-                desc: 'Best for top tech companies.', 
-                focus: 'Focus: Showing your scores and results.',
-                color: 'hover:bg-purple-50',
-                accent: 'bg-purple-600'
+                name: 'Strategic Alliance', 
+                desc: 'Highly structured for multi-nationals.', 
+                focus: 'Priority: High Readability.',
+                color: 'hover:bg-slate-50',
+                accent: 'bg-slate-900'
               },
               { 
                 id: 'strategic', 
-                name: 'Strategic Project Pro', 
-                desc: 'Great for building your first big projects.', 
-                focus: 'Focus: High clarity.',
+                name: 'Professional Growth', 
+                desc: 'Balanced design for general applications.', 
+                focus: 'Priority: Skill Visualization.',
                 color: 'hover:bg-blue-50',
-                accent: 'bg-[#2563EB]'
+                accent: 'bg-blue-600'
               },
               { 
                 id: 'modern', 
-                name: 'Modern Job Pro', 
-                desc: 'Standard style for all careers.', 
-                focus: 'Focus: Passing auto-screening systems.',
-                color: 'hover:bg-emerald-50',
-                accent: 'bg-emerald-600'
+                name: 'Student Success', 
+                desc: 'Academic friendly for internships.', 
+                focus: 'Priority: ATS Optimized.',
+                color: 'hover:bg-teal-50',
+                accent: 'bg-teal-500'
               }
             ].map((t) => (
               <button
@@ -327,29 +328,29 @@ export default function ResumeBuilder() {
         {/* Action Protocol Panel */}
         <motion.div 
           whileHover={{ y: -2 }}
-          className="neo-box p-6 md:p-8 bg-gray-100 text-black space-y-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] border-2 border-black"
+          className="neo-box p-6 bg-slate-50 text-slate-900 space-y-6 shadow-[4px_4px_0px_0px_#0F172A] border-[3px] border-slate-900"
         >
-           <h3 className="text-[10px] font-black uppercase tracking-widest text-[#2563EB] flex items-center gap-3">
-              <Zap className="w-4 h-4 fill-current animate-pulse" /> EXPORT & IMPORT PROTOCOL
+           <h3 className="text-[10px] font-black uppercase tracking-widest text-blue-600 flex items-center gap-3">
+              <Zap className="w-4 h-4 fill-current animate-pulse" /> EXPORT ACTIONS
            </h3>
-           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+           <div className="grid grid-cols-2 gap-4">
               <button 
                 onClick={handlePrint} 
-                className="w-full bg-white text-black border-2 border-black py-4 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-[#FACC15] hover:scale-[1.03] active:bg-[#2563EB] active:text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all"
+                className="w-full bg-white text-slate-900 border-2 border-slate-900 py-4 text-[10px] font-black uppercase flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white transition-all shadow-[2px_2px_0px_0px_#0F172A]"
               >
-                 <Printer className="w-5 h-5" /> PDF
+                 <Printer className="w-4 h-4" /> PDF
               </button>
               <button 
                 onClick={generateWordDoc} 
-                className="w-full bg-white text-black border-2 border-black py-4 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-[#FACC15] hover:scale-[1.03] active:bg-[#2563EB] active:text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all"
+                className="w-full bg-white text-slate-900 border-2 border-slate-900 py-4 text-[10px] font-black uppercase flex items-center justify-center gap-2 hover:bg-teal-500 hover:text-white transition-all shadow-[2px_2px_0px_0px_#0F172A]"
               >
-                 <FileText className="w-5 h-5" /> DOCX
+                 <FileText className="w-4 h-4" /> DOCX
               </button>
            </div>
            
            <div className="pt-2">
-              <label className="w-full bg-white border-2 border-black hover:border-[#2563EB] py-4 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-4 cursor-pointer shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#FACC15] transition-all">
-                 <Upload className="w-5 h-5 text-[#2563EB]" /> {isParsing ? 'PARSING...' : 'IMPORT RESUME PDF'}
+              <label className="w-full bg-white border-2 border-slate-900 py-3 text-[10px] font-black uppercase flex items-center justify-center gap-3 cursor-pointer hover:bg-slate-50 transition-all">
+                 <Upload className="w-4 h-4 text-blue-600" /> {isParsing ? 'PARSING...' : 'IMPORT PDF'}
                  <input type="file" hidden accept=".pdf" onChange={handleImportPdf} />
               </label>
            </div>

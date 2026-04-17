@@ -45,7 +45,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col bg-[#F3F4F6] selection:bg-[#FACC15]/40 min-h-screen">
+    <div className="flex flex-col bg-slate-50 selection:bg-blue-600/20 min-h-screen">
 
       {/* 🚀 CLICKABLE MARQUEE TICKER (Exclusive to Home) */}
       <div className="marquee-neo mt-[88px] overflow-hidden border-b-4 border-black w-full">
@@ -87,9 +87,9 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-col items-center gap-4 mb-8"
           >
-            <p className="font-black text-xs uppercase tracking-[0.3em]">Welcome Back, {userData?.name?.split(' ')[0] || 'User'}!</p>
-            <div className="px-4 py-1 bg-[#FACC15] border-2 border-black text-[10px] font-black uppercase tracking-widest shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-              ⚡ AI-Powered Career Growth
+            <p className="font-bold text-xs uppercase tracking-[0.3em] text-slate-500">Welcome Back, {userData?.name?.split(' ')[0] || 'User'}!</p>
+            <div className="px-4 py-1 bg-teal-500 border-2 border-slate-900 text-white text-[10px] font-black uppercase tracking-widest shadow-[3px_3px_0px_0px_#0F172A]">
+              ⚡ EMPOWERING YOUR FUTURE
             </div>
           </motion.div>
         )}
@@ -100,22 +100,22 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="space-y-8"
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter leading-tight text-black uppercase">
-            Your Dream Career, <br />
-            <span className="text-black drop-shadow-[2px_2px_0px_rgba(255,255,255,1)] md:drop-shadow-[3px_3px_0px_rgba(255,255,255,1)]">Synced Perfectly.</span>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[1.1] text-slate-900 uppercase">
+            Empowering Youth,<br />
+            <span className="text-blue-600">Shaping Futures.</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-500 font-bold max-w-2xl mx-auto leading-relaxed uppercase">
-            Guidance, resumes, ATS checks, and custom roadmaps—all powered by AI. Designed explicitly for Indian students.
+          <p className="text-base md:text-lg text-slate-500 font-semibold max-w-2xl mx-auto leading-relaxed uppercase">
+            Professional AI guidance, high-impact resumes, and verified roadmaps—built as a non-profit initiative for students across India.
           </p>
         </motion.div>
 
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6 px-4">
-          <Link href="/signup" className="w-full sm:w-auto bg-[#2563EB] text-white border-4 border-black px-12 py-5 font-black text-sm uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
-            Get Started For Free →
+          <Link href="/signup" className="w-full sm:w-auto bg-blue-600 text-white border-[3px] border-slate-900 px-12 py-5 font-black text-sm uppercase shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+            Join Our Platform →
           </Link>
-          <Link href="/about" className="w-full sm:w-auto bg-white text-black border-4 border-black px-12 py-5 font-black text-sm uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
-            See How It Works
+          <Link href="/about" className="w-full sm:w-auto bg-white text-slate-900 border-[3px] border-slate-900 px-12 py-5 font-black text-sm uppercase shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+            Learn Our Mission
           </Link>
         </div>
       </section>
@@ -124,10 +124,10 @@ export default function Home() {
       <section className="py-20 px-4 md:px-6 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {[
-            { val: '1+', label: 'Working Locations', icon: MapPin, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
-            { val: '50+', label: 'Verified Documents', icon: ClipboardCheck, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-            { val: '6+', label: 'Well-being Sessions', icon: MonitorPlay, color: 'text-rose-600', bg: 'bg-rose-50' },
-            { val: '3+', label: 'Community Members', icon: Network, color: 'text-amber-600', bg: 'bg-amber-50' },
+            { val: '1+', label: 'Strategic Partners', icon: MapPin, color: 'text-blue-600', bg: 'bg-blue-50' },
+            { val: '50+', label: 'Verified Resources', icon: ClipboardCheck, color: 'text-teal-600', bg: 'bg-teal-50' },
+            { val: '6+', label: 'Mentorship Slots', icon: MonitorPlay, color: 'text-indigo-600', bg: 'bg-indigo-50' },
+            { val: '3+', label: 'Student Enrolled', icon: Network, color: 'text-slate-600', bg: 'bg-slate-100' },
           ].map((stat, i) => (
             <motion.div
               key={i}
@@ -174,7 +174,7 @@ export default function Home() {
       {/* 🧪 EVERYTHING YOU NEED SECTION */}
       <section className="py-20 px-6 max-w-6xl mx-auto w-full space-y-20">
         <div className="text-center">
-          <h2 className="text-4xl font-black uppercase tracking-tighter underline decoration-8 decoration-[#FACC15] underline-offset-8">Everything You Need</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tighter underline decoration-[10px] decoration-teal-500 underline-offset-[12px]">Our Core Opportunities</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

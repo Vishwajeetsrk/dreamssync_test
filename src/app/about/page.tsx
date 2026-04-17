@@ -27,7 +27,7 @@ const StatCounter = ({ value }: { value: string }) => {
     }
   }, [value, isInView]);
 
-  return <span ref={ref}>{display}</span>;
+  return <span ref={ref} className="tabular-nums">{display}</span>;
 };
 
 // --- COMPONENTS ---
@@ -48,17 +48,17 @@ const FlipCard = ({ title, desc, icon: Icon }: { title: string, desc: string, ic
         transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
       >
         {/* Front */}
-        <div className="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-8 bg-white border-4 border-black neo-box group-hover:translate-x-[-4px] group-hover:translate-y-[-4px] group-hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all">
-          <div className="p-4 bg-[#FACC15] border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] mb-6 transition-transform group-hover:scale-110">
+        <div className="absolute inset-0 backface-hidden flex flex-col items-center justify-center p-8 bg-white border-4 border-slate-900 neo-box group-hover:translate-x-[-4px] group-hover:translate-y-[-4px] group-hover:shadow-[12px_12px_0px_0px_#2563EB] transition-all">
+          <div className="p-4 bg-teal-500 border-4 border-slate-900 shadow-[4px_4px_0px_0px_#0F172A] mb-6 transition-transform group-hover:scale-110 text-white">
             <Icon className="w-10 h-10" strokeWidth={3} />
           </div>
-          <h3 className="text-xl font-black uppercase tracking-tight text-center">{title}</h3>
-          <p className="mt-4 text-[10px] font-black uppercase tracking-widest text-[#2563EB]">Hover to reveal →</p>
+          <h3 className="text-xl font-black uppercase tracking-tight text-center text-slate-900 italic">{title}</h3>
+          <p className="mt-4 text-[9px] font-black uppercase tracking-widest text-blue-600">AUDIT PROTOCOL →</p>
         </div>
 
         {/* Back */}
         <div 
-          className="absolute inset-0 backface-hidden rotate-y-180 flex flex-col items-center justify-center p-8 bg-black text-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(37,99,235,1)]"
+          className="absolute inset-0 backface-hidden rotate-y-180 flex flex-col items-center justify-center p-8 bg-slate-900 text-white border-4 border-slate-900 shadow-[8px_8px_0px_0px_#2563EB]"
         >
           <div className="p-3 bg-white text-black border-2 border-white mb-6">
             <Icon className="w-8 h-8" />
@@ -76,15 +76,15 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-4 border-black bg-white neo-box overflow-hidden">
+    <div className="border-4 border-slate-900 bg-white neo-box overflow-hidden shadow-[6px_6px_0px_0px_#F1F5F9]">
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+        className="w-full flex items-center justify-between p-6 text-left hover:bg-slate-50 transition-colors"
       >
-        <span className="text-lg font-black uppercase tracking-tight">{question}</span>
+        <span className="text-lg font-black uppercase tracking-tight text-slate-900">{question}</span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
-          className="p-2 border-2 border-black bg-[#FACC15]"
+          className="p-2 border-2 border-slate-900 bg-blue-600 text-white shadow-[2px_2px_0px_0px_#0F172A]"
         >
           <ChevronDown className="w-5 h-5" strokeWidth={3} />
         </motion.div>
@@ -97,7 +97,7 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
             exit={{ height: 0, opacity: 0 }}
             className="border-t-4 border-black bg-white"
           >
-            <div className="p-6 text-sm font-bold leading-relaxed uppercase text-gray-600">
+            <div className="p-6 text-[11px] font-black leading-relaxed uppercase text-slate-400 tracking-wider">
               {answer}
             </div>
           </motion.div>
@@ -112,23 +112,23 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
 export default function About() {
   const featureCards = [
     { 
-      title: "Document Helper", 
-      desc: "Get easy help in preparing and managing your important ID cards, government forms, and professional papers correctly.",
+      title: "Resource Audit", 
+      desc: "Comprehensive facilitation of identity credentials, government directives, and professional documentation for vocational compliance.",
       icon: FileText
     },
     { 
-      title: "Skill Guides", 
-      desc: "Access a library of easy guides, video links, and free learning tools built to help you grow your skills.",
+      title: "Skill Acquisition", 
+      desc: "Access a curated intelligence repository featuring streamlined directives, academic assets, and free-tier learning protocols.",
       icon: Zap
     },
     { 
-      title: "Community Unity", 
-      desc: "Join a friendly network of people growing up independently to chat, share advice, and build professional friendships.",
+      title: "Strategic Unity", 
+      desc: "Foster high-impact professional affiliations within an independent network of vocational peers for career maximization.",
       icon: Heart
     },
     { 
-      title: "Career Boosting", 
-      desc: "Take part in live sessions to build your confidence and career, where everyone helps each other succeed.",
+      title: "Career Advancement", 
+      desc: "Facilitate growth through authoritative sessions focused on vocational resilience, industry standards, and community success.",
       icon: HeartHandshake
     }
   ];
@@ -165,16 +165,16 @@ export default function About() {
     <div className="flex flex-col bg-[#F3F4F6] selection:bg-[#FACC15]/40 min-h-screen">
       
       {/* Black Marquee Ticker */}
-      <div className="marquee-neo mt-[88px]">
+      <div className="marquee-neo mt-[88px] bg-slate-900 text-white py-2">
         <motion.div 
           animate={{ x: [0, -1200] }}
           transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-          className="flex whitespace-nowrap gap-20 font-black text-xs uppercase tracking-[0.3em] items-center"
+          className="flex whitespace-nowrap gap-20 font-black text-[10px] uppercase tracking-[0.4em] items-center"
         >
-          <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-[#2563EB]" /> CORE MISSION: EMPOWERING CARE-EXPERIENCED INDIVIDUALS</div>
-          <div className="flex items-center gap-3"><Globe className="w-5 h-5 text-emerald-400" /> REGIONS: BANGALORE & KASHMIR</div>
-          <div className="flex items-center gap-3"><HeartHandshake className="w-5 h-5 text-rose-400" /> POSITIVE COMMUNITY CULTURE</div>
-          <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-[#2563EB]" /> CORE MISSION: EMPOWERING CARE-EXPERIENCED INDIVIDUALS</div>
+          <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-blue-400" /> STRATEGIC MISSION: EMPOWERING INDEPENDENT YOUTH</div>
+          <div className="flex items-center gap-3"><Globe className="w-5 h-5 text-teal-400" /> GLOBAL STANDARDS: BANGALORE & KASHMIR</div>
+          <div className="flex items-center gap-3"><HeartHandshake className="w-5 h-5 text-white" /> PROFESSIONAL UNITY CULTURE</div>
+          <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-blue-400" /> MISSION CRITICAL: VOCATIONAL ACCELERATION</div>
         </motion.div>
       </div>
 
@@ -185,28 +185,28 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-block px-8 py-2 border-4 border-black bg-white text-black font-black text-[10px] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] uppercase tracking-[0.4em]"
+            className="inline-block px-8 py-3 border-4 border-slate-900 bg-white text-slate-900 font-black text-[10px] shadow-[6px_6px_0px_0px_#2563EB] uppercase tracking-[0.4em]"
           >
-             About DreamSync
+             Strategic Foundation
           </motion.div>
 
-          <h1 className="text-4xl md:text-7xl font-black tracking-tighter leading-tight text-center max-w-5xl mx-auto uppercase">
-            The Platform for Care-Experienced People to 
-            <span className="inline-block mx-4 text-[#2563EB] italic decoration-8 decoration-[#FACC15] underline underline-offset-8">
-              Connect
+          <h1 className="text-4xl md:text-7xl font-black tracking-tighter leading-tight text-center max-w-5xl mx-auto uppercase text-slate-900 italic">
+            Facilitating Independent Growth through 
+            <span className="inline-block mx-4 text-blue-600 not-italic decoration-8 decoration-slate-100 underline underline-offset-8">
+              Strategic
             </span> 
-            with other Care-Experienced individuals.
+            Unity.
           </h1>
 
           {/* SECTION 2 — INTRO TEXT */}
-          <div className="max-w-3xl mx-auto space-y-8 pt-10 border-t-4 border-black">
-            <p className="text-xl md:text-3xl text-black font-black leading-relaxed uppercase">
+          <div className="max-w-3xl mx-auto space-y-8 pt-10 border-t-8 border-slate-100">
+            <p className="text-xl md:text-3xl text-slate-900 font-black leading-relaxed uppercase italic">
               Welcome to 
-              <span className="text-[#2563EB] ml-2">Dream</span>Sync, 
-              a hub created for care-experienced individuals.
+              <span className="text-blue-600 ml-2 not-italic underline decoration-4 decoration-blue-100 underline-offset-4">Dream</span>Sync, 
+              the central intelligence hub.
             </p>
-            <p className="text-lg md:text-xl text-gray-500 font-bold leading-relaxed uppercase">
-               Join us in this one-stop destination where you can connect, meet, greet, and empower others while being empowered yourself.
+            <p className="text-lg md:text-xl text-slate-400 font-bold leading-relaxed uppercase tracking-tight">
+               Participate in an ecosystem designed to connect, audit, and empower the vocational trajectories of independent students.
             </p>
           </div>
         </section>
@@ -214,11 +214,11 @@ export default function About() {
         {/* SECTION 3 — WHAT DREAMSYNC DOES */}
         <section className="space-y-16">
           <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">
-              What <span className="text-[#2563EB]">DreamSync</span> Does.
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-slate-900 italic">
+              Strategic <span className="text-blue-600 not-italic">Directives</span>.
             </h2>
-            <p className="text-lg font-black uppercase tracking-widest text-[#2563EB]">
-              Explore Our Comprehensive Resources
+            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600">
+              EXPLORE OUR MISSION-CRITICAL RESOURCES
             </p>
           </div>
 
@@ -237,16 +237,16 @@ export default function About() {
 
 
         {/* SECTION 5 — RESTORED IMPACT STATS */}
-        <section className="bg-black border-8 border-black p-6 sm:p-12 md:p-20 shadow-[12px_12px_0px_0px_rgba(37,99,235,1)]">
+        <section className="bg-slate-900 border-8 border-slate-900 p-6 sm:p-12 md:p-20 shadow-[12px_12px_0px_0px_#2563EB]">
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
              {[
-               { value: "1+", label: "Working Locations", icon: MapPin, color: 'text-[#FACC15]', anim: { y: [0, -8, 0] } },
-               { value: "50+", label: "Verified Documents", icon: ClipboardCheck, color: 'text-emerald-400', anim: { scale: [1, 1.2, 1] } },
-               { value: "6+", label: "Well-being Sessions", icon: MonitorPlay, color: 'text-rose-400', anim: { scaleY: [1, 0.8, 1] } },
-               { value: "30+", label: "Members Connected", icon: Network, color: 'text-[#2563EB]', anim: { scale: [1, 1.1, 1], rotate: [0, 10, 0] } }
+               { value: "1+", label: "Regional Hubs", icon: MapPin, color: 'text-teal-400', anim: { y: [0, -8, 0] } },
+               { value: "50+", label: "Audit Assets", icon: ClipboardCheck, color: 'text-blue-400', anim: { scale: [1, 1.2, 1] } },
+               { value: "6+", label: "Strategic Sessions", icon: MonitorPlay, color: 'text-white', anim: { scaleY: [1, 0.8, 1] } },
+               { value: "30+", label: "Mission Members", icon: Network, color: 'text-teal-400', anim: { scale: [1, 1.1, 1], rotate: [0, 10, 0] } }
              ].map((stat, i) => (
                <div key={i} className="space-y-6 flex flex-col items-center">
-                  <div className="p-4 bg-white/10 border-2 border-white/20 rounded-full overflow-hidden">
+                  <div className="p-4 bg-white/5 border-2 border-white/10 rounded-full overflow-hidden">
                      <motion.div
                        animate={stat.anim}
                        transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
@@ -255,11 +255,11 @@ export default function About() {
                      </motion.div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-5xl md:text-7xl font-black text-[#FACC15] tracking-tighter italic">
+                    <div className="text-5xl md:text-7xl font-black text-white tracking-tighter italic">
                       <StatCounter value={stat.value} />
                     </div>
-                    <div className="h-1 w-12 bg-white/20 mx-auto rounded-full" />
-                    <p className="text-xs font-black uppercase tracking-widest text-white leading-tight opacity-70">
+                    <div className="h-1 w-12 bg-white/10 mx-auto rounded-full" />
+                    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 leading-tight">
                       {stat.label}
                     </p>
                   </div>
@@ -272,11 +272,11 @@ export default function About() {
         <section className="space-y-20">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
              <div className="space-y-2 text-center md:text-left">
-                <h2 className="text-4xl font-black uppercase tracking-tighter italic">Common Inquiries</h2>
-                <p className="text-[#2563EB] font-black uppercase tracking-widest text-xs">Essential Foundation Knowledge</p>
+                <h2 className="text-4xl font-black uppercase tracking-tighter italic text-slate-900 leading-none">Strategic Inquiries</h2>
+                <p className="text-blue-600 font-black uppercase tracking-[0.4em] text-[10px]">ESSENTIAL FOUNDATION AUDITS</p>
              </div>
-             <div className="h-2 flex-grow hidden md:block bg-black/5" />
-             <div className="p-4 bg-[#FACC15] border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+             <div className="h-2 flex-grow hidden md:block bg-slate-100" />
+             <div className="p-4 bg-teal-500 border-4 border-slate-900 shadow-[4px_4px_0px_0px_#0F172A] text-white">
                 <HeartHandshake className="w-8 h-8" />
              </div>
           </div>
@@ -294,25 +294,25 @@ export default function About() {
 
         {/* CTA SECTION */}
         <section className="pb-40">
-          <div className="neo-box p-8 sm:p-12 md:p-20 bg-white text-center space-y-12 relative overflow-hidden group">
-             <div className="absolute top-0 left-0 w-full h-3 bg-[#2563EB]" />
+          <div className="neo-box p-8 sm:p-12 md:p-20 bg-white border-4 border-slate-900 text-center space-y-12 relative overflow-hidden group shadow-[12px_12px_0px_0px_#F1F5F9]">
+             <div className="absolute top-0 left-0 w-full h-3 bg-blue-600" />
              <div className="absolute bottom-0 right-0 p-8 transform translate-x-12 translate-y-12 opacity-5 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700">
-                <Target className="w-64 h-64 text-black" />
+                <Target className="w-64 h-64 text-slate-900" />
              </div>
              
-             <h2 className="text-4xl md:text-7xl font-black tracking-tighter uppercase leading-tight relative z-10">
-                Ready to empower <br /> your journey?
+             <h2 className="text-4xl md:text-7xl font-black tracking-tighter uppercase leading-tight relative z-10 text-slate-900 italic">
+                Ready to empower <br /> your vocation?
              </h2>
-             <p className="text-lg md:text-xl text-gray-500 font-bold max-w-2xl mx-auto uppercase relative z-10">
-                Join our supportive ecosystem and build a future alongside care-experienced individuals who truly understand your path.
+             <p className="text-lg md:text-xl text-slate-400 font-bold max-w-2xl mx-auto uppercase relative z-10 tracking-tight">
+                Join our supportive ecosystem and construct a legacy alongside independent individuals who truly understand your path.
              </p>
              
              <div className="flex flex-col sm:flex-row justify-center items-center gap-6 relative z-10">
-                <Link href="/signup" className="neo-btn-primary inline-flex px-12 py-5 text-lg items-center gap-4">
-                  Join Community Today <ArrowRight className="w-6 h-6" />
+                <Link href="/signup" className="px-12 py-6 bg-blue-600 text-white border-4 border-slate-900 font-black uppercase text-[12px] tracking-widest shadow-[6px_6px_0px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all italic">
+                  Join Community Today <ArrowRight className="ml-2 w-6 h-6 inline" />
                 </Link>
-                <Link href="/contact" className="neo-btn-secondary inline-flex px-12 py-5 text-lg items-center gap-4">
-                  Contact Us
+                <Link href="/contact" className="px-12 py-6 bg-white text-slate-900 border-4 border-slate-900 font-black uppercase text-[12px] tracking-widest shadow-[6px_6px_0px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all italic">
+                   Contact Directives
                 </Link>
              </div>
           </div>

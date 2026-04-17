@@ -87,33 +87,33 @@ export default function AdvancedATS() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Eligible': return 'bg-green-500 text-white';
-      case 'Partially Eligible': return 'bg-[#FACC15] text-black';
-      case 'Not Eligible': return 'bg-red-600 text-white';
-      default: return 'bg-black text-white';
+      case 'Eligible': return 'bg-teal-500 text-white';
+      case 'Partially Eligible': return 'bg-blue-600 text-white';
+      case 'Not Eligible': return 'bg-slate-700 text-white';
+      default: return 'bg-slate-900 text-white';
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#F3F4F6] text-black selection:bg-[#FACC15]/40 font-bold uppercase">
+    <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-blue-600/20 font-bold uppercase overflow-hidden">
       
       <div className="mt-[88px]" />
 
       <div className="max-w-7xl mx-auto px-6 py-20">
         
         {/* Header Architecture */}
-        <div className="flex flex-col md:flex-row justify-between items-end gap-12 border-b-8 border-black pb-16 mb-20">
-           <div className="space-y-6">
-              <div className="flex items-center gap-3">
-                 <div className="p-2 bg-black text-white shadow-[3px_3px_0px_0px_rgba(37,99,235,1)]">
-                    <BarChart3 className="w-8 h-8" />
-                 </div>
-                 <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">Professional ATS Engine</span>
-              </div>
-              <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[80px] font-black tracking-tighter leading-none text-black uppercase">
-                 Smart <br /> <span className="text-[#2563EB] drop-shadow-[5px_5px_0px_rgba(0,0,0,1)] italic">Analyzer</span>
-              </h1>
-           </div>
+         <div className="flex flex-col md:flex-row justify-between items-end gap-12 border-b-8 border-slate-900 pb-16 mb-20">
+            <div className="space-y-6">
+               <div className="flex items-center gap-3">
+                  <div className="p-2 bg-slate-900 text-white shadow-[3px_3px_0px_0px_#2563EB]">
+                     <BarChart3 className="w-8 h-8" />
+                  </div>
+                  <span className="text-xs font-black uppercase tracking-[0.4em] text-slate-400">Strategic Alignment Engine</span>
+               </div>
+               <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[80px] font-black tracking-tighter leading-none text-slate-900 uppercase">
+                  ATS <br /> <span className="text-blue-600 italic">ANALYZER</span>
+               </h1>
+            </div>
            <div className="hidden lg:block">
            </div>
         </div>
@@ -123,7 +123,7 @@ export default function AdvancedATS() {
           {/* Left: Input Panel */}
           <div className="neo-box bg-white p-12 space-y-12">
             <h2 className="text-3xl font-black mb-10 flex items-center gap-4">
-              <Search className="w-8 h-8 text-[#2563EB]" /> INPUT PROTOCOL
+              <Search className="w-8 h-8 text-blue-600" /> ANALYSIS PROTOCOL
             </h2>
 
             <div className="space-y-10">
@@ -131,10 +131,10 @@ export default function AdvancedATS() {
                 <label className="text-[10px] font-black uppercase tracking-[0.2em] text-black/40">1. UPLOAD RESUME NODE (PDF)</label>
                 <div className="relative group">
                   <input type="file" accept=".pdf" onChange={handleFileUpload} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                  <div className={`p-12 border-4 border-dashed border-black ${file ? 'bg-green-50' : 'bg-[#F3F4F6]'} flex flex-col items-center justify-center transition-all shadow-[inset_0px_0px_20px_rgba(0,0,0,0.05)]`}>
-                    <Upload className={`w-12 h-12 mb-4 ${file ? 'text-green-600' : 'text-black/20'}`} />
+                  <div className={`p-8 md:p-12 border-4 border-dashed border-slate-900 ${file ? 'bg-teal-50' : 'bg-slate-50'} flex flex-col items-center justify-center transition-all shadow-[inset_0px_0px_20px_rgba(0,0,0,0.05)]`}>
+                    <Upload className={`w-12 h-12 mb-4 ${file ? 'text-teal-600' : 'text-slate-300'}`} />
                     <p className="text-lg font-black text-center uppercase tracking-tight">
-                      {file ? file.name : 'COMMIT FILE TO BUFFER'}
+                      {file ? file.name : 'COMMIT DOCUMENT'}
                     </p>
                     <p className="text-[10px] text-black/40 mt-2 font-black uppercase tracking-widest">TEXT-BASED PDF • 5MB LIMIT</p>
                   </div>
@@ -190,35 +190,34 @@ export default function AdvancedATS() {
             {loading && (
               <div className="neo-box bg-white p-20 flex flex-col items-center justify-center text-center">
                 <div className="relative w-24 h-24 mb-10">
-                   <Loader2 className="w-24 h-24 animate-spin text-[#2563EB] absolute inset-0" />
+                   <Loader2 className="w-24 h-24 animate-spin text-blue-600 absolute inset-0" />
                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Zap className="w-8 h-8 text-[#FACC15] fill-current animate-pulse" />
+                      <Zap className="w-8 h-8 text-teal-400 fill-current animate-pulse" />
                    </div>
                 </div>
                 <h2 className="text-5xl font-black mb-4 uppercase italic">AI SCANNING...</h2>
-                <div className="mt-12 w-full h-4 bg-[#F3F4F6] border-4 border-black overflow-hidden relative shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <motion.div initial={{ x: "-100%" }} animate={{ x: "100%" }} transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }} className="bg-[#2563EB] h-full w-1/2" />
+                <div className="mt-12 w-full h-4 bg-slate-100 border-4 border-slate-900 overflow-hidden relative shadow-[2px_2px_0px_0px_#0F172A]">
+                  <motion.div initial={{ x: "-100%" }} animate={{ x: "100%" }} transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }} className="bg-blue-600 h-full w-1/2" />
                 </div>
-                <p className="mt-8 font-black text-black/40 text-xs tracking-[0.3em]">SYNCHRONIZING WITH GOOGLE, MICROSOFT, META RECRUITER API</p>
+                <p className="mt-8 font-black text-slate-400 text-[10px] tracking-[0.3em]">SYNCHRONIZING WITH GLOBAL INDUSTRY STANDARDS</p>
               </div>
             )}
 
             {result && (
               <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="space-y-12">
                 {/* Score Panel */}
-                <div className="bg-black text-white p-12 border-8 border-black shadow-[12px_12px_0px_0px_rgba(37,99,235,0.4)] relative overflow-hidden group">
+                <div className="bg-slate-900 text-white p-12 border-8 border-slate-900 shadow-[12px_12px_0px_0px_#2563EB] relative overflow-hidden group">
                    <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:rotate-12 transition-transform">
                       <ShieldCheck className="w-32 h-32" />
                    </div>
                    <div className="relative z-10 flex justify-between items-center">
                       <div className="space-y-4">
-                         <h2 className="text-2xl font-black uppercase tracking-tighter">ATS PROTOCOL SCORE</h2>
+                         <h2 className="text-2xl font-black uppercase tracking-tighter">ALIGNMENT SCORE</h2>
                          <div className="flex gap-4">
                             <div className="bg-white/10 px-6 py-2 border border-white/20 text-xs font-black">MATCH: {result.keyword_match}%</div>
-                            <div className="bg-white/10 px-6 py-2 border border-white/20 text-xs font-black">EXPERIENCE: {experienceLevel}</div>
                          </div>
                       </div>
-                      <div className={`text-4xl sm:text-5xl md:text-7xl font-black px-6 py-4 border-8 border-white italic ${result.ats_score > 80 ? 'text-green-400' : 'text-[#FACC15]'}`}>
+                      <div className={`text-4xl sm:text-5xl md:text-7xl font-black px-6 py-4 border-8 border-white italic ${result.ats_score > 80 ? 'text-teal-400' : 'text-blue-400'}`}>
                          {result.ats_score}%
                       </div>
                    </div>

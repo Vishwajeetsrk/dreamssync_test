@@ -2,62 +2,65 @@
 
 @layer base {
   :root {
-    /* DREAM SYNC NEO-BRUTALISM LIGHT (AUDIT RECAP RESTORED) */
-    --background: #F3F4F6;
-    --foreground: #000000;
-    --primary: #2563EB;
-    --secondary: #FACC15; /* Yellow */
-    --accent: #E11D48;
+    /* PROFESSIONAL NGO THEME (LEGIBLE & TRUSTWORTHY) */
+    --background: #F8FAFC; /* Light slate bg */
+    --foreground: #0F172A; /* Deep slate text */
+    --primary: #2563EB;    /* Professional blue */
+    --secondary: #14B8A6;  /* NGO Teal */
+    --accent: #6366F1;     /* Indigo */
     
     --card-bg: #FFFFFF;
-    --border: #000000;
+    --border: #1E293B;     /* Slate 800 */
     --radius-none: 0px;
-    --radius-lg: 0.5rem;
+    --radius-md: 4px;
+    --radius-lg: 8px;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-family: 'Public Sans', 'Inter', sans-serif;
+    font-family: 'Inter', 'Public Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Public Sans', 'Space Grotesk', sans-serif;
-    font-weight: 900;
+    font-family: 'Space Grotesk', 'Public Sans', sans-serif;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
   }
 
-  /* Responsive Typography Base */
-  h1 { font-size: clamp(2.5rem, 8vw, 6rem); }
-  h2 { font-size: clamp(2rem, 6vw, 4rem); }
-  h3 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+  /* Responsive Typography Base - Capped for mobile safety */
+  h1 { font-size: clamp(2rem, 7vw, 4.5rem); }
+  h2 { font-size: clamp(1.75rem, 5vw, 3rem); }
+  h3 { font-size: clamp(1.25rem, 4vw, 2.25rem); }
 }
 
 @layer utilities {
   .neo-box {
-    @apply border-2 md:border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all;
+    @apply border-2 md:border-[3px] border-slate-900 bg-white shadow-[4px_4px_0px_0px_#0F172A] transition-all;
   }
 
   .neo-btn-primary {
-    @apply bg-[#2563EB] text-white border-4 border-black px-8 py-3 font-black uppercase tracking-widest shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all;
+    @apply bg-[#2563EB] text-white border-[3px] border-slate-900 px-6 py-3 font-bold uppercase tracking-wider shadow-[4px_4px_0px_0px_#0F172A] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_#0F172A] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all;
   }
 
   .neo-btn-secondary {
-    @apply bg-[#FACC15] text-black border-4 border-black px-8 py-3 font-black uppercase tracking-widest shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all;
+    @apply bg-[#14B8A6] text-white border-[3px] border-slate-900 px-6 py-3 font-bold uppercase tracking-wider shadow-[4px_4px_0px_0px_#0F172A] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_#0F172A] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all;
   }
 
   .neo-input {
-    @apply bg-white border-4 border-black px-4 py-3 text-black font-bold outline-none focus:bg-[#2563EB]/5 transition-all w-full decoration-black;
+    @apply bg-white border-[3px] border-slate-900 px-4 py-3 text-slate-900 font-bold outline-none focus:ring-4 focus:ring-blue-500/20 transition-all w-full;
   }
 
   .marquee-neo {
-    @apply bg-black text-white py-3 border-y-4 border-black whitespace-nowrap overflow-hidden;
+    @apply bg-slate-900 text-white py-3 border-y-[3px] border-slate-900 whitespace-nowrap overflow-hidden font-bold uppercase tracking-widest text-xs;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#2563EB] via-[#FACC15] to-[#E11D48];
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-teal-500;
   }
 
   /* MOBILE OPTIMIZATIONS */

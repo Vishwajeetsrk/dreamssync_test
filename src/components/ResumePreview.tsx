@@ -62,10 +62,10 @@ const ResumePreview = React.forwardRef<HTMLDivElement, ResumePreviewProps>(({ da
   const isStrategic = template === 'strategic';
   
   const sectionTitleClass = isElite 
-    ? "text-[14px] font-bold text-gray-900 uppercase tracking-tight border-b-2 border-gray-900 pb-0.5 mb-2 mt-4" 
+    ? "text-[14px] font-bold text-slate-900 uppercase tracking-tight border-b-2 border-slate-900 pb-0.5 mb-2 mt-4" 
     : isStrategic 
-      ? "text-[13px] font-bold text-[#2b5797] uppercase tracking-widest border-b border-gray-300 pb-1 mb-2 mt-4"
-      : "text-[14px] font-black uppercase tracking-[0.2em] border-b-2 border-black pb-1 mb-3 mt-6";
+      ? "text-[13px] font-bold text-blue-700 uppercase tracking-widest border-b border-slate-300 pb-1 mb-2 mt-4"
+      : "text-[14px] font-black uppercase tracking-[0.2em] border-b-2 border-slate-900 pb-1 mb-3 mt-6";
 
   const bulletClass = "text-[12px] text-gray-900 leading-[1.5] mb-1 list-disc ml-4 pl-1";
   const subTitleClass = "text-[13px] font-bold text-black";
@@ -89,8 +89,8 @@ const ResumePreview = React.forwardRef<HTMLDivElement, ResumePreviewProps>(({ da
     >
       {/* Header */}
       <header className={`text-center ${isElite ? 'mb-4' : 'mb-6'}`}>
-        <h1 className={`text-4xl uppercase tracking-tighter mb-1 font-black ${isElite ? 'text-black' : isStrategic ? 'text-[#2b5797]' : 'text-black'}`}>{personalInfo.fullName || 'YOUR NAME'}</h1>
-        <p className={`text-lg mb-3 ${isElite ? 'font-bold text-gray-800' : 'font-bold text-gray-600 italic tracking-wide'}`}>{personalInfo.role?.toUpperCase() || 'PROFESSIONAL ROLE'}</p>
+        <h1 className={`text-4xl uppercase tracking-tighter mb-1 font-black ${isElite ? 'text-slate-900' : isStrategic ? 'text-blue-700' : 'text-slate-900'}`}>{personalInfo.fullName || 'YOUR NAME'}</h1>
+        <p className={`text-lg mb-3 ${isElite ? 'font-bold text-slate-700' : 'font-bold text-slate-600 italic tracking-wide'}`}>{personalInfo.role?.toUpperCase() || 'PROFESSIONAL ROLE'}</p>
         
         <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-1 text-[11px] font-bold text-gray-800">
           {personalInfo.phone && <span>{personalInfo.phone}</span>}
@@ -133,8 +133,8 @@ const ResumePreview = React.forwardRef<HTMLDivElement, ResumePreviewProps>(({ da
                 <span className={dateClass}>{exp.date?.toUpperCase()}</span>
               </div>
               <div className="flex justify-between items-baseline mb-1.5">
-                <span className="text-[12px] font-black italic text-gray-800">{exp.company?.toUpperCase()}</span>
-                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{exp.location}</span>
+                <span className="text-[12px] font-black italic text-slate-800">{exp.company?.toUpperCase()}</span>
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{exp.location}</span>
               </div>
               <ul className="mt-1 space-y-1">
                 {exp.bullets.map((bullet, bIdx) => (
@@ -157,7 +157,7 @@ const ResumePreview = React.forwardRef<HTMLDivElement, ResumePreviewProps>(({ da
               <div key={idx} className="break-inside-avoid">
                 <div className="flex justify-between items-baseline mb-1">
                   <h3 className={subTitleClass}>{proj.name?.toUpperCase()}</h3>
-                  {proj.link && <span className="text-[10px] text-gray-600 font-bold underline italic">{proj.link}</span>}
+                  {proj.link && <span className="text-[10px] text-blue-600 font-bold underline italic">{proj.link}</span>}
                 </div>
                 <p className={textClass}>{proj.description}</p>
               </div>

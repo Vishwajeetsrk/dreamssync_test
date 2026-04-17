@@ -46,14 +46,14 @@ export default function Navbar() {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b-4 border-black px-4 md:px-12 py-4 md:py-5">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b-[6px] border-slate-100 px-4 md:px-12 py-4 md:py-6">
       <nav className="max-w-7xl mx-auto flex items-center justify-between">
         
         {/* Branding */}
-        <Link href="/" className="shrink-0 inline-block group">
+        <Link href="/" className="shrink-0 inline-block group flex items-center gap-3">
            <Image 
              src="/DreamSynclogo.png" 
-             alt="DreamSync Logo" 
+             alt="DreamSync NGO Platform" 
              width={180} 
              height={45} 
              className="object-contain w-[140px] md:w-[180px]" 
@@ -64,16 +64,16 @@ export default function Navbar() {
         {/* Center Navigation */}
         <div className="hidden lg:flex items-center gap-10">
           <div className="relative group">
-            <button className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-black hover:text-[#2563EB] transition-colors">
-              FEATURES <ChevronDown className="w-3 h-3" />
+            <button className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 hover:text-blue-600 transition-colors italic">
+              Directives <ChevronDown className="w-3 h-3" />
             </button>
-            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-60 neo-box bg-white p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-[60]">
-               <div className="grid gap-1">
+            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-6 w-64 neo-box bg-white border-4 border-slate-900 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-[60] shadow-[12px_12px_0px_0px_#F1F5F9]">
+               <div className="grid gap-2">
                   {featureLinks.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="block px-4 py-3 text-[10px] font-black uppercase tracking-widest transition-all hover:bg-[#2563EB] hover:text-white border-2 border-transparent"
+                      className="block px-4 py-3 text-[9px] font-black uppercase tracking-[0.25em] transition-all hover:bg-blue-600 hover:text-white border-2 border-transparent hover:border-slate-900 leading-none italic"
                     >
                       {item.name}
                     </Link>
@@ -81,10 +81,10 @@ export default function Navbar() {
                </div>
             </div>
           </div>
-          <Link href="/about" className="text-xs font-black uppercase tracking-widest text-black hover:text-[#2563EB] transition-colors">ABOUT</Link>
-          <Link href="/team" className="text-xs font-black uppercase tracking-widest text-black hover:text-[#2563EB] transition-colors">TEAM</Link>
-          <Link href="/donate" className="text-xs font-black uppercase tracking-widest text-[#2563EB] hover:bg-[#2563EB] hover:text-white px-3 py-1 border-2 border-transparent hover:border-black transition-all">SUPPORT US</Link>
-          <Link href="/contact" className="text-xs font-black uppercase tracking-widest text-black hover:text-[#2563EB] transition-colors">CONTACT</Link>
+          <Link href="/about" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 hover:text-blue-600 transition-colors italic">Mission</Link>
+          <Link href="/team" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 hover:text-blue-600 transition-colors italic">Architects</Link>
+          <Link href="/donate" className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 bg-blue-50 hover:bg-blue-600 hover:text-white px-5 py-2 border-2 border-slate-900 transition-all shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none italic leading-none">Contribute</Link>
+          <Link href="/contact" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 hover:text-blue-600 transition-colors italic">Inquiry</Link>
         </div>
 
         {/* Action Group */}
@@ -93,26 +93,26 @@ export default function Navbar() {
 
 
           {!user ? (
-            <div className="flex items-center gap-4">
-              <Link href="/login" className="text-xs font-black uppercase tracking-widest text-black px-4">LOGIN</Link>
-              <Link href="/signup" className="bg-black text-white border-4 border-black px-6 py-2 font-black text-xs uppercase shadow-[4px_4px_0px_0px_rgba(37,99,235,1)]">SIGN UP</Link>
+            <div className="flex items-center gap-3">
+              <Link href="/login" className="text-xs font-black uppercase tracking-widest text-slate-900 px-4">LOGIN</Link>
+              <Link href="/signup" className="hidden sm:block bg-slate-900 text-white border-[3px] border-slate-900 px-6 py-2 font-black text-xs uppercase shadow-[3px_3px_0px_0px_#2563EB]">JOIN NOW</Link>
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <Link href="/dashboard" className="hidden lg:flex border-4 border-black px-6 py-2 bg-white font-black text-xs uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+              <Link href="/dashboard" className="hidden lg:flex border-4 border-slate-900 px-6 py-2 bg-white font-black text-[10px] uppercase tracking-widest shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all italic leading-none">
                 DASHBOARD
               </Link>
                <div className="relative">
-                 <button 
+                  <button 
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
-                  className="w-10 h-10 rounded-full border-4 border-black overflow-hidden flex items-center justify-center bg-white shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:scale-110 transition-transform active:translate-x-0.5 active:translate-y-0.5"
+                  className="w-10 h-10 rounded-full border-4 border-slate-900 overflow-hidden flex items-center justify-center bg-white shadow-[4px_4px_0px_0px_#F1F5F9] hover:scale-110 transition-transform active:translate-x-0.5 active:translate-y-0.5"
                  >
                    {userData?.avatar_url ? (
                      <img src={userData.avatar_url} alt="Profile" className="w-full h-full object-cover" />
                    ) : (
-                     <UserIcon className="w-5 h-5" />
+                     <UserIcon className="w-5 h-5 text-slate-400" />
                    )}
-                 </button>
+                  </button>
 
                  <AnimatePresence>
                    {isProfileOpen && (
@@ -122,37 +122,25 @@ export default function Navbar() {
                           initial={{ opacity: 0, y: 10, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                          className="absolute right-0 mt-4 w-52 neo-box bg-white p-4 z-[100] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] origin-top-right md:right-0"
+                          className="absolute right-0 mt-6 w-60 neo-box bg-white border-4 border-slate-900 p-6 z-[100] shadow-[12px_12px_0px_0px_#F1F5F9] origin-top-right md:right-0"
                         >
-                          <div className="flex flex-col gap-3">
-                            <div className="border-b-2 border-black/10 pb-3">
-                              <p className="font-black text-[10px] text-gray-400 uppercase tracking-widest mb-1">Account</p>
-                              <p className="font-black text-[10px] uppercase truncate">{userData?.name || 'User'}</p>
+                          <div className="flex flex-col gap-4">
+                            <div className="border-b-4 border-slate-50 pb-4">
+                              <p className="font-black text-[9px] text-slate-300 uppercase tracking-[0.3em] mb-1">Authenticated</p>
+                              <p className="font-black text-xs uppercase italic truncate text-slate-900">{userData?.name || 'Vocation Member'}</p>
                             </div>
                              <Link 
                                href="/profile" 
                                onClick={() => setIsProfileOpen(false)}
-                               className="w-full flex items-center gap-3 px-3 py-2 text-[10px] font-black uppercase tracking-widest text-[#2563EB] border-2 border-[#2563EB] hover:bg-[#2563EB] hover:text-white transition-all"
+                               className="w-full flex items-center justify-between px-4 py-3 text-[9px] font-black uppercase tracking-widest text-slate-900 border-2 border-slate-900 bg-white hover:bg-slate-50 transition-all shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none italic leading-none"
                              >
-                               <motion.div
-                                 animate={{ rotate: 360 }}
-                                 transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
-                                 className="flex items-center justify-center"
-                               >
-                                 <Settings className="w-3 h-3" />
-                               </motion.div> SETTINGS
+                               Settings <Settings className="w-3.5 h-3.5 text-blue-600" />
                              </Link>
                             <button 
                               onClick={() => { setIsProfileOpen(false); handleLogout(); }}
-                              className="w-full flex items-center gap-3 px-3 py-2 text-[10px] font-black uppercase tracking-widest text-red-600 border-2 border-red-600 hover:bg-red-600 hover:text-white transition-all group"
+                              className="w-full flex items-center justify-between px-4 py-3 text-[9px] font-black uppercase tracking-widest text-red-600 border-2 border-slate-100 hover:border-red-600 transition-all italic leading-none"
                             >
-                              <motion.div
-                                whileHover={{ x: 3 }}
-                                transition={{ repeat: Infinity, duration: 0.5, repeatType: "reverse" }}
-                              >
-                                <LogOut className="w-4 h-4" />
-                              </motion.div>
-                              LOGOUT
+                              Logout <LogOut className="w-3.5 h-3.5" />
                             </button>
                           </div>
                         </motion.div>
@@ -166,7 +154,7 @@ export default function Navbar() {
           <div className="lg:hidden">
             <button 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 border-4 border-black bg-white shadow-[4px_4px_0px_0px_rgba(37,99,235,1)] relative w-12 h-12 flex items-center justify-center overflow-hidden active:translate-x-0.5 active:translate-y-0.5"
+              className="p-2 border-[3px] border-slate-900 bg-white shadow-[3px_3px_0px_0px_#2563EB] relative w-12 h-12 flex items-center justify-center overflow-hidden active:translate-x-0.5 active:translate-y-0.5"
             >
               <div className="flex flex-col gap-1.5 items-center justify-center">
                 <motion.span 

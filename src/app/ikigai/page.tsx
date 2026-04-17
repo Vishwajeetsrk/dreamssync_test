@@ -39,35 +39,35 @@ interface IkigaiResult {
 const steps = [
   { 
     id: 'passions', 
-    title: '❤️ What You Love', 
-    desc: 'List your passions, interests, and things that make you lose track of time.',
+    title: '❤️ Strategic Passions', 
+    desc: 'Identify vocational interests and high-engagement activities.',
     icon: Heart,
-    color: 'bg-rose-500',
-    placeholder: 'e.g. Graphic design, writing, coding, public speaking, gaming'
+    color: 'bg-blue-600',
+    placeholder: 'e.g. Graphic design, writing, research, social advocacy'
   },
   { 
     id: 'skills', 
-    title: '💪 What You Are Good At', 
-    desc: 'List your technical skills, soft skills, and natural talents.',
+    title: '💪 Core Capabilities', 
+    desc: 'Audit your technical proficiencies and transferable soft skills.',
     icon: Zap,
-    color: 'bg-emerald-500',
-    placeholder: 'e.g. React.js, leadership, problem solving, creative thinking'
+    color: 'bg-teal-500',
+    placeholder: 'e.g. React.js, strategic leadership, quantitative analysis'
   },
   { 
     id: 'marketNeeds', 
-    title: '🌍 What The World Needs', 
-    desc: 'Think about current problems, trends, and demands in the 2026 market.',
+    title: '🌍 Industry Opportunity', 
+    desc: 'Analyze societal challenges and high-demand 2026 market roles.',
     icon: Globe,
-    color: 'bg-indigo-500',
-    placeholder: 'e.g. AI automation, digital privacy, mental health support, sustainable tech'
+    color: 'bg-slate-900',
+    placeholder: 'e.g. AI ethics, sustainable development, healthcare access'
   },
   { 
     id: 'incomeGoals', 
-    title: '💰 What You Can Be Paid For', 
-    desc: 'Mention your salary expectations and career goals.',
+    title: '💰 Economic Potential', 
+    desc: 'Define your professional growth trajectory and compensation goals.',
     icon: DollarSign,
-    color: 'bg-amber-500',
-    placeholder: 'e.g. Remote role, 15-25 LPA, freelancing high-income roles'
+    color: 'bg-blue-600',
+    placeholder: 'e.g. High-impact enterprise role, 18-30L target'
   }
 ];
 
@@ -149,25 +149,25 @@ export default function IkigaiPage() {
       <div className="max-w-6xl mx-auto space-y-12 pb-24 px-4 sm:px-6">
         {/* Results Header */}
         <header className="text-center space-y-4">
-          <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="inline-block p-3 bg-black text-white neo-box mb-4">
+          <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="inline-block p-3 bg-slate-900 text-white border-2 border-slate-900 shadow-[4px_4px_0px_0px_#2563EB] mb-4">
             <Sparkles className="w-8 h-8 mx-auto" />
           </motion.div>
-          <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-tight">Your Ikigai Career Path</h1>
-          <p className="text-xl text-muted-foreground font-medium max-w-2xl mx-auto">
-            The intersection of your heart, your skills, the world, and your future.
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-none text-slate-900 uppercase">Strategic <span className="text-blue-600 italic">Alignment</span></h1>
+          <p className="text-base md:text-xl text-slate-500 font-semibold uppercase tracking-tight max-w-2xl mx-auto">
+            Discovering the intersection of passion, capability, and industry demand.
           </p>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Visual Diagram */}
           <div className="space-y-8 sticky top-24">
-            <div className="bg-white border-4 border-black p-8 neo-box">
+            <div className="bg-white border-4 border-slate-900 p-8 neo-box shadow-[12px_12px_0px_0px_#F1F5F9]">
               <IkigaiDiagram activeZone={hoveredZone as any} />
               <div className="mt-8 grid grid-cols-2 gap-4 text-center">
-                <div onMouseEnter={() => setHoveredZone('passion')} onMouseLeave={() => setHoveredZone(null)} className="p-3 border-2 border-black bg-rose-50 font-bold text-xs uppercase cursor-help shadow-[2px_2px_0px_0px_rgba(244,63,94,1)] text-rose-700">❤️ Passion Zone</div>
-                <div onMouseEnter={() => setHoveredZone('profession')} onMouseLeave={() => setHoveredZone(null)} className="p-3 border-2 border-black bg-emerald-50 font-bold text-xs uppercase cursor-help shadow-[2px_2px_0px_0px_rgba(16,185,129,1)] text-emerald-700">💪 Profession Zone</div>
-                <div onMouseEnter={() => setHoveredZone('mission')} onMouseLeave={() => setHoveredZone(null)} className="p-3 border-2 border-black bg-indigo-50 font-bold text-xs uppercase cursor-help shadow-[2px_2px_0px_0px_rgba(79,70,229,1)] text-indigo-700">🌍 Mission Zone</div>
-                <div onMouseEnter={() => setHoveredZone('vocation')} onMouseLeave={() => setHoveredZone(null)} className="p-3 border-2 border-black bg-amber-50 font-bold text-xs uppercase cursor-help shadow-[2px_2px_0px_0px_rgba(245,158,11,1)] text-amber-700">💰 Vocation Zone</div>
+                <div onMouseEnter={() => setHoveredZone('passion')} onMouseLeave={() => setHoveredZone(null)} className="p-3 border-2 border-slate-900 bg-blue-50 font-black text-[10px] uppercase cursor-help shadow-[2px_2px_0px_0px_#2563EB] text-blue-700 leading-none">Strategic Passion</div>
+                <div onMouseEnter={() => setHoveredZone('profession')} onMouseLeave={() => setHoveredZone(null)} className="p-3 border-2 border-slate-900 bg-teal-50 font-black text-[10px] uppercase cursor-help shadow-[2px_2px_0px_0px_#14B8A6] text-teal-700 leading-none">Core Profession</div>
+                <div onMouseEnter={() => setHoveredZone('mission')} onMouseLeave={() => setHoveredZone(null)} className="p-3 border-2 border-slate-900 bg-slate-100 font-black text-[10px] uppercase cursor-help shadow-[2px_2px_0px_0px_#0F172A] text-slate-900 leading-none">Social Mission</div>
+                <div onMouseEnter={() => setHoveredZone('vocation')} onMouseLeave={() => setHoveredZone(null)} className="p-3 border-2 border-slate-900 bg-blue-50 font-black text-[10px] uppercase cursor-help shadow-[2px_2px_0px_0px_#3B82F6] text-blue-900 leading-none">Economic Vocation</div>
               </div>
             </div>
           </div>
@@ -176,24 +176,24 @@ export default function IkigaiPage() {
           <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} className="space-y-8">
             {/* Primary Path */}
             {/* 🎯 RECOMMENDED IKIGAI PATH */}
-            <div className="bg-[#0F172A] text-white border-[3px] border-black p-8 neo-box shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <div className="bg-slate-900 text-white border-4 border-slate-900 p-8 neo-box shadow-[8px_8px_0px_0px_#2563EB]">
               <div className="flex justify-between items-start mb-6">
-                <div className="text-[#FACC15] font-black uppercase text-xs tracking-[0.2em] flex items-center gap-2">
-                  <Rocket className="w-4 h-4" /> RECOMMENDED IKIGAI PATH
+                <div className="text-teal-400 font-black uppercase text-[10px] tracking-[0.2em] flex items-center gap-2">
+                  <Rocket className="w-4 h-4" /> RECOMMENDED PATHWAY
                 </div>
-                <div className="bg-[#7C3AED] text-white px-3 py-1 border-2 border-black text-[10px] font-black uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                   Ikigai Match: {result.ikigaiMatchScore}%
+                <div className="bg-blue-600 text-white px-3 py-1 border-2 border-white/20 text-[10px] font-black uppercase">
+                   SYNERGY SCORE: {result.ikigaiMatchScore}%
                 </div>
               </div>
 
-              <h2 className="text-[22px] font-black mb-4 text-[#22C55E] uppercase italic">{result.primaryPath.title}</h2>
+              <h2 className="text-2xl font-black mb-4 text-blue-400 uppercase italic leading-none">{result.primaryPath.title}</h2>
               
               <div className="space-y-4 mb-8">
-                <p className="text-sm font-black text-gray-400 uppercase tracking-widest">Why this fits you:</p>
+                <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.3em]">ALIGNMENT RATIONALE</p>
                 <ul className="space-y-2">
                    {result.primaryPath.whyFits?.map((point, i) => (
-                     <li key={i} className="text-sm font-bold flex gap-2 text-gray-200">
-                        <span className="text-[#22C55E]">✦</span> {point}
+                     <li key={i} className="text-[11px] font-bold flex gap-2 text-slate-300 uppercase leading-snug">
+                        <span className="text-teal-400">✦</span> {point}
                      </li>
                    ))}
                 </ul>
@@ -201,14 +201,14 @@ export default function IkigaiPage() {
 
               <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/10">
                 <div>
-                  <div className="text-[10px] text-gray-500 uppercase font-black tracking-widest mb-1">Market Demand</div>
-                  <div className="text-xl font-black text-[#22C55E] flex items-center gap-2 uppercase">
+                  <div className="text-[9px] text-white/30 uppercase font-black tracking-widest mb-1">MARKET DEMAND</div>
+                  <div className="text-xl font-black text-teal-400 flex items-center gap-2 uppercase italic">
                     {result.primaryPath.marketDemand} 📈
                   </div>
                 </div>
                 <div>
-                  <div className="text-[10px] text-gray-500 uppercase font-black tracking-widest mb-1">Exp. Salary (India 2026)</div>
-                  <div className="text-xl font-black text-[#FACC15]">{result.primaryPath.salaryRange}</div>
+                  <div className="text-[9px] text-white/30 uppercase font-black tracking-widest mb-1">COMPENSATION (IND 2026)</div>
+                  <div className="text-xl font-black text-blue-400">{result.primaryPath.salaryRange}</div>
                 </div>
               </div>
             </div>
@@ -225,9 +225,9 @@ export default function IkigaiPage() {
                      ))}
                   </div>
                </div>
-               <div className="bg-[#FEF2F2] border-4 border-black p-6 neo-box">
-                  <h3 className="text-lg font-black mb-4 uppercase flex items-center gap-2 italic text-red-600">
-                     <AlertCircle className="w-5 h-5" /> Skill Gaps
+               <div className="bg-[#F8FAFC] border-4 border-slate-900 p-6 neo-box">
+                  <h3 className="text-sm font-black mb-4 uppercase flex items-center gap-2 italic text-blue-600">
+                     <AlertCircle className="w-5 h-5" /> Strategic Gaps
                   </h3>
                   <ul className="space-y-2">
                      {result.skillGaps?.map((gap, i) => (
@@ -274,8 +274,8 @@ export default function IkigaiPage() {
             {/* 💡 NEXT ACTION STEPS & RESOURCES */}
             <div className="bg-white border-4 border-black p-8 neo-box space-y-8">
                <div className="border-b-4 border-black pb-4">
-                  <h3 className="text-2xl font-black uppercase italic flex items-center gap-3">
-                     <TrendingUp className="w-7 h-7 text-[#7C3AED]" /> Next Action Steps
+                  <h3 className="text-2xl font-black uppercase italic flex items-center gap-3 text-slate-900">
+                     <TrendingUp className="w-7 h-7 text-blue-600" /> Strategic Action Steps
                   </h3>
                </div>
                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -303,11 +303,11 @@ export default function IkigaiPage() {
 
             {/* Integration CTAs */}
             <div className="flex flex-col gap-4">
-               <Link href="/resume-builder" className="w-full flex items-center justify-between p-5 bg-[#7C3AED] text-white font-black border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all uppercase italic">
-                 Build Resume for this Path <ArrowRight className="w-6 h-6 text-white" />
+               <Link href="/resume-builder" className="w-full flex items-center justify-between p-5 bg-blue-600 text-white font-black border-[3px] border-slate-900 shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all uppercase italic">
+                 Draft Professional Resume <ArrowRight className="w-6 h-6 text-white" />
                </Link>
-               <Link href="/roadmap" className="w-full flex items-center justify-between p-5 bg-black text-white font-black border-4 border-black shadow-[6px_6px_0px_0px_rgba(124,58,237,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all uppercase italic">
-                 Generate Technical Roadmap <ArrowRight className="w-6 h-6 text-white" />
+               <Link href="/roadmap" className="w-full flex items-center justify-between p-5 bg-slate-900 text-white font-black border-[3px] border-slate-900 shadow-[4px_4px_0px_0px_#2563EB] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all uppercase italic">
+                 Get Skills Roadmap <ArrowRight className="w-6 h-6 text-white" />
                </Link>
             </div>
 
@@ -355,36 +355,35 @@ export default function IkigaiPage() {
             <div className="space-y-8">
               <header className="text-center md:text-left">
                 <div className="flex items-center justify-center md:justify-start gap-4 mb-4">
-                   <motion.span 
-                     animate={{ scale: [1, 1.05, 1], rotate: [-1, 1, -1] }}
-                     transition={{ repeat: Infinity, duration: 2 }}
-                     className="px-6 py-2 bg-[#FACC15] text-black font-black text-xs border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] uppercase tracking-widest"
-                   >
-                     💎 PREMIUM FEATURE
-                   </motion.span>
+                    <motion.span 
+                      animate={{ scale: [1, 1.05, 1] }}
+                      className="px-6 py-2 bg-blue-600 text-white font-black text-[10px] border-[3px] border-slate-900 shadow-[4px_4px_0px_0px_#0F172A] uppercase tracking-widest"
+                    >
+                      🚀 Strategic Excellence
+                    </motion.span>
                 </div>
-                <h1 className="text-5xl md:text-6xl font-black mb-4 tracking-tighter uppercase italic">Find Your <span className="text-[#7C3AED]">Vibe</span></h1>
-                <p className="text-xl text-muted-foreground font-medium uppercase tracking-tight">Find exactly what you love and get a step-by-step path to a happy life.</p>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-4 tracking-tighter uppercase italic leading-none text-slate-900">Career <span className="text-blue-600">Synergy</span></h1>
+                <p className="text-base md:text-xl text-slate-500 font-semibold uppercase tracking-tight">Audit your professional alignment and navigate toward your ideal vocation.</p>
               </header>
 
               {/* Progress Bar */}
-              <div className="h-2 bg-gray-200 border-2 border-black overflow-hidden mb-12">
+              <div className="h-2 bg-slate-100 border-2 border-slate-900 overflow-hidden mb-12 shadow-[2px_2px_0px_0px_#F1F5F9]">
                 <motion.div
-                  className="h-full bg-[#7C3AED]"
+                  className="h-full bg-blue-600"
                   initial={{ width: 0 }}
                   animate={{ width: `${progress}%` }}
                 />
               </div>
 
               {/* Form Step */}
-              <div className="bg-white border-4 border-black neo-box p-4 sm:p-8 space-y-8">
-                <div className="flex items-center gap-4 border-b-4 border-black pb-6">
-                  <div className={`p-4 ${currentStepData.color} border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>
+              <div className="bg-white border-4 border-slate-900 neo-box p-4 sm:p-8 space-y-8 shadow-[8px_8px_0px_0px_#F1F5F9]">
+                <div className="flex items-center gap-4 border-b-4 border-slate-900 pb-6">
+                  <div className={`p-4 ${currentStepData.color} border-4 border-slate-900 shadow-[4px_4px_0px_0px_#0F172A]`}>
                     <currentStepData.icon className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <h2 className="text-3xl font-black leading-none text-[#2563EB]">{currentStepData.title}</h2>
-                    <p className="text-gray-500 font-medium mt-2 uppercase text-[10px] tracking-widest">{currentStepData.desc}</p>
+                    <h2 className="text-3xl font-black leading-none text-slate-900 uppercase italic">{currentStepData.title}</h2>
+                    <p className="text-slate-400 font-bold mt-2 uppercase text-[10px] tracking-[0.2em]">{currentStepData.desc}</p>
                   </div>
                 </div>
 
@@ -398,17 +397,17 @@ export default function IkigaiPage() {
                   />
                 ) : (
                   <div className="space-y-6">
-                    <div className="flex gap-4">
+                    <div className="flex flex-col sm:flex-row gap-4">
                       <input
                         type="text"
                         value={tempInput}
                         onChange={e => setTempInput(e.target.value)}
                         onKeyDown={e => e.key === 'Enter' && handleAddItem()}
                         placeholder={currentStepData.placeholder}
-                        className="flex-1 p-5 text-lg font-black border-4 border-black bg-white focus:outline-none focus:bg-gray-50 text-gray-900 placeholder:text-gray-400"
+                        className="flex-1 p-4 text-base font-bold border-[3px] border-slate-900 bg-white focus:outline-none focus:ring-4 focus:ring-blue-500/10 text-slate-900 placeholder:text-slate-400"
                       />
-                      <button onClick={handleAddItem} className="px-8 py-4 bg-[#7C3AED] text-white font-black uppercase border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
-                        Add
+                      <button onClick={handleAddItem} className="px-8 py-4 bg-blue-600 text-white font-black uppercase border-[3px] border-slate-900 shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all text-xs">
+                        Audit Item
                       </button>
                     </div>
 
@@ -443,9 +442,9 @@ export default function IkigaiPage() {
                       (currentStepData.id !== 'incomeGoals' && (form[currentStepData.id as keyof typeof form] as string[]).length === 0) ||
                       (currentStepData.id === 'incomeGoals' && !form.incomeGoals.trim())
                     }
-                    className="flex items-center gap-3 px-12 py-5 bg-[#7C3AED] text-white font-black text-sm border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all disabled:opacity-50 disabled:bg-[#C4B5FD] disabled:text-[#1F2937] uppercase italic"
+                    className="flex items-center gap-3 px-8 sm:px-12 py-4 sm:py-5 bg-blue-600 text-white font-black text-sm border-[3px] border-slate-900 shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all disabled:opacity-50 disabled:bg-slate-300 uppercase italic"
                   >
-                    {isLastStep ? 'Analyze My Ikigai ✨' : 'Continue Execution →'}
+                    {isLastStep ? 'Analyze My Potential ✨' : 'Save & Continue →'}
                   </button>
                 </div>
               </div>
