@@ -83,6 +83,7 @@ export default function Navbar() {
           </div>
           <Link href="/about" className="text-xs font-black uppercase tracking-widest text-black hover:text-blue-600 transition-colors">ABOUT US</Link>
           <Link href="/team" className="text-xs font-black uppercase tracking-widest text-black hover:text-blue-600 transition-colors">TEAM</Link>
+          <Link href="/community" className="text-xs font-black uppercase tracking-widest text-black hover:text-blue-600 transition-colors">COMMUNITY</Link>
           <Link href="/donate" className="text-xs font-black uppercase tracking-widest bg-[#FACC15] text-black px-4 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">DONATE</Link>
           <Link href="/contact" className="text-xs font-black uppercase tracking-widest text-black hover:text-blue-600 transition-colors">CONTACT</Link>
         </div>
@@ -201,8 +202,9 @@ export default function Navbar() {
                 <div className="grid grid-cols-2 gap-4 pt-6 border-t-8 border-black">
                    <Link href="/about" onClick={() => setIsMenuOpen(false)} className="text-xs font-black uppercase tracking-widest text-black">ABOUT US</Link>
                    <Link href="/team" onClick={() => setIsMenuOpen(false)} className="text-xs font-black uppercase tracking-widest text-black">TEAM</Link>
+                   <Link href="/community" onClick={() => setIsMenuOpen(false)} className="text-xs font-black uppercase tracking-widest text-black">COMMUNITY</Link>
                    <Link href="/contact" onClick={() => setIsMenuOpen(false)} className="text-xs font-black uppercase tracking-widest text-black">CONTACT</Link>
-                   <Link href="/dashboard" onClick={() => setIsMenuOpen(false)} className="text-xs font-black uppercase tracking-widest text-blue-600">DASHBOARD</Link>
+                   <Link href="/dashboard" onClick={() => setIsMenuOpen(false)} className="text-xs font-black uppercase tracking-widest text-blue-600 col-span-2 text-center pt-2">DASHBOARD</Link>
                 </div>
 
                 {user && (

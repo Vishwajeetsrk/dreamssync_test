@@ -132,31 +132,31 @@ export default function Roadmap() {
         <div className="flex flex-col md:flex-row justify-between items-end gap-12 border-b-8 border-black pb-16 mb-20 no-print">
            <div className="space-y-6">
                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-slate-900 text-white shadow-[3px_3px_0px_0px_#2563EB]">
+                  <div className="p-2 bg-black text-white shadow-[3px_3px_0px_0px_#2563EB]">
                      <Map className="w-8 h-8" />
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Career Architecture</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">Career Architecture</span>
                </div>
-               <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[80px] font-black tracking-tighter leading-none text-slate-900 uppercase italic">
+               <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[80px] font-black tracking-tighter leading-none text-black uppercase italic">
                    Strategic <br /> Roadmap
                </h1>
            </div>
            
-            <div className="neo-box bg-white p-6 md:p-10 space-y-8 min-w-full md:min-w-[400px] shadow-[8px_8px_0px_0px_#F1F5F9] border-4 border-slate-900">
+            <div className="bg-white p-6 md:p-10 space-y-8 min-w-full md:min-w-[400px] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-4 border-black">
                <div className="space-y-4">
                   <label className="text-[10px] font-black uppercase text-blue-600 tracking-widest leading-none">Target Vocation</label>
-                  <input type="text" value={query.role} onChange={e => setQuery({...query, role: e.target.value})} className="neo-input text-lg border-2 border-slate-900 font-black uppercase" placeholder="e.g. DATA ARCHITECT" />
+                  <input type="text" value={query.role} onChange={e => setQuery({...query, role: e.target.value})} className="w-full p-4 text-lg border-4 border-black font-black uppercase focus:outline-none focus:bg-slate-50 transition-all" placeholder="e.g. DATA ARCHITECT" />
                </div>
               <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-4">
-                     <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest leading-none">Proficiency Level</label>
-                     <select value={query.experience} onChange={e => setQuery({...query, experience: e.target.value})} className="neo-input text-[10px] font-black uppercase border-2 border-slate-900">
+                     <label className="text-[10px] font-black uppercase text-gray-500 tracking-widest leading-none">Proficiency Level</label>
+                     <select value={query.experience} onChange={e => setQuery({...query, experience: e.target.value})} className="w-full p-4 text-[10px] font-black uppercase border-4 border-black bg-white">
                         <option>Beginner</option>
                         <option>Intermediate</option>
                      </select>
                   </div>
                   <div className="flex items-end">
-                     <button onClick={generateRoadmap} disabled={loading} className="w-full py-4 text-[10px] font-black uppercase bg-blue-600 text-white border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+                     <button onClick={generateRoadmap} disabled={loading} className="w-full py-5 text-[10px] font-black uppercase bg-blue-600 text-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
                         {loading ? <Loader2 className="animate-spin w-4 h-4 mx-auto" /> : 'CONSTRUCT MISSION'}
                      </button>
                   </div>
@@ -206,20 +206,20 @@ export default function Roadmap() {
               
               {/* Journey Stats (Audit Recap State) */}
               <div className="flex flex-col md:flex-row justify-between items-center gap-10">
-                <div className="neo-box bg-blue-600 p-8 border-4 border-slate-900 flex items-center gap-6 shadow-[8px_8px_0px_0px_#0F172A]">
-                   <div className="p-3 bg-white text-blue-600 border-2 border-slate-900">
+                <div className="bg-blue-600 p-8 border-4 border-black flex items-center gap-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                   <div className="p-3 bg-white text-blue-600 border-2 border-black">
                       <Zap className="w-8 h-8 fill-current" />
                    </div>
                    <div className="space-y-1">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-white/60 leading-none">Estimated Roadmap Duration</span>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-white/80 leading-none">Estimated Roadmap Duration</span>
                       <h2 className="text-3xl font-black uppercase italic text-white">{totalTimeline}</h2>
                    </div>
                 </div>
                  <div className="flex flex-wrap gap-4 no-print shrink-0">
-                    <button onClick={handleDownloadPDF} className="px-8 py-4 text-[10px] font-black uppercase bg-white border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0F172A] flex items-center gap-3 hover:bg-slate-50">
+                    <button onClick={handleDownloadPDF} className="px-8 py-4 text-[10px] font-black uppercase bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center gap-3 hover:bg-slate-50 transition-all">
                        <Download className="w-5 h-5" /> EXPORT PDF
                     </button>
-                    <button onClick={handleDownloadDocx} className="px-8 py-4 text-[10px] font-black uppercase bg-slate-900 text-white border-2 border-slate-900 shadow-[4px_4px_0px_0px_#2563EB] flex items-center gap-3 hover:bg-slate-800">
+                    <button onClick={handleDownloadDocx} className="px-8 py-4 text-[10px] font-black uppercase bg-black text-white border-4 border-black shadow-[4px_4px_0px_0px_#2563EB] flex items-center gap-3 hover:bg-gray-900 transition-all">
                        <FileText className="w-5 h-5" /> EXPORT WORD
                     </button>
                  </div>
@@ -227,14 +227,14 @@ export default function Roadmap() {
 
               {/* Global Prerequisites (Audit Recap State) */}
               {globalPrerequisites && (
-                <div className="neo-box p-6 sm:p-12 bg-white space-y-10 border-4 border-slate-900 border-b-[8px] shadow-[12px_12px_0px_0px_#F1F5F9]">
-                  <h2 className="text-3xl font-black flex items-center gap-6 border-b-6 border-slate-100 pb-6 uppercase italic text-slate-900 leading-none">
+                <div className="p-6 sm:p-12 bg-white space-y-10 border-4 border-black border-b-[12px] shadow-[12px_12px_0px_0px_rgba(0,0,0,0.05)]">
+                  <h2 className="text-3xl font-black flex items-center gap-6 border-b-6 border-gray-100 pb-6 uppercase italic text-black leading-none">
                     <GraduationCap className="w-10 h-10 text-blue-600" /> Core Prerequisites
                   </h2>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-16">
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16">
                     <div className="space-y-4">
                       <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-600">Academic Baseline</h3>
-                      <p className="text-xl font-black leading-tight text-slate-900 uppercase italic">{globalPrerequisites.education}</p>
+                      <p className="text-xl font-black leading-tight text-black uppercase italic">{globalPrerequisites.education}</p>
                     </div>
                     {globalPrerequisites.requiredKnowledge && (
                       <div className="space-y-4">
@@ -252,7 +252,7 @@ export default function Roadmap() {
                       <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-600">Technical Audit</h3>
                       <div className="flex flex-wrap gap-4">
                         {globalPrerequisites.technicalSkills?.map((s: string) => (
-                          <span key={s} className="px-6 py-2 bg-slate-50 border-2 border-slate-900 text-[10px] font-black uppercase shadow-[3px_3px_0px_0px_#0F172A]">{s}</span>
+                          <span key={s} className="px-6 py-2 bg-gray-50 border-2 border-black text-[10px] font-black uppercase shadow-[3px_3px_0px_0px_black]">{s}</span>
                         ))}
                       </div>
                     </div>
@@ -261,19 +261,19 @@ export default function Roadmap() {
               )}
 
               {/* Timeline Architecture */}
-              <div className="relative border-l-4 md:border-l-8 border-slate-900 ml-2 md:ml-12 pl-6 md:pl-20 space-y-16 md:space-y-32 py-10 md:py-20">
+              <div className="relative md:border-l-8 md:border-black ml-0 md:ml-12 pl-0 md:pl-20 space-y-12 md:space-y-32 py-10 md:py-20">
                 {steps.map((step, i) => (
-                  <motion.div key={i} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative neo-box bg-white p-6 md:p-12 border-4 border-slate-900 group hover:shadow-[12px_12px_0px_0px_#2563EB] transition-all">
+                  <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative bg-white p-6 md:p-12 border-4 border-black group hover:shadow-[12px_12px_0px_0px_#2563EB] transition-all shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                     
-                    {/* Timeline Node Infrastructure */}
-                    <div className="absolute top-1/2 -translate-y-1/2 -left-[1.75rem] md:-left-[5.7rem] w-8 h-8 md:w-12 md:h-12 border-4 md:border-8 border-slate-900 bg-white z-10 group-hover:bg-blue-600 transition-colors" />
-                    <div className="absolute top-1/2 -translate-y-1/2 -left-8 md:-left-16 w-8 md:w-16 h-2 md:h-4 bg-slate-900 -z-10 group-hover:bg-blue-600/20 transition-colors" />
+                    {/* Timeline Node Infrastructure - Hidden on Mobile for cleaner layout */}
+                    <div className="hidden md:block absolute top-1/2 -translate-y-1/2 md:-left-[5.75rem] w-12 h-12 border-8 border-black bg-white z-10 group-hover:bg-blue-600 transition-colors" />
+                    <div className="hidden md:block absolute top-1/2 -translate-y-1/2 md:-left-16 w-16 h-4 bg-black -z-10 group-hover:bg-blue-600/20 transition-colors" />
 
                     <div className="flex flex-col lg:flex-row gap-16 items-start">
                       <div className="flex-1 space-y-10">
                         <div className="space-y-6">
-                          <div className="flex items-center gap-6">
-                            <div className="px-6 py-2 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest shadow-[4px_4px_0px_0px_#2563EB]">
+                           <div className="flex items-center gap-6">
+                            <div className="px-6 py-2 bg-black text-white text-[10px] font-black uppercase tracking-widest shadow-[4px_4px_0px_0px_#2563EB]">
                                {step.time}
                             </div>
                             {step.skillsToLearn && (
@@ -282,17 +282,17 @@ export default function Roadmap() {
                               </div>
                             )}
                           </div>
-                          <h3 className="text-3xl md:text-6xl font-black tracking-tight leading-none text-slate-900 uppercase italic leading-none">{step.title}</h3>
-                          <p className="text-base md:text-xl font-bold text-slate-500 leading-snug uppercase tracking-tight">{step.desc}</p>
+                          <h3 className="text-3xl md:text-6xl font-black tracking-tight leading-none text-black uppercase italic leading-none">{step.title}</h3>
+                          <p className="text-base md:text-xl font-bold text-gray-500 leading-snug uppercase tracking-tight">{step.desc}</p>
                         </div>
 
                         {step.phasePrerequisites?.length > 0 && (
-                          <div className="bg-[#F3F4F6] border-4 border-slate-900 p-8 italic shadow-inner">
+                          <div className="bg-gray-50 border-4 border-black p-8 italic shadow-inner">
                             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-4 text-[#2563EB]">GATEWAY REQUIREMENTS</h4>
                             <ul className="grid md:grid-cols-2 gap-4">
                               {step.phasePrerequisites.map((p: string) => (
-                                <li key={p} className="flex gap-4 text-xs font-black uppercase italic">
-                                   <div className="w-2 h-2 mt-1 shrink-0 bg-slate-900" /> {p}
+                                <li key={p} className="flex gap-4 text-xs font-black uppercase italic text-black">
+                                   <div className="w-2 h-2 mt-1 shrink-0 bg-black" /> {p}
                                 </li>
                               ))}
                             </ul>
@@ -300,11 +300,11 @@ export default function Roadmap() {
                         )}
 
                         {step.build && (
-                          <div className="bg-teal-50 border-2 border-slate-900 p-8 shadow-[4px_4px_0px_0px_#0F172A]">
+                          <div className="bg-teal-50 border-4 border-black p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-4 text-teal-600">PROJECT MISSION</h4>
                             <div className="flex items-start gap-4">
-                              <div className="p-2 bg-slate-900 text-white"><CheckCircle className="w-5 h-5" /></div>
-                              <p className="text-sm font-black uppercase italic tracking-tight text-slate-900 leading-tight">{step.build}</p>
+                              <div className="p-2 bg-black text-white"><CheckCircle className="w-5 h-5" /></div>
+                              <p className="text-sm font-black uppercase italic tracking-tight text-black leading-tight">{step.build}</p>
                             </div>
                           </div>
                         )}
@@ -314,17 +314,17 @@ export default function Roadmap() {
                       <div className="w-full lg:w-[450px] shrink-0 space-y-10">
                         {step.studyMaterials && step.studyMaterials.length > 0 && (
                           <div className="space-y-6">
-                             <h4 className="text-xs font-black uppercase tracking-[0.4em] text-slate-400 flex items-center gap-4">
-                               <Book className="w-5 h-5 text-slate-900" /> Free Course
+                             <h4 className="text-xs font-black uppercase tracking-[0.4em] text-gray-500 flex items-center gap-4">
+                               <Book className="w-5 h-5 text-black" /> Free Course
                              </h4>
                              <div className="space-y-4">
                                {step.studyMaterials.map((link: any, idx: number) => (
-                                 <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="block p-6 bg-white border-4 border-slate-900 hover:bg-blue-50 transition-all shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none group">
+                                 <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="block p-6 bg-white border-4 border-black hover:bg-blue-50 transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none group">
                                    <div className="flex justify-between items-center mb-2">
-                                     <h5 className="text-sm font-black uppercase italic">{link.label}</h5>
-                                     <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                     <h5 className="text-sm font-black uppercase italic text-black">{link.label}</h5>
+                                     <ExternalLink className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
                                    </div>
-                                   <p className="text-[10px] font-bold text-slate-400 leading-relaxed uppercase">{link.summary}</p>
+                                   <p className="text-[10px] font-bold text-gray-500 leading-relaxed uppercase">{link.summary}</p>
                                  </a>
                                ))}
                              </div>
@@ -338,7 +338,7 @@ export default function Roadmap() {
                              </h4>
                              <div className="space-y-4">
                                {step.videoLectures.map((link: any, idx: number) => (
-                                 <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="block p-6 bg-white border-4 border-slate-900 hover:bg-red-50 transition-all shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none group">
+                                 <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="block p-6 bg-white border-4 border-black hover:bg-red-50 transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none group">
                                    <div className="flex justify-between items-center mb-2">
                                      <h5 className="text-sm font-black uppercase italic text-red-600">{link.label}</h5>
                                      <ExternalLink className="w-4 h-4 text-red-600" />
@@ -356,12 +356,12 @@ export default function Roadmap() {
                              </h4>
                              <div className="space-y-4">
                                {step.preparationTools.map((link: any, idx: number) => (
-                                 <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="block p-6 bg-white border-4 border-slate-900 hover:bg-blue-50 transition-all shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none group">
+                                 <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="block p-6 bg-white border-4 border-black hover:bg-blue-50 transition-all shadow-[4px_4px_0px_0px_black] hover:shadow-none group">
                                    <div className="flex justify-between items-center mb-2">
                                      <h5 className="text-sm font-black uppercase italic text-[#2563EB]">{link.label}</h5>
                                      <ExternalLink className="w-4 h-4 text-[#2563EB]" />
                                    </div>
-                                   {link.summary && <p className="text-[10px] font-bold text-slate-400 leading-relaxed uppercase mt-2">{link.summary}</p>}
+                                   {link.summary && <p className="text-[10px] font-bold text-gray-500 leading-relaxed uppercase mt-2">{link.summary}</p>}
                                  </a>
                                ))}
                              </div>
@@ -375,12 +375,12 @@ export default function Roadmap() {
                              </h4>
                              <div className="space-y-4">
                                {step.aiTools.map((link: any, idx: number) => (
-                                 <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="block p-6 bg-white border-4 border-slate-900 hover:bg-purple-50 transition-all shadow-[4px_4px_0px_0px_#0F172A] hover:shadow-none group">
+                                 <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="block p-6 bg-white border-4 border-black hover:bg-purple-50 transition-all shadow-[4px_4px_0px_0px_black] hover:shadow-none group">
                                    <div className="flex justify-between items-center mb-2">
                                      <h5 className="text-sm font-black uppercase italic text-purple-600">{link.label}</h5>
                                      <ExternalLink className="w-4 h-4 text-purple-600" />
                                    </div>
-                                   {link.summary && <p className="text-[10px] font-bold text-slate-400 leading-relaxed uppercase mt-2">{link.summary}</p>}
+                                   {link.summary && <p className="text-[10px] font-bold text-gray-500 leading-relaxed uppercase mt-2">{link.summary}</p>}
                                  </a>
                                ))}
                              </div>
@@ -396,33 +396,33 @@ export default function Roadmap() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-20">
                  {/* Market Stats */}
                  {marketInsights && (
-                   <div className="neo-box bg-slate-50 border-4 border-slate-900 p-10 space-y-8 shadow-[8px_8px_0px_0px_#2563EB]">
-                      <h4 className="text-xl font-black uppercase italic border-b-4 border-slate-900 pb-4 text-slate-900">Industry Insights</h4>
+                   <div className="neo-box bg-gray-50 border-4 border-black p-10 space-y-8 shadow-[8px_8px_0px_0px_#2563EB]">
+                      <h4 className="text-xl font-black uppercase italic border-b-4 border-black pb-4 text-black">Industry Insights</h4>
                       <div className="space-y-6">
                          <div>
-                            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Domestic Avg Salary</p>
-                            <p className="text-2xl font-black text-slate-900">{marketInsights.salaryIndia}</p>
+                            <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest leading-none mb-1">Domestic Avg Salary</p>
+                            <p className="text-2xl font-black text-black">{marketInsights.salaryIndia}</p>
                          </div>
                          <div>
-                            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Global Trajectory</p>
-                            <p className="text-2xl font-black text-slate-900">{marketInsights.salaryGlobal}</p>
+                            <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest leading-none mb-1">Global Trajectory</p>
+                            <p className="text-2xl font-black text-black">{marketInsights.salaryGlobal}</p>
                          </div>
-                         <div className={`px-4 py-2 border-2 border-slate-900 inline-block ${marketInsights.demandLevel === 'High' ? 'bg-teal-400' : 'bg-blue-400'} shadow-[2px_2px_0px_0px_#0F172A]`}>
-                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-900">DEMAND: {marketInsights.demandLevel}</p>
+                         <div className={`px-4 py-2 border-4 border-black inline-block ${marketInsights.demandLevel === 'High' ? 'bg-teal-400' : 'bg-blue-400'} shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>
+                            <p className="text-[10px] font-black uppercase tracking-widest text-black">DEMAND: {marketInsights.demandLevel}</p>
                          </div>
                       </div>
                    </div>
                  )}
 
                  {/* Real Job Roles */}
-                 <div className="md:col-span-2 neo-box bg-white p-10 space-y-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-4 border-slate-900">
-                    <h4 className="text-xl font-black uppercase italic border-b-4 border-slate-900 pb-4">Industry Roles & Targets</h4>
+                 <div className="md:col-span-2 bg-white p-10 space-y-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-4 border-black">
+                    <h4 className="text-xl font-black uppercase italic border-b-4 border-black pb-4 text-black">Industry Roles & Targets</h4>
                     <div className="grid sm:grid-cols-2 gap-8">
                        {realJobRoles.map((job, idx) => (
                          <div key={idx} className="space-y-3">
-                            <h5 className="font-black text-lg uppercase">{job.title}</h5>
+                            <h5 className="font-black text-lg uppercase text-black">{job.title}</h5>
                             <p className="text-xs text-[#2563EB] font-black">@ {job.companies}</p>
-                            <p className="text-[10px] text-gray-400 font-bold uppercase">{job.skills}</p>
+                            <p className="text-[10px] text-gray-500 font-bold uppercase">{job.skills}</p>
                          </div>
                        ))}
                     </div>

@@ -64,8 +64,8 @@ function Flowchart({ nodes }: { nodes: RoadmapNode[] }) {
   const colors = ['bg-blue-600', 'bg-teal-500', 'bg-slate-900', 'bg-blue-700', 'bg-teal-600'];
 
   return (
-    <div className="bg-white border-4 border-slate-900 neo-box p-8 shadow-[8px_8px_0px_0px_#F1F5F9]">
-      <h3 className="font-black text-xl mb-6 flex items-center gap-3 uppercase italic text-slate-900">
+    <div className="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.05)]">
+      <h3 className="font-black text-xl mb-6 flex items-center gap-3 uppercase italic text-black">
         <MapPin className="w-6 h-6 text-blue-600" /> Strategic Progression
       </h3>
       <div className="overflow-x-auto pb-4">
@@ -82,8 +82,8 @@ function Flowchart({ nodes }: { nodes: RoadmapNode[] }) {
                    {i + 1}
                 </div>
                 <div className="mt-4 text-center max-w-[120px]">
-                   <p className="text-xs font-black uppercase leading-tight italic">{node.label}</p>
-                   <p className="text-[10px] font-bold text-black/40 mt-1 uppercase">{node.sublabel}</p>
+                   <p className="text-xs font-black uppercase leading-tight italic text-black">{node.label}</p>
+                   <p className="text-[10px] font-bold text-gray-500 mt-1 uppercase">{node.sublabel}</p>
                 </div>
               </motion.div>
               {i < nodes.length - 1 && (
@@ -103,10 +103,10 @@ function Flowchart({ nodes }: { nodes: RoadmapNode[] }) {
 // ── Role Card ─────────────────────────────────────────────────────
 function RoleCard({ role }: { role: Role }) {
   return (
-    <div className="bg-white border-4 border-slate-900 p-6 neo-box space-y-4 hover:bg-slate-50 transition-colors shadow-[4px_4px_0px_0px_#F1F5F9]">
+    <div className="bg-white border-4 border-black p-6 space-y-4 hover:bg-slate-50 transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)]">
       <div className="flex items-start justify-between gap-4">
-        <h4 className="font-black text-xl leading-tight uppercase italic text-slate-900">{role.title}</h4>
-        <span className="px-3 py-1 text-[10px] font-black border-2 border-slate-900 bg-white uppercase tracking-widest shadow-[2px_2px_0px_0px_#0F172A]">
+        <h4 className="font-black text-xl leading-tight uppercase italic text-black">{role.title}</h4>
+        <span className="px-3 py-1 text-[10px] font-black border-2 border-black bg-white uppercase tracking-widest shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
           {role.demand}
         </span>
       </div>
@@ -139,7 +139,7 @@ function ChatBubble({ msg }: { msg: Message }) {
         </div>
       )}
       <div className="max-w-[85%] space-y-6">
-        <div className={`p-4 sm:p-8 border-4 border-slate-900 ${isUser ? 'bg-slate-900 text-white shadow-[6px_6px_0px_0px_#2563EB]' : 'bg-white shadow-[6px_6px_0px_0px_#F1F5F9]'}`}>
+        <div className={`p-4 sm:p-8 border-4 border-black ${isUser ? 'bg-black text-white shadow-[6px_6px_0px_0px_#2563EB]' : 'bg-white shadow-[6px_6px_0px_0px_rgba(0,0,0,0.05)]'}`}>
           <div className={`text-lg font-bold whitespace-pre-wrap leading-relaxed italic ${isUser ? 'text-white' : 'text-black'}`}>
             {isUser ? msg.content : (
               <div className="space-y-6">
@@ -156,7 +156,7 @@ function ChatBubble({ msg }: { msg: Message }) {
                   return (
                     <div key={si} className="space-y-4 pt-8 border-t-8 border-slate-50 mt-8 first:mt-0 first:border-0 first:pt-0">
                       <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-blue-600 flex items-center gap-4 group italic">
-                         <div className="p-2 border-2 border-slate-900 bg-white shadow-[4px_4px_0px_0px_#0F172A] group-hover:bg-teal-500 transition-colors">
+                         <div className="p-2 border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:bg-teal-500 transition-colors">
                            <TrendingUp className="w-6 h-6" />
                          </div>
                          {cleanedTitle}
@@ -198,7 +198,7 @@ function ChatBubble({ msg }: { msg: Message }) {
               </div>
             )}
             {msg.data.quickTips?.length > 0 && (
-              <div className="bg-teal-500 border-4 border-slate-900 p-8 shadow-[8px_8px_0px_0px_#0F172A]">
+              <div className="bg-teal-500 border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                 <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white mb-4">⚡ STRATEGIC INTELLIGENCE</p>
                 <ul className="space-y-3">
                   {msg.data.quickTips.map((tip, i) => (
@@ -211,21 +211,21 @@ function ChatBubble({ msg }: { msg: Message }) {
             )}
             {msg.data.jobLinks?.length > 0 && (
               <div className="space-y-4">
-                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 flex items-center gap-3">
+                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 flex items-center gap-3">
                   <Briefcase className="w-4 h-4" /> CAREER PORTALS
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {msg.data.jobLinks.map((j, i) => (
-                    <a key={i} href={j.url} target="_blank" rel="noopener noreferrer" className="block p-6 bg-white border-4 border-slate-900 hover:bg-blue-600 hover:text-white transition-all neo-box group shadow-[4px_4px_0px_0px_#F1F5F9]">
-                       <div className="flex items-center justify-between mb-2">
-                          <span className="text-[10px] font-black uppercase tracking-widest">{j.platform}</span>
-                          <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                       </div>
-                       <h5 className="font-black text-base uppercase italic mb-2 leading-tight">{j.label}</h5>
-                       {j.summary && <p className="text-[9px] font-bold opacity-60 uppercase">{j.summary}</p>}
-                    </a>
-                  ))}
-                </div>
+                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                   {msg.data.jobLinks.map((j, i) => (
+                     <a key={i} href={j.url} target="_blank" rel="noopener noreferrer" className="block p-6 bg-white border-4 border-black hover:bg-blue-600 hover:text-white transition-all neo-box group shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)]">
+                        <div className="flex items-center justify-between mb-2">
+                           <span className="text-[10px] font-black uppercase tracking-widest text-[#2563EB] group-hover:text-white">{j.platform}</span>
+                           <ExternalLink className="w-4 h-4 text-black group-hover:text-white group-hover:translate-x-1 transition-transform" />
+                        </div>
+                        <h5 className="font-black text-base uppercase italic mb-2 leading-tight text-black group-hover:text-white">{j.label}</h5>
+                        {j.summary && <p className="text-[9px] font-bold text-gray-500 group-hover:text-white/80 uppercase">{j.summary}</p>}
+                     </a>
+                   ))}
+                 </div>
               </div>
             )}
           </div>
@@ -307,25 +307,25 @@ export default function CareerAgent() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 font-bold uppercase overflow-x-hidden">
+    <div className="min-h-screen bg-white text-black selection:bg-blue-100 font-bold uppercase overflow-x-hidden">
       
       <div className="mt-[88px]" />
 
       <div className="max-w-6xl mx-auto px-6 py-20 pb-60 space-y-12">
         
         {/* Header Architecture (Audit Recap State) */}
-        <header className="border-b-8 border-slate-900 pb-16 flex flex-col md:flex-row justify-between items-end gap-12">
+        <header className="border-b-8 border-black pb-16 flex flex-col md:flex-row justify-between items-end gap-12">
           <div className="space-y-6">
             <div className="flex items-center gap-3">
-               <div className="p-2 bg-slate-900 text-white shadow-[3px_3px_0px_0px_#2563EB]">
+               <div className="p-2 bg-black text-white shadow-[3px_3px_0px_0px_#2563EB]">
                   <Brain className="w-8 h-8" />
                </div>
-               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 text-left">Strategic AI Counselor</span>
+               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 text-left">Strategic AI Counselor</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[80px] font-black tracking-tighter leading-none text-slate-900 italic">
+             <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[80px] font-black tracking-tighter leading-none text-black italic">
                Strategic <br /> Guide
-            </h1>
-            <p className="text-lg md:text-2xl text-slate-500 font-semibold uppercase tracking-tight mt-2">
+             </h1>
+            <p className="text-lg md:text-2xl text-gray-500 font-semibold uppercase tracking-tight mt-2">
                Empowering student career trajectories.
             </p>
           </div>

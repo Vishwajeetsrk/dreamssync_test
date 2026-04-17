@@ -112,24 +112,24 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
 export default function About() {
   const featureCards = [
     { 
-      title: "Resource Audit", 
-      desc: "Comprehensive facilitation of identity credentials, government directives, and professional documentation for vocational compliance.",
-      icon: FileText
+      title: "Career Guidance", 
+      desc: "Get personalized AI roadmaps and career paths designed specifically for Indian students.",
+      icon: Target
     },
     { 
-      title: "Skill Acquisition", 
-      desc: "Access a curated intelligence repository featuring streamlined directives, academic assets, and free-tier learning protocols.",
+      title: "Skill Building", 
+      desc: "Access curated resources and learning paths to master high-demand industry skills.",
       icon: Zap
     },
     { 
-      title: "Strategic Unity", 
-      desc: "Foster high-impact professional affiliations within an independent network of vocational peers for career maximization.",
+      title: "Community", 
+      desc: "Connect with like-minded students and professionals across India for support and growth.",
       icon: Heart
     },
     { 
-      title: "Career Advancement", 
-      desc: "Facilitate growth through authoritative sessions focused on vocational resilience, industry standards, and community success.",
-      icon: HeartHandshake
+      title: "Career Growth", 
+      desc: "Interactive sessions and tools to build your resume, portfolio, and professional brand.",
+      icon: Briefcase
     }
   ];
 
@@ -319,13 +319,19 @@ export default function About() {
                 Join our community today and start building the career you've always dreamed of with the help of AI and a supportive network.
              </p>
              
-             <div className="flex flex-col sm:flex-row justify-center items-center gap-6 relative z-10">
-                <Link href="/signup" className="px-12 py-6 bg-black text-white border-4 border-black font-black uppercase text-[12px] tracking-widest shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                  Join The Community <ArrowRight className="ml-2 w-6 h-6 inline" />
-                </Link>
-                <Link href="/contact" className="px-12 py-6 bg-white text-black border-4 border-black font-black uppercase text-[12px] tracking-widest shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                   Get In Touch
-                </Link>
+             <div className="flex flex-col sm:flex-row justify-center items-center gap-8 relative z-10">
+                <div className="flex flex-col items-center gap-4 group/btn w-full sm:w-auto">
+                  <Link href="/signup" className="w-full sm:w-auto px-12 py-6 bg-black text-white border-4 border-black font-black uppercase text-[12px] tracking-widest shadow-[6px_6px_0px_0px_#2563EB] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center">
+                    Join The Community <ArrowRight className="ml-2 w-6 h-6 inline" />
+                  </Link>
+                  <p className="text-[10px] font-black text-gray-400 italic">Takes 30 seconds · 100% Free</p>
+                </div>
+                <div className="flex flex-col items-center gap-4 group/btn w-full sm:w-auto">
+                  <Link href="/contact" className="w-full sm:w-auto px-12 py-6 bg-white text-black border-4 border-black font-black uppercase text-[12px] tracking-widest shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center">
+                     Get In Touch
+                  </Link>
+                  <p className="text-[10px] font-black text-gray-400 italic">Fast support · Real humans</p>
+                </div>
              </div>
           </div>
         </section>

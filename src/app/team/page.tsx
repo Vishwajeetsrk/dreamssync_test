@@ -175,10 +175,11 @@ export default function Team() {
                 </h3>
               </div>
 
-              <div className="mt-auto flex flex-col gap-1">
-                <div className="flex items-center justify-center px-2 py-3 bg-white text-black border-2 border-black font-black text-[10px] uppercase tracking-widest shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-black hover:text-white transition-all leading-none italic">
-                  VIEW PROFILE
-                </div>
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center justify-center px-2 py-3 bg-white text-black border-2 border-black font-black text-[10px] uppercase tracking-widest shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-black hover:text-white transition-all leading-none italic">
+                    VIEW PROFILE
+                  </div>
+                  <p className="text-[8px] font-black text-gray-400 mt-1">READ STORY · 1 MIN</p>
 
                 <a
                   href={member.link}
@@ -193,6 +194,16 @@ export default function Team() {
             </div>
           </motion.div>
         ))}
+      </div>
+      
+      <div className="mt-32 bg-yellow-400 border-8 border-black p-12 md:p-20 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row items-center justify-between gap-12">
+        <div className="space-y-6 text-center md:text-left">
+           <h3 className="text-4xl md:text-6xl font-black uppercase italic leading-none text-black">WE'RE HERE TO HELP</h3>
+           <p className="text-lg md:text-xl font-bold uppercase text-black/70 max-w-2xl">Building a career is hard. Our team is dedicated to making it easier for you, step-by-step. Feel free to connect with any of us!</p>
+        </div>
+        <Link href="/contact" className="px-12 py-6 bg-black text-white border-4 border-black font-black uppercase text-xs tracking-widest shadow-[8px_8px_0px_0px_white] hover:shadow-none transition-all text-center">
+           TALK TO US
+        </Link>
       </div>
     </div>
   );
