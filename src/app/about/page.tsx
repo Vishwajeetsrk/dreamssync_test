@@ -237,7 +237,7 @@ export default function About() {
 
 
         {/* SECTION 5 — RESTORED IMPACT STATS */}
-        <section className="bg-black border-8 border-black p-12 md:p-20 shadow-[12px_12px_0px_0px_rgba(37,99,235,1)]">
+        <section className="bg-black border-8 border-black p-6 sm:p-12 md:p-20 shadow-[12px_12px_0px_0px_rgba(37,99,235,1)]">
            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
              {[
                { value: "1+", label: "Working Locations", icon: MapPin, color: 'text-[#FACC15]', anim: { y: [0, -8, 0] } },
@@ -294,7 +294,7 @@ export default function About() {
 
         {/* CTA SECTION */}
         <section className="pb-40">
-          <div className="neo-box p-12 md:p-20 bg-white text-center space-y-12 relative overflow-hidden group">
+          <div className="neo-box p-8 sm:p-12 md:p-20 bg-white text-center space-y-12 relative overflow-hidden group">
              <div className="absolute top-0 left-0 w-full h-3 bg-[#2563EB]" />
              <div className="absolute bottom-0 right-0 p-8 transform translate-x-12 translate-y-12 opacity-5 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700">
                 <Target className="w-64 h-64 text-black" />

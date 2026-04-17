@@ -347,7 +347,7 @@ export default function MentalHealthAgent() {
   // ── Mood Selection Screen ─────────────────────────────────────────
   if (!mood) {
     return (
-      <div className="max-w-2xl mx-auto py-8 space-y-8">
+      <div className="max-w-2xl mx-auto py-8 space-y-8 px-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-4">
           {/* Avatar */}
           <motion.div
@@ -381,7 +381,7 @@ export default function MentalHealthAgent() {
         {/* Mood Picker */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
           <p className="text-lg font-black text-center mb-4">How are you feeling right now?</p>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {moods.map((m, i) => (
               <motion.button
                 key={m.label}
@@ -410,7 +410,7 @@ export default function MentalHealthAgent() {
 
   // ── Chat Screen ───────────────────────────────────────────────────
   return (
-    <div className="max-w-2xl mx-auto space-y-4 pb-8">
+    <div className="max-w-2xl mx-auto space-y-4 pb-8 px-4">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">

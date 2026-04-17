@@ -307,7 +307,7 @@ export default function PortfolioGenerator() {
   };
 
   return (
-    <div className={`mx-auto space-y-8 transition-all ${activePreview ? 'max-w-[100vw] px-4' : 'max-w-4xl'}`}>
+    <div className={`mx-auto space-y-8 transition-all px-4 sm:px-6 ${activePreview ? 'max-w-[100vw]' : 'max-w-4xl'}`}>
       {/* Header */}
       <header className="text-center border-b-4 border-black pb-8">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#2563EB] text-white border-2 border-black text-sm font-bold mb-4">
@@ -327,7 +327,7 @@ export default function PortfolioGenerator() {
           const isCurrent = step === s.id;
           return (
             <div key={s.id} className="flex flex-col items-center gap-2">
-              <div className={`w-12 h-12 rounded-lg border-4 border-black flex items-center justify-center font-black text-xs transition-all ${isDone ? 'bg-[#FACC15] text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]' : isCurrent ? 'bg-[#2563EB] text-white scale-110 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white text-gray-400'}`}>
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg border-4 border-black flex items-center justify-center font-black text-xs transition-all ${isDone ? 'bg-[#FACC15] text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]' : isCurrent ? 'bg-[#2563EB] text-white scale-110 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'bg-white text-gray-400'}`}>
                 {isDone ? <Check className="w-6 h-6" /> : <s.icon className="w-5 h-5" />}
               </div>
               <span className={`text-[10px] uppercase font-black tracking-widest hidden md:block ${isCurrent ? 'text-black' : 'text-gray-400'}`}>{s.label}</span>

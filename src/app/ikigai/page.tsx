@@ -146,7 +146,7 @@ export default function IkigaiPage() {
 
   if (result) {
     return (
-      <div className="max-w-6xl mx-auto space-y-12 pb-24">
+      <div className="max-w-6xl mx-auto space-y-12 pb-24 px-4 sm:px-6">
         {/* Results Header */}
         <header className="text-center space-y-4">
           <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="inline-block p-3 bg-black text-white neo-box mb-4">
@@ -321,7 +321,7 @@ export default function IkigaiPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-12 pb-24">
+    <div className="max-w-4xl mx-auto space-y-12 pb-24 px-4 sm:px-6">
       {/* Landing / Intro Area */}
       <AnimatePresence mode="wait">
         {isAnalyzing ? (
@@ -377,7 +377,7 @@ export default function IkigaiPage() {
               </div>
 
               {/* Form Step */}
-              <div className="bg-white border-4 border-black neo-box p-8 space-y-8">
+              <div className="bg-white border-4 border-black neo-box p-4 sm:p-8 space-y-8">
                 <div className="flex items-center gap-4 border-b-4 border-black pb-6">
                   <div className={`p-4 ${currentStepData.color} border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>
                     <currentStepData.icon className="w-8 h-8 text-white" />

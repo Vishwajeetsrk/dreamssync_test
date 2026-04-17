@@ -180,7 +180,7 @@ export default function LinkedInOptimizer() {
   const scoreBg = totalScore >= 70 ? 'bg-green-50 border-green-200' : totalScore >= 40 ? 'bg-yellow-50 border-yellow-200' : 'bg-red-50 border-red-200';
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8">
+    <div className="max-w-5xl mx-auto space-y-8 px-4 sm:px-6">
       {/* Header */}
       <header className="border-b-4 border-black pb-8">
         <div className="flex items-center gap-4 mb-4">
@@ -191,7 +191,7 @@ export default function LinkedInOptimizer() {
             </svg>
           </div>
           <div>
-            <h1 className="text-4xl md:text-5xl font-black leading-tight">LinkedIn Optimizer</h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight">LinkedIn Optimizer</h1>
             <p className="text-gray-500 font-medium mt-1">AI-powered profile optimization to get noticed by recruiters</p>
           </div>
         </div>
@@ -203,7 +203,7 @@ export default function LinkedInOptimizer() {
       </header>
 
       {/* INPUT FORM */}
-      <div className="bg-white border-4 border-black neo-box p-8 space-y-6">
+      <div className="bg-white border-4 border-black neo-box p-4 sm:p-8 space-y-6">
         <div className="flex flex-col md:flex-row items-center gap-6 pb-6 border-b-2 border-black">
           <div className="flex items-center gap-3">
              <div className="p-2 bg-[#0A66C2] border-2 border-black"><User className="w-4 h-4 text-white" /></div>

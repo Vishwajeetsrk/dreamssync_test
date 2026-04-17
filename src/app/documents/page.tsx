@@ -452,7 +452,7 @@ export default function Documents() {
   const [tab, setTab] = useState<'skills' | 'docs'>('skills');
 
   return (
-    <div className="space-y-10 pb-16">
+    <div className="space-y-10 pb-16 px-4 sm:px-6">
       {/* Header */}
       <header className="border-b-4 border-black pb-8">
         <h1 className="text-4xl md:text-5xl font-black mb-3 flex items-center gap-4">
@@ -464,7 +464,7 @@ export default function Documents() {
       </header>
 
       {/* Tab Switcher */}
-      <div className="flex gap-0 border-4 border-black w-fit neo-box">
+      <div className="flex flex-col sm:flex-row gap-0 border-4 border-black w-full sm:w-fit neo-box">
         <button
           onClick={() => setTab('skills')}
           className={`px-8 py-3 font-black text-sm uppercase tracking-wider transition-colors flex items-center gap-2 ${tab === 'skills' ? 'bg-[#2563EB] text-white' : 'bg-white hover:bg-gray-100'}`}
@@ -473,7 +473,7 @@ export default function Documents() {
         </button>
         <button
           onClick={() => setTab('docs')}
-          className={`px-8 py-3 font-black text-sm uppercase tracking-wider transition-colors border-l-4 border-black flex items-center gap-2 ${tab === 'docs' ? 'bg-[#2563EB] text-white' : 'bg-white hover:bg-gray-100'}`}
+          className={`px-8 py-3 font-black text-sm uppercase tracking-wider transition-colors border-t-4 sm:border-t-0 sm:border-l-4 border-black flex items-center gap-2 ${tab === 'docs' ? 'bg-[#2563EB] text-white' : 'bg-white hover:bg-gray-100'}`}
         >
           <Landmark className="w-4 h-4" /> Government Docs
         </button>

@@ -139,7 +139,7 @@ function ChatBubble({ msg }: { msg: Message }) {
         </div>
       )}
       <div className="max-w-[85%] space-y-6">
-        <div className={`p-8 border-4 border-black ${isUser ? 'bg-black text-white shadow-[6px_6px_0px_0px_rgba(37,99,235,1)]' : 'bg-white shadow-[6px_6px_0px_0px_rgba(250,204,21,1)]'}`}>
+        <div className={`p-4 sm:p-8 border-4 border-black ${isUser ? 'bg-black text-white shadow-[6px_6px_0px_0px_rgba(37,99,235,1)]' : 'bg-white shadow-[6px_6px_0px_0px_rgba(250,204,21,1)]'}`}>
           <div className={`text-lg font-bold whitespace-pre-wrap leading-relaxed italic ${isUser ? 'text-white' : 'text-black'}`}>
             {isUser ? msg.content : (
               <div className="space-y-6">
@@ -322,7 +322,7 @@ export default function CareerAgent() {
                </div>
                <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">AI Agent (Chatbot)</span>
             </div>
-            <h1 className="text-6xl md:text-[80px] font-black tracking-tighter leading-none text-black">
+            <h1 className="text-4xl sm:text-6xl md:text-[80px] font-black tracking-tighter leading-none text-black">
                AI Career Guide
             </h1>
             <p className="text-xl md:text-3xl text-black/40 font-black tracking-tighter uppercase mt-2">
@@ -337,7 +337,7 @@ export default function CareerAgent() {
         </header>
 
         {/* Main Interface Area */}
-        <div className="bg-white border-8 border-black p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,0.1)] space-y-12">
+        <div className="bg-white border-4 md:border-8 border-black p-4 sm:p-6 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,0.1)] space-y-12">
            {messages.length === 0 ? (
              <div className="flex flex-col items-center justify-center py-20 text-center space-y-8 grayscale">
                 <div className="w-16 h-16 bg-[#A855F7] border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
