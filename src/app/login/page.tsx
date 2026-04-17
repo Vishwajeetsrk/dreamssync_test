@@ -74,7 +74,7 @@ export default function Login() {
         animate={{ opacity: 1, scale: 1 }}
         className="w-full max-w-lg"
       >
-        <div className="neo-box p-12 bg-white space-y-10">
+        <div className="neo-box p-6 sm:p-12 bg-white space-y-10">
           <div className="text-center space-y-4">
             <div className="flex flex-col items-center gap-4 mb-4">
               <Link href="/" className="inline-block focus:outline-none">

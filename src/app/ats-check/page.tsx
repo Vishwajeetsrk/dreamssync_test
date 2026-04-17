@@ -110,7 +110,7 @@ export default function AdvancedATS() {
                  </div>
                  <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">Professional ATS Engine</span>
               </div>
-              <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[100px] font-black tracking-tighter leading-none text-black uppercase">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[80px] font-black tracking-tighter leading-none text-black uppercase">
                  Smart <br /> <span className="text-[#2563EB] drop-shadow-[5px_5px_0px_rgba(0,0,0,1)] italic">Analyzer</span>
               </h1>
            </div>

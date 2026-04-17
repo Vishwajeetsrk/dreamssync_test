@@ -205,7 +205,7 @@ function ProfileContent() {
               </div>
               <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">User Profile Data</span>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-8xl xl:text-[100px] font-black tracking-tighter leading-none text-black uppercase">
+            <h1 className="text-3xl md:text-5xl lg:text-7xl xl:text-[80px] font-black tracking-tighter leading-none text-black uppercase">
               User <br /> <span className="text-[#2563EB] drop-shadow-[5px_5px_0px_rgba(0,0,0,1)] italic">Profile</span>
             </h1>
           </div>

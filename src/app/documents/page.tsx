@@ -455,7 +455,7 @@ export default function Documents() {
     <div className="space-y-10 pb-16 px-4 sm:px-6">
       {/* Header */}
       <header className="border-b-4 border-black pb-8">
-        <h1 className="text-4xl md:text-5xl font-black mb-3 flex items-center gap-4">
+        <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[80px] font-black mb-3 flex items-center gap-4 uppercase tracking-tighter italic">
           <BookOpen className="w-10 h-10" /> Roadmaps & Docs
         </h1>
         <p className="text-xl text-muted-foreground font-medium">

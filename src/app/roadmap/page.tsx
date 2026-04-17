@@ -124,11 +124,9 @@ export default function Roadmap() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F3F4F6] text-black selection:bg-[#FACC15]/40 font-bold uppercase overflow-x-hidden">
+    <div className="min-h-screen bg-[#F3F4F6] pt-32 sm:pt-40 pb-20 px-4 md:px-12 text-black selection:bg-[#FACC15]/40 font-bold uppercase overflow-x-hidden">
       
-      <div className="mt-[88px]" />
-
-      <div className="max-w-7xl mx-auto px-6 py-20">
+      <div className="max-w-7xl mx-auto">
         
         {/* Header Architecture (Audit Recap State) */}
         <div className="flex flex-col md:flex-row justify-between items-end gap-12 border-b-8 border-black pb-16 mb-20 no-print">
@@ -139,7 +137,7 @@ export default function Roadmap() {
                  </div>
                  <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">Career Roadmap</span>
               </div>
-              <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[100px] font-black tracking-tighter leading-none text-black">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[80px] font-black tracking-tighter leading-none text-black uppercase">
                   Career Roadmap
               </h1>
            </div>
@@ -229,7 +227,7 @@ export default function Roadmap() {
 
               {/* Global Prerequisites (Audit Recap State) */}
               {globalPrerequisites && (
-                <div className="neo-box bg-white p-16 border-black space-y-10 shadow-[12px_12px_0px_0px_rgba(37,99,235,1)]">
+                <div className="neo-box p-6 sm:p-12 bg-white space-y-10 border-black border-b-6 shadow-[12px_12px_0px_0px_rgba(37,99,235,1)]">
                   <h2 className="text-3xl font-black flex items-center gap-6 border-b-6 border-black pb-6 uppercase italic">
                     <GraduationCap className="w-10 h-10 text-[#2563EB]" /> Core Prerequisites
                   </h2>
@@ -284,7 +282,7 @@ export default function Roadmap() {
                               </div>
                             )}
                           </div>
-                          <h3 className="text-5xl font-black tracking-tighter uppercase italic leading-none">{step.title}</h3>
+                          <h3 className="text-4xl md:text-7xl font-black tracking-tight leading-none text-[#111827] uppercase italic leading-none">{step.title}</h3>
                           <p className="text-xl font-bold text-black/60 leading-snug uppercase">{step.desc}</p>
                         </div>
 

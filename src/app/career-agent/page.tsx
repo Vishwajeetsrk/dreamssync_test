@@ -311,7 +311,7 @@ export default function CareerAgent() {
       
       <div className="mt-[88px]" />
 
-      <div className="max-w-6xl mx-auto px-6 py-20 space-y-12">
+      <div className="max-w-6xl mx-auto px-6 py-20 pb-60 space-y-12">
         
         {/* Header Architecture (Audit Recap State) */}
         <header className="border-b-8 border-black pb-16 flex flex-col md:flex-row justify-between items-end gap-12">
@@ -322,7 +322,7 @@ export default function CareerAgent() {
                </div>
                <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">AI Agent (Chatbot)</span>
             </div>
-            <h1 className="text-4xl sm:text-6xl md:text-[80px] font-black tracking-tighter leading-none text-black">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[80px] font-black tracking-tighter leading-none text-black">
                AI Career Guide
             </h1>
             <p className="text-xl md:text-3xl text-black/40 font-black tracking-tighter uppercase mt-2">

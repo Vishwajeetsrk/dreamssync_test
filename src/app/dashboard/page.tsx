@@ -43,7 +43,7 @@ export default function Dashboard() {
   const userName = userData?.name?.replace(/[._-]/g, ' ').toUpperCase() || user.email?.split('@')[0].replace(/[._-]/g, ' ').toUpperCase() || "DREAMER";
 
   return (
-    <div className="min-h-screen bg-[#F3F4F6] pt-40 pb-20 px-6 md:px-12 text-black selection:bg-[#FACC15]/40">
+    <div className="min-h-screen bg-[#F3F4F6] pt-32 sm:pt-40 pb-20 px-4 md:px-12 text-black selection:bg-[#FACC15]/40">
       <div className="max-w-7xl mx-auto space-y-20">
         
         {/* Dashboard Architecture (Audit Recap State) */}
@@ -61,7 +61,7 @@ export default function Dashboard() {
             <motion.h1 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-6xl md:text-8xl font-black tracking-tight leading-none text-[#111827] uppercase"
+              className="text-4xl md:text-7xl font-black tracking-tight leading-none text-[#111827] uppercase"
             >
               Welcome, <br /> <span className="text-[#2563EB] drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] italic selection:bg-black selection:text-[#FACC15] transition-all duration-500 hover:tracking-tighter">{userName}</span>
             </motion.h1>
@@ -82,7 +82,7 @@ export default function Dashboard() {
              <div className="h-2 flex-grow mx-8 bg-black/5" />
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
             {tools.map((tool, i) => (
               <motion.div 
                 key={i}
