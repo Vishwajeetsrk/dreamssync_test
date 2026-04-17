@@ -92,7 +92,7 @@ export default function PortfolioGenerator() {
   const [workExp, setWorkExp] = useState<WorkExp[]>([]);
 
   // Helpers
-  const addProject = () => setProjects(p => [...p, { topic: '', points: '', website: '' }]);
+  const addProject = () => setProjects(p => [...p, { topic: 'New Project', points: '', website: '' }]);
   const removeProject = (i: number) => setProjects(p => p.filter((_, idx) => idx !== i));
   const updateProject = (i: number, f: keyof Project, v: string) => setProjects(p => p.map((x, idx) => idx === i ? { ...x, [f]: v } : x));
 

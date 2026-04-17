@@ -142,7 +142,7 @@ export default function Team() {
       {/* Unified Core Members Section - High Visibility Layout */}
       <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-8 md:mb-16 border-l-[10px] md:border-l-[16px] border-black pl-4 md:pl-8">Core Members</h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4 items-stretch">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 items-stretch px-2 md:px-0">
         {team.map((member, i) => (
           <motion.div
             key={i}

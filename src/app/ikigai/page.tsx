@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Heart, Zap, Globe, DollarSign, ArrowRight, ArrowLeft, 
   Sparkles, Brain, Briefcase, TrendingUp, CheckCircle2,
-  RefreshCcw, Download, Share2, Rocket, Star, Target, AlertCircle
+  RefreshCcw, Download, Share2, Rocket, Star, Target, AlertCircle, ExternalLink
 } from 'lucide-react';
 import { IkigaiDiagram } from '@/components/IkigaiDiagram';
 import { validateCareerInput } from '@/lib/aiGuard';

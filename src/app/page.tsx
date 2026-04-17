@@ -122,7 +122,7 @@ export default function Home() {
 
       {/* 📊 IMPACT STATS SECTION */}
       <section className="py-20 px-4 md:px-6 max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {[
             { val: '1+', label: 'Working Locations', icon: MapPin, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
             { val: '50+', label: 'Verified Documents', icon: ClipboardCheck, color: 'text-emerald-600', bg: 'bg-emerald-50' },

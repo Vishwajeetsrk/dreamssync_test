@@ -184,6 +184,18 @@ export default function Signup() {
               </div>
             </div>
 
+            <div className="flex items-start gap-3 px-1">
+              <input
+                type="checkbox"
+                id="terms"
+                required
+                className="w-5 h-5 mt-1 border-4 border-black rounded-none appearance-none checked:bg-[#2563EB] cursor-pointer"
+              />
+              <label htmlFor="terms" className="text-[10px] text-gray-400 font-black leading-tight cursor-pointer">
+                I AGREE TO THE <Link href="/terms" className="text-[#2563EB] hover:underline">TERMS OF SERVICE</Link> AND <Link href="/privacy" className="text-[#2563EB] hover:underline">PRIVACY PROTOCOL</Link>.
+              </label>
+            </div>
+
             <button
               type="submit"
               disabled={loading}

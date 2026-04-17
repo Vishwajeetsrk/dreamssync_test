@@ -7,7 +7,7 @@ import {
   TrendingUp, Target, Star, MessageSquare, Key, AlertCircle,
   User, Briefcase, BookOpen, Award, RotateCcw, ExternalLink,
   PenLine, FileText, Wrench, Building2, GraduationCap, Trophy, Sliders,
-  Upload, Search, Loader2, CheckCircle2, ArrowRight, ShieldCheck, Zap
+  Upload, Search, Loader2, CheckCircle2, ArrowRight, ShieldCheck, Zap, Globe
 } from 'lucide-react';
 import Link from 'next/link';
 import { validateCareerInput } from '@/lib/aiGuard';
