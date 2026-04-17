@@ -12,7 +12,7 @@ const team = [
     link: "https://www.linkedin.com/in/anandbin/",
     image: "/Anand.jpeg",
     bgColor: "#FFFFFF",
-    intro: "He is the person leading this project. He wants to make sure every student in India finds their dream job easily."
+    intro: "He is the person leading this project. He wants to make sure every student finds their dream job easily."
   },
   {
     name: "Ayush Bajpai",
@@ -20,7 +20,7 @@ const team = [
     link: "https://www.linkedin.com/in/ayush-bajpai25/",
     image: "/Ayush.jpeg",
     bgColor: "#FFFFFF",
-    intro: "He manages the daily work at DreamSync. He is here to help you if you have any problems using the platform."
+    intro: "He manages the daily work at DreamSync. He is here to help you if you have any problems using the site."
   },
   {
     name: "Vishwajeet",
@@ -28,7 +28,7 @@ const team = [
     link: "https://www.linkedin.com/in/vishwajeetsrk/",
     image: "/vishwajeet.jpeg",
     bgColor: "#FFFFFF",
-    intro: "He builds the smart AI tools you use. He made sure this website is easy and simple for everyone to use."
+    intro: "He builds the smart AI tools you use. He made sure this site is simple for everyone to use."
   },
   {
     name: "Chaitanya Khaleja",
@@ -36,23 +36,23 @@ const team = [
     link: "https://www.linkedin.com/in/chaitanya-khaleja-975502255/",
     image: "/Chaitanya.jpeg",
     bgColor: "#FFFFFF",
-    intro: "He brings students together. He helps you find new friends and helpers on your career journey."
+    intro: "He brings students together. He helps you find new friends and helpers on your journey."
   },
   {
     name: "Nisha Das",
-    dept: "Content Guide",
+    dept: "Guides",
     link: "https://www.linkedin.com/in/nisha-das-ab9bb5246/",
     image: "/Nisha.jpeg",
     bgColor: "#FFFFFF",
-    intro: "She finds the best guides and papers for you. She makes sure you have everything you need to study well."
+    intro: "She finds the best guides and papers for you. She makes sure you have everything you need to study."
   },
   {
     name: "Hrithik Kumar",
-    dept: "Project Manager",
+    dept: "Projects",
     link: "https://www.linkedin.com/in/kumar-hrithik/",
     image: "/Hrithik.jpg",
     bgColor: "#FFFFFF",
-    intro: "He manages our special projects. He makes sure our career tools are high quality and ready for you to use."
+    intro: "He manages our special projects. He makes sure our tools are high quality and ready for you."
   },
 ];
 
@@ -60,7 +60,7 @@ export default function Team() {
   const [activeMember, setActiveMember] = useState<null | typeof team[0]>(null);
 
   return (
-    <div className="space-y-16 max-w-7xl mx-auto py-12 px-4 relative">
+    <div className="space-y-12 max-w-7xl mx-auto py-10 px-4 relative">
 
       {/* Introduction Modal */}
       <AnimatePresence>
@@ -69,56 +69,56 @@ export default function Team() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 md:p-8"
+            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
             onClick={() => setActiveMember(null)}
           >
             <motion.div
-              initial={{ scale: 0.9, rotate: -1, y: 20 }}
-              animate={{ scale: 1, rotate: 0, y: 0 }}
-              exit={{ scale: 0.9, rotate: 1, y: 20 }}
-              className="bg-white border-[8px] border-black p-6 md:p-10 max-w-[95%] md:max-w-2xl w-full mx-auto relative shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] overflow-y-auto max-h-[90vh]"
+              initial={{ scale: 0.95, y: 10 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 10 }}
+              className="bg-white border-4 border-black p-6 md:p-8 max-w-[95%] md:max-w-xl w-full mx-auto relative shadow-[10px_10px_0px_0px_black] overflow-y-auto max-h-[85vh]"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setActiveMember(null)}
-                className="absolute top-4 right-4 bg-black text-white p-2 hover:bg-blue-600 transition-colors border-4 border-black z-50 shadow-[4px_4px_0px_0px_white] active:shadow-none transition-all"
+                className="absolute top-3 right-3 bg-black text-white p-1.5 hover:bg-blue-600 border-2 border-black z-50 shadow-[3px_3px_0px_0px_white] active:shadow-none transition-all"
               >
-                <X className="w-8 h-8 md:w-6 md:h-6" />
+                <X className="w-5 h-5" />
               </button>
 
-              <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center md:items-start pt-6">
-                <div className="w-40 h-40 md:w-56 md:h-56 border-8 border-black bg-white flex-shrink-0 shadow-[10px_10px_0px_0px_#2563EB] relative overflow-hidden">
+              <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start pt-4">
+                <div className="w-32 h-32 md:w-40 md:h-40 border-4 border-black bg-white flex-shrink-0 shadow-[6px_6px_0px_0px_#2563EB] relative overflow-hidden">
                   <img src={activeMember.image} alt={activeMember.name} className="w-full h-full object-cover" />
                 </div>
                 
-                <div className="text-center md:text-left flex-1 w-full space-y-6">
+                <div className="text-center sm:text-left flex-1 w-full space-y-4">
                   <div>
-                    <div className="inline-block bg-[#FACC15] text-black px-4 py-2 font-black uppercase text-xs tracking-widest border-4 border-black mb-2 shadow-[4px_4px_0px_0px_black]">
+                    <div className="inline-block bg-yellow-400 text-black px-3 py-1 font-black uppercase text-[9px] tracking-widest border-2 border-black mb-1 shadow-[2px_2px_0px_0px_black]">
                       {activeMember.dept}
                     </div>
                   </div>
-                  <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none text-black italic">
+                  <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none text-black italic">
                     {activeMember.name}
                   </h2>
                   
-                  <div className="bg-gray-100 border-l-[12px] border-black p-6 md:p-8 mb-6 italic text-lg font-bold leading-tight text-black">
+                  <div className="bg-gray-100 border-l-[6px] border-black p-4 italic text-sm font-bold leading-tight text-black">
                     "{activeMember.intro}"
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4 w-full">
+                  <div className="flex flex-col xs:flex-row gap-3 w-full">
                     <a
                       href={activeMember.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-3 py-4 bg-[#2563EB] text-white border-4 border-black font-black uppercase text-xs shadow-[6px_6px_0px_0px_#000000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
+                      className="flex-1 flex items-center justify-center gap-2 py-3 bg-blue-600 text-white border-2 border-black font-black uppercase text-[10px] shadow-[4px_4px_0px_0px_black] hover:shadow-none transition-all"
                     >
-                      <Linkedin className="w-5 h-5 fill-current" /> LinkedIn
+                      <Linkedin className="w-4 h-4 fill-current" /> LinkedIn
                     </a>
                     <button
                       onClick={() => setActiveMember(null)}
-                      className="flex-1 py-4 border-4 border-black bg-white text-black font-black uppercase text-xs shadow-[6px_6px_0px_0px_#000000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
+                      className="flex-1 py-3 border-2 border-black bg-white text-black font-black uppercase text-[10px] shadow-[4px_4px_0px_0px_black] hover:shadow-none transition-all"
                     >
-                      Close Details
+                      Close
                     </button>
                   </div>
                 </div>
@@ -128,38 +128,37 @@ export default function Team() {
         )}
       </AnimatePresence>
 
-      <header className="border-b-[10px] border-black pb-20 text-center space-y-8">
-        <div className="inline-block bg-[#FACC15] text-black border-4 border-black px-8 py-4 mb-4 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-          <p className="font-black uppercase tracking-[0.4em] text-xs">THE DREAM TEAM</p>
+      <header className="border-b-4 border-black pb-12 text-center space-y-6">
+        <div className="inline-block bg-yellow-400 text-black border-2 border-black px-6 py-2 mb-2 shadow-[4px_4px_0px_0px_black]">
+          <p className="font-black uppercase tracking-[0.3em] text-[10px]">THE TEAM</p>
         </div>
-        <h1 className="text-5xl md:text-8xl lg:text-9xl font-black mb-6 flex items-center justify-center gap-8 uppercase tracking-tighter text-black italic leading-none">
+        <h1 className="text-4xl md:text-6xl font-black mb-4 flex items-center justify-center gap-4 uppercase tracking-tighter text-black italic leading-none">
           OUR PEOPLE
         </h1>
-        <p className="text-xl md:text-3xl text-gray-400 font-bold uppercase max-w-4xl mx-auto leading-tight italic tracking-tight">
-          Meet the team building a better future for students in India.
+        <p className="text-base md:text-xl text-gray-400 font-bold uppercase max-w-2xl mx-auto leading-tight italic tracking-tight">
+          Meet the team building a better future for India.
         </p>
       </header>
 
-      {/* Unified Core Members Section */}
-      <div className="space-y-12">
-        <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter border-l-[16px] border-blue-600 pl-6 text-black italic">CORE MEMBERS</h2>
+      {/* Section */}
+      <div className="space-y-10">
+        <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tighter border-l-8 border-blue-600 pl-4 text-black italic">CORE MEMBERS</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {team.map((member, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="border-4 border-black bg-white p-8 flex flex-col items-center text-center relative group cursor-pointer w-full shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all hover:shadow-[12px_12px_0px_0px_#2563EB] hover:-translate-y-2"
+              className="border-2 border-black bg-white p-6 flex flex-col items-center text-center relative group cursor-pointer w-full shadow-[6px_6px_0px_0px_black] transition-all hover:shadow-[8px_8px_0px_0px_#2563EB]"
               onClick={() => setActiveMember(member)}
             >
-              {/* Dept Badge */}
-              <div className="absolute -top-4 -right-4 bg-black text-white font-black text-xs uppercase tracking-widest px-4 py-2 border-4 border-black z-20 shadow-[4px_4px_0px_0px_#FACC15] whitespace-nowrap">
+              <div className="absolute -top-3 -right-3 bg-black text-white font-black text-[9px] uppercase tracking-widest px-3 py-1.5 border-2 border-black z-20 shadow-[2px_2px_0px_0px_yellow-400]">
                 {member.dept}
               </div>
 
-              <div className="w-32 h-32 md:w-48 md:h-48 border-4 border-black bg-white mt-4 mb-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden flex-shrink-0 relative group-hover:scale-105 transition-transform">
+              <div className="w-28 h-28 md:w-36 md:h-36 border-2 border-black bg-white mt-2 mb-4 shadow-[4px_4px_0px_0px_black] overflow-hidden flex-shrink-0 relative group-hover:scale-105 transition-transform">
                 <img
                   src={member.image}
                   alt={member.name}
@@ -167,16 +166,16 @@ export default function Team() {
                 />
               </div>
 
-              <div className="flex flex-col flex-1 w-full gap-4">
-                <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none text-black italic">
-                  {member.name}
+              <div className="flex flex-col flex-1 w-full gap-3">
+                <h3 className="text-xl md:text-2xl font-black uppercase tracking-tighter leading-none text-black italic">
+                   {member.name}
                 </h3>
 
-                <div className="flex flex-col gap-2 mt-auto">
-                    <div className="flex items-center justify-center px-4 py-4 bg-white text-black border-4 border-black font-black text-xs uppercase tracking-widest shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-black hover:text-white transition-all italic">
-                      VIEW FULL PROFILE
+                <div className="flex flex-col gap-1.5 mt-auto">
+                    <div className="flex items-center justify-center px-4 py-2.5 bg-white text-black border-2 border-black font-black text-[10px] uppercase tracking-widest shadow-[3px_3px_0px_0px_black] hover:bg-black hover:text-white transition-all italic">
+                      VIEW PROFILE
                     </div>
-                    <p className="text-[10px] font-black text-gray-400 mt-1 uppercase italic">Read {member.name.split(' ')[0]}'s Story · 1 Min</p>
+                    <p className="text-[8px] font-black text-gray-400 mt-1 uppercase italic">Read Story · 1 Min</p>
                 </div>
               </div>
             </motion.div>
@@ -184,12 +183,12 @@ export default function Team() {
         </div>
       </div>
       
-      <div className="mt-32 bg-yellow-400 border-[10px] border-black p-12 md:p-24 shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row items-center justify-between gap-12 group">
-        <div className="space-y-8 text-center md:text-left">
-           <h3 className="text-5xl md:text-7xl font-black uppercase italic leading-none text-black">WE'RE HERE TO HELP</h3>
-           <p className="text-xl md:text-2xl font-bold uppercase text-black/70 max-w-2xl leading-tight">Building a career is hard. Our team is dedicated to making it easier for you, step-by-step. Feel free to connect with any of us!</p>
+      <div className="mt-20 bg-yellow-400 border-4 border-black p-10 md:p-14 shadow-[10px_10px_0px_0px_black] flex flex-col md:flex-row items-center justify-between gap-8 group">
+        <div className="space-y-4 text-center md:text-left">
+           <h3 className="text-3xl md:text-5xl font-black uppercase italic leading-none text-black">WE'RE HERE TO HELP</h3>
+           <p className="text-base md:text-lg font-bold uppercase text-black/70 max-w-xl leading-tight">Our team is here to help you find your path, step-by-step.</p>
         </div>
-        <Link href="/contact" className="px-16 py-8 bg-black text-white border-4 border-black font-black uppercase text-sm tracking-widest shadow-[10px_10px_0px_0px_white] group-hover:shadow-none group-hover:translate-x-2 group-hover:translate-y-2 transition-all text-center">
+        <Link href="/contact" className="px-10 py-5 bg-black text-white border-2 border-black font-black uppercase text-xs tracking-widest shadow-[6px_6px_0px_0px_white] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all text-center">
            TALK TO US
         </Link>
       </div>
