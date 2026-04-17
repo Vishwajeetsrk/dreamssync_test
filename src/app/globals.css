@@ -2,15 +2,15 @@
 
 @layer base {
   :root {
-    /* PROFESSIONAL NGO THEME (LEGIBLE & TRUSTWORTHY) */
-    --background: #F8FAFC; /* Light slate bg */
-    --foreground: #0F172A; /* Deep slate text */
-    --primary: #2563EB;    /* Professional blue */
-    --secondary: #14B8A6;  /* NGO Teal */
-    --accent: #6366F1;     /* Indigo */
+    /* VIBRANT NEO-BRUTALIST THEME (ORIGINAL LOOK) */
+    --background: #FFFFFF; /* Pure white bg */
+    --foreground: #000000; /* Pure black text */
+    --primary: #2563EB;    /* Vibrant blue */
+    --secondary: #FACC15;  /* Vibrant yellow */
+    --accent: #FB923C;     /* Orange */
     
     --card-bg: #FFFFFF;
-    --border: #1E293B;     /* Slate 800 */
+    --border: #000000;     /* Pure Black */
     --radius-none: 0px;
     --radius-md: 4px;
     --radius-lg: 8px;
@@ -40,27 +40,27 @@
 
 @layer utilities {
   .neo-box {
-    @apply border-2 md:border-[3px] border-slate-900 bg-white shadow-[4px_4px_0px_0px_#0F172A] transition-all;
+    @apply border-2 md:border-[3px] border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all;
   }
 
   .neo-btn-primary {
-    @apply bg-[#2563EB] text-white border-[3px] border-slate-900 px-6 py-3 font-bold uppercase tracking-wider shadow-[4px_4px_0px_0px_#0F172A] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_#0F172A] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all;
+    @apply bg-[#2563EB] text-white border-[3px] border-black px-6 py-3 font-bold uppercase tracking-wider shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all;
   }
 
   .neo-btn-secondary {
-    @apply bg-[#14B8A6] text-white border-[3px] border-slate-900 px-6 py-3 font-bold uppercase tracking-wider shadow-[4px_4px_0px_0px_#0F172A] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_#0F172A] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all;
+    @apply bg-[#FACC15] text-black border-[3px] border-black px-6 py-3 font-bold uppercase tracking-wider shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all;
   }
 
   .neo-input {
-    @apply bg-white border-[3px] border-slate-900 px-4 py-3 text-slate-900 font-bold outline-none focus:ring-4 focus:ring-blue-500/20 transition-all w-full;
+    @apply bg-white border-[3px] border-black px-4 py-3 text-black font-bold outline-none focus:ring-4 focus:ring-blue-500/20 transition-all w-full;
   }
 
   .marquee-neo {
-    @apply bg-slate-900 text-white py-3 border-y-[3px] border-slate-900 whitespace-nowrap overflow-hidden font-bold uppercase tracking-widest text-xs;
+    @apply bg-black text-white py-3 border-y-[3px] border-black whitespace-nowrap overflow-hidden font-bold uppercase tracking-widest text-xs;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-teal-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-yellow-500;
   }
 
   /* MOBILE OPTIMIZATIONS */
