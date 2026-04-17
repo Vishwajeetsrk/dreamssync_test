@@ -48,7 +48,7 @@ export default function Home() {
     <div className="flex flex-col bg-[#F3F4F6] selection:bg-[#FACC15]/40 min-h-screen">
 
       {/* 🚀 CLICKABLE MARQUEE TICKER (Exclusive to Home) */}
-      <div className="marquee-neo mt-[88px] overflow-hidden border-b-4 border-black">
+      <div className="marquee-neo mt-[88px] overflow-hidden border-b-4 border-black w-full">
         <motion.div
           animate={{ x: [0, -1200] }}
           transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
@@ -110,11 +110,11 @@ export default function Home() {
           </p>
         </motion.div>
 
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-          <Link href="/signup" className="bg-[#2563EB] text-white border-4 border-black px-12 py-5 font-black text-sm uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6 px-4">
+          <Link href="/signup" className="w-full sm:w-auto bg-[#2563EB] text-white border-4 border-black px-12 py-5 font-black text-sm uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
             Get Started For Free →
           </Link>
-          <Link href="/about" className="bg-white text-black border-4 border-black px-12 py-5 font-black text-sm uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+          <Link href="/about" className="w-full sm:w-auto bg-white text-black border-4 border-black px-12 py-5 font-black text-sm uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
             See How It Works
           </Link>
         </div>

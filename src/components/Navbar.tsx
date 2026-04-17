@@ -122,7 +122,7 @@ export default function Navbar() {
                           initial={{ opacity: 0, y: 10, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                          className="absolute right-0 mt-4 w-52 neo-box bg-white p-4 z-[100] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+                          className="absolute right-0 mt-4 w-52 neo-box bg-white p-4 z-[100] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] origin-top-right md:right-0"
                         >
                           <div className="flex flex-col gap-3">
                             <div className="border-b-2 border-black/10 pb-3">

@@ -205,21 +205,21 @@ function ProfileContent() {
               </div>
               <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">User Profile Data</span>
             </div>
-            <h1 className="text-6xl md:text-[100px] font-black tracking-tighter leading-none text-black uppercase">
+            <h1 className="text-4xl md:text-6xl lg:text-[100px] font-black tracking-tighter leading-none text-black uppercase">
               User <br /> <span className="text-[#2563EB] drop-shadow-[5px_5px_0px_rgba(0,0,0,1)] italic">Profile</span>
             </h1>
           </div>
           
-          <div className="flex bg-white p-2 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <div className="flex flex-col sm:flex-row bg-white p-2 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full md:w-auto">
             <button 
               onClick={() => setActiveTab('profile')}
-              className={`px-8 py-4 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'profile' ? 'bg-[#2563EB] text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'text-black/40 hover:text-black'}`}
+              className={`w-full md:w-auto px-8 py-4 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'profile' ? 'bg-[#2563EB] text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'text-black/40 hover:text-black'}`}
             >
               PROFILE
             </button>
             <button 
               onClick={() => setActiveTab('settings')}
-              className={`px-8 py-4 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'settings' ? 'bg-[#2563EB] text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'text-black/40 hover:text-black'}`}
+              className={`w-full md:w-auto px-8 py-4 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'settings' ? 'bg-[#2563EB] text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'text-black/40 hover:text-black'}`}
             >
               SETTINGS
             </button>
