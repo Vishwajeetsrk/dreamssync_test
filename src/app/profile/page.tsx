@@ -197,7 +197,7 @@ function ProfileContent() {
       <div className="max-w-6xl mx-auto z-10 relative">
         
         {/* Header Architecture (Audit Recap State) */}
-        <div className="mb-20 flex flex-col md:flex-row justify-between items-end gap-10 border-b-8 border-black pb-16">
+        <div className="mb-12 md:mb-20 flex flex-col md:flex-row justify-between items-end gap-10 border-b-8 border-black pb-8 md:pb-16">
           <div className="space-y-6">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-black text-white shadow-[3px_3px_0px_0px_rgba(37,99,235,1)]">
@@ -205,7 +205,7 @@ function ProfileContent() {
               </div>
               <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">User Profile Data</span>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-[100px] font-black tracking-tighter leading-none text-black uppercase">
+            <h1 className="text-4xl md:text-6xl lg:text-8xl xl:text-[100px] font-black tracking-tighter leading-none text-black uppercase">
               User <br /> <span className="text-[#2563EB] drop-shadow-[5px_5px_0px_rgba(0,0,0,1)] italic">Profile</span>
             </h1>
           </div>
@@ -237,7 +237,7 @@ function ProfileContent() {
             >
               {/* Profile Context Card */}
               <div className="lg:col-span-4 space-y-10">
-                <div className="neo-box p-12 flex flex-col items-center text-center space-y-10 group overflow-hidden bg-white">
+                <div className="neo-box p-6 md:p-12 flex flex-col items-center text-center space-y-10 group overflow-hidden bg-white">
                   <div className="relative w-56 h-56 border-8 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] group-hover:scale-105 transition-transform overflow-hidden">
                     {avatarUrl ? (
                       <img src={avatarUrl} alt="Identity" className="w-full h-full object-cover" />
@@ -287,7 +287,7 @@ function ProfileContent() {
 
               {/* Identity Modification Infrastructure */}
               <div className="lg:col-span-8 space-y-12">
-                <div className="neo-box p-16 bg-white">
+                <div className="neo-box p-6 sm:p-10 md:p-16 bg-white">
                   <h3 className="text-sm font-black uppercase tracking-[0.4em] text-black/30 mb-12 flex items-center gap-4">
                     <Settings className="w-6 h-6 text-black" /> PROFILE INFORMATION
                   </h3>
@@ -331,7 +331,7 @@ function ProfileContent() {
               exit={{ opacity: 0, scale: 0.95 }} 
               className="space-y-16"
             >
-              <div className="neo-box p-16 bg-white">
+              <div className="neo-box p-6 sm:p-10 md:p-16 bg-white">
                 <h2 className="text-3xl font-black uppercase mb-16 flex items-center gap-6 tracking-tighter">
                   <Lock className="w-10 h-10 text-[#2563EB]" /> SECURITY SETTINGS
                 </h2>
@@ -363,7 +363,7 @@ function ProfileContent() {
               </div>
 
               {/* Termination Zone Architecture */}
-              <div className="neo-box p-16 bg-red-50 border-red-600 flex flex-col xl:flex-row xl:items-center justify-between gap-16">
+              <div className="neo-box p-6 sm:p-10 md:p-16 bg-red-50 border-red-600 flex flex-col xl:flex-row xl:items-center justify-between gap-8 md:gap-16">
                 <div className="space-y-6">
                   <h3 className="text-4xl font-black uppercase tracking-tighter text-red-600">DANGER ZONE</h3>
                   <p className="text-lg font-bold text-red-600/60 max-w-xl leading-snug uppercase">

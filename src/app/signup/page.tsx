@@ -52,51 +52,22 @@ export default function Signup() {
     }
   };
 
-  const handleSocialSignup = async (provider: 'google' | 'github' | 'linkedin') => {
+  const handleSocialSignup = async (providerName: 'google' | 'github' | 'linkedin') => {
     setLoading(true);
     setError('');
     try {
-      let authProvider;
-      if (provider === 'google') {
-        authProvider = new GoogleAuthProvider();
-      } else if (provider === 'github') {
-        authProvider = new GithubAuthProvider();
-      } else {
-        return;
-      }
+      // Use NextAuth signIn which handles the redirect_uri correctly based on NEXTAUTH_URL
+      const result = await signIn(providerName, { 
+        callbackUrl: '/dashboard',
+        redirect: true 
+      });
       
-      const result = await signInWithPopup(auth, authProvider);
-      const user = result.user;
-
-      // Sync with Firestore
-      const userRef = doc(db, 'users', user.uid);
-      const snap = await getDoc(userRef);
-      if (!snap.exists()) {
-        await setDoc(userRef, {
-          uid: user.uid,
-          name: user.displayName || 'DreamSync User',
-          email: user.email,
-          avatar_url: user.photoURL || '',
-          provider: provider,
-          created_at: new Date().toISOString()
-        });
+      if (result?.error) {
+        throw new Error(result.error);
       }
-
-      router.push('/dashboard');
     } catch (err: any) {
-      console.error(`${provider} signup error:`, err);
-
-      // Handle common Firebase popup errors gracefully
-      let errorMessage = err.message || `Failed to sign up with ${provider}`;
-      if (err.code === 'auth/popup-closed-by-user') {
-        errorMessage = "Signup window was closed before completion. Please try again.";
-      } else if (err.code === 'auth/cancelled-popup-request') {
-        errorMessage = "Only one signup window can be open at a time.";
-      } else if (err.code === 'auth/popup-blocked') {
-        errorMessage = "The signup popup was blocked by your browser. Please allow popups for this site.";
-      }
-
-      setError(errorMessage);
+      console.error(`${providerName} signup error:`, err);
+      setError(`Failed to sign up with ${providerName}. Please check your configuration.`);
     } finally {
       setLoading(false);
     }

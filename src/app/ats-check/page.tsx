@@ -110,7 +110,7 @@ export default function AdvancedATS() {
                  </div>
                  <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">Professional ATS Engine</span>
               </div>
-              <h1 className="text-6xl md:text-[100px] font-black tracking-tighter leading-none text-black uppercase">
+              <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[100px] font-black tracking-tighter leading-none text-black uppercase">
                  Smart <br /> <span className="text-[#2563EB] drop-shadow-[5px_5px_0px_rgba(0,0,0,1)] italic">Analyzer</span>
               </h1>
            </div>
@@ -146,7 +146,7 @@ export default function AdvancedATS() {
                 <input type="text" value={jobRole} onChange={(e) => setJobRole(e.target.value)} placeholder="e.g. SENIOR FRONTEND DEVELOPER" className="neo-input" />
               </div>
 
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
                 <div className="space-y-4">
                   <label className="text-[10px] font-black uppercase tracking-[0.2em] text-black/40">3. EXPERIENCE LEVEL</label>
                   <select value={experienceLevel} onChange={(e) => setExperienceLevel(e.target.value)} className="neo-input">
@@ -218,7 +218,7 @@ export default function AdvancedATS() {
                             <div className="bg-white/10 px-6 py-2 border border-white/20 text-xs font-black">EXPERIENCE: {experienceLevel}</div>
                          </div>
                       </div>
-                      <div className={`text-7xl font-black px-6 py-4 border-8 border-white italic ${result.ats_score > 80 ? 'text-green-400' : 'text-[#FACC15]'}`}>
+                      <div className={`text-4xl sm:text-5xl md:text-7xl font-black px-6 py-4 border-8 border-white italic ${result.ats_score > 80 ? 'text-green-400' : 'text-[#FACC15]'}`}>
                          {result.ats_score}%
                       </div>
                    </div>

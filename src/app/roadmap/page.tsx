@@ -139,7 +139,7 @@ export default function Roadmap() {
                  </div>
                  <span className="text-xs font-black uppercase tracking-[0.4em] text-black/40">Career Roadmap</span>
               </div>
-              <h1 className="text-4xl md:text-[100px] font-black tracking-tighter leading-none text-black">
+              <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[100px] font-black tracking-tighter leading-none text-black">
                   Career Roadmap
               </h1>
            </div>

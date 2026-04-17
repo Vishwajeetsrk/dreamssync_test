@@ -363,7 +363,7 @@ export default function ResumeBuilder() {
             <h2 className="text-lg font-black uppercase tracking-tight flex items-center gap-4 border-b-4 border-black pb-4">
               <User className="w-6 h-6 text-[#2563EB]" /> PERSONAL DETAILS
             </h2>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                <div className="space-y-2">
                   <label className="text-[9px] font-black uppercase tracking-widest text-black/40">Full Name</label>
                   <input value={data.personalInfo.fullName} onChange={(e) => updatePersonalInfo('fullName', e.target.value)} className="neo-input" placeholder="Vashnavi Chauhan" />
@@ -373,7 +373,7 @@ export default function ResumeBuilder() {
                   <input value={data.personalInfo.role} onChange={(e) => updatePersonalInfo('role', e.target.value)} className="neo-input" placeholder="Frontend Developer" />
                </div>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                <div className="space-y-2">
                   <label className="text-[9px] font-black uppercase tracking-widest text-black/40">Email Address</label>
                   <input type="email" value={data.personalInfo.email} onChange={(e) => updatePersonalInfo('email', e.target.value)} className="neo-input" placeholder="vashnavichauhan1@gmail.com" />
@@ -383,7 +383,7 @@ export default function ResumeBuilder() {
                   <input value={data.personalInfo.phone} onChange={(e) => updatePersonalInfo('phone', e.target.value)} className="neo-input" placeholder="+91 9174403667" />
                </div>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                <div className="space-y-2">
                   <label className="text-[9px] font-black uppercase tracking-widest text-black/40">LinkedIn Profile</label>
                   <input value={data.personalInfo.linkedin} onChange={(e) => updatePersonalInfo('linkedin', e.target.value)} className="neo-input" placeholder="vashnavichauhan18" />
@@ -393,7 +393,7 @@ export default function ResumeBuilder() {
                   <input value={data.personalInfo.github} onChange={(e) => updatePersonalInfo('github', e.target.value)} className="neo-input" placeholder="vashnavichauhan18" />
                </div>
             </div>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
               <div className="space-y-2">
                 <label className="text-[9px] font-black uppercase tracking-widest text-black/40">Portfolio Website</label>
                 <input value={data.personalInfo.portfolio || ''} onChange={(e) => updatePersonalInfo('portfolio', e.target.value)} className="neo-input" placeholder="vashnavi.dev" />
@@ -447,7 +447,7 @@ export default function ResumeBuilder() {
             </div>
             {data.experience.map((exp, idx) => (
               <div key={idx} className="bg-white border-2 border-black p-6 relative group space-y-4">
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                    <input value={exp.role} onChange={(e) => updateExperience(idx, 'role', e.target.value)} placeholder="Role" className="neo-input text-[10px]" />
                    <input value={exp.company} onChange={(e) => updateExperience(idx, 'company', e.target.value)} placeholder="Company" className="neo-input text-[10px]" />
                 </div>
