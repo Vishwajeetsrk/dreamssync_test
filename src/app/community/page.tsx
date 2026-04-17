@@ -20,21 +20,21 @@ import {
 const activities = [
   {
     id: 1,
-    title: "Weekly Tech Sync",
-    desc: "Join fellow students to discuss the latest in AI and web development. No experience needed!",
+    title: "Weekly Chat",
+    desc: "Talk with other students about your future and AI tools. No tech skill needed!",
     date: "Every Sat, 11:00 AM",
     location: "Online (Discord)",
     type: "Free",
     icon: Zap,
     count: 124,
-    color: "bg-blue-600"
+    color: "bg-blue-600 font-white"
   },
   {
     id: 2,
-    title: "Resume Masterclass",
-    desc: "A hands-on workshop where we help you build an ATS-friendly resume from scratch.",
+    title: "Resume Workshop",
+    desc: "A simple session where we help you build a professional resume from scratch.",
     date: "Sun, Oct 22, 2:00 PM",
-    location: "Online",
+    location: "Online (Zoom)",
     type: "Workshop",
     icon: Star,
     count: 89,
@@ -42,10 +42,10 @@ const activities = [
   },
   {
     id: 3,
-    title: "Interview Prep Q&A",
-    desc: "Ask anything about job interviews to our community mentors who work at top companies.",
+    title: "Interview Help Call",
+    desc: "Get tips for job interviews from our mentors who already work at big companies.",
     date: "Wed, Oct 25, 6:00 PM",
-    location: "Near Bangalore / Online",
+    location: "Online",
     type: "Free",
     icon: Users,
     count: 245,
@@ -56,28 +56,28 @@ const activities = [
 const opportunities = [
   {
     id: 1,
-    title: "Junior Web Developer",
+    title: "Junior Developer",
     org: "TechIndia Solutions",
     type: "Internship",
-    tags: ["Remote", "Paid", "Entry Level"],
+    tags: ["Remote", "Paid", "For Students"],
     deadline: "2 days left",
     link: "#"
   },
   {
     id: 2,
-    title: "Community Outreach",
+    title: "Help Your Community",
     org: "NGO Partners",
     type: "Volunteering",
-    tags: ["In-person", "Social Impact"],
+    tags: ["In-person", "Good Work"],
     deadline: "Ongoing",
     link: "#"
   },
   {
     id: 3,
-    title: "Social Media Manager",
+    title: "Social Media Helper",
     org: "StartupHub India",
-    type: "Job",
-    tags: ["Hybrid", "Full-time"],
+    type: "Monthly Job",
+    tags: ["Part-time"],
     deadline: "1 week left",
     link: "#"
   }
@@ -85,92 +85,82 @@ const opportunities = [
 
 export default function Community() {
   const [filter, setFilter] = useState('All');
-  const filters = ['All', 'This Week', 'Near Me', 'Online', 'Free'];
+  const filters = ['All', 'This Week', 'Online', 'Free'];
 
   return (
-    <div className="min-h-screen bg-white selection:bg-blue-100 font-bold uppercase overflow-x-hidden">
+    <div className="min-h-screen bg-white selection:bg-yellow-200 overflow-x-hidden p-0 m-0">
       
-      <div className="mt-[44px]" />
+      <div className="mt-[88px]" />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 space-y-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-20 space-y-24">
         
         {/* Header Architecture */}
-        <header className="border-b-8 border-black pb-16 flex flex-col md:flex-row justify-between items-end gap-12">
-          <div className="space-y-6">
-            <div className="flex items-center gap-3">
-               <div className="p-2 bg-black text-white shadow-[3px_3px_0px_0px_#2563EB]">
-                  <Users className="w-8 h-8" />
-               </div>
-               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 text-left">The Unified Student Hub</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[80px] font-black tracking-tighter leading-none text-black italic">
-               Community <br /> <span className="text-blue-600 not-italic decoration-8 decoration-yellow-400 underline underline-offset-8">Central</span>
+        <header className="border-b-[10px] border-black pb-16 flex flex-col items-center text-center space-y-8">
+            <div className="inline-block px-6 py-2 bg-black text-white font-black text-[10px] uppercase tracking-[0.4em] shadow-[4px_4px_0px_0px_#2563EB] italic">CONNECT WITH STUDENTS</div>
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-none text-black uppercase italic">
+               STUDENT <span className="text-blue-600 not-italic decoration-8 decoration-yellow-400 underline underline-offset-8">CENTRAL</span>
             </h1>
-            <p className="text-lg md:text-2xl text-gray-500 font-semibold uppercase tracking-tight mt-4 max-w-2xl">
-               Connect with thousands of students, find activities, and grow your career together.
+            <p className="text-lg md:text-2xl text-gray-400 font-bold uppercase tracking-tight max-w-2xl mx-auto leading-tight italic">
+               Find students to study with, discover new job chances, and build your future together.
             </p>
-          </div>
-          
-          <div className="bg-blue-600 text-white p-8 border-4 border-black shadow-[8px_8px_0px_0px_black] hidden lg:block">
-            <h3 className="text-3xl font-black italic mb-2">5,432+</h3>
-            <p className="text-[10px] font-black uppercase tracking-widest text-white/80">Active Members This Month</p>
-          </div>
         </header>
 
-        {/* Filters Infrastructure */}
-        <section className="space-y-8">
-           <div className="flex flex-wrap items-center gap-4">
-              <div className="bg-black text-white p-4 border-2 border-black flex items-center gap-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)]">
-                 <Filter className="w-5 h-5" />
-                 <span className="text-xs font-black uppercase tracking-widest">Filter by</span>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                 {filters.map(f => (
-                   <button 
-                     key={f}
-                     onClick={() => setFilter(f)}
-                     className={`px-6 py-4 text-[10px] font-black uppercase border-4 border-black transition-all ${filter === f ? 'bg-black text-white shadow-[4px_4px_0px_0px_#2563EB]' : 'bg-white text-black hover:bg-gray-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)]'}`}
-                   >
-                     {f}
-                   </button>
-                 ))}
-              </div>
-           </div>
+        {/* Filters Architecture */}
+        <section className="space-y-8 flex flex-col items-center">
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
+               <div className="bg-black text-white px-6 py-4 border-4 border-black flex items-center gap-3 shadow-[4px_4px_0px_0px_#2563EB] w-full sm:w-auto text-center justify-center">
+                  <Filter className="w-5 h-5" />
+                  <span className="text-xs font-black uppercase tracking-widest">SHOW ONLY</span>
+               </div>
+               <div className="flex flex-wrap gap-2 justify-center">
+                  {filters.map(f => (
+                    <button 
+                      key={f}
+                      onClick={() => setFilter(f)}
+                      className={`px-6 py-4 text-[10px] font-black uppercase border-4 border-black transition-all ${filter === f ? 'bg-black text-white shadow-[4px_4px_0px_0px_#2563EB]' : 'bg-white text-black hover:bg-gray-50 shadow-[4px_4px_0px_0px_black]'}`}
+                    >
+                      {f}
+                    </button>
+                  ))}
+               </div>
+            </div>
         </section>
 
         {/* Weekly Activities Section */}
-        <section className="space-y-12">
-          <h2 className="text-4xl font-black flex items-center gap-6 border-l-[16px] border-yellow-400 pl-8 italic text-black">
-            WEEKLY ACTIVITIES
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <section className="space-y-16">
+          <div className="text-center md:text-left border-l-[16px] border-yellow-400 pl-8">
+            <h2 className="text-4xl md:text-6xl font-black italic text-black uppercase leading-none">WEEKLY CHATS</h2>
+            <p className="text-gray-400 font-black text-xs uppercase tracking-widest mt-2">Free events every week</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {activities.map((act) => (
               <motion.div 
                 key={act.id} 
-                whileHover={{ y: -4 }}
-                className="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col group h-full"
+                whileHover={{ y: -8 }}
+                className="bg-white border-8 border-black p-8 md:p-12 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] flex flex-col group h-full hover:shadow-[12px_12px_0px_0px_#2563EB]"
               >
-                <div className={`p-4 ${act.color} text-black border-4 border-black inline-block mb-8 shadow-[4px_4px_0px_0px_black] group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none transition-all`}>
-                  <act.icon className="w-8 h-8" />
+                <div className={`p-6 ${act.color} text-black border-4 border-black inline-block mb-10 shadow-[6px_6px_0px_0px_black] group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none transition-all`}>
+                  <act.icon className="w-10 h-10" />
                 </div>
-                <div className="flex-1 space-y-4">
-                  <h3 className="text-2xl font-black uppercase italic leading-none text-black break-words">{act.title}</h3>
-                  <p className="text-sm font-bold text-gray-500 leading-snug uppercase tracking-tight">{act.desc}</p>
+                <div className="flex-1 space-y-6 text-center md:text-left">
+                  <h3 className="text-3xl font-black uppercase italic leading-none text-black">{act.title}</h3>
+                  <p className="text-sm font-bold text-gray-500 leading-snug uppercase tracking-tight italic">{act.desc}</p>
                 </div>
-                <div className="mt-8 pt-8 border-t-4 border-gray-100 space-y-4">
-                  <div className="flex items-center gap-4 text-[10px] font-black uppercase text-black">
-                    <Calendar className="w-4 h-4 text-blue-600" /> {act.date}
+                <div className="mt-10 pt-10 border-t-8 border-gray-50 space-y-4">
+                  <div className="flex items-center gap-4 text-xs font-black uppercase text-black">
+                    <Calendar className="w-5 h-5 text-blue-600" /> {act.date}
                   </div>
-                  <div className="flex items-center gap-4 text-[10px] font-black uppercase text-black">
-                    <MapPin className="w-4 h-4 text-blue-600" /> {act.location}
+                  <div className="flex items-center gap-4 text-xs font-black uppercase text-black">
+                    <MapPin className="w-5 h-5 text-blue-600" /> {act.location}
                   </div>
                 </div>
-                <div className="mt-8 flex items-center justify-between gap-4">
-                   <div className="text-[10px] font-black uppercase text-gray-400">
+                <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+                   <div className="text-[10px] font-black uppercase text-gray-400 italic">
                      {act.count} STUDENTS JOINING
                    </div>
-                   <button className="px-6 py-3 bg-black text-white border-2 border-black font-black uppercase text-[10px] shadow-[4px_4px_0px_0px_#2563EB] hover:shadow-none transition-all">
-                     JOIN EVENT
+                   <button className="w-full sm:w-auto px-8 py-4 bg-black text-white border-4 border-black font-black uppercase text-xs shadow-[6px_6px_0px_0px_#2563EB] hover:shadow-none transition-all italic">
+                     JOIN NOW
                    </button>
                 </div>
               </motion.div>
@@ -179,32 +169,32 @@ export default function Community() {
         </section>
 
         {/* Opportunities Awareness */}
-        <section className="space-y-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-            <h2 className="text-4xl font-black flex items-center gap-6 border-l-[16px] border-blue-600 pl-8 italic text-black">
-              OPPORTUNITIES
-            </h2>
-            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">Updates every 24 hours</p>
+        <section className="space-y-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-l-[16px] border-blue-600 pl-8">
+            <div className="text-center md:text-left">
+              <h2 className="text-4xl md:text-6xl font-black italic text-black uppercase leading-none">GOOD JOBS FOR YOU</h2>
+              <p className="text-gray-400 font-black text-xs uppercase tracking-widest mt-2">UPDATED EVERY DAY</p>
+            </div>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             {opportunities.map((opp) => (
-              <div key={opp.id} className="bg-white border-4 border-black p-8 flex flex-col sm:flex-row gap-8 items-start sm:items-center shadow-[8px_8px_0px_0px_rgba(0,0,0,0.05)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all">
-                <div className="bg-black text-white p-6 border-4 border-black shadow-[4px_4px_0px_0px_#2563EB]">
-                  {opp.type === 'Internship' ? <Star className="w-8 h-8" /> : opp.type === 'Volunteering' ? <Globe className="w-8 h-8" /> : <Briefcase className="w-8 h-8" />}
+              <div key={opp.id} className="bg-white border-8 border-black p-10 flex flex-col sm:flex-row gap-10 items-center shadow-[8px_8px_0px_0px_rgba(0,0,0,0.05)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all">
+                <div className="bg-black text-white p-6 border-8 border-black shadow-[6px_6px_0px_0px_#2563EB] shrink-0">
+                  {opp.type === 'Internship' ? <Star className="w-10 h-10" /> : opp.type === 'Volunteering' ? <Globe className="w-10 h-10" /> : <Briefcase className="w-10 h-10" />}
                 </div>
-                <div className="flex-1 space-y-2">
-                   <div className="flex items-center gap-3">
-                      <span className="text-[9px] font-black uppercase text-blue-600 bg-blue-50 px-2 py-0.5 border border-blue-600">{opp.type}</span>
-                      <span className="text-[9px] font-black uppercase text-red-600">{opp.deadline}</span>
+                <div className="flex-1 space-y-3 text-center sm:text-left">
+                   <div className="flex items-center gap-3 justify-center sm:justify-start">
+                      <span className="text-[10px] font-black uppercase text-blue-600 bg-blue-50 px-2 py-1 border-2 border-blue-600">{opp.type}</span>
+                      <span className="text-[10px] font-black uppercase text-red-600 italic animate-pulse">{opp.deadline}</span>
                    </div>
-                   <h4 className="text-xl font-black uppercase italic text-black">{opp.title}</h4>
-                   <p className="text-xs font-bold text-gray-400 uppercase tracking-tight">At {opp.org}</p>
-                   <div className="flex flex-wrap gap-2 pt-2">
-                     {opp.tags.map(t => <span key={t} className="text-[8px] font-black uppercase tracking-widest text-gray-400"># {t}</span>)}
+                   <h4 className="text-2xl font-black uppercase italic text-black leading-none">{opp.title}</h4>
+                   <p className="text-xs font-bold text-gray-400 uppercase tracking-widest italic">At {opp.org}</p>
+                   <div className="flex flex-wrap gap-3 pt-4 justify-center sm:justify-start">
+                     {opp.tags.map(t => <span key={t} className="text-[10px] font-black uppercase tracking-widest text-black/50"># {t}</span>)}
                    </div>
                 </div>
-                <a href={opp.link} className="w-full sm:w-auto px-8 py-4 bg-white text-black border-4 border-black font-black uppercase text-[10px] shadow-[4px_4px_0px_0px_black] hover:bg-black hover:text-white transition-all text-center">
+                <a href={opp.link} className="w-full sm:w-auto px-10 py-5 bg-white text-black border-4 border-black font-black uppercase text-xs shadow-[6px_6px_0px_0px_black] hover:bg-black hover:text-white transition-all text-center italic mt-4 sm:mt-0">
                    APPLY NOW
                 </a>
               </div>
@@ -213,25 +203,22 @@ export default function Community() {
         </section>
 
         {/* Supportive Helper CTA */}
-        <section className="pb-20">
-           <div className="bg-black text-white p-12 md:p-20 border-8 border-black shadow-[12px_12px_0px_0px_#FACC15] relative overflow-hidden group">
-              <div className="relative z-10 space-y-10">
-                 <h2 className="text-4xl md:text-7xl font-black tracking-tighter uppercase italic leading-none">
-                   Need some help <br /> getting started?
+        <section className="pb-24">
+           <div className="bg-black text-white p-12 md:p-24 border-[10px] border-black shadow-[20px_20px_0px_0px_#FACC15] text-center space-y-12">
+                 <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase italic leading-[0.9]">
+                   NEED HELP <br /> STARTING?
                  </h2>
-                 <p className="text-xl font-bold uppercase text-white/70 max-w-2xl leading-relaxed">
-                   Our mentors are here to guide you step-by-step. Join our Discord community or book a short intro call to start your journey.
+                 <p className="text-xl md:text-3xl font-bold uppercase text-white/70 max-w-3xl mx-auto leading-tight italic">
+                   Don't worry, we are here for you. Talk to our mentors for free support step-by-step.
                  </p>
-                 <div className="flex flex-col sm:flex-row gap-6 pt-4">
-                    <button className="px-12 py-5 bg-[#FACC15] text-black border-4 border-black font-black uppercase text-[12px] tracking-widest shadow-[6px_6px_0px_0px_white] hover:shadow-none transition-all">
+                 <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
+                    <button className="w-full sm:w-auto px-16 py-8 bg-[#FACC15] text-black border-4 border-black font-black uppercase text-sm tracking-widest shadow-[10px_10px_0px_0px_white] hover:shadow-none transition-all italic">
                        CHAT WITH MENTOR
                     </button>
-                    <button className="px-12 py-5 bg-white text-black border-4 border-black font-black uppercase text-[12px] tracking-widest shadow-[6px_6px_0px_0px_#2563EB] hover:shadow-none transition-all">
+                    <button className="w-full sm:w-auto px-16 py-8 bg-white text-black border-4 border-black font-black uppercase text-sm tracking-widest shadow-[10px_10px_0px_0px_#2563EB] hover:shadow-none transition-all italic">
                        JOIN THE HUB
                     </button>
                  </div>
-              </div>
-              <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-600/10 pointer-events-none" />
            </div>
         </section>
 

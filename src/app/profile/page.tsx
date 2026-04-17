@@ -78,9 +78,7 @@ function ProfileContent() {
           last_sync: new Date().toISOString()
         }, { merge: true });
         setAvatarUrl(currentPhoto);
-        setMessage({ type: 'success', text: 'PROFILE SYNC COMPLETE.' });
-      } else {
-        setMessage({ type: 'error', text: 'NO SOURCE PHOTO DETECTED. MANUAL UPDATE REQUIRED.' });
+        setMessage({ type: 'success', text: 'SYNC COMPLETE.' });
       }
     } catch (err) {
       console.error('Headless sync failed');
@@ -100,7 +98,7 @@ function ProfileContent() {
         avatar_url: avatarUrl,
         updated_at: new Date().toISOString(),
       }, { merge: true });
-      setMessage({ type: 'success', text: 'PROFILE UPDATED SUCCESSFULLY.' });
+      setMessage({ type: 'success', text: 'NAME UPDATED SUCCESSFULLY.' });
     } catch (err: any) {
       setMessage({ type: 'error', text: err.message });
     } finally {
@@ -119,9 +117,8 @@ function ProfileContent() {
       const url = await getDownloadURL(storageRef);
       setAvatarUrl(url);
       await setDoc(doc(db, 'users', user.uid), { avatar_url: url }, { merge: true });
-      setMessage({ type: 'success', text: 'PROFILE PHOTO UPDATED.' });
+      setMessage({ type: 'success', text: 'PHOTO UPDATED.' });
     } catch (err: any) {
-      console.warn('Storage blocked, fallback sync initiated...');
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = async () => {
@@ -129,9 +126,9 @@ function ProfileContent() {
         try {
           setAvatarUrl(base64data);
           await setDoc(doc(db, 'users', user.uid), { avatar_url: base64data }, { merge: true });
-          setMessage({ type: 'success', text: 'PROFILE PHOTO UPLOADED.' });
+          setMessage({ type: 'success', text: 'PHOTO UPDATED.' });
         } catch (dbErr: any) {
-          setMessage({ type: 'error', text: 'SYNC FAILED. FILE SIZE EXCEEDS BUFFER.' });
+          setMessage({ type: 'error', text: 'SAVE FAILED. PHOTO TOO BIG.' });
         } finally {
           setUploading(false);
         }
@@ -147,7 +144,7 @@ function ProfileContent() {
     setLoading(true);
     try {
       await updatePassword(auth.currentUser!, newPassword);
-      setMessage({ type: 'success', text: 'SECURITY SETTINGS UPDATED SUCCESSFULLY.' });
+      setMessage({ type: 'success', text: 'PASSWORD CHANGED SUCCESSFULLY.' });
       setNewPassword('');
       setCurrentPassword('');
     } catch (err: any) {
@@ -182,47 +179,38 @@ function ProfileContent() {
   };
 
   if (loading && !user) return (
-     <div className="min-h-screen bg-[#F3F4F6] flex items-center justify-center">
-        <div className="neo-box p-10 bg-white">
+     <div className="min-h-screen bg-white flex items-center justify-center p-6">
+        <div className="border-4 border-black p-10 bg-white shadow-[8px_8px_0px_0px_black]">
            <Loader2 className="w-12 h-12 text-black animate-spin" />
         </div>
      </div>
   );
 
-  const userName = name?.split(' ')[0] || "Vishwajeet Srk";
-
   return (
-    <div className="min-h-screen bg-[#F3F4F6] pt-40 pb-20 px-6 md:px-12 text-black selection:bg-[#FACC15]/40 relative overflow-hidden">
+    <div className="min-h-screen bg-white pt-24 sm:pt-40 pb-20 px-4 sm:px-6 md:px-12 text-black selection:bg-yellow-400/40 relative">
       
-      <div className="max-w-6xl mx-auto z-10 relative">
+      <div className="max-w-6xl mx-auto">
         
-        {/* Header Architecture (Audit Recap State) */}
-        <div className="mb-12 md:mb-16 flex flex-col md:flex-row justify-between items-end gap-10 border-b-8 border-black pb-8 md:pb-12">
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-black text-white shadow-[3px_3px_0px_0px_#2563EB]">
-                <UserIcon className="w-8 h-8" />
-              </div>
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">Your Account Hub</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-black tracking-tighter leading-none text-black uppercase italic">
-              Your <br /> <span className="text-blue-600 drop-shadow-[4px_4px_0px_#F1F5F9] not-italic decoration-8 decoration-[#FACC15] underline underline-offset-8">Profile</span>
+        {/* Header Section */}
+        <div className="mb-12 md:mb-16 flex flex-col items-center text-center space-y-6 border-b-8 border-black pb-12">
+            <div className="inline-block px-6 py-2 bg-black text-white font-black text-[10px] uppercase tracking-[0.4em] shadow-[4px_4px_0px_0px_#2563EB] italic">YOUR ACCOUNT SETTINGS</div>
+            <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-none text-black uppercase italic">
+              MY <span className="text-blue-600 drop-shadow-[4px_4px_0px_#F1F5F9] not-italic decoration-8 decoration-[#FACC15] underline underline-offset-8">PROFILE</span>
             </h1>
-            <p className="text-sm font-bold text-gray-400 uppercase tracking-tight">Manage your identity and account security.</p>
-          </div>
+            <p className="text-base sm:text-xl font-bold text-gray-400 uppercase tracking-tight max-w-2xl mx-auto">Update your name and keep your account safe from the settings below.</p>
           
-          <div className="flex flex-col sm:flex-row bg-white p-2 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] w-full md:w-auto">
+          <div className="flex bg-white p-2 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] w-full sm:w-auto mt-8">
             <button 
               onClick={() => setActiveTab('profile')}
-              className={`w-full md:w-auto px-8 py-4 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'profile' ? 'bg-blue-600 text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'text-gray-400 hover:text-black'}`}
+              className={`flex-1 sm:grow-0 px-8 py-4 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'profile' ? 'bg-blue-600 text-white shadow-[4px_4px_0px_0px_black]' : 'text-gray-400 hover:text-black'}`}
             >
-              PROFILE INFO
+              YOUR INFO
             </button>
             <button 
               onClick={() => setActiveTab('settings')}
-              className={`w-full md:w-auto px-8 py-4 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'settings' ? 'bg-blue-600 text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' : 'text-gray-400 hover:text-black'}`}
+              className={`flex-1 sm:grow-0 px-8 py-4 text-[11px] font-black uppercase tracking-widest transition-all ${activeTab === 'settings' ? 'bg-blue-600 text-white shadow-[4px_4px_0px_0px_black]' : 'text-gray-400 hover:text-black'}`}
             >
-              SECURITY
+              PASSWORD
             </button>
           </div>
         </div>
@@ -231,20 +219,20 @@ function ProfileContent() {
           {activeTab === 'profile' ? (
             <motion.div 
               key="profile" 
-              initial={{ opacity: 0, y: 30 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              exit={{ opacity: 0, y: -20 }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-16"
+              initial={{ opacity: 0, scale: 0.95 }} 
+              animate={{ opacity: 1, scale: 1 }} 
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-12"
             >
-              {/* Profile Context Card */}
-              <div className="lg:col-span-4 space-y-10">
-                <div className="bg-white border-4 border-black p-6 md:p-12 flex flex-col items-center text-center space-y-10 group overflow-hidden shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="relative w-56 h-56 border-8 border-black shadow-[8px_8px_0px_0px_#2563EB] group-hover:scale-105 transition-transform overflow-hidden bg-white">
+              {/* Profile Card */}
+              <div className="lg:col-span-12 xl:col-span-4 space-y-8">
+                <div className="bg-white border-8 border-black p-8 md:p-12 flex flex-col items-center text-center space-y-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] group">
+                  <div className="relative w-48 h-48 sm:w-64 sm:h-64 border-8 border-black shadow-[8px_8px_0px_0px_#2563EB] group-hover:scale-105 transition-transform overflow-hidden bg-white">
                     {avatarUrl ? (
                       <img src={avatarUrl} alt="Identity" className="w-full h-full object-cover" />
                     ) : (
-                      <div className="w-full h-full bg-gray-50 flex items-center justify-center z-20">
-                         <UserIcon className="w-24 h-24 text-black/10" />
+                      <div className="w-full h-full bg-gray-50 flex items-center justify-center">
+                         <UserIcon className="w-32 h-32 text-black/10" />
                       </div>
                     )}
                     {uploading && (
@@ -260,71 +248,60 @@ function ProfileContent() {
                   
                   <div className="space-y-4">
                     <h3 className="text-3xl font-black tracking-tighter text-black uppercase leading-none">{name || 'STUDENT NAME'}</h3>
-                    <div className="px-5 py-2 bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.3em] inline-block border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] italic">STU-ID: {user?.uid.substring(0,8).toUpperCase()}</div>
-                    <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] block pt-2">{user?.email}</p>
-                  </div>
- 
-                  <div className="w-full pt-10 border-t-4 border-gray-100 grid grid-cols-2 gap-8">
-                    <div className="text-center">
-                      <div className="text-[10px] font-black uppercase text-gray-400 mb-2 tracking-widest">ACCESS</div>
-                      <div className="text-xs font-black text-blue-600 uppercase">STUDENT</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-[10px] font-black uppercase text-gray-400 mb-2 tracking-widest">STATUS</div>
-                      <div className="text-xs font-black text-teal-600 uppercase tracking-widest flex items-center justify-center gap-1">
-                         <Zap className="w-3 h-3 fill-current" /> ACTIVE
-                      </div>
-                    </div>
+                    <div className="px-5 py-2 bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.3em] inline-block border-4 border-black shadow-[4px_4px_0px_0px_black] italic">ID: {user?.uid.substring(0,8).toUpperCase()}</div>
+                    <p className="text-xs font-black text-gray-500 uppercase tracking-widest block pt-2">{user?.email}</p>
                   </div>
                 </div>
- 
+
                 <Link 
                   href="/donate" 
-                  className="w-full bg-[#FACC15] border-4 border-black p-8 font-black uppercase text-black text-center flex items-center justify-center gap-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
+                  className="w-full bg-[#FACC15] border-8 border-black p-8 font-black uppercase text-black text-center flex items-center justify-center gap-4 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
                 >
-                   <Coffee className="w-6 h-6 fill-current" /> SUPPORT OUR MISSION
+                   <Coffee className="w-8 h-8 fill-current text-black" /> GIVE SUPPORT
                 </Link>
               </div>
- 
-              {/* Profile Form */}
-              <div className="lg:col-span-8 space-y-12">
-                <div className="bg-white border-4 border-black p-8 sm:p-12 md:p-16 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
-                  <h3 className="text-sm font-black uppercase tracking-[0.4em] text-gray-400 mb-12 flex items-center gap-4">
-                    <Settings className="w-6 h-6 text-black" /> BASIC INFORMATION
+
+              {/* Form Section */}
+              <div className="lg:col-span-12 xl:col-span-8 space-y-12">
+                <div className="bg-white border-8 border-black p-8 sm:p-12 md:p-16 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
+                  <h3 className="text-sm font-black uppercase tracking-[0.4em] text-gray-400 mb-12 flex items-center gap-4 italic border-b-4 border-gray-100 pb-4">
+                    <Settings className="w-6 h-6 text-black" /> YOUR INFO
                   </h3>
                   
                   <form onSubmit={handleUpdateProfile} className="space-y-12">
                     <div className="space-y-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-blue-600 block italic">YOUR FULL NAME</label>
-                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tight">This name will appear on your resumes and certificates.</p>
+                        <label className="text-xs font-black uppercase tracking-widest text-blue-600 block italic">Your Full Name</label>
+                        <p className="text-xs text-gray-400 font-bold uppercase tracking-tight">This name will be shown on your resumes and papers.</p>
                       </div>
                       <input 
                         type="text" 
                         value={name} 
                         onChange={(e) => setName(e.target.value)} 
-                        className="w-full p-5 text-2xl border-4 border-black font-black uppercase focus:outline-none focus:bg-gray-50 transition-colors" 
-                        placeholder="e.g. VISHWAJEET SRK"
+                        className="w-full p-6 text-2xl border-4 border-black font-black focus:outline-none focus:bg-gray-50 transition-colors bg-white shadow-[6px_6px_0px_0px_black] focus:shadow-none focus:translate-x-1 focus:translate-y-1" 
+                        placeholder="ENTER YOUR NAME"
                       />
                     </div>
- 
-                    <div className="pt-8 space-y-6">
-                       <button type="submit" className="w-full md:w-auto px-16 py-6 bg-black text-white border-4 border-black font-black text-xl uppercase italic shadow-[10px_10px_0px_0px_#2563EB] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center gap-6 group">
-                         <Save className="w-8 h-8 group-hover:rotate-12 transition-transform" /> SAVE PROFILE
+
+                    <div className="pt-8 space-y-4">
+                       <button type="submit" className="w-full sm:w-auto px-16 py-8 bg-black text-white border-4 border-black font-black text-xl uppercase italic shadow-[10px_10px_0px_0px_#2563EB] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all flex items-center justify-center gap-6 group">
+                         <Save className="w-8 h-8 group-hover:rotate-12 transition-transform" /> SAVE INFO
                        </button>
                        <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest italic flex items-center gap-2">
-                         <CheckCircle2 className="w-4 h-4 text-teal-500" /> Takes 2 seconds · You can edit later
+                         <CheckCircle2 className="w-4 h-4 text-green-500" /> Takes 2 seconds · Keep it real
                        </p>
                     </div>
                   </form>
                 </div>
- 
-                <div className="bg-black text-white p-12 shadow-[12px_12px_0px_0px_#FACC15] border-8 border-black">
-                  <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-                    <ShieldCheck className="w-16 h-16 shrink-0 text-[#FACC15]" strokeWidth={3} />
-                    <div className="space-y-4 text-center md:text-left">
-                       <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-[#FACC15]">Privacy Protocol</h4>
-                       <p className="text-xl font-bold leading-tight uppercase italic text-white/90">Your data is safe with us. We use professional security measures to protect your personal information at all times.</p>
+
+                <div className="bg-black text-white p-10 md:p-16 border-8 border-black shadow-[16px_16px_0px_0px_#FACC15]">
+                  <div className="flex flex-col md:flex-row items-center md:items-start gap-10">
+                    <div className="p-6 bg-white shrink-0 shadow-[8px_8px_0px_0px_#2563EB] rotate-6 group-hover:rotate-0 transition-transform">
+                       <ShieldCheck className="w-16 h-16 text-black" strokeWidth={3} />
+                    </div>
+                    <div className="space-y-6 text-center md:text-left">
+                       <h4 className="text-xs font-black uppercase tracking-[0.4em] text-[#FACC15]">SAFETY GUARANTEE</h4>
+                       <p className="text-xl md:text-2xl font-bold leading-tight uppercase italic text-white/90 tracking-tight">We keep your data safe. We use high security systems to protect your privacy at all times.</p>
                     </div>
                   </div>
                 </div>
@@ -338,68 +315,68 @@ function ProfileContent() {
               exit={{ opacity: 0, scale: 0.95 }} 
               className="space-y-16"
             >
-              <div className="bg-white border-8 border-black p-8 sm:p-12 md:p-16 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
-                <h2 className="text-4xl font-black uppercase mb-16 flex items-center gap-6 tracking-tighter text-black italic">
-                  <Lock className="w-12 h-12 text-[#2563EB]" /> SECURITY SETTINGS
+              <div className="bg-white border-8 border-black p-8 md:p-16 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] max-w-4xl mx-auto w-full">
+                <h2 className="text-4xl md:text-6xl font-black uppercase mb-16 flex flex-col md:flex-row md:items-center gap-6 tracking-tighter text-black italic leading-none">
+                  <Lock className="w-16 h-16 text-[#2563EB]" /> CHANGE PASSWORD
                 </h2>
-                <form onSubmit={handleChangePassword} className="space-y-12 max-w-2xl">
+                <form onSubmit={handleChangePassword} className="space-y-12">
                   <div className="space-y-6">
                     <div className="space-y-2">
-                       <label className="text-[10px] font-black uppercase tracking-widest text-blue-600 block italic">Current Secure Code</label>
-                       <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tight">Enter your old password to authorize the change.</p>
+                       <label className="text-xs font-black uppercase tracking-widest text-blue-600 block italic">Old Password</label>
+                       <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tight italic">Type your current password here.</p>
                     </div>
                     <input 
                       type="password" 
                       value={currentPassword} 
                       onChange={(e) => setCurrentPassword(e.target.value)} 
                       placeholder="••••••••"
-                      className="w-full p-5 text-2xl border-4 border-black font-black focus:outline-none" 
+                      className="w-full p-6 text-2xl border-4 border-black font-black focus:outline-none bg-white shadow-[6px_6px_0px_0px_black] focus:shadow-none focus:translate-x-1 focus:translate-y-1" 
                     />
                   </div>
                   <div className="space-y-6">
                     <div className="space-y-2">
-                       <label className="text-[10px] font-black uppercase tracking-widest text-blue-600 block italic">New Secure Code</label>
-                       <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tight">Minimum 8 characters for high security.</p>
+                       <label className="text-xs font-black uppercase tracking-widest text-blue-600 block italic">New Password</label>
+                       <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tight italic">At least 8 letters or numbers.</p>
                     </div>
                     <input 
                       type="password" 
                       value={newPassword} 
                       onChange={(e) => setNewPassword(e.target.value)} 
                       placeholder="••••••••"
-                      className="w-full p-5 text-2xl border-4 border-black font-black focus:outline-none" 
+                      className="w-full p-6 text-2xl border-4 border-black font-black focus:outline-none bg-white shadow-[6px_6px_0px_0px_black] focus:shadow-none focus:translate-x-1 focus:translate-y-1" 
                     />
                   </div>
-                  <div className="pt-4 space-y-6">
-                    <button type="submit" className="w-full md:w-auto px-16 py-6 bg-black text-white border-4 border-black font-black text-xl uppercase italic shadow-[10px_10px_0px_0px_#2563EB] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all flex items-center justify-center gap-6 group">
-                      <Shield className="w-8 h-8 group-hover:scale-110 transition-transform" /> UPDATE SECURITY
+                  <div className="pt-8 space-y-6">
+                    <button type="submit" className="w-full sm:w-auto px-16 py-8 bg-black text-white border-4 border-black font-black text-xl uppercase italic shadow-[10px_10px_0px_0px_#2563EB] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all flex items-center justify-center gap-6 group">
+                      <Shield className="w-8 h-8 group-hover:scale-110 transition-transform" /> UPDATE SECURELY
                     </button>
                     <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest italic flex items-center gap-2">
-                       <Zap className="w-4 h-4 text-[#FACC15]" /> Takes 10 seconds · System wide sync
+                       <Zap className="w-4 h-4 text-[#FACC15]" /> Takes 10 seconds · 100% Safe
                     </p>
                   </div>
                 </form>
               </div>
- 
+
               {/* Danger Zone */}
-              <div className="bg-gray-50 border-8 border-black p-8 sm:p-12 md:p-16 flex flex-col xl:flex-row xl:items-center justify-between gap-8 md:gap-16 shadow-[12px_12px_0px_0px_rgba(32,32,32,0.1)]">
+              <div className="bg-gray-100 border-8 border-black p-8 sm:p-12 md:p-16 flex flex-col xl:flex-row xl:items-center justify-between gap-12 md:gap-16 shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] max-w-6xl mx-auto w-full group">
                 <div className="space-y-6">
-                  <h3 className="text-4xl font-black uppercase tracking-tighter text-black italic">DANGER ZONE</h3>
-                  <p className="text-base font-bold text-gray-400 max-w-xl leading-snug uppercase tracking-tight">
-                    Full account closure. Permanent removal of all your resumes, roadmaps, and career data from the DreamSync network.
+                  <h3 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-black italic leading-none group-hover:text-red-600 transition-colors">DANGER ZONE</h3>
+                  <p className="text-lg md:text-xl font-bold text-gray-500 max-w-xl leading-snug uppercase tracking-tight">
+                    Delete your account. This will permanently remove your resumes, roadmaps, and all your data.
                   </p>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-8">
+                <div className="flex flex-col sm:flex-row gap-6 w-full xl:w-auto">
                   <button 
                     onClick={handleSignOut}
-                    className="px-12 py-5 bg-white text-black border-4 border-black font-black uppercase text-[11px] tracking-widest shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                    className="flex-1 px-12 py-6 bg-white text-black border-4 border-black font-black uppercase text-xs tracking-widest shadow-[6px_6px_0px_0px_black] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
                   >
-                    Logout System
+                    Log Out
                   </button>
                   <button 
                     onClick={handleDeleteAccount}
-                    className={`px-12 py-5 border-4 border-black font-black uppercase text-[11px] tracking-widest transition-all shadow-[6px_6px_0px_rgba(0,0,0,1)] ${confirmDelete ? 'bg-red-600 text-white animate-pulse' : 'bg-white text-red-600 hover:bg-red-600 hover:text-white'}`}
+                    className={`flex-1 px-12 py-6 border-4 border-black font-black uppercase text-xs tracking-widest transition-all shadow-[6px_6px_0px_black] ${confirmDelete ? 'bg-red-600 text-white animate-pulse' : 'bg-white text-red-600 hover:bg-red-600 hover:text-white'}`}
                   >
-                    {confirmDelete ? 'CONFIRM PURGE?' : 'Purge Identity'}
+                    {confirmDelete ? 'SURE? CLICK AGAIN' : 'Delete Everything'}
                   </button>
                 </div>
               </div>
@@ -407,20 +384,20 @@ function ProfileContent() {
           )}
         </AnimatePresence>
 
-        {/* Global Feedback Matrix */}
+        {/* Messaging Matrix */}
         <AnimatePresence>
           {message && (
             <motion.div 
               initial={{ opacity: 0, x: 50 }} 
               animate={{ opacity: 1, x: 0 }} 
               exit={{ opacity: 0, x: 50 }}
-              className={`fixed bottom-12 right-12 p-10 border-4 border-slate-900 shadow-[8px_8px_0px_0px_#0F172A] z-[100] flex flex-col gap-4 max-w-sm ${message.type === 'success' ? 'bg-blue-600 text-white' : 'bg-slate-900 text-red-400'}`}
+              className={`fixed bottom-8 sm:bottom-12 right-4 sm:right-12 p-8 sm:p-12 border-8 border-black shadow-[12px_12px_0px_0px_black] z-[100] flex flex-col gap-6 max-w-[90vw] sm:max-w-sm ${message.type === 'success' ? 'bg-blue-600 text-white' : 'bg-black text-red-400'}`}
             >
               <div className="flex items-center gap-6">
-                {message.type === 'success' ? <CheckCircle2 className="w-10 h-10" /> : <ShieldAlert className="w-10 h-10 animate-pulse" />}
-                <p className="text-lg font-black uppercase tracking-tight leading-tighter w-48">{message.text}</p>
+                {message.type === 'success' ? <CheckCircle2 className="w-12 h-12" /> : <ShieldAlert className="w-12 h-12 animate-pulse" />}
+                <p className="text-xl font-black uppercase tracking-tight leading-none italic">{message.text}</p>
               </div>
-              <div className="w-full h-3 bg-white/20 border-2 border-black/10 overflow-hidden">
+              <div className="w-full h-4 bg-white/20 border-4 border-black/10">
                 <motion.div 
                    initial={{ width: "100%" }}
                    animate={{ width: "0%" }}
@@ -439,8 +416,10 @@ function ProfileContent() {
 export default function Profile() {
   return (
     <Suspense fallback={
-       <div className="min-h-screen bg-[#F3F4F6] flex items-center justify-center">
-          <Loader2 className="w-12 h-12 text-black animate-spin" />
+       <div className="min-h-screen bg-white flex items-center justify-center p-6">
+          <div className="border-8 border-black p-20 bg-white shadow-[16px_16px_0px_0px_black]">
+            <Loader2 className="w-16 h-16 text-black animate-spin" />
+          </div>
        </div>
     }>
       <ProfileContent />

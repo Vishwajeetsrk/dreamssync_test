@@ -37,7 +37,7 @@ const FlipCard = ({ title, desc, icon: Icon }: { title: string, desc: string, ic
 
   return (
     <div 
-      className="relative h-[300px] w-full perspective-1000 cursor-pointer group"
+      className="relative h-[280px] w-full perspective-1000 cursor-pointer group"
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
       onClick={() => setIsFlipped(!isFlipped)}
@@ -52,8 +52,8 @@ const FlipCard = ({ title, desc, icon: Icon }: { title: string, desc: string, ic
           <div className="p-4 bg-[#FACC15] border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] mb-6 transition-transform group-hover:scale-110 text-black">
             <Icon className="w-10 h-10" strokeWidth={3} />
           </div>
-          <h3 className="text-xl font-black uppercase tracking-tight text-center text-black italic">{title}</h3>
-          <p className="mt-4 text-[9px] font-black uppercase tracking-widest text-blue-600">VIEW DETAILS →</p>
+          <h3 className="text-xl font-black uppercase tracking-tight text-center text-black italic leading-none">{title}</h3>
+          <p className="mt-6 text-[10px] font-black uppercase tracking-widest text-blue-600 italic">READ MORE →</p>
         </div>
 
         {/* Back */}
@@ -63,7 +63,7 @@ const FlipCard = ({ title, desc, icon: Icon }: { title: string, desc: string, ic
           <div className="p-3 bg-white text-black border-2 border-white mb-6">
             <Icon className="w-8 h-8" />
           </div>
-          <p className="text-sm font-bold text-center leading-relaxed uppercase">
+          <p className="text-sm font-bold text-center leading-relaxed uppercase italic">
             {desc}
           </p>
         </div>
@@ -79,9 +79,9 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
     <div className="border-4 border-black bg-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-6 text-left hover:bg-slate-50 transition-colors"
+        className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
       >
-        <span className="text-lg font-black uppercase tracking-tight text-black">{question}</span>
+        <span className="text-lg font-black uppercase tracking-tight text-black italic">{question}</span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           className="p-2 border-4 border-black bg-[#2563EB] text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
@@ -97,7 +97,7 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
             exit={{ height: 0, opacity: 0 }}
             className="border-t-4 border-black bg-white"
           >
-            <div className="p-6 text-[11px] font-black leading-relaxed uppercase text-slate-400 tracking-wider">
+            <div className="p-6 text-sm font-bold leading-relaxed uppercase text-gray-400 tracking-tight italic">
               {answer}
             </div>
           </motion.div>
@@ -110,168 +110,131 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
 // --- MAIN PAGE ---
 
 export default function About() {
-  const featureCards = [
-    { 
-      title: "Career Guidance", 
-      desc: "Get personalized AI roadmaps and career paths designed specifically for Indian students.",
-      icon: Target
-    },
-    { 
-      title: "Skill Building", 
-      desc: "Access curated resources and learning paths to master high-demand industry skills.",
-      icon: Zap
-    },
-    { 
-      title: "Community", 
-      desc: "Connect with like-minded students and professionals across India for support and growth.",
-      icon: Heart
-    },
-    { 
-      title: "Career Growth", 
-      desc: "Interactive sessions and tools to build your resume, portfolio, and professional brand.",
-      icon: Briefcase
-    }
-  ];
-
-
   const faqs = [
     {
       q: "What is DreamSync?",
-      a: "DreamSync is a professional community for students and young builders to connect, share jobs, and grow their careers together."
+      a: "DreamSync is a free website for students to find jobs, build resumes, and connect with other students for career growth."
     },
     {
-      q: "What is our main goal?",
-      a: "Our goal is simple: to help you build a great career by providing the right tools, roadmaps, and a supportive community."
+      q: "What is our goal?",
+      a: "Our goal is simple: to help every student in India find their dream job by giving them free AI tools and a supportive family."
     },
     {
       q: "Why should I join?",
-      a: "Join us if you want free AI career tools, better resumes, and a network of people who support each other's growth."
+      a: "Join us if you want a better resume, a clear career plan, and help from experts who care about your future."
     },
     {
-      q: "Are there any requirements?",
-      a: "No special requirements! Just bring a positive attitude, an open mind, and a willingness to help others."
+      q: "Is it really free?",
+      a: "Yes! 100% free for all students. We are a non-profit project made to help you succeed."
     },
     {
-      q: "How do our sessions help?",
-      a: "We talk about real things: how to get a job, how to manage stress, and how to build the confidence you need to succeed."
-    },
-    {
-      q: "Which language is used?",
-      a: "We use English and Hindi to make sure everyone understands and can participate easily."
+      q: "How do I get help?",
+      a: "You can talk to our AI assistant or join our student groups on the Community page for real human help."
     }
   ];
 
   return (
-    <div className="flex flex-col bg-white selection:bg-[#FACC15]/40 min-h-screen">
+    <div className="flex flex-col bg-white selection:bg-yellow-400/40 min-h-screen">
       
       {/* Black Marquee Ticker */}
-      <div className="marquee-neo mt-[88px]">
+      <div className="marquee-neo mt-[88px] bg-black text-white py-4 overflow-hidden border-b-8 border-black">
         <motion.div 
           animate={{ x: [0, -1200] }}
           transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
           className="flex whitespace-nowrap gap-20 font-black text-xs uppercase tracking-[0.4em] items-center"
         >
-          <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-blue-400" /> DREAMS SYNC MISSION: EMPOWERING INDIAN STUDENTS</div>
-          <div className="flex items-center gap-3"><Globe className="w-5 h-5 text-yellow-400" /> GLOBAL OPPORTUNITIES · LOCAL IMPACT</div>
-          <div className="flex items-center gap-3"><HeartHandshake className="w-5 h-5 text-white" /> PROFESSIONAL COMMUNITY CULTURE</div>
-          <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-blue-400" /> BUILD YOUR FUTURE · BUILD YOUR PATH</div>
+          <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-blue-400" /> HELPING INDIAN STUDENTS GROW</div>
+          <div className="flex items-center gap-3"><Globe className="w-5 h-5 text-yellow-400" /> GLOBAL JOBS · LOCAL TRAINING</div>
+          <div className="flex items-center gap-3"><HeartHandshake className="w-5 h-5 text-white" /> FRIENDLY STUDENT COMMUNITY</div>
+          <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-blue-400" /> PLAN YOUR FUTURE · FIND YOUR WAY</div>
         </motion.div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-20 space-y-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-16 sm:py-24 space-y-24 sm:space-y-32">
         
-        {/* SECTION 1 — HERO ABOUT TITLE */}
-        <section className="text-center space-y-12">
+        {/* HERO SECTION */}
+        <section className="text-center space-y-10 sm:space-y-12">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-block px-8 py-3 border-4 border-black bg-[#FACC15] text-black font-black text-xs shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] uppercase tracking-[0.4em]"
+            className="inline-block px-8 py-3 border-4 border-black bg-[#FACC15] text-black font-black text-xs shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] uppercase tracking-[0.4em] italic mx-auto"
           >
-             ABOUT DREAMS SYNC
+             WHY WE ARE HERE
           </motion.div>
 
-          <h1 className="text-4xl md:text-7xl font-black tracking-tighter leading-tight text-center max-w-5xl mx-auto uppercase text-black italic">
-            Building the next generation of 
-            <span className="inline-block mx-4 text-blue-600 not-italic decoration-8 decoration-[#FACC15] underline underline-offset-8">
-              Skilled
-            </span> 
-            India.
+          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-none text-center max-w-6xl mx-auto uppercase text-black italic">
+            Building the <br /> 
+            <span className="text-blue-600 not-italic decoration-8 decoration-[#FACC15] underline underline-offset-8">Future</span> of India.
           </h1>
 
-          {/* SECTION 2 — INTRO TEXT */}
-          <div className="max-w-3xl mx-auto space-y-8 pt-10 border-t-8 border-black">
-            <p className="text-xl md:text-3xl text-black font-black leading-relaxed uppercase">
+          <div className="max-w-4xl mx-auto space-y-8 pt-12 border-t-[10px] border-black text-center">
+            <p className="text-2xl md:text-4xl text-black font-black leading-tight uppercase italic">
               Welcome to 
-              <span className="text-blue-600 ml-2 underline decoration-4 decoration-blue-100 underline-offset-4">Dream</span>Sync, 
-              your AI career partner.
+              <span className="text-blue-600 ml-3 underline decoration-4 decoration-blue-100 underline-offset-4">Dream</span>Sync, 
+              your simple career partner.
             </p>
-            <p className="text-lg md:text-xl text-gray-500 font-bold leading-relaxed uppercase tracking-tight">
-               We provide AI-powered tools and a supportive community to help students navigate their career paths with confidence.
+            <p className="text-lg md:text-2xl text-gray-400 font-bold leading-relaxed uppercase tracking-tight italic">
+               We give you free AI tools to build your resume and find the best jobs near you.
             </p>
           </div>
         </section>
 
-        {/* SECTION 3 — WHAT DREAMSYNC DOES */}
+        {/* CORE SUPPORT SECTION */}
         <section className="space-y-16">
           <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black italic">
-              Our Core <span className="text-blue-600 not-italic">Support</span>.
+            <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-black italic leading-none">
+              HOW WE <span className="text-blue-600 not-italic decoration-8 decoration-yellow-400 underline underline-offset-8">HELP</span>
             </h2>
-            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600">
-              EXPLORE OUR SUITE OF CAREER TOOLS
-            </p>
+            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 mt-4">SIMPLE TOOLS · BIG IMPACT</p>
           </div>
 
-          {/* SECTION 4 — FEATURE CARDS */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
             <FlipCard 
-              title="Career Guidance" 
-              desc="Get personalized AI roadmaps and career paths designed specifically for Indian students."
+              title="Find Your Way" 
+              desc="Get a simple AI plan for your future career based on what you love to do."
               icon={Target}
             />
             <FlipCard 
-              title="Skill Building" 
-              desc="Access curated resources and learning paths to master high-demand industry skills."
+              title="Learn New Skills" 
+              desc="Read the best study guides and watch videos to learn things that jobs want."
               icon={Zap}
             />
             <FlipCard 
-              title="Community" 
-              desc="Connect with like-minded students and professionals across India for support and growth."
+              title="Meet Students" 
+              desc="Connect with thousands of other students who are also building their path."
               icon={Heart}
             />
             <FlipCard 
-              title="Career Growth" 
-              desc="Interactive sessions and tools to build your resume, portfolio, and professional brand."
+              title="Job Ready" 
+              desc="Making your resume and website is now easy and free for everyone."
               icon={Briefcase}
             />
           </div>
         </section>
 
-
-        {/* SECTION 5 — RESTORED IMPACT STATS */}
-        <section className="bg-black border-8 border-black p-6 sm:p-12 md:p-20 shadow-[12px_12px_0px_0px_#2563EB]">
-           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+        {/* IMPACT STATS */}
+        <section className="bg-black border-[10px] border-black p-12 md:p-24 shadow-[20px_20px_0px_0px_#2563EB]">
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 text-center">
              {[
-               { value: "5000+", label: "Active Students", icon: User, color: 'text-yellow-400', anim: { y: [0, -8, 0] } },
-               { value: "50+", label: "Career Paths", icon: MapPin, color: 'text-blue-400', anim: { scale: [1, 1.2, 1] } },
-               { value: "1000+", label: "Resumes Built", icon: FileText, color: 'text-white', anim: { scaleY: [1, 0.8, 1] } },
-               { value: "10+", label: "AI Tools", icon: Zap, color: 'text-teal-400', anim: { scale: [1, 1.1, 1], rotate: [0, 10, 0] } }
+               { value: "5000+", label: "Happy Students", icon: User, color: 'text-yellow-400', anim: { y: [0, -8, 0] } },
+               { value: "50+", label: "Career Plans", icon: MapPin, color: 'text-blue-400', anim: { scale: [1, 1.2, 1] } },
+               { value: "1000+", label: "Resumes Made", icon: FileText, color: 'text-white', anim: { scaleY: [1, 0.8, 1] } },
+               { value: "10+", label: "Free Tools", icon: Zap, color: 'text-teal-400', anim: { scale: [1, 1.1, 1], rotate: [0, 10, 0] } }
              ].map((stat, i) => (
-               <div key={i} className="space-y-6 flex flex-col items-center">
-                  <div className="p-4 bg-white/10 border-2 border-white/20 rounded-full overflow-hidden">
+               <div key={i} className="space-y-8 flex flex-col items-center">
+                  <div className="p-5 bg-white shrink-0 shadow-[6px_6px_0px_0px_rgba(255,255,255,0.2)]">
                      <motion.div
                        animate={stat.anim}
                        transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
                      >
-                        <stat.icon className={`w-8 h-8 ${stat.color}`} strokeWidth={3} />
+                        <stat.icon className="w-10 h-10 text-black" strokeWidth={3} />
                      </motion.div>
                   </div>
-                  <div className="space-y-2">
-                    <div className="text-5xl md:text-7xl font-black text-white tracking-tighter italic">
+                  <div className="space-y-3">
+                    <div className="text-6xl md:text-8xl font-black text-white tracking-tighter italic leading-none">
                       <StatCounter value={stat.value} />
                     </div>
-                    <div className="h-1 w-12 bg-white/20 mx-auto rounded-full" />
-                    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 leading-tight">
+                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 leading-tight italic">
                       {stat.label}
                     </p>
                   </div>
@@ -280,20 +243,14 @@ export default function About() {
            </div>
         </section>
 
-        {/* SECTION 6 — FAQ SECTION */}
+        {/* FAQ SECTION */}
         <section className="space-y-20">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-             <div className="space-y-2 text-center md:text-left">
-                <h2 className="text-4xl font-black uppercase tracking-tighter italic text-black leading-none">Questions & Answers</h2>
-                <p className="text-blue-600 font-black uppercase tracking-[0.4em] text-[10px]">EVERYTHING YOU NEED TO KNOW</p>
-             </div>
-             <div className="h-2 flex-grow hidden md:block bg-gray-100" />
-             <div className="p-4 bg-[#FACC15] border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-black">
-                <HeartHandshake className="w-8 h-8" />
-             </div>
+          <div className="text-center border-l-[16px] border-yellow-400 pl-8 md:text-left">
+            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter italic text-black leading-none">QUESTIONS</h2>
+            <p className="text-blue-600 font-black uppercase tracking-[0.4em] text-[10px] mt-2">WE HAVE ANSWERS FOR YOU</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {faqs.map((faq, i) => (
               <FAQItem 
                 key={i}
@@ -305,32 +262,27 @@ export default function About() {
         </section>
 
         {/* CTA SECTION */}
-        <section className="pb-40">
-          <div className="p-8 sm:p-12 md:p-20 bg-white border-4 border-black text-center space-y-12 relative overflow-hidden group shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
-             <div className="absolute top-0 left-0 w-full h-3 bg-blue-600" />
-             <div className="absolute bottom-0 right-0 p-8 transform translate-x-12 translate-y-12 opacity-5 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700">
-                <Target className="w-64 h-64 text-black" />
-             </div>
-             
-             <h2 className="text-4xl md:text-7xl font-black tracking-tighter uppercase leading-tight relative z-10 text-black italic">
+        <section className="pb-24">
+          <div className="p-10 md:p-24 bg-white border-8 border-black text-center space-y-12 shadow-[20px_20px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-2 hover:translate-y-2 transition-all">
+             <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-black italic">
                 Ready to build <br /> your future?
              </h2>
-             <p className="text-lg md:text-xl text-gray-400 font-bold max-w-2xl mx-auto uppercase relative z-10 tracking-tight">
-                Join our community today and start building the career you've always dreamed of with the help of AI and a supportive network.
+             <p className="text-lg md:text-2xl text-gray-400 font-bold max-w-3xl mx-auto uppercase tracking-tight italic leading-snug">
+                Join our family today and start building your career for free with the help of AI.
              </p>
              
-             <div className="flex flex-col sm:flex-row justify-center items-center gap-8 relative z-10">
-                <div className="flex flex-col items-center gap-4 group/btn w-full sm:w-auto">
-                  <Link href="/signup" className="w-full sm:w-auto px-12 py-6 bg-black text-white border-4 border-black font-black uppercase text-[12px] tracking-widest shadow-[6px_6px_0px_0px_#2563EB] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center">
-                    Join The Community <ArrowRight className="ml-2 w-6 h-6 inline" />
+             <div className="flex flex-col sm:flex-row justify-center items-center gap-10">
+                <div className="flex flex-col items-center gap-4 w-full sm:w-auto">
+                  <Link href="/signup" className="w-full sm:w-auto px-16 py-8 bg-black text-white border-4 border-black font-black uppercase text-sm tracking-widest shadow-[8px_8px_0px_0px_#2563EB] hover:translate-x-2 hover:translate-y-2 hover:shadow-none transition-all flex items-center justify-center italic">
+                    Start Now <ArrowRight className="ml-3 w-6 h-6 inline" />
                   </Link>
                   <p className="text-[10px] font-black text-gray-400 italic">Takes 30 seconds · 100% Free</p>
                 </div>
-                <div className="flex flex-col items-center gap-4 group/btn w-full sm:w-auto">
-                  <Link href="/contact" className="w-full sm:w-auto px-12 py-6 bg-white text-black border-4 border-black font-black uppercase text-[12px] tracking-widest shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center">
-                     Get In Touch
+                <div className="flex flex-col items-center gap-4 w-full sm:w-auto">
+                  <Link href="/contact" className="w-full sm:w-auto px-16 py-8 bg-white text-black border-4 border-black font-black uppercase text-sm tracking-widest shadow-[8px_8px_0px_0px_black] hover:translate-x-2 hover:translate-y-2 hover:shadow-none transition-all flex items-center justify-center italic">
+                     Get Help
                   </Link>
-                  <p className="text-[10px] font-black text-gray-400 italic">Fast support · Real humans</p>
+                  <p className="text-[10px] font-black text-gray-400 italic">We are here to support you</p>
                 </div>
              </div>
           </div>

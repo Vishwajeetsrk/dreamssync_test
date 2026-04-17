@@ -34,15 +34,15 @@ export default function Navbar() {
   };
 
   const featureLinks = [
-    { name: 'AI ROADMAP', href: '/roadmap' },
-    { name: 'AI CAREER AGENT', href: '/career-agent' },
-    { name: 'RESUME BUILDER', href: '/resume-builder' },
-    { name: 'ATS CHECK', href: '/ats-check' },
-    { name: 'IKIGAI FINDER', href: '/ikigai' },
-    { name: 'PORTFOLIO GEN', href: '/portfolio' },
-    { name: 'LINKEDIN OPTIMIZER', href: '/linkedin' },
-    { name: 'MENTAL HEALTH AI', href: '/mental-health' },
-    { name: 'ROADMAPS & DOCS', href: '/documents' },
+    { name: 'Roadmap', href: '/roadmap' },
+    { name: 'Career Assistant', href: '/career-agent' },
+    { name: 'Make Resume', href: '/resume-builder' },
+    { name: 'Check Score', href: '/ats-check' },
+    { name: 'Find Path', href: '/ikigai' },
+    { name: 'Make Website', href: '/portfolio' },
+    { name: 'LinkedIn Help', href: '/linkedin' },
+    { name: 'Mental Health AI', href: '/mental-health' },
+    { name: 'Guides', href: '/documents' },
   ];
 
   return (
@@ -199,12 +199,12 @@ export default function Navbar() {
                   SUPPORT US
                 </Link>
 
-                <div className="grid grid-cols-2 gap-4 pt-6 border-t-8 border-black">
-                   <Link href="/about" onClick={() => setIsMenuOpen(false)} className="text-xs font-black uppercase tracking-widest text-black">ABOUT US</Link>
-                   <Link href="/team" onClick={() => setIsMenuOpen(false)} className="text-xs font-black uppercase tracking-widest text-black">TEAM</Link>
-                   <Link href="/community" onClick={() => setIsMenuOpen(false)} className="text-xs font-black uppercase tracking-widest text-black">COMMUNITY</Link>
-                   <Link href="/contact" onClick={() => setIsMenuOpen(false)} className="text-xs font-black uppercase tracking-widest text-black">CONTACT</Link>
-                   <Link href="/dashboard" onClick={() => setIsMenuOpen(false)} className="text-xs font-black uppercase tracking-widest text-blue-600 col-span-2 text-center pt-2">DASHBOARD</Link>
+                <div className="grid grid-cols-2 gap-4 pt-8 border-t-8 border-black">
+                   <Link href="/about" onClick={() => setIsMenuOpen(false)} className="text-[10px] font-black uppercase tracking-widest text-black border-2 border-black p-4 text-center bg-white shadow-[2px_2px_0px_0px_black] active:shadow-none transition-all">ABOUT US</Link>
+                   <Link href="/team" onClick={() => setIsMenuOpen(false)} className="text-[10px] font-black uppercase tracking-widest text-black border-2 border-black p-4 text-center bg-white shadow-[2px_2px_0px_0px_black] active:shadow-none transition-all">TEAM</Link>
+                   <Link href="/community" onClick={() => setIsMenuOpen(false)} className="text-[10px] font-black uppercase tracking-widest text-black border-2 border-black p-4 text-center bg-white shadow-[2px_2px_0px_0px_black] active:shadow-none transition-all">COMMUNITY</Link>
+                   <Link href="/contact" onClick={() => setIsMenuOpen(false)} className="text-[10px] font-black uppercase tracking-widest text-black border-2 border-black p-4 text-center bg-white shadow-[2px_2px_0px_0px_black] active:shadow-none transition-all">CONTACT</Link>
+                   <Link href="/dashboard" onClick={() => setIsMenuOpen(false)} className="text-[10px] font-black uppercase tracking-widest text-blue-600 col-span-2 text-center py-5 border-4 border-black bg-white shadow-[4px_4px_0px_0px_black] mt-2 active:shadow-none active:translate-x-1 active:translate-y-1 transition-all">GO TO DASHBOARD</Link>
                 </div>
 
                 {user && (
