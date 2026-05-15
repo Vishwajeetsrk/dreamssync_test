@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { validateCareerInput } from '@/lib/aiGuard';
+import { secureFetch } from '@/lib/secureFetch';
 
 // --- Types ---
 interface HeadlineOption { text: string; focus: string; }
@@ -121,7 +122,7 @@ export default function LinkedInOptimizer() {
     const formData = new FormData();
     formData.append('file', file);
     try {
-      const res = await fetch('/api/resume-parse', { method: 'POST', body: formData });
+      const res = await secureFetch('/api/resume-parse', { method: 'POST', body: formData });
       const d = await res.json();
       if (!res.ok) throw new Error(d.error);
       setForm({
@@ -155,7 +156,7 @@ export default function LinkedInOptimizer() {
     setError('');
     setResult(null);
     try {
-      const res = await fetch('/api/linkedin', {
+      const res = await secureFetch('/api/linkedin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),

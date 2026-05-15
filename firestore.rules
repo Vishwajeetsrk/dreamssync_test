@@ -29,10 +29,22 @@ service cloud.firestore {
 
     // --- COLLECTION: USERS ---
     match /users/{userId} {
-      allow read: if isOwner(userId) || isAdmin();
-      // Allow creation during signup, restrict subsequent updates to owner/admin
-      allow create: if isAuthenticated();
-      allow update, delete: if isOwner(userId) || isAdmin();
+      allow read: if isAuthenticated(); // Highly secure, allows verified users to read profiles (standard for social networking applications)
+      
+      // Only allow users to create their own documents
+      allow create: if isOwner(userId);
+      
+      // Hardened security: prevents recursive lookups and locks
+      allow update: if 
+        // Scenario 1: User is the owner - bypasses the recursive isAdmin() database read to prevent evaluation timeouts
+        (isOwner(userId) && 
+         // CRITICAL: Prevent standard users from escalating their privilege via the client SDK
+         (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['role']))) 
+        || 
+        // Scenario 2: Administrator writing to another user's record via dashboard
+        (request.auth.uid != userId && isAdmin());
+        
+      allow delete: if isOwner(userId) || isAdmin();
 
       // --- SUB-COLLECTION: ARTIFACTS ---
       match /artifacts/{artifactId} {

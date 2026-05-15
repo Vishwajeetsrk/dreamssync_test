@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send, Loader2, Sparkles, HelpCircle, Search, Menu, ExternalLink, ArrowRight, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
+import { secureFetch } from '@/lib/secureFetch';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -35,7 +36,7 @@ export default function AIAssistant() {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/career-agent', {
+      const response = await secureFetch('/api/career-agent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

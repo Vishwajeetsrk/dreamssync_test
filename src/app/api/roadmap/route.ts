@@ -63,8 +63,23 @@ RETURN EXACT JSON STRUCTURE:
   }
 }`;
 
+import { verifySession } from '@/lib/auth-verifier';
+import { toolRateLimit } from '@/lib/ratelimit';
+
 // ── Handler ───────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
+  // 1. Verify Authentication
+  const user = await verifySession(req);
+  if (!user) {
+    return NextResponse.json({ error: 'Auth Required' }, { status: 401 });
+  }
+
+  // 2. Rate Limit
+  const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
+  const { success } = await toolRateLimit.limit(`${user.uid}:${ip}`);
+  if (!success) {
+    return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
+  }
 
   // 3. Validate
   let body: z.infer<typeof BodySchema>;

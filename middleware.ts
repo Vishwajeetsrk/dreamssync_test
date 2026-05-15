@@ -41,16 +41,8 @@ export function middleware(request: NextRequest) {
   }
 
   // 3. Admin Route Protection
-  // Note: True admin check happens in context, but we can do a quick check here
-  // if using session cookies (NextAuth). 
-  if (request.nextUrl.pathname.startsWith('/admin')) {
-    const sessionToken = request.cookies.get('next-auth.session-token') || 
-                        request.cookies.get('__Secure-next-auth.session-token');
-    
-    if (!sessionToken) {
-      return NextResponse.redirect(new URL('/auth/login', request.url));
-    }
-  }
+  // Enforced robustly via layout-level Firebase authentication in 'src/app/admin/layout.tsx'
+  // and server-level verification via Token headers in administrative API handlers.
 
   return response;
 }

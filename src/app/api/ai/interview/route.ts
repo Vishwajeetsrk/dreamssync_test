@@ -2,12 +2,12 @@ import { callAI } from '@/lib/ai';
 import { NextResponse } from 'next/server';
 import { toolRateLimit } from '@/lib/ratelimit';
 import { MockInterviewRequestSchema } from '@/lib/security';
-import { getServerSession } from 'next-auth';
+import { verifySession } from '@/lib/auth-verifier';
 
 export async function POST(req: Request) {
   try {
-    const session = await getServerSession();
-    if (!session) {
+    const user = await verifySession(req);
+    if (!user) {
       return NextResponse.json({ error: 'Auth Required' }, { status: 401 });
     }
 

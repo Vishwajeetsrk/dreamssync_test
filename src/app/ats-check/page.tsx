@@ -8,6 +8,7 @@ import {
   Printer, FileDown, Zap, ShieldCheck, ArrowRight, TrendingUp, Search
 } from 'lucide-react';
 import Link from 'next/link';
+import { secureFetch } from '@/lib/secureFetch';
 
 interface CompanyResult {
   company: string;
@@ -69,7 +70,7 @@ export default function AdvancedATS() {
     formData.append('experienceLevel', experienceLevel);
 
     try {
-      const res = await fetch('/api/ats-advanced', {
+      const res = await secureFetch('/api/ats-advanced', {
         method: 'POST',
         body: formData,
       });

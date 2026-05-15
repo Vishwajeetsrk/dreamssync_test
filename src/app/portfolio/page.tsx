@@ -11,6 +11,7 @@ import {
 import { validateCareerInput } from '@/lib/aiGuard';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import { secureFetch } from '@/lib/secureFetch';
 
 // ---------- TYPES ----------
 interface Project { topic: string; points: string; website: string; }
@@ -139,7 +140,7 @@ export default function PortfolioGenerator() {
         setGenProgress(p => p < 90 ? p + 2 : p);
       }, 500);
 
-      const res = await fetch('/api/portfolio', {
+      const res = await secureFetch('/api/portfolio', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -179,7 +180,7 @@ export default function PortfolioGenerator() {
     const formData = new FormData();
     formData.append('file', file);
     try {
-      const res = await fetch('/api/resume-parse', { method: 'POST', body: formData });
+      const res = await secureFetch('/api/resume-parse', { method: 'POST', body: formData });
       const d = await res.json();
       if (!res.ok) throw new Error(d.error);
       setFullName(d.personalInfo?.fullName || '');

@@ -59,8 +59,23 @@ const FALLBACK_RESPONSES = [
   "It takes real courage to reach out and talk about how you're feeling. I'm so glad you're here. 💙 Whatever you're going through right now, it's temporary — even when it doesn't feel that way.\n\nFor now, try this: write down one thing that went okay today, no matter how small. Even 'I woke up' counts. You're doing better than you think.",
 ];
 
+import { verifySession } from '@/lib/auth-verifier';
+import { toolRateLimit } from '@/lib/ratelimit';
+
 // ── Handler ───────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
+  // 1. Verify Authentication
+  const user = await verifySession(req);
+  if (!user) {
+    return NextResponse.json({ error: 'Auth Required' }, { status: 401 });
+  }
+
+  // 2. Rate Limit
+  const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
+  const { success } = await toolRateLimit.limit(`${user.uid}:${ip}`);
+  if (!success) {
+    return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
+  }
 
   // 2. Validate body
   let body: z.infer<typeof BodySchema>;

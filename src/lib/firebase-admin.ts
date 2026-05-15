@@ -1,24 +1,50 @@
 import * as admin from 'firebase-admin';
 
-// Initialize Firebase Admin once (Singleton)
-if (!admin.apps.length) {
-  try {
-    admin.initializeApp({
-      credential: admin.credential.cert({
-        projectId: process.env.FIREBASE_PROJECT_ID,
-        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-        // Ensure private key handles newlines correctly
-        privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-      }),
-      databaseURL: `https://${process.env.FIREBASE_PROJECT_ID}.firebaseio.com`
-    });
-    console.log('[Firebase Admin] Initialized successfully');
-  } catch (error) {
-    console.error('[Firebase Admin] Initialization error:', error);
+// Lazy initialize Firebase Admin to prevent build-time crashes when environment variables are absent.
+function initAdmin() {
+  if (!admin.apps.length) {
+    const projectId = process.env.FIREBASE_PROJECT_ID;
+    const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+    const privateKey = process.env.FIREBASE_PRIVATE_KEY;
+
+    if (!projectId || !clientEmail || !privateKey) {
+      throw new Error(
+        '[Firebase Admin] Cannot initialize: Missing mandatory environment variables ' +
+        '(FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, or FIREBASE_PRIVATE_KEY).'
+      );
+    }
+
+    try {
+      admin.initializeApp({
+        credential: admin.credential.cert({
+          projectId,
+          clientEmail,
+          privateKey: privateKey.replace(/\\n/g, '\n'),
+        }),
+        databaseURL: `https://${projectId}.firebaseio.com`
+      });
+      console.log('[Firebase Admin] Initialized successfully');
+    } catch (error) {
+      console.error('[Firebase Admin] Initialization runtime error:', error);
+      throw error;
+    }
   }
 }
 
-export const adminDb = admin.firestore();
-export const adminAuth = admin.auth();
-export const adminStorage = admin.storage();
+export function getAdminDb() {
+  initAdmin();
+  return admin.firestore();
+}
+
+export function getAdminAuth() {
+  initAdmin();
+  return admin.auth();
+}
+
+export function getAdminStorage() {
+  initAdmin();
+  return admin.storage();
+}
+
 export { admin };
+

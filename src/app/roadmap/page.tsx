@@ -10,6 +10,7 @@ import {
 import { validateCareerInput } from '@/lib/aiGuard';
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } from 'docx';
 import { saveAs } from 'file-saver';
+import { secureFetch } from '@/lib/secureFetch';
 
 export default function Roadmap() {
   const [steps, setSteps] = useState<any[]>([]);
@@ -45,7 +46,7 @@ export default function Roadmap() {
     setSafetyError(null);
 
     try {
-      const res = await fetch('/api/roadmap', {
+      const res = await secureFetch('/api/roadmap', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(query),

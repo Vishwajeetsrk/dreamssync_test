@@ -11,6 +11,7 @@ import {
 import { IkigaiDiagram } from '@/components/IkigaiDiagram';
 import { validateCareerInput } from '@/lib/aiGuard';
 import Link from 'next/link';
+import { secureFetch } from '@/lib/secureFetch';
 
 // ── Types ─────────────────────────────────────────────────────────
 interface IkigaiResult {
@@ -123,7 +124,7 @@ export default function IkigaiPage() {
     setIsAnalyzing(true);
     setError('');
     try {
-      const res = await fetch('/api/ikigai', {
+      const res = await secureFetch('/api/ikigai', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)

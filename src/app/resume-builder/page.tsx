@@ -14,6 +14,7 @@ import { saveAs } from 'file-saver';
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, ExternalHyperlink, BorderStyle } from 'docx';
 import ResumePreview, { ResumeData } from '@/components/ResumePreview';
 import { calculateATSScore, ATSAnalysis } from '@/lib/atsScore';
+import { secureFetch } from '@/lib/secureFetch';
 
 const DEFAULT_RESUME: ResumeData = {
   personalInfo: {
@@ -99,7 +100,72 @@ export default function ResumeBuilder() {
   const [atsAnalysis, setAtsAnalysis] = useState<ATSAnalysis | null>(null);
   const [scanStatus, setScanStatus] = useState<'idle' | 'scanning' | 'complete'>('idle');
   const [isParsing, setIsParsing] = useState(false);
+  const [isGeneratingSummary, setIsGeneratingSummary] = useState(false);
+  const [optimizingIdx, setOptimizingIdx] = useState<number | null>(null);
   const componentRef = useRef<HTMLDivElement>(null);
+
+  const handleGenerateSummary = async () => {
+    setIsGeneratingSummary(true);
+    try {
+      const formattedSkills = data.skills.map(s => `${s.category}: ${s.items}`).join(' | ');
+      const formattedProjects = data.projects?.map(p => `${p.name}: ${p.description}`).join(' | ') || '';
+      
+      const res = await secureFetch('/api/resume', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'generate_summary',
+          fullName: data.personalInfo.fullName,
+          targetRole: data.personalInfo.role,
+          skills: formattedSkills.substring(0, 490),
+          projects: formattedProjects.substring(0, 990),
+          experienceStatus: data.experience.length > 0 ? 'experience' : 'fresher'
+        })
+      });
+      
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || 'Generation failed');
+      
+      if (result.summary) {
+        setData(prev => ({ ...prev, summary: result.summary }));
+      }
+    } catch (err: any) {
+      alert("AI Generation Error: " + err.message);
+    } finally {
+      setIsGeneratingSummary(false);
+    }
+  };
+
+  const handleOptimizeBullets = async (idx: number) => {
+    setOptimizingIdx(idx);
+    try {
+      const currentExp = data.experience[idx];
+      const rawText = currentExp.bullets.join('\n');
+      
+      const res = await secureFetch('/api/resume', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'generate_bullets',
+          targetRole: data.personalInfo.role,
+          experience: `Company: ${currentExp.company}\nRole: ${currentExp.role}\nRaw points:\n${rawText}`.substring(0, 1900),
+          experienceStatus: 'experience'
+        })
+      });
+      
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || 'Optimization failed');
+      
+      if (result.bullets && Array.isArray(result.bullets)) {
+        const cleanBullets = result.bullets.map((b: string) => b.replace(/^[•\*\-\s]+/, ''));
+        updateExperience(idx, 'bullets', cleanBullets);
+      }
+    } catch (err: any) {
+      alert("AI Bullet Optimization Error: " + err.message);
+    } finally {
+      setOptimizingIdx(null);
+    }
+  };
 
   const startAnalysis = () => {
     setScanStatus('scanning');
@@ -132,7 +198,7 @@ export default function ResumeBuilder() {
     formData.append('file', file);
 
     try {
-      const res = await fetch('/api/resume-parse', {
+      const res = await secureFetch('/api/resume-parse', {
         method: 'POST',
         body: formData,
       });
@@ -405,11 +471,20 @@ export default function ResumeBuilder() {
             </div>
           </section>
 
-          {/* Section: Summary */}
           <section className="space-y-8">
-            <h2 className="text-lg font-black uppercase tracking-tight flex items-center gap-4 border-b-4 border-black pb-4">
-              <FileText className="w-6 h-6 text-[#2563EB]" /> PROFESSIONAL SUMMARY
-            </h2>
+            <div className="flex justify-between items-center border-b-4 border-black pb-4">
+              <h2 className="text-lg font-black uppercase tracking-tight flex items-center gap-4">
+                <FileText className="w-6 h-6 text-[#2563EB]" /> PROFESSIONAL SUMMARY
+              </h2>
+              <button 
+                onClick={handleGenerateSummary} 
+                disabled={isGeneratingSummary}
+                className="flex items-center gap-2 text-[9px] font-black tracking-wider text-white bg-black px-3 py-1.5 border-2 border-black shadow-[2px_2px_0px_0px_rgba(37,99,235,1)] hover:bg-[#2563EB] disabled:opacity-50 active:translate-y-0.5 transition-all cursor-pointer"
+              >
+                {isGeneratingSummary ? <Loader2 className="w-3 h-3 animate-spin" /> : <Sparkles className="w-3 h-3" />}
+                {isGeneratingSummary ? "GENERATING..." : "AI GENERATE"}
+              </button>
+            </div>
             <textarea 
               value={data.summary}
               onChange={(e) => updateSummary(e.target.value)}
@@ -461,7 +536,17 @@ export default function ResumeBuilder() {
                         }} className="neo-input text-[10px] min-h-[50px] py-3" placeholder="Bullet point..." />
                      </div>
                    ))}
-                   <button onClick={() => updateExperience(idx, 'bullets', [...exp.bullets, ""])} className="text-[10px] font-black text-[#2563EB] uppercase text-xs hover:underline">+ Add Point</button>
+                   <div className="flex justify-between items-center pt-2">
+                      <button onClick={() => updateExperience(idx, 'bullets', [...exp.bullets, ""])} className="text-[10px] font-black text-[#2563EB] uppercase text-xs hover:underline">+ Add Point</button>
+                      <button 
+                        onClick={() => handleOptimizeBullets(idx)}
+                        disabled={optimizingIdx === idx}
+                        className="flex items-center gap-1 text-[9px] font-black text-black border-2 border-black bg-yellow-300 px-2 py-1 hover:bg-black hover:text-white disabled:opacity-50 transition-colors cursor-pointer"
+                      >
+                        {optimizingIdx === idx ? <Loader2 className="w-3 h-3 animate-spin" /> : <Sparkles className="w-3 h-3" />}
+                        {optimizingIdx === idx ? "OPTIMIZING..." : "AI OPTIMIZE STAR"}
+                      </button>
+                   </div>
                 </div>
                 <button onClick={() => removeExperience(idx)} className="absolute -top-3 -right-3 bg-white border-2 border-black p-1 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"><Trash2 className="w-4 h-4" /></button>
               </div>

@@ -10,6 +10,7 @@ import {
 import CareerPathCard from '@/components/CareerPathCard';
 import { graphicDesignPath } from '@/data/careerPaths';
 import { validateCareerInput } from '@/lib/aiGuard';
+import { secureFetch } from '@/lib/secureFetch';
 
 // ── Types ─────────────────────────────────────────────────────────
 interface Role {
@@ -275,7 +276,7 @@ export default function CareerAgent() {
         content: m.role === 'user' ? m.content : (m.data?.reply || m.content),
       }));
 
-      const res = await fetch('/api/career-agent', {
+      const res = await secureFetch('/api/career-agent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: history }),

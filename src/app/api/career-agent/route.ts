@@ -59,8 +59,24 @@ STRICT JSON FORMAT:
   "quickTips": []
 }`;
 
+import { verifySession } from '@/lib/auth-verifier';
+import { toolRateLimit } from '@/lib/ratelimit';
+
 export async function POST(req: NextRequest) {
   try {
+    // 1. Verify Authentication
+    const user = await verifySession(req);
+    if (!user) {
+      return NextResponse.json({ error: 'Auth Required' }, { status: 401 });
+    }
+
+    // 2. Rate Limit
+    const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
+    const { success } = await toolRateLimit.limit(`${user.uid}:${ip}`);
+    if (!success) {
+      return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
+    }
+
     const raw = await req.json();
     const parsed = BodySchema.safeParse(raw);
     if (!parsed.success) return NextResponse.json({ error: 'Invalid input' }, { status: 400 });

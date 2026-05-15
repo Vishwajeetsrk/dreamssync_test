@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { validateCareerInput } from '@/lib/aiGuard';
+import { secureFetch } from '@/lib/secureFetch';
 
 // ── Types ─────────────────────────────────────────────────────────
 interface Message {
@@ -307,7 +308,7 @@ export default function MentalHealthAgent() {
 
     try {
       const history = [...messages, userMsg];
-      const res = await fetch('/api/mental-health', {
+      const res = await secureFetch('/api/mental-health', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: history, mood: mood || 'not specified' }),
