@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from 'next/server';
 import { z } from 'zod';
 import { Redis } from '@upstash/redis';
 import { validateCareerInput } from '@/lib/aiGuard';
-import { callAI } from '@/lib/ai';
+import { callAI, parseJSON } from '@/lib/ai';
 
 const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL || '',
@@ -31,65 +31,76 @@ const portfolioSchema = z.object({
   }).optional(),
 });
 
+const sysPrompt = `
+You are a world-class award-winning creative technologist and senior frontend developer. 
+Your goal is to generate an "Awwwards-worthy" high-fidelity personal portfolio.
+
+CORE DIRECTIVES:
+1. Return a JSON object: { "html": "...", "css": "...", "js": "..." }
+2. TYPOGRAPHY: ALWAYS use Google Fonts. Link them in the <head>.
+   - Neo-Brutalism: 'Space Grotesk' & 'Archivo Black'
+   - Glass Dark/Data Pro: 'Inter' & 'Syne'
+   - Minimal: 'Playfair Display' & 'Plus Jakarta Sans'
+3. ANIMATIONS: ALWAYS include AOS (Animate on Scroll) library. 
+   - Add <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"> in <head>.
+   - Add <script src="https://unpkg.com/aos@next/dist/aos.js"></script> before </body>.
+   - Initialize AOS in script.js: AOS.init({ duration: 1000, once: true });
+4. ASSETS: 
+   - Profile Photo: "./assets/profile.jpg"
+   - Resume Download: "./assets/resume.pdf"
+5. ICONS: Use FontAwesome 6.4.0 (all themes).
+6. RESPONSIVENESS: Ensure premium mobile experience with collateral navigation.
+`;
+
+const userPrompt = (theme: string, data: any) => `
+Generate a MASTERPIECE portfolio for:
+NAME: ${data.fullName}
+ROLE: ${data.targetRole}
+THEME: ${theme}
+SUMMARY: ${data.summary}
+SKILLS: ${data.skills}
+EXPERIENCE: ${data.experience}
+PROJECTS: ${data.projects}
+
+REQUIREMENTS:
+1. Use semantic HTML5 layout (header, main, section, footer).
+2. Creative Hero Section: Large typography, interesting layouts.
+3. Immersive Sections: Use data-aos animations (fade-up, zoom-in, flip-left) for ALL cards and headers.
+4. Separate the code into "html", "css", and "js" keys.
+`;
+
 function buildThemePrompt(theme: string): string {
   if (theme === 'neo-brutalism') return `
-THEME: Neo-Brutalism. Use these EXACT styles:
-- Background: #FFFBF5 (cream white)
-- Primary accent: #FFE500 (yellow)
-- Secondary accent: #FF4081 (pink)
-- All interactive elements: border: 4px solid black, box-shadow: 4px 4px 0px black
-- Headings: font-family: 'Space Grotesk', bold, black
-- Cards: white bg, thick black borders, hard offset shadows
-- Buttons: yellow bg, black border, "hover:translate-y-[-2px]" effect
-- Section dividers: bold black lines
-- Profile Photo: Square frame with 4px black border and hard yellow shadow
-- Stats Section: Grid with bold numbers, primary yellow bg, black borders
-- Icons: Use solid FontAwesome icons only
+THINK: Gumroad / Figma aesthetics.
+- Background: #FFFBF5
+- Accents: #FFE500 (Yellow), #8B5CF6 (Violet)
+- Borders: 4px solid #000
+- Shadows: 8px 8px 0px #000
+- Hover: translate(-4px, -4px) with shadow increase.
+- Layout: Asymmetric editorial grid.
 `;
   if (theme === 'glass-dark') return `
-THEME: Modern Glass UI (Dark). Use these EXACT styles:
-- Background: deep dark gradient from #0a0a1a to #1a0a2e (dark navy/purple)
-- Cards: backdrop-filter: blur(20px), background: rgba(255,255,255,0.05), border: 1px solid rgba(255,255,255,0.1)
-- Accent colors: #8B5CF6 (violet), #06B6D4 (cyan), gradient-to-r from-violet-600 to-cyan-400
-- Text: white and light gray
-- Buttons: gradient bg from violet to cyan, no border, rounded-full
-- Skill badges: colored gradient pills with glow effect
-- Animations: smooth fade-ins, floating elements
-- Icons: use colored/gradient FontAwesome icons
-- Profile Photo: Blurred glass circle with glowing cyan/violet ring
-- Stats Section: Transparent glass cards with glowing borders
-- Give everything a premium, Apple-level dark mode feel
+THINK: Linear / Apple / Raycast aesthetics.
+- Background: #050505 with mesh gradients in background.
+- Elements: backdrop-filter: blur(12px), background: rgba(255,255,255,0.03).
+- Border: 1px solid rgba(255,255,255,0.1).
+- Glow: Subtle cyan/violet box-shadow glow on cards.
+- Layout: Minimal, central-aligned, generous whitespace.
 `;
   if (theme === 'data-pro') return `
-THEME: Data-Driven Innovator / Creative Technologist (Vishwa Pro). Use these EXACT styles:
-- Background: Linear gradient (135deg, #667eea 0%, #764ba2 100%) for hero.
-- Typography: 'Poppins' for headings, 'Inter' for body.
-- Palette: Primary #1e40af, Secondary #10b981, Accent #f59e0b.
-- Layout Features:
-  1. Particle.js background on Hero.
-  2. Multi-category skills grid with categorized icons.
-  3. Timeline with 'dots' and vertical connection lines.
-  4. Project cards with overlay hover links (External/GitHub icons).
-  5. Statistics cards (e.g. "1000+ Records", "2+ Years").
-  6. Dark/Light mode compatible (default to professional light/dark balance).
-- Buttons: Rounded (0.5rem), high-contrast gradients, FontAwesome icons.
-- Modern elements: Floating badges, interactive skill bars, and smooth AOS-style animations (fade-up).
-- FontAwesome 6.4.0 integration for all icons.
+THINK: Professional SaaS / Stripe aesthetics.
+- Background: #FFFFFF
+- Primary: #2563EB (Royal Blue)
+- Sections: Alternating white and extreme light gray (#F8FAFC).
+- Elements: Smooth 0.5rem border-radius, subtle 0 10px 15px rgba(0,0,0,0.05) shadows.
+- Features: "Floating" elements with data-aos animations.
 `;
-  // minimal-dev
   return `
-THEME: Minimal Dev Portfolio. Use these EXACT styles:
-- Background: pure white (#FFFFFF) and light gray (#F9FAFB) alternating sections
-- Typography: 'Inter' font, ultra-clean, generous whitespace
-- Accent: black (#000), with subtle gray borders (border-gray-200)
-- Cards: white bg, light gray border, subtle box-shadow: 0 2px 8px rgba(0,0,0,0.08)
-- Profile Photo: Floating circular frame with subtle drop shadow
-- Stats Section: minimalist grid with "Count | Label" pairing
-- Buttons: Black bg white text, pill shape (rounded-full), clean hover
-- Section layout: centered, max-width: 900px, well-padded
-- Skill chips: gray-100 bg, rounded-full, small text
-- Clean, editorial typography: large bold headings, regular body copy
-- Icons: Use regular/solid FontAwesome (e.g., fa-briefcase, fa-graduation-cap)
+THINK: Kinfolk / Medium / Minimalist aesthetics.
+- Background: #FFFFFF / #000000
+- Typography: Bold serif headings, monospace secondary text.
+- Layout: Single column focus, massive margins.
+- Accents: Zero color, just contrast.
 `;
 }
 
@@ -114,8 +125,8 @@ export async function POST(req: NextRequest) {
     // 5. Call AI with multi-provider fallback
     try {
       const { content, provider } = await callAI([
-        { role: 'system', content: sysPrompt },
-        { role: 'user', content: userPrompt }
+        { role: 'system', content: sysPrompt + buildThemePrompt(theme) },
+        { role: 'user', content: userPrompt(theme, data) }
       ], { 
         jsonMode: true, 
         maxTokens: 8000, 
@@ -123,31 +134,32 @@ export async function POST(req: NextRequest) {
       });
 
       const rawContent = content.trim();
-
-      // Try clean JSON parse first
       let result: any = null;
+
       try {
-        result = JSON.parse(rawContent);
-      } catch {
-        // Fallback: extract HTML between the first { "html": "..." } pattern
-        const match = rawContent.match(/"html"\s*:\s*"([\s\S]+)"\s*\}/);
-        if (match) {
-          result = { html: match[1].replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\\\/g, '\\') };
-        } else {
-          // Second fallback: if it's raw HTML, wrap it
-          if (rawContent.trim().startsWith('<!DOCTYPE') || rawContent.trim().startsWith('<html')) {
-            result = { html: rawContent };
-          } else {
-            // THIRD FALLBACK: Global HTML extraction (The "Nuclear" Option)
-            const htmlMatch = rawContent.match(/<html[\s\S]*<\/html>/i);
-            if (htmlMatch) {
-               result = { html: htmlMatch[0] };
-            } else {
-               console.error('Cannot parse AI response:', rawContent.substring(0, 500));
-               return NextResponse.json({ error: 'AI returned malformed content. Please try again.' }, { status: 500 });
-            }
+        // Use the global robust parser
+        result = parseJSON(rawContent);
+      } catch (e) {
+        console.warn('[Portfolio API] JSON.parse failed, trying regex extraction...');
+        
+        // Strategy A: Find the first { and last }
+        const start = rawContent.indexOf('{');
+        const end = rawContent.lastIndexOf('}');
+        if (start !== -1 && end !== -1 && end > start) {
+          try {
+            const jsonPortion = rawContent.substring(start, end + 1);
+            result = parseJSON(jsonPortion);
+          } catch (e2) {
+             console.error('[Portfolio API] Substring parsing failed as well.');
           }
         }
+      }
+
+      // If we still don't have a result-like object, try one last check for raw HTML
+      if (!result?.html) {
+         if (rawContent.includes('<html') || rawContent.includes('<!DOCTYPE')) {
+            result = { html: rawContent, css: '', js: '' };
+         }
       }
 
       if (!result?.html) {
@@ -162,8 +174,6 @@ export async function POST(req: NextRequest) {
         error: 'AI is currently overloaded with requests in your region. Please try again in 30 seconds.' 
       }, { status: 503 });
     }
-
-    return NextResponse.json(result);
 
   } catch (error: any) {
     console.error('Portfolio gen error:', error);

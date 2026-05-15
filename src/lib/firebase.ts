@@ -14,6 +14,14 @@ const firebaseConfig = {
   measurementId: "G-CL8E5H565T"
 };
 
+const missingKeys = Object.entries(firebaseConfig)
+  .filter(([key, value]) => !value && key !== 'measurementId')
+  .map(([key]) => key);
+
+if (missingKeys.length > 0 && typeof window !== 'undefined') {
+  console.warn(`[Firebase] Missing configuration keys: ${missingKeys.join(', ')}`);
+}
+
 // Initialize Firebase once
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth(app);

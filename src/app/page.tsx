@@ -202,6 +202,50 @@ export default function Home() {
          </div>
       </section>
 
+      {/* 🤝 MEET THE TEAM SECTION */}
+      <section className="py-20 px-6 max-w-7xl mx-auto w-full">
+         <div className="flex flex-col md:flex-row items-end justify-between gap-8 mb-16">
+            <div className="space-y-4">
+               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter italic">The <span className="text-[#2563EB]">Architects</span></h2>
+               <p className="text-sm font-black uppercase tracking-widest text-gray-500">The people behind the dream sync revolution.</p>
+            </div>
+            <Link href="/team" className="font-black text-xs uppercase tracking-widest border-b-4 border-black pb-2 hover:text-[#2563EB] transition-colors">View All Nodes →</Link>
+         </div>
+
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { name: "Anand Biniya", role: "Founder / CEO", image: "/Anand.jpeg" },
+              { name: "Ayush Bajpai", role: "COO", image: "/Ayush.jpeg" },
+              { name: "Vishwajeet", role: "Training Manager", image: "/Vishwajeet.jpeg" },
+              { name: "Chaitanya Khaleja", role: "Associate Programme", image: "/Chaitanya.jpeg" },
+              { name: "Nisha Das", role: "Resource Operation", image: "/Nisha.jpeg" },
+              { name: "Hrithik Kumar", role: "Project Lead", image: "/Hrithik.jpg" },
+              { name: "Suraj Kumar", role: "Accountant", image: "/Suraj.jpeg" },
+              { name: "Ketan Salve", role: "Team Support", image: "/Ketan.png" }
+            ].map((member, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group relative"
+              >
+                 <div className="bg-white border-4 border-black p-8 neo-box flex flex-col items-center text-center gap-6 group-hover:bg-[#FACC15] transition-colors relative z-10">
+                    <div className="w-24 h-24 rounded-full border-4 border-black bg-white overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:rotate-6 transition-transform">
+                       <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                       <h3 className="text-xl font-black uppercase tracking-tight">{member.name}</h3>
+                       <p className="text-[10px] font-bold uppercase text-gray-400 group-hover:text-black transition-colors">{member.role}</p>
+                    </div>
+                 </div>
+                 <div className="absolute inset-0 bg-black translate-x-3 translate-y-3 -z-0" />
+              </motion.div>
+            ))}
+         </div>
+      </section>
+
     </div>
   );
 }

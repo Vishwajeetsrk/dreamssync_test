@@ -78,7 +78,12 @@ export async function POST(req: NextRequest) {
       ...messages.map(m => ({ role: m.role, content: m.content }))
     ], { jsonMode: true });
 
-    return NextResponse.json({ ...parseJSON(content), _provider: provider });
+    const parsedBody = parseJSON(content) as unknown;
+    const payload =
+      typeof parsedBody === 'object' && parsedBody !== null && !Array.isArray(parsedBody)
+        ? (parsedBody as Record<string, unknown>)
+        : {};
+    return NextResponse.json({ ...payload, _provider: provider });
   } catch (error: any) {
     console.error('[career-agent] Error:', error);
     return NextResponse.json({ 

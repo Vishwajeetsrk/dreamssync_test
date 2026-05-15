@@ -1,0 +1,73 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper: Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper: Check if user owns the document
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Helper: Check if the current user is an Admin
+    function isAdmin() {
+      return isAuthenticated() && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Helper: Check if the current user is a Moderator
+    function isModerator() {
+      return isAuthenticated() && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'moderator';
+    }
+
+    // --- COLLECTION: USERS ---
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      // Allow creation during signup, restrict subsequent updates to owner/admin
+      allow create: if isAuthenticated();
+      allow update, delete: if isOwner(userId) || isAdmin();
+
+      // --- SUB-COLLECTION: ARTIFACTS ---
+      match /artifacts/{artifactId} {
+        allow read, write: if isOwner(userId) || isAdmin();
+      }
+    }
+
+    // --- COLLECTION: JOBS ---
+    match /jobs/{jobId} {
+      allow read: if true; // Publicly accessible
+      allow write: if isAdmin() || isModerator();
+    }
+
+    // --- COLLECTION: MEETINGS (ACTIVITIES) ---
+    match /meetings/{meetingId} {
+      allow read: if true; // Publicly accessible
+      allow write: if isAdmin() || isModerator();
+    }
+
+    // --- COLLECTION: RESOURCES ---
+    match /resources/{resourceId} {
+      allow read: if true; // Publicly accessible
+      allow write: if isAdmin() || isModerator();
+    }
+
+    // --- COLLECTION: APPLICATIONS (JOB TRACKER) ---
+    match /applications/{appId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow delete: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    // --- COLLECTION: ADMIN LOGS ---
+    match /admin_logs/{logId} {
+      allow read, write: if isAdmin();
+    }
+
+  }
+}

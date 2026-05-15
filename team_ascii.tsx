@@ -25,8 +25,8 @@ const team = [
     name: "Vishwajeet",
     dept: "CE Training",
     link: "https://www.linkedin.com/in/vishwajeetsrk/",
-    image: "/Vishwajeet.jpeg",
-    bgColor: "#FB923C", // Orange
+    image: "/vishwajeet.jpeg",
+    bgColor: "#FB923C", // Orange (changed from red for variety)
     intro: "Chief architect of the CE Training protocol. Developing high-fidelity learning pathways for complex technical ecosystems."
   },
   {
@@ -50,25 +50,9 @@ const team = [
     dept: "Project Management",
     link: "https://www.linkedin.com/in/kumar-hrithik/",
     image: "/Hrithik.jpg",
-    bgColor: "#2DD4BF", // Teal
+    bgColor: "#A78BFA", // Violet
     intro: "Strategic project lead focused on scaling AI-driven career intelligence nodes across the DreamSync ecosystem."
   },
-  // {
-  //   name: "Suraj Kumar",
-  //   dept: "Finance",
-  //   link: "https://www.linkedin.com/in/suraj-kumar-38b7b527a/",
-  //   image: "/Suraj.jpeg",
-  //   bgColor: "#94A3B8", // Slate
-  //   intro: "Managing the financial engine of DreamSync. Ensuring resource allocation is optimized for maximum student reach and community impact."
-  // },
-  // {
-  //   name: "Ketan Salve",
-  //   dept: "Support",
-  //   link: "https://www.linkedin.com/in/ketan-salve/",
-  //   image: "/Ketan.png",
-  //   bgColor: "#A78BFA", // Violet
-  //   intro: "Core support node for the DreamSync community. Empowering users through comprehensive technical assistance and operational guidance."
-  // },
 ];
 
 export default function Team() {
@@ -105,7 +89,7 @@ export default function Team() {
                 <div className="w-32 h-32 md:w-40 md:h-40 border-4 md:border-8 border-black bg-[#FACC15] flex-shrink-0 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative">
                   <img src={activeMember.image} alt={activeMember.name} className="w-full h-full object-cover" />
                 </div>
-
+                
                 <div className="text-center md:text-left flex-1 w-full space-y-3">
                   <div>
                     <div className="inline-block bg-black text-white px-3 py-1 font-black uppercase text-[10px] md:text-[11px] tracking-widest border-2 border-black mb-1">
@@ -115,7 +99,7 @@ export default function Team() {
                   <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none">
                     {activeMember.name}
                   </h2>
-
+                  
                   <div className="bg-gray-100 border-l-4 md:border-l-8 border-black p-4 md:p-5 mb-5 md:mb-6 italic text-xs md:text-base font-black leading-tight">
                     "{activeMember.intro}"
                   </div>
@@ -173,7 +157,7 @@ export default function Team() {
             onClick={() => setActiveMember(member)}
           >
             {/* Right-Aligned Dept Badge */}
-            <div className="absolute -top-3 -right-2 bg-black text-white font-black text-[9px] md:text-[10px] uppercase tracking-widest px-3 py-1.5 border-2 border-black z-20 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap">
+            <div className="absolute -top-3 -right-2 bg-black text-white font-black text-[9px] md:text-[10px] uppercase tracking-widest px-3 py-1.5 border-2 border-black z-20 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)] whitespace-nowrap">
               {member.dept}
             </div>
 

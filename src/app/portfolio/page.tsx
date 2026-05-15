@@ -6,9 +6,11 @@ import {
   Globe, Plus, Trash2, Download, ChevronRight, ChevronLeft,
   Sparkles, Monitor, Eye, Code2, Check, ArrowRight, Palette,
   User, Briefcase, BookOpen, FolderKanban, Award,
-  Upload, Loader2, Linkedin, Github, ExternalLink
+  Upload, Loader2, Linkedin, Github, ExternalLink, Zap,
 } from 'lucide-react';
 import { validateCareerInput } from '@/lib/aiGuard';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
 // ---------- TYPES ----------
 interface Project { topic: string; points: string; website: string; }
@@ -63,7 +65,7 @@ export default function PortfolioGenerator() {
   const [step, setStep] = useState(1);
   const [selectedTheme, setSelectedTheme] = useState('minimal-dev');
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedHtml, setGeneratedHtml] = useState('');
+  const [generatedCode, setGeneratedCode] = useState<{ html: string; css: string; js: string } | null>(null);
   const [showPreview, setShowPreview] = useState(false);
   const [genError, setGenError] = useState('');
   const [genProgress, setGenProgress] = useState(0);
@@ -85,6 +87,7 @@ export default function PortfolioGenerator() {
   const [achievements, setAchievements] = useState('');
   const [hobbies, setHobbies] = useState('');
   const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
 
   // Dynamic arrays
   const [projects, setProjects] = useState<Project[]>([{ topic: '', points: '', website: '' }]);
@@ -155,7 +158,12 @@ export default function PortfolioGenerator() {
       setGenProgress(100);
       const resData = await res.json();
       if (!res.ok) throw new Error(resData.error || 'Generation failed');
-      setGeneratedHtml(resData.html);
+      
+      setGeneratedCode({
+        html: resData.html || '',
+        css: resData.css || '',
+        js: resData.js || ''
+      });
       setStep(4);
     } catch (err: any) {
       setGenError(err.message);
@@ -205,14 +213,19 @@ export default function PortfolioGenerator() {
     setTimeout(() => setIsEnhancing(false), 1500);
   };
 
-  const handleDownload = () => {
-    const blob = new Blob([generatedHtml], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${fullName || 'portfolio'}.html`;
-    a.click();
-    URL.revokeObjectURL(url);
+  const downloadSingleFile = (filename: string, content: string) => {
+    const blob = new Blob([content], { type: 'text/plain' });
+    saveAs(blob, filename);
+  };
+
+  const handleDownload = async () => {
+    if (!generatedCode) return;
+    const zip = new JSZip();
+    zip.file('index.html', generatedCode.html);
+    zip.file('style.css', generatedCode.css);
+    zip.file('script.js', generatedCode.js);
+    const blob = await zip.generateAsync({ type: 'blob' });
+    saveAs(blob, 'portfolio-export.zip');
   };
 
   const inputCls = "w-full px-3 py-2.5 border-2 border-black/20 bg-white rounded-lg text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all";
@@ -220,77 +233,119 @@ export default function PortfolioGenerator() {
   const labelCls = "block text-sm font-semibold text-gray-700 mb-1.5";
 
   // ---- GENERATED STATE ----
-  if (generatedHtml && step === 4) {
+  if (generatedCode && step === 4) {
+    const combinedPreview = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>${generatedCode.css}</style>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+          <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+        </head>
+        <body>
+          ${generatedCode.html}
+          <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+          <script>${generatedCode.js}</script>
+        </body>
+      </html>
+    `;
+
     return (
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6 max-w-6xl mx-auto">
-        {/* Success Banner */}
-        <div className="relative overflow-hidden bg-gradient-to-r from-green-500 to-emerald-600 border-4 border-black p-8 neo-box text-white">
-          <div className="absolute -right-8 -top-8 w-32 h-32 bg-white/10 rounded-full" />
-          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                  <Check className="w-6 h-6" />
-                </div>
-                <h2 className="text-3xl font-black">Portfolio Generated! 🎉</h2>
-              </div>
-              <p className="text-green-100 font-medium">Your premium portfolio is ready. Download and host it anywhere — Vercel, Netlify, or GitHub Pages.</p>
-            </div>
-            <div className="flex gap-3 flex-wrap">
-              <button onClick={handleDownload} className="flex items-center gap-2 px-5 py-3 bg-white text-black font-black border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all text-sm">
-                <Download className="w-4 h-4" /> Download HTML
-              </button>
-              <button onClick={() => setShowPreview(!showPreview)} className="flex items-center gap-2 px-5 py-3 bg-black text-white font-black border-4 border-black shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)] hover:translate-y-1 transition-all text-sm">
-                <Eye className="w-4 h-4" /> {showPreview ? 'Hide' : 'Live'} Preview
-              </button>
-              <button onClick={() => { setGeneratedHtml(''); setStep(1); }} className="flex items-center gap-2 px-5 py-3 bg-white/20 text-white font-bold border-2 border-white/40 hover:bg-white/30 transition-all text-sm rounded-lg">
-                ← Start Over
-              </button>
-            </div>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6 max-w-6xl mx-auto pb-20">
+        {/* Success Header */}
+        <div className="relative overflow-hidden bg-white border-8 border-black p-10 shadow-[16px_16px_0px_0px_rgba(0,0,0,1)]">
+          <div className="absolute top-0 right-0 p-4">
+             <div className="px-4 py-1 bg-green-500 text-white font-black text-[10px] uppercase tracking-widest border-2 border-black">Masterpiece Built</div>
           </div>
+          <div className="flex flex-col md:flex-row gap-10 items-start">
+             <div className="w-24 h-24 bg-yellow-400 border-4 border-black flex items-center justify-center shadow-[6px_6px_0px_0px_#000]">
+                <Sparkles className="w-12 h-12" />
+             </div>
+             <div className="flex-1 space-y-4">
+                <h2 className="text-5xl font-black uppercase italic tracking-tighter leading-none">Your Premium <br /> <span className="text-blue-600">Portfolio</span> is Live.</h2>
+                <p className="text-gray-500 font-bold uppercase text-sm tracking-wide">High-fidelity production code has been synthesized with AOS animations and premium typography.</p>
+                
+                <div className="flex flex-wrap gap-4 pt-4">
+                   <button onClick={handleDownload} className="flex items-center gap-3 px-8 py-4 bg-blue-600 text-white font-black border-4 border-black shadow-[6px_6px_0px_0px_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all uppercase text-sm">
+                      <Download className="w-5 h-5" /> Export All Assets (ZIP)
+                   </button>
+                   <button onClick={() => setShowPreview(!showPreview)} className="flex items-center gap-3 px-8 py-4 bg-white text-black font-black border-4 border-black shadow-[6px_6px_0px_0px_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all uppercase text-sm">
+                      <Eye className="w-5 h-5" /> {showPreview ? 'Collapse Preview' : 'Interactive Preview'}
+                   </button>
+                </div>
+             </div>
+          </div>
+        </div>
+
+        {/* Individual File Cloud */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+           {[
+             { name: 'INDEX.HTML', content: generatedCode.html, icon: Code2, color: 'border-orange-500', bg: 'bg-orange-50' },
+             { name: 'STYLE.CSS', content: generatedCode.css, icon: Palette, color: 'border-blue-500', bg: 'bg-blue-50' },
+             { name: 'SCRIPT.JS', content: generatedCode.js, icon: Zap, color: 'border-yellow-500', bg: 'bg-yellow-50' }
+           ].map((file, i) => (
+             <div key={i} className={`p-6 border-4 border-black ${file.bg} flex flex-col gap-4 shadow-[8px_8px_0px_0px_#000]`}>
+                <div className="flex items-center justify-between">
+                   <file.icon className="w-8 h-8" />
+                   <span className="text-[10px] font-black tracking-widest uppercase opacity-40">Development Node</span>
+                </div>
+                <h4 className="text-xl font-black uppercase italic">{file.name}</h4>
+                <button 
+                  onClick={() => downloadSingleFile(file.name.toLowerCase(), file.content)}
+                  className="mt-auto flex items-center justify-center gap-2 py-3 bg-white border-2 border-black font-black text-[10px] uppercase hover:bg-black hover:text-white transition-colors"
+                >
+                   Download Source
+                </button>
+             </div>
+           ))}
         </div>
 
         {/* Preview Panel */}
         <AnimatePresence>
           {showPreview && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="border-4 border-black neo-box overflow-hidden"
-              style={{ boxShadow: '8px 8px 0px 0px rgba(0,0,0,1)' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              className="border-8 border-black shadow-[20px_20px_0px_0px_rgba(0,0,0,1)] bg-white overflow-hidden"
             >
-              <div className="bg-gray-900 border-b-4 border-black p-3 flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
-                <div className="ml-4 flex-1 bg-gray-800 rounded px-3 py-1 text-xs font-mono text-gray-300 flex items-center gap-2">
-                  <Globe className="w-3 h-3" />
-                  dreamsync://preview/{fullName.toLowerCase().replace(/\s+/g, '-') || 'portfolio'}.html
+              <div className="bg-black text-white p-4 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="flex gap-1.5 mr-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                    <div className="w-3 h-3 rounded-full bg-green-500" />
+                  </div>
+                  <span className="text-[10px] font-black uppercase tracking-widest hidden md:block">Portfolio Runtime Simulator v1.0</span>
                 </div>
-                <button onClick={handleDownload} className="ml-2 flex items-center gap-1 text-xs font-bold px-3 py-1 bg-primary text-white rounded hover:bg-primary/80 transition-colors">
-                  <Download className="w-3 h-3" /> Save
-                </button>
+                <div className="flex items-center gap-4">
+                   <div className="px-3 py-1 bg-white/10 rounded text-[10px] font-mono">dreamsync://${fullName.toLowerCase().replace(/\s+/g, '-')}.local</div>
+                   <button onClick={() => setShowPreview(false)} className="text-white hover:text-red-500 font-bold uppercase text-[10px]">Close X</button>
+                </div>
               </div>
-              <iframe srcDoc={generatedHtml} className="w-full bg-white" style={{ height: '85vh' }} title="Portfolio Preview" sandbox="allow-scripts allow-popups" />
+              <iframe srcDoc={combinedPreview} className="w-full bg-white" style={{ height: '80vh' }} title="Portfolio Preview" sandbox="allow-scripts allow-popups" />
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* How to Deploy */}
-        <div className="bg-white border-4 border-black p-6 neo-box">
-          <h3 className="text-xl font-black mb-4 flex items-center gap-2"><Monitor className="w-5 h-5" /> Deploy Your Portfolio</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Deployment Steps */}
+        <div className="bg-black text-white border-8 border-black p-10 shadow-[12px_12px_0px_0px_#2563EB]">
+          <h3 className="text-3xl font-black uppercase italic mb-8 flex items-center gap-4"><Monitor className="w-8 h-8 text-blue-400" /> Advanced Deployment Nodes</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
-              { name: 'Vercel', icon: '▲', steps: ['Download your .html file', 'Go to vercel.com/new', 'Drop the file or import from GitHub', 'Live in 30 seconds!'] },
-              { name: 'Netlify', icon: '◆', steps: ['Download your .html file', 'Go to netlify.com', 'Drag & drop the file', 'Get free .netlify.app URL'] },
-              { name: 'GitHub Pages', icon: '■', steps: ['Create a repo named username.github.io', 'Upload your .html as index.html', 'Enable Pages in Settings', 'Free custom domain!'] },
+              { name: 'Instant (Vercel)', steps: ['Drop your ZIP at vercel.com', 'AI configures the build', 'Custom SSL issued'] },
+              { name: 'Static (Netlify)', steps: ['Drag folder to Netlify Drop', 'Instant global CDN', 'Form handling built-in'] },
+              { name: 'Cloud (GitHub)', steps: ['Push to username.github.io', 'Free hosting forever', 'DevOps integration'] },
             ].map(host => (
-              <div key={host.name} className="border-2 border-black p-4 bg-gray-50">
-                <p className="font-black text-lg mb-3">{host.icon} {host.name}</p>
-                <ol className="space-y-1">
-                  {host.steps.map((s, i) => <li key={i} className="text-sm text-gray-700 flex gap-2"><span className="font-bold text-primary shrink-0">{i+1}.</span>{s}</li>)}
-                </ol>
+              <div key={host.name} className="space-y-4">
+                <p className="font-black text-xl text-blue-400 uppercase">{host.name}</p>
+                <ul className="space-y-4">
+                  {host.steps.map((s, i) => (
+                    <li key={i} className="text-xs font-black uppercase tracking-wide flex gap-4 text-gray-400">
+                      <span className="text-white">0{i+1}</span> {s}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
@@ -430,6 +485,11 @@ export default function PortfolioGenerator() {
                 <div>
                   <label className={labelCls}>GitHub URL</label>
                   <input value={github} onChange={e => setGithub(e.target.value)} className={inputCls} placeholder="github.com/arjun" />
+                </div>
+                <div className="col-span-2">
+                  <label className={labelCls}>Resume (for Portfolio Download Button)</label>
+                  <input type="file" accept=".pdf" onChange={e => setResumeFile(e.target.files?.[0] || null)} className={inputCls} />
+                  <p className="text-[10px] text-gray-400 mt-1 uppercase font-bold">This file will be included in your portfolio pack so visitors can download your resume.</p>
                 </div>
                 <div>
                   <label className={labelCls}>Core Skills <span className="text-red-500">*</span></label>
@@ -619,7 +679,7 @@ export default function PortfolioGenerator() {
           )}
 
           {/* STEP 4: Pre-Generate Review */}
-          {step === 4 && !generatedHtml && (
+          {step === 4 && !generatedCode && (
             <div className="bg-white border-4 border-black neo-box p-8 space-y-6">
               {isGenerating ? (
                 <div className="text-center space-y-6 py-8">
@@ -716,7 +776,7 @@ export default function PortfolioGenerator() {
       )}
 
       {/* Back to edit when on step 4 without generated */}
-      {step === 4 && !generatedHtml && (
+      {step === 4 && !generatedCode && (
         <button onClick={() => setStep(3)} className="flex items-center gap-2 px-6 py-3 border-4 border-black font-bold bg-white hover:bg-gray-50">
           <ChevronLeft className="w-5 h-5" /> Back to Edit
         </button>

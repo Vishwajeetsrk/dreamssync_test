@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { auth, db } from '@/lib/firebase';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { doc, onSnapshot, getDoc } from 'firebase/firestore';
+import { doc, onSnapshot, getDoc, setDoc } from 'firebase/firestore';
 
 import { useSession } from 'next-auth/react';
 
@@ -12,13 +12,15 @@ interface AuthContextType {
   userData: any | null;
   loading: boolean;
   provider: 'firebase' | 'next-auth' | null;
+  isAdmin: boolean;
 }
 
 const AuthContext = createContext<AuthContextType>({ 
   user: null, 
   userData: null, 
   loading: true,
-  provider: null
+  provider: null,
+  isAdmin: false,
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -43,19 +45,33 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setProvider('firebase');
         
         const docRef = doc(db, 'users', currentUser.uid);
-        unsubscribeSnapshot = onSnapshot(docRef, (docSnap) => {
-          if (docSnap.exists()) {
-            setUserData(docSnap.data());
-          } else {
+        unsubscribeSnapshot = onSnapshot(
+          docRef,
+          (docSnap) => {
+            if (docSnap.exists()) {
+              setUserData(docSnap.data());
+            } else {
+              setUserData({
+                name: currentUser.displayName || currentUser.email?.split('@')[0],
+                email: currentUser.email,
+                avatar_url: currentUser.photoURL || '',
+                plan: 'free'
+              });
+            }
+            setLoading(false);
+          },
+          (error) => {
+            console.error("[AuthContext] Firestore onSnapshot error:", error);
+            // Fallback user data to unblock the UI
             setUserData({
               name: currentUser.displayName || currentUser.email?.split('@')[0],
               email: currentUser.email,
               avatar_url: currentUser.photoURL || '',
               plan: 'free'
             });
+            setLoading(false);
           }
-          setLoading(false);
-        });
+        );
       } else if (sessionStatus !== 'loading') {
         // If no Firebase user, check for NextAuth session
         if (session) {
@@ -68,25 +84,42 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             // Note: Ideally you'd use a stable ID, but session.user.email is available
             const docRef = doc(db, 'users', (session.user as any).id || nextAuthEmail.replace(/\./g, '_'));
             
-            getDoc(docRef).then(async (docSnap) => {
-              if (docSnap.exists()) {
-                setUserData(docSnap.data());
-              } else {
-                // Create the user record in Firestore if it doesn't exist
-                const newUserData = {
+            getDoc(docRef)
+              .then(async (docSnap) => {
+                if (docSnap.exists()) {
+                  setUserData(docSnap.data());
+                } else {
+                  // Create the user record in Firestore if it doesn't exist
+                  const newUserData = {
+                    name: session.user?.name,
+                    email: session.user?.email,
+                    avatar_url: session.user?.image,
+                    plan: 'free',
+                    created_at: new Date().toISOString(),
+                    provider: 'next-auth'
+                  };
+                  try {
+                    await setDoc(docRef, newUserData);
+                  } catch (err) {
+                    console.error("[AuthContext] Error setting next-auth user doc:", err);
+                  }
+                  setUserData(newUserData);
+                }
+                setUser(session.user);
+                setLoading(false);
+              })
+              .catch((error) => {
+                console.error("[AuthContext] Error getting next-auth user doc:", error);
+                // Fallback to keep dashboard working
+                setUser(session.user);
+                setUserData({
                   name: session.user?.name,
                   email: session.user?.email,
                   avatar_url: session.user?.image,
-                  plan: 'free',
-                  created_at: new Date().toISOString(),
-                  provider: 'next-auth'
-                };
-                await setDoc(docRef, newUserData);
-                setUserData(newUserData);
-              }
-              setUser(session.user);
-              setLoading(false);
-            });
+                  plan: 'free'
+                });
+                setLoading(false);
+              });
           } else {
             setUser(session.user);
             setUserData({
@@ -111,8 +144,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }, [session, sessionStatus]);
 
+  const isAdmin = Boolean(
+    userData &&
+      ((userData as { isAdmin?: boolean }).isAdmin === true ||
+        (userData as { role?: string }).role === 'admin')
+  );
+
   return (
-    <AuthContext.Provider value={{ user, userData, loading, provider }}>
+    <AuthContext.Provider value={{ user, userData, loading, provider, isAdmin }}>
       {children}
     </AuthContext.Provider>
   );

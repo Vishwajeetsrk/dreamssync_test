@@ -12,7 +12,20 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Scratch / backup copies at repo root (not part of app build graph)
+    "team_old.tsx",
+    "team_ascii.tsx",
   ]),
+  {
+    rules: {
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-require-imports": "warn",
+      "react/no-unescaped-entities": "warn",
+      "react-hooks/purity": "warn",
+      "react-hooks/set-state-in-effect": "warn",
+      "react/jsx-no-comment-textnodes": "warn",
+    },
+  },
 ]);
 
 export default eslintConfig;

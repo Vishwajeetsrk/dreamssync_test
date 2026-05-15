@@ -8,7 +8,7 @@ import {
   Star, Download, Printer, Wrench, Zap, Globe, TrendingUp, Search, Loader2, FileText
 } from 'lucide-react';
 import { validateCareerInput } from '@/lib/aiGuard';
-import { Document, Packer, Paragraph, TextRun, HeadingLevel, Link, AlignmentType } from 'docx';
+import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } from 'docx';
 import { saveAs } from 'file-saver';
 
 export default function Roadmap() {
