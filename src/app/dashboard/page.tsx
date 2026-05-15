@@ -13,6 +13,7 @@ const tools = [
   { name: 'ATS CHECKER', href: '/ats-check', icon: CheckCircle, color: 'bg-purple-100 text-purple-700', desc: 'Scan existing resumes for optimization.' },
   { name: 'PORTFOLIO GEN', href: '/portfolio', icon: Sparkles, color: 'bg-pink-100 text-pink-700', desc: 'Auto-generate a personal site.' },
   { name: 'AI ROADMAP', href: '/roadmap', icon: Briefcase, color: 'bg-amber-100 text-amber-700', desc: 'Plan your learning timeline.' },
+  { name: 'MOCK INTERVIEW', href: '/mock-interview', icon: Zap, color: 'bg-cyan-100 text-cyan-700', desc: 'Interactive AI voice-based mock interviews.', premium: true },
   { name: 'ROADMAPS & DOCS', href: '/documents', icon: BookOpen, color: 'bg-blue-100 text-blue-700', desc: 'Detailed guides & free resources.' },
   { name: 'LINKEDIN PRO', href: '/linkedin', icon: Link2, color: 'bg-[#0A66C2]/10 text-blue-600', desc: 'AI headlines & keyword optimization.' },
   { name: 'AI CAREER AGENT', href: '/career-agent', icon: Brain, color: 'bg-violet-100 text-violet-700', desc: 'AI guidance & real-time jobs.' },
