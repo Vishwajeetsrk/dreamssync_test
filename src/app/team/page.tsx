@@ -25,7 +25,7 @@ const team = [
     name: "Vishwajeet",
     dept: "CE Training",
     link: "https://www.linkedin.com/in/vishwajeetsrk/",
-    image: "/Vishwajeet.jpeg",
+    image: "/vishwajeet.jpeg",
     bgColor: "#FB923C", // Orange
     intro: "Chief architect of the CE Training protocol. Developing high-fidelity learning pathways for complex technical ecosystems."
   },
