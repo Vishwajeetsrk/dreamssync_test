@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Coffee, Globe, Shield, Zap, Sparkles, Linkedin, Mail } from 'lucide-react';
 import Image from 'next/image';
+import OfficialLogo from './OfficialLogo';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -14,13 +15,7 @@ export default function Footer() {
         {/* Brand Identity */}
         <div className="space-y-8">
           <Link href="/" className="inline-block">
-            <Image 
-              src="/DreamSynclogo.png" 
-              alt="DreamSync Logo" 
-              width={160} 
-              height={40} 
-              className="object-contain" 
-            />
+            <OfficialLogo />
           </Link>
           <p className="text-xs font-bold leading-relaxed text-gray-400 max-w-xs uppercase">
             AI-powered career guidance for Indian students. Find your path, build your resume, and grow your career.
@@ -36,6 +31,7 @@ export default function Footer() {
             <li><Link href="/roadmap" className="hover:text-black">AI Roadmap</Link></li>
             <li><Link href="/portfolio" className="hover:text-black">Portfolio Gen</Link></li>
             <li><Link href="/linkedin" className="hover:text-black">LinkedIn Optimizer</Link></li>
+            <li><Link href="/mock-interview" className="hover:text-black text-[#2563EB]">Mock Interview</Link></li>
           </ul>
         </div>
         
@@ -96,7 +92,7 @@ export default function Footer() {
       
       {/* Bottom Meta */}
       <div className="max-w-7xl mx-auto mt-24 pt-10 border-t-2 border-black/5 flex justify-between items-center text-[10px] font-black uppercase text-gray-400">
-        <span>© {currentYear} Dream Sync. All rights reserved.</span>
+        <span>© 2026 Vishwajeet. All rights reserved.</span>
         <div className="flex gap-8">
           <Link href="/privacy" className="hover:text-black">Privacy</Link>
           <Link href="/terms" className="hover:text-black">Terms</Link>

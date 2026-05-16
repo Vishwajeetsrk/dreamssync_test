@@ -7,7 +7,7 @@ import {
   GraduationCap, Box, CheckCircle, ArrowRight, ShieldCheck,
   Star, Download, Printer, Wrench, Zap, Globe, TrendingUp, Search, Loader2, FileText
 } from 'lucide-react';
-import { validateCareerInput } from '@/lib/aiGuard';
+import { validateCareerInput, validateCareerRole } from '@/lib/aiGuard';
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } from 'docx';
 import { saveAs } from 'file-saver';
 import { secureFetch } from '@/lib/secureFetch';
@@ -27,6 +27,20 @@ export default function Roadmap() {
   const generateRoadmap = async () => {
     if (!query.role) return alert("ROLE REDACTED. FIELD MANDATORY.");
     
+    const roleValidation = validateCareerRole(query.role);
+    if (!roleValidation.allowed) {
+      setSafetyError({ 
+        message: roleValidation.message, 
+        alternatives: [
+          "Software Developer", 
+          "Data Scientist", 
+          "UI/UX Designer", 
+          "Product Manager"
+        ] 
+      });
+      return;
+    }
+
     const safety = validateCareerInput(query.role);
     if (!safety.allowed) {
       setSafetyError({ 

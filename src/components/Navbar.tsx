@@ -11,6 +11,7 @@ import { auth } from '@/lib/firebase';
 import { signOut as firebaseSignOut } from 'firebase/auth';
 import { signOut as nextAuthSignOut } from 'next-auth/react';
 import Image from 'next/image';
+import OfficialLogo from './OfficialLogo';
 
 export default function Navbar() {
   const { user, userData } = useAuth();
@@ -37,6 +38,7 @@ export default function Navbar() {
     { name: 'AI ROADMAP', href: '/roadmap' },
     { name: 'AI CAREER AGENT', href: '/career-agent' },
     { name: 'RESUME BUILDER', href: '/resume-builder' },
+    { name: 'MOCK INTERVIEW', href: '/mock-interview' },
     { name: 'ATS CHECK', href: '/ats-check' },
     { name: 'IKIGAI FINDER', href: '/ikigai' },
     { name: 'PORTFOLIO GEN', href: '/portfolio' },
@@ -50,15 +52,8 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto flex items-center justify-between">
         
         {/* Branding */}
-        <Link href="/" className="shrink-0 inline-block group">
-           <Image 
-             src="/DreamSynclogo.png" 
-             alt="DreamSync Logo" 
-             width={180} 
-             height={45} 
-             className="object-contain" 
-             priority 
-           />
+        <Link href="/" className="shrink-0 inline-block">
+           <OfficialLogo />
         </Link>
 
         {/* Center Navigation */}

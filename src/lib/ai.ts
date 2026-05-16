@@ -1,4 +1,4 @@
-import { redis } from './ratelimit';
+import { redis, hasRedis } from './ratelimit';
 import crypto from 'crypto';
 
 export type AIMessage = {
@@ -10,7 +10,7 @@ export type AIOptions = {
   jsonMode?: boolean;
   maxTokens?: number;
   temperature?: number;
-  /** Timeout in ms per provider attempt. Default: 45000 (45s) */
+  /** Timeout in ms per provider attempt. Default: 25000 (25s) to avoid Vercel gateway timeouts. */
   timeoutMs?: number;
 };
 
@@ -68,7 +68,7 @@ async function callGroq(
       },
       body: JSON.stringify(body),
     },
-    opts.timeoutMs ?? 45_000
+    opts.timeoutMs ?? 25_000
   );
 
   if (!res.ok) {
@@ -90,14 +90,11 @@ async function callOpenRouter(
   const key = process.env.OPENROUTER_API_KEY;
   if (!key) throw new Error('OPENROUTER_API_KEY not configured');
 
-  // Multi-model rotation for OpenRouter resilience
+  // Primary resilient models for OpenRouter fallback
   const models = [
     'openai/gpt-4o-mini',
     'meta-llama/llama-3.3-70b-instruct',
-    'meta-llama/llama-3.1-70b-instruct',
-    'anthropic/claude-3-haiku',
     'google/gemini-flash-1.5-8b',
-    'meta-llama/llama-3.1-8b-instruct:free'
   ];
 
   let lastError = '';
@@ -123,7 +120,7 @@ async function callOpenRouter(
           },
           body: JSON.stringify(body),
         },
-        opts.timeoutMs ?? 45_000
+        opts.timeoutMs ?? 15_000
       );
 
       if (!res.ok) {
@@ -180,7 +177,7 @@ async function callGemini(
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     },
-    opts.timeoutMs ?? 45_000 // Gemini can be slightly slower
+    opts.timeoutMs ?? 15_000 // Gemini backup
   );
 
   if (!res.ok) {
@@ -199,64 +196,68 @@ export async function callAI(
   messages: AIMessage[],
   opts: AIOptions = {}
 ): Promise<ProviderResult> {
-  // 1. Generate Cache Key (based on messages and opts)
+  const startTime = Date.now();
+  const MAX_BUDGET_MS = 50_000; // 50s total before giving up
+
+  // 1. Generate Cache Key
   const cacheKey = `ds:ai:cache:${crypto
     .createHash('md5')
     .update(JSON.stringify({ messages, opts }))
     .digest('hex')}`;
 
-  // 2. Try Cache First (if redis is available)
-  try {
-    const cached = await redis.get<ProviderResult>(cacheKey);
-    if (cached) {
-      // Return cached result (verified non-null by SDK type if configured)
-      return { ...cached, provider: `${cached.provider} (cached)` };
-    }
-  } catch (err) {
-    console.warn('[AI] Cache lookup error:', err);
+  // 2. Try Cache First
+  if (hasRedis) {
+    try {
+      const cached = await redis.get<ProviderResult>(cacheKey);
+      if (cached) return { ...cached, provider: `${cached.provider} (cached)` };
+    } catch (err) { /* ignore cache lookup errors */ }
   }
 
   const errors: string[] = [];
 
-  // Logic for providers below...
-  const executeCall = async (): Promise<ProviderResult> => {
-    // 1. Groq — fastest, most generous free tier
+  const checkBudget = () => {
+    if (Date.now() - startTime > MAX_BUDGET_MS) {
+       throw new Error(`AI Timeout Budget Exceeded (${MAX_BUDGET_MS}ms)`);
+    }
+  };
+
+  const getResult = async (): Promise<ProviderResult> => {
+    // 1. Groq
     try {
-      return await callGroq(messages, opts);
-    } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : String(e);
-      errors.push(`Groq: ${msg}`);
-      console.warn('[AI] Groq failed →', msg.slice(0, 120));
+      checkBudget();
+      return await callGroq(messages, { ...opts, timeoutMs: opts.timeoutMs ?? 15_000 });
+    } catch (e: any) {
+      errors.push(`Groq: ${e.message}`);
     }
 
     // 2. OpenRouter
     try {
-      return await callOpenRouter(messages, opts);
-    } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : String(e);
-      errors.push(`OpenRouter: ${msg}`);
-      console.warn('[AI] OpenRouter failed →', msg.slice(0, 120));
+      checkBudget();
+      return await callOpenRouter(messages, { ...opts, timeoutMs: opts.timeoutMs ?? 15_000 });
+    } catch (e: any) {
+      errors.push(`OpenRouter: ${e.message}`);
     }
 
-    // 3. Gemini — last resort
+    // 3. Gemini
     try {
-      return await callGemini(messages, opts);
-    } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : String(e);
-      errors.push(`Gemini: ${msg}`);
-      console.warn('[AI] Gemini failed →', msg.slice(0, 120));
+      checkBudget();
+      return await callGemini(messages, { ...opts, timeoutMs: opts.timeoutMs ?? 15_000 });
+    } catch (e: any) {
+      errors.push(`Gemini: ${e.message}`);
     }
 
-    throw new Error(`All AI providers failed:\n${errors.join('\n')}`);
+    throw new Error(`All AI providers failed or timed out:\n${errors.join('\n')}`);
   };
 
-  const result = await executeCall();
+  const result = await getResult();
 
   // 3. Save to Cache (Async, don't block response) - TTL: 24h
-  try {
-    redis.set(cacheKey, result, { ex: 60 * 60 * 24 }).catch(e => console.error('[AI] Cache write error:', e));
-  } catch (err) {
-    /* ignore cache save errors */
+  if (hasRedis) {
+    try {
+      redis.set(cacheKey, result, { ex: 60 * 60 * 24 }).catch(e => console.error('[AI] Cache write error:', e));
+    } catch (err) {
+      /* ignore cache save errors */
+    }
   }
 
   return result;
@@ -268,8 +269,19 @@ export async function callAI(
  */
 export function parseJSON<T>(raw: string): T {
   let cleaned = raw.trim();
-  if (cleaned.startsWith('```')) {
-    cleaned = cleaned.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
+  try {
+    if (cleaned.startsWith('```')) {
+      cleaned = cleaned.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
+    }
+    // Deeply clean any potential non-JSON garbage before/after the object
+    const start = cleaned.indexOf('{');
+    const end = cleaned.lastIndexOf('}');
+    if (start !== -1 && end !== -1 && end >= start) {
+       cleaned = cleaned.substring(start, end + 1);
+    }
+    return JSON.parse(cleaned) as T;
+  } catch (e) {
+    console.error('[parseJSON] Failed to parse AI response:', e, 'Raw content:', raw.slice(0, 500));
+    throw new Error('AI returned an invalid JSON response. Please try again.');
   }
-  return JSON.parse(cleaned) as T;
 }

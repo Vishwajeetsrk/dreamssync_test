@@ -6,7 +6,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { z } from 'zod';
 import { callAI, parseJSON } from '@/lib/ai';
-import { validateCareerInput } from '@/lib/aiGuard';
+import { validateCareerInput, validateCareerRole } from '@/lib/aiGuard';
 
 // ── Schema ────────────────────────────────────────────────────────
 const BodySchema = z.object({
@@ -91,7 +91,12 @@ export async function POST(req: NextRequest) {
     }
     body = parsed.data;
 
-    // 4. Safety Guard
+    // 4. Safety & Role Integrity Guard
+    const roleValidation = validateCareerRole(body.role);
+    if (!roleValidation.allowed) {
+      return NextResponse.json({ error: 'Safety Violation', details: roleValidation.message }, { status: 400 });
+    }
+
     const safety = validateCareerInput(body.role);
     if (!safety.allowed) {
       return NextResponse.json({ error: 'Safety Violation', details: safety.message }, { status: 400 });

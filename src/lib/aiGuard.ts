@@ -88,3 +88,66 @@ export async function logSafetyViolation(userId: string | undefined, input: stri
     console.error('Failed to log safety violation:', error);
   }
 }
+
+const GIBBERISH_OR_GREETINGS = [
+  'hi', 'hello', 'hey', 'wassup', 'howdy', 'sup', 'yo', 'hola',
+  'test', 'demo', 'stuff', 'something', 'anything', 'nothing',
+  'job', 'work', 'career', 'role', 'placeholder', 'dummy',
+  'how are you', 'good morning', 'good evening', 'thanks', 'thank you',
+  'plz', 'please', 'help', 'ok', 'okay', 'yes', 'no', 'bye'
+];
+
+/**
+ * Validates that a specified target career represents a valid role title
+ * and is not a greeting, filler, or gibberish.
+ */
+export function validateCareerRole(role: string): GuardResult {
+  if (!role) {
+    return { allowed: false, message: '⚠️ Target career goal cannot be empty.' };
+  }
+  
+  const normalized = role.toLowerCase().trim();
+
+  // 1. Catch extremely short inputs (excluding legitimate short roles like QA, HR, IT, VP, MD)
+  const legitShortRoles = ['qa', 'hr', 'it', 'vp', 'md', 'ai', 'ml', 'ar', 'vr', 'ui', 'ux'];
+  if (normalized.length < 3 && !legitShortRoles.includes(normalized)) {
+    return {
+      allowed: false,
+      message: "⚠️ Role name is too short. Please enter a professional career title (e.g. Frontend Engineer)."
+    };
+  }
+
+  // 2. Catch simple greetings or filler phrases
+  if (GIBBERISH_OR_GREETINGS.includes(normalized)) {
+    return {
+      allowed: false,
+      message: `⚠️ "${role}" is not recognized as a professional role. Please enter a valid career goal (e.g. Data Scientist, Product Designer).`
+    };
+  }
+
+  // 3. Basic character format validation (letters, numbers, standard role symbols)
+  // Supports: C++, C#, Web3, Level 2, UI/UX
+  const charRegex = /^[a-zA-Z0-9\s\-&.+/()#]{2,}$/;
+  if (!charRegex.test(normalized)) {
+     return {
+       allowed: false,
+       message: "⚠️ Career role contains unsupported characters. Please use alphanumeric professional titles."
+     };
+  }
+
+  // 4. Block obvious conversational questions/fillers
+  const questionPhrases = [
+    'what is', 'tell me', 'how to', 'i want', 'give me', 
+    'show me', 'generate', 'create a', 'make me'
+  ];
+  for (const phr of questionPhrases) {
+    if (normalized.startsWith(phr)) {
+      return {
+        allowed: false,
+        message: `⚠️ Please enter just the professional role title (e.g. "Web Developer") rather than full sentences.`
+      };
+    }
+  }
+
+  return { allowed: true, message: '' };
+}

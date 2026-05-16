@@ -225,6 +225,32 @@ export default function PortfolioGenerator() {
     zip.file('index.html', generatedCode.html);
     zip.file('style.css', generatedCode.css);
     zip.file('script.js', generatedCode.js);
+
+    // Asset injector folder
+    const assetsFolder = zip.folder('assets');
+
+    // Inject profile picture if available
+    if (profileImage && assetsFolder) {
+      try {
+        const matches = profileImage.match(/^data:(.+);base64,(.+)$/);
+        if (matches && matches[2]) {
+          assetsFolder.file('profile.jpg', matches[2], { base64: true });
+        }
+      } catch (err) {
+        console.error('[Export] Failed to append profile image to package:', err);
+      }
+    }
+
+    // Inject resume file if available
+    if (resumeFile && assetsFolder) {
+      try {
+        const buffer = await resumeFile.arrayBuffer();
+        assetsFolder.file('resume.pdf', buffer);
+      } catch (err) {
+        console.error('[Export] Failed to append resume PDF to package:', err);
+      }
+    }
+
     const blob = await zip.generateAsync({ type: 'blob' });
     saveAs(blob, 'portfolio-export.zip');
   };
@@ -235,21 +261,47 @@ export default function PortfolioGenerator() {
 
   // ---- GENERATED STATE ----
   if (generatedCode && step === 4) {
-    const combinedPreview = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <style>${generatedCode.css}</style>
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-          <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
-        </head>
-        <body>
-          ${generatedCode.html}
-          <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-          <script>${generatedCode.js}</script>
-        </body>
-      </html>
-    `;
+    // Smart Preview Builder: replaces static asset links with local base64, and injects scripts seamlessly
+    let previewHtml = generatedCode.html;
+
+    // 1. Inject actual uploaded profile photo in place of static asset folder path
+    if (profileImage) {
+      previewHtml = previewHtml.replace(/(['"])(?:\.\/)?assets\/profile\.jpg(['"])/gi, `$1${profileImage}$2`);
+    }
+
+    const hasHead = previewHtml.toLowerCase().includes('<head>');
+    const hasBody = previewHtml.toLowerCase().includes('</body>');
+
+    let combinedPreview = '';
+
+    if (hasHead && hasBody) {
+      // The AI generated a complete standalone document. We just patch in the CSS and JS.
+      combinedPreview = previewHtml
+        .replace(/<\/head>/i, `<style>${generatedCode.css}</style></head>`)
+        .replace(/<\/body>/i, `<script>${generatedCode.js}</script></body>`);
+    } else {
+      // Fallback wrapper for snippet responses
+      combinedPreview = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>${generatedCode.css}</style>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+            <!-- Include standard engines for flawless fallback simulator rendering -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+          </head>
+          <body>
+            ${previewHtml}
+            <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+            <script>${generatedCode.js}</script>
+          </body>
+        </html>
+      `;
+    }
 
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6 max-w-6xl mx-auto pb-20">
@@ -320,7 +372,7 @@ export default function PortfolioGenerator() {
                   <span className="text-[10px] font-black uppercase tracking-widest hidden md:block">Portfolio Runtime Simulator v1.0</span>
                 </div>
                 <div className="flex items-center gap-4">
-                   <div className="px-3 py-1 bg-white/10 rounded text-[10px] font-mono">dreamsync://${fullName.toLowerCase().replace(/\s+/g, '-')}.local</div>
+                   <div className="px-3 py-1 bg-white/10 rounded text-[10px] font-mono">https://${fullName.toLowerCase().replace(/\s+/g, '-')}.dev</div>
                    <button onClick={() => setShowPreview(false)} className="text-white hover:text-red-500 font-bold uppercase text-[10px]">Close X</button>
                 </div>
               </div>
@@ -633,7 +685,7 @@ export default function PortfolioGenerator() {
                 {projects.map((p, i) => (
                   <div key={i} className="border-2 border-gray-200 rounded-lg p-4 bg-gray-50 space-y-3">
                     <div className="flex justify-end"><button onClick={() => removeProject(i)} className="p-1.5 bg-red-100 border border-red-300 text-red-600 rounded hover:bg-red-200"><Trash2 className="w-3.5 h-3.5" /></button></div>
-                    <div><label className={labelCls}>Project Name</label><input value={p.topic} onChange={e => updateProject(i, 'topic', e.target.value)} className={inputCls} placeholder="DreamSync - AI Career Platform" /></div>
+                    <div><label className={labelCls}>Project Name</label><input value={p.topic} onChange={e => updateProject(i, 'topic', e.target.value)} className={inputCls} placeholder="AetherFlow - Decentralized Data Mesh" /></div>
                     <div><label className={labelCls}>Description & Tech Stack</label><textarea value={p.points} onChange={e => updateProject(i, 'points', e.target.value)} className={textareaCls} rows={2} placeholder="AI-powered SaaS for resume building and ATS checking. Built with Next.js, TypeScript, Supabase." /></div>
                     <div><label className={labelCls}>GitHub / Live Link</label><input value={p.website} onChange={e => updateProject(i, 'website', e.target.value)} className={inputCls} placeholder="https://github.com/you/project" /></div>
                   </div>
@@ -847,7 +899,7 @@ export default function PortfolioGenerator() {
 
                {/* Footer Preview */}
                <div className="pt-8 text-center space-y-2 border-t border-black/10">
-                  <p className="text-[10px] font-black uppercase opacity-20">Generated by DreamSync AI</p>
+                  <p className="text-[10px] font-black uppercase opacity-20">Crafted with Premium Portfolio Engine</p>
                </div>
             </div>
          </div>

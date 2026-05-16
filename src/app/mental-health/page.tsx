@@ -172,6 +172,7 @@ export default function MentalHealthAgent() {
         if (candidates.length === 0) {
           console.warn(`No native voice found for ${selectedLang.name}. Skipping audio.`);
           setSpeaking(false);
+          resolve();
           return;
         }
 
@@ -192,11 +193,15 @@ export default function MentalHealthAgent() {
         if (preferred && !preferred.lang.startsWith(primaryCode)) {
           console.error("Voice language mismatch. Aborting audio to prevent accent issues.");
           setSpeaking(false);
+          resolve();
           return;
         }
 
         if (preferred) utter.voice = preferred;
         utter.lang = langCode;
+        
+        // Bind to window to prevent garbage collection
+        (window as any).activeUtterance = utter;
         window.speechSynthesis.speak(utter);
       };
 
@@ -206,7 +211,7 @@ export default function MentalHealthAgent() {
         window.speechSynthesis.onvoiceschanged = trySpeak;
       }
     });
-  }, []);
+  }, [selectedLang]);
 
   // Stop speaking
   const stopSpeaking = () => {
