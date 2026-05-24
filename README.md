@@ -2,7 +2,7 @@
 
 > **AI-powered career engineering for students. Find your path, build your resume, and grow your career with 2026 Market Intelligence.**
 
-### 🌐 [Live Deployment](https://dreamsync-ruddy.vercel.app/) | 🏗️ [Blueprint Repository](https://github.com/Vishwajeetsrk/dreamsync)
+### 🌐 [Live Deployment](https://dreamssync.vercel.app/) | 🏗️ [Blueprint Repository](https://github.com/Vishwajeetsrk/dreamsync)
 
 ---
 
@@ -103,8 +103,8 @@ DreamSync is a 100% community-supported platform. We remove financial barriers f
 
 **Support the Protocol:**
 - **UPI**: `vishwajeetsrk-1@okhdfcbank`
-- **Official Portal**: [Donate Hub](https://dreamsync-ruddy.vercel.app/donate)
+- **Official Portal**: [Donate Hub](https://dreamssync.vercel.app/donate)
 
 ---
 
-© 2026 DREAMSYNC AI. IDENTITY_SYNCHRONIZED. REGISTRY_MODERNIZED.
+© 2026 DREAMSYNC 
