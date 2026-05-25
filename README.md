@@ -2,7 +2,7 @@
 
 > **AI-powered career engineering for students. Find your path, build your resume, and grow your career with 2026 Market Intelligence.**
 
-###  [Live Deployment](https://dreamssync.vercel.app/) | [Blueprint Repository](https://github.com/Vishwajeetsrk/dreamsync)
+###  [Live Deployment](https://dreamssync.vercel.app/) | [Blueprint Repository](https://github.com/Vishwajeetsrk/dreamssync_test)
 
 ---
 
@@ -25,6 +25,7 @@ The platform consists of **specialized AI-powered engines** designed to synchron
 9.  **Global Docs Hub**: Unified guidance on essential identity nodes (Aadhar, PAN, Passport) and legal professional requirements.
 10. **Serenity AI**: Empathetic mental health companion for burnout and professional stress management.
 11. **MOCK INTERVIEW**: High-fidelity conversational simulations powered by enterprise intelligence to bridge the corporate entry gap.
+12. **AI Interview Simulator**: Live practice interviews with feedback, role-specific prompts, and adaptive question flow.
 
 ---
 
