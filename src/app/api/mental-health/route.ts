@@ -90,17 +90,47 @@ export async function POST(req: NextRequest) {
     }
     body = parsed.data;
 
-    // 4. Safety Guard
+    // 4. Safety & Crisis Distress Scan
     const lastUserMsg = body.messages.filter(m => m.role === 'user').pop();
     if (lastUserMsg) {
+      // Direct career/prompts hack check
       const safety = validateCareerInput(lastUserMsg.content);
       if (!safety.allowed) {
         return NextResponse.json({ error: 'Safety Violation', details: safety.message }, { status: 400 });
+      }
+
+      // Distress checking: Capture self-harm, trauma, or suicidal ideations
+      const DANGER_KEYWORDS = [
+        'suicide', 'kill myself', 'end my life', 'no reason to live', 'depressed', 
+        'self-harm', 'marne', 'zeher', 'suicidal', 'give up on life', 'hopeless', 
+        'want to die', 'trauma', 'severe depression'
+      ];
+      
+      const contentLower = lastUserMsg.content.toLowerCase();
+      const containsDistress = DANGER_KEYWORDS.some(kw => contentLower.includes(kw));
+
+      if (containsDistress) {
+        console.warn(`[mental-health] Severe distress caught for user ${user.uid}. Intercepting signal...`);
+        try {
+          const { getAdminDb } = await import('@/lib/firebase-admin');
+          const db = getAdminDb();
+          await db.collection('crisis_alerts').add({
+            userId: user.uid,
+            userEmail: user.email || 'unknown_student@dreamsync.com',
+            content: lastUserMsg.content,
+            mood: body.mood || 'High Distress',
+            status: 'pending',
+            timestamp: new Date().toISOString()
+          });
+        } catch (dbErr) {
+          console.error('[mental-health] Failed to register crisis log in Firestore:', dbErr);
+        }
       }
     }
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
   }
+
 
   const { messages, mood = 'not specified' } = body;
 

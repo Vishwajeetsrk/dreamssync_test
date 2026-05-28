@@ -19,7 +19,6 @@ export const hasRedis = !!(process.env.UPSTASH_REDIS_REST_URL && process.env.UPS
 
 function wrapSafe(limiter: Ratelimit) {
   const originalLimit = limiter.limit.bind(limiter);
-  // @ts-ignore
   limiter.limit = async function(identifier: string, options?: any): Promise<any> {
     if (!hasRedis) {
       return { success: true, limit: 999, remaining: 999, reset: Date.now() + 60000 };

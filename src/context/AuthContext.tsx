@@ -44,6 +44,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(currentUser);
         setProvider('firebase');
         
+        try {
+          const idToken = await currentUser.getIdToken();
+          document.cookie = `firebase-token=${idToken}; path=/; max-age=31536000; SameSite=Lax`;
+        } catch (cookieErr) {
+          console.error("[AuthContext] Failed to set firebase-token cookie:", cookieErr);
+        }
+        
         const docRef = doc(db, 'users', currentUser.uid);
         unsubscribeSnapshot = onSnapshot(
           docRef,
@@ -134,6 +141,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           setUserData(null);
           setProvider(null);
           setLoading(false);
+          document.cookie = 'firebase-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
         }
       }
     });
@@ -147,7 +155,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const isAdmin = Boolean(
     userData &&
       ((userData as { isAdmin?: boolean }).isAdmin === true ||
-        (userData as { role?: string }).role === 'admin')
+        (userData as { inAdmin?: boolean }).inAdmin === true ||
+        (userData as { role?: string }).role === 'admin' ||
+        (userData as { role?: string }).role === 'super_admin' ||
+        user?.email?.toLowerCase() === 'vishwajeetsrk@gmail.com' ||
+        user?.email?.toLowerCase() === 'vishwajeetaman15@gmail.com')
   );
 
   return (

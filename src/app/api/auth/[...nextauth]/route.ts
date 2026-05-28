@@ -1,7 +1,9 @@
 import NextAuth from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-const handler = NextAuth({
+
+export const authOptions: NextAuthOptions = {
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID!,
@@ -19,14 +21,11 @@ const handler = NextAuth({
   callbacks: {
     async signIn({ user, account, profile }) {
       if (account?.provider === 'google' || account?.provider === 'github') {
-        // Here we could sync with Firestore if needed via a fetch to a server action or API
-        // For now, allow sign in
         return true;
       }
       return true;
     },
     async redirect({ url, baseUrl }) {
-      // Direct back to dashboard after successful sync
       return baseUrl + '/dashboard';
     },
     async session({ session, token }) {
@@ -36,6 +35,7 @@ const handler = NextAuth({
       return session;
     },
   },
-});
+};
 
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

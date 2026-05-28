@@ -172,7 +172,7 @@ export default function About() {
           className="flex whitespace-nowrap gap-20 font-black text-xs uppercase tracking-[0.3em] items-center"
         >
           <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-[#2563EB]" /> CORE MISSION: EMPOWERING CARE-EXPERIENCED INDIVIDUALS</div>
-          <div className="flex items-center gap-3"><Globe className="w-5 h-5 text-emerald-400" /> REGIONS: BANGALORE & KASHMIR</div>
+          <div className="flex items-center gap-3"><Globe className="w-5 h-5 text-emerald-400" /> REGIONS: BANGALORE</div>
           <div className="flex items-center gap-3"><HeartHandshake className="w-5 h-5 text-rose-400" /> POSITIVE COMMUNITY CULTURE</div>
           <div className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-[#2563EB]" /> CORE MISSION: EMPOWERING CARE-EXPERIENCED INDIVIDUALS</div>
         </motion.div>

@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import AIAssistant from "@/components/AIAssistant";
 import { AuthProvider } from "@/context/AuthContext";
 import SessionWrapper from "@/components/SessionWrapper";
 import { LanguageProvider } from "@/context/LanguageContext";
+import AppChrome from "@/components/AppChrome";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-sans' });
 
@@ -26,12 +24,9 @@ export default function RootLayout({
         <SessionWrapper>
           <AuthProvider>
             <LanguageProvider>
-              <Navbar />
-              <main className="flex-1 max-w-7xl w-full mx-auto p-2 sm:p-6 lg:p-8 mt-24">
+              <AppChrome>
                 {children}
-              </main>
-              <Footer />
-              <AIAssistant />
+              </AppChrome>
             </LanguageProvider>
           </AuthProvider>
         </SessionWrapper>

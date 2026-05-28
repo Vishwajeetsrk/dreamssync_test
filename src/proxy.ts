@@ -21,7 +21,23 @@ const SECURITY_HEADERS = {
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
+  // 0. Protect /admin and /api/admin paths at Edge level
+  if (pathname.startsWith('/admin') || pathname.startsWith('/api/admin')) {
+    const nextAuthToken = 
+      request.cookies.get('next-auth.session-token') || 
+      request.cookies.get('__Secure-next-auth.session-token');
+      
+    const firebaseSession = request.cookies.get('firebase-token');
+
+    if (!nextAuthToken && !firebaseSession) {
+      const loginUrl = new URL('/login', request.url);
+      loginUrl.searchParams.set('callbackUrl', pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+  
   const response = NextResponse.next();
+
 
   // 1. Inject Security Headers
   Object.entries(SECURITY_HEADERS).forEach(([key, value]) => {
