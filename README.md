@@ -1,112 +1,281 @@
-# DreamSync — Advanced Career Intelligence Platform
+# 🌙 DreamSync — Career Intelligence & Support Platform
 
-> **AI-powered career engineering for students. Find your path, build your resume, and grow your career with 2026 Market Intelligence.**
+> **Empowering career journeys for students and care-experienced youth. Discover your Ikigai, build your professional identity, and grow with empathetic AI guidance.**
 
-###  [Live Deployment](https://dreamssync.vercel.app/) | [Blueprint Repository](https://github.com/Vishwajeetsrk/dreamssync_test)
-
----
-
-## The Professional Design System
-DreamSync is built on a **High-Contrast Sovereign Neo-Brutalist** architecture. It prioritizes information density, bold structural elements, and a "Fintech-Modern" aesthetic designed to empower the modern professional.
+### 🌐 [Live Platform](https://dreamssync.vercel.app/) | 📖 [Documentation](https://github.com/Vishwajeetsrk/dreamssync_test) | 💼 [Team](https://dreamssync.vercel.app/team)
 
 ---
 
-## Core Intelligence Nodes
-The platform consists of **specialized AI-powered engines** designed to synchronize your professional trajectory with global market patterns:
+## 🎯 Platform Overview
 
-1.  **IKIGAI Architect**: High-precision career diagnostics intersecting Passion, Skills, Market Demand, and Income.
-2.  **AI Resume Forge**: Generate FAANG-optimized, ATS-hardened resumes with real-time PDF/DOCX rendering.
-3.  **Advanced ATS Analyzer**: Decrypt recruiter patterns and get eligibility scores vs specific Job Descriptions.
-4.  **Roadmap Accelerator**: 90-day technical and professional progression paths tailored to the 2026 Indian ecosystem.
-5.  **LinkedIn Pro Optimizer**: AI-driven headline, about section, and keyword tuning to rank in the top 1% of recruiters' searches.
-6.  **Portfolio Engine**: Instantly transform professional data into high-performance, responsive web portfolios.
-7.  **AI Strategist v2**: Expert AI agent synced with real-time salary trends and primary job portals.
-8.  **Community Hub**: A unified ecosystem for care-experienced individuals to connect, collaborate, and empower each other.
-9.  **Global Docs Hub**: Unified guidance on essential identity nodes (Aadhar, PAN, Passport) and legal professional requirements.
-10. **Serenity AI**: Empathetic mental health companion for burnout and professional stress management.
-11. **MOCK INTERVIEW**: High-fidelity conversational simulations powered by enterprise intelligence to bridge the corporate entry gap.
-12. **AI Interview Simulator**: Live practice interviews with feedback, role-specific prompts, and adaptive question flow.
+DreamSync is an all-in-one career companion designed for **students, recent graduates, and care-experienced youth**. It combines AI-powered intelligence with a warm, human-centric interface to help users navigate their career paths, build professional identities, and connect with supportive communities.
 
 ---
 
-## 🛠 Technical Architecture (2026)
+## ✨ Core Features & Modules
 
-### Core Performance Stack
-- **Framework**: [Next.js 16.2+](https://nextjs.org/) (App Router, Turbopack, Server Components)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (Custom Neo-Brutalist Utility System)
-- **Animation**: [Framer Motion 12+](https://www.framer.com/motion/) (Micro-interactions & Physics)
-- **Database**: [Firebase Cloud Firestore](https://firebase.google.com/) (Real-time Profile Synchronization)
-- **Authentication**: **Native Firebase Secure Protocol** (OIDC Social login via Google & GitHub with Popup/Redirect flows)
-- **Storage**: [Firebase Storage](https://firebase.google.com/) (Identity Assets & PDF Blobs)
-- **Edge Cache**: [Upstash Redis](https://upstash.com/) (AI Response Caching & Rate Limiting)
+### 🧠 **Ikigai Architect** 
+Discover the intersection of your Passion, Skills, Market Demand, and Income. Interactive visualization helps you find your true career north star.
 
-### AI Intelligence Protocol
-- **Groq & Llama 3**: Primary ultra-fast inference for conversational agents.
-- **OpenRouter (GPT-4o)**: Complex reasoning and resume architecture engine.
-- **Google Gemini 1.5 Flash**: Multimodal analysis for vision-based resume parsing.
-- **Strategic Caching**: All AI responses are cached at the edge via Redis to ensure sub-100ms response times for repeat queries.
+### 📄 **AI Resume Forge**
+Transform your experiences into ATS-optimized professional documents. Guided builder with real-time preview and AI-powered suggestions.
+
+### 🤖 **Career Agent**
+Your personal AI mentor. Get instant career advice, job search strategies, interview preparation, and personalized roadmaps powered by Llama 3.
+
+### 🏆 **ATS Checker**
+Validate your resume against real job descriptions. Get actionable feedback, keyword optimization tips, and ATS compatibility scores.
+
+### 🗺️ **Skills & Document Roadmap**
+Build a structured pathway to your goals. Track identity documents (Aadhaar, PAN), certifications, and skill milestones with localized guidance for the Indian job market.
+
+### 💼 **LinkedIn Pro Optimizer**
+Craft high-performance professional summaries and profile recommendations. Increase visibility to recruiters with data-backed optimizations.
+
+### 🖼️ **Portfolio Engine**
+Generate stunning, responsive web portfolios instantly from your professional data. Share your work with a custom domain or direct link.
+
+### 🌱 **Community Hub**
+Connect with peers through local meetups, workshops, and job opportunities. Access curated resources and peer mentorship in a safe, supportive space.
+
+### 💭 **Mental Health Support**
+Career anxiety? Feeling stuck? Access empathetic guidance and wellness resources integrated into your journey.
 
 ---
 
-## Development Protocol
+## 🛠 Technical Stack
+
+| Component | Technology |
+| :--- | :--- |
+| **Framework** | [Next.js 16.2.2](https://nextjs.org/) with React 19 |
+| **Language** | TypeScript |
+| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) + Framer Motion 12 |
+| **Database** | [Firebase Cloud Firestore](https://firebase.google.com/) |
+| **Authentication** | Firebase Auth + NextAuth v4 (Google, GitHub OAuth) |
+| **AI Models** | Llama 3 via [OpenRouter](https://openrouter.ai/) |
+| **Document Processing** | PDF Parse, DOCX, Mammoth |
+| **File Storage** | Firebase Storage + Web3Forms |
+| **Rate Limiting** | Upstash Redis |
+| **Email** | [Resend](https://resend.com/) |
+
+---
+
+## 📋 File Structure
+
+```
+dreamsync/
+├── src/
+│   ├── app/              # Next.js app router pages
+│   │   ├── page.tsx              # Landing page
+│   │   ├── ikigai/               # Ikigai discovery tool
+│   │   ├── resume-builder/       # Resume creation
+│   │   ├── career-agent/         # AI career chat
+│   │   ├── ats-check/            # ATS validation
+│   │   ├── portfolio/            # Portfolio engine
+│   │   ├── linkedin/             # LinkedIn optimizer
+│   │   ├── community/            # Community hub
+│   │   ├── mental-health/        # Wellness support
+│   │   ├── documents/            # Document roadmap
+│   │   ├── dashboard/            # User dashboard
+│   │   ├── api/                  # Backend routes
+│   │   ├── auth/                 # Authentication
+│   │   └── admin/                # Admin panel (restricted)
+│   ├── components/       # Reusable React components
+│   ├── context/          # React context (Auth, etc.)
+│   ├── lib/              # Utility functions & configs
+│   └── agents/           # AI agent configurations
+├── public/               # Static assets
+├── portfolio/            # Portfolio template samples
+└── .env.local           # Environment variables (create locally)
+```
+
+---
+
+## 🔐 Infrastructure & Credentials
+
+To run DreamSync, configure these services:
+
+| Service | Purpose | Setup Link |
+| :--- | :--- | :--- |
+| **Firebase Project** | Database, Auth, Storage | [Firebase Console](https://console.firebase.google.com/) |
+| **OpenRouter Account** | AI Model API (Llama 3) | [OpenRouter Dashboard](https://openrouter.ai/) |
+| **Web3Forms Account** | Contact form processing | [Web3Forms](https://web3forms.com/) |
+| **GitHub OAuth App** | OAuth credentials for auth | [GitHub Developer Settings](https://github.com/settings/developers) |
+| **Google OAuth App** | Google Sign-In | [Google Cloud Console](https://console.cloud.google.com/) |
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js >= 20.x
-- npm >= 10.x
-- Active Firebase, Upstash, and OpenRouter API credentials.
+- **Node.js** 20.x or higher ([Download](https://nodejs.org/))
+- **Git** for version control
+- All credentials from the services listed above
 
-### Installation & Initialization
+### Installation
+
+1. **Clone the Repository**
 ```bash
-# 1. Clone the identity node
 git clone https://github.com/Vishwajeetsrk/dreamssync_test.git
 cd dreamssync_test
+```
 
-# 2. Synchronize Dependencies
+2. **Install Dependencies**
+```bash
 npm install --legacy-peer-deps
+```
 
-# 3. Configure Environment Nodes
-# Create .env.local and populate with:
-# NEXT_PUBLIC_FIREBASE_*, GOOGLE_CLIENT_ID, GITHUB_CLIENT_ID, 
-# GROQ_API_KEY, UPSTASH_REDIS_REST_URL, etc.
+3. **Create Environment File**
+Create `.env.local` in the root directory:
 
-# 4. Initialize Development Accelerator
+```env
+# Firebase
+NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+
+# AI Services
+OPENROUTER_API_KEY=your_openrouter_key
+
+# Forms & Contact
+NEXT_PUBLIC_WEB3FORMS_KEY=your_web3forms_key
+
+# NextAuth Configuration (Optional)
+NEXTAUTH_SECRET=your_nextauth_secret
+NEXTAUTH_URL=http://localhost:3000
+```
+
+4. **Start Development Server**
+```bash
 npm run dev
 ```
 
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
 ---
 
-## 🚀 Version Control & Synchronization
-
-To synchronize local modifications with the primary and mirror repositories:
+## 📦 Available Scripts
 
 ```bash
-# 1. Stage all modifications
-git add .
-
-# 2. Commit with professional context
-git commit -m "feat: stabilize core auth nodes and optimize AI edge caching"
-
-# 3. Push to High-Level Remotes
-git push origin main
-git push secondary main
+npm run dev        # Start dev server (hot reload)
+npm run build      # Build for production
+npm run start      # Start production server
+npm run lint       # Run ESLint
 ```
 
 ---
 
-## Integrity & Security
-- **Identity Protection**: Native Firebase Secure Auth ensures sub-millisecond validation for Google and GitHub accounts.
-- **Protocol Safety**: `aiGuard` filtering prevents generation of unprofessional or illegal career content.
-- **Rate Limit**: Enforced via Upstash Redis (Sliding Window Algorithm) to prevent API exhaustion.
+## 🌍 Deployment (Vercel)
+
+### Quick Deploy to Vercel
+
+1. **Push to GitHub** (if not already done)
+```bash
+git add .
+git commit -m "Deploy to Vercel"
+git push origin main
+```
+
+2. **Connect to Vercel**
+   - Go to [Vercel](https://vercel.com/)
+   - Click **"New Project"** → Import `dreamssync_test` repository
+
+3. **Configure Environment Variables**
+   - In Vercel Project Settings → Environment Variables
+   - Add all variables from your `.env.local`
+
+4. **Deploy**
+   - Click **"Deploy"** → Vercel builds and deploys automatically
+
+5. **Update Firebase Allowed Domains**
+   - Go to Firebase Console → Authentication → Settings
+   - Add your Vercel domain (e.g., `dreamssync-test.vercel.app`) to Authorized Domains
+
+### Verify Deployment
+- Visit your Vercel URL
+- Test login with Google/GitHub
+- Verify all features are working
 
 ---
 
-## Community Stewardship
-DreamSync is a 100% community-supported platform. We remove financial barriers for students through donor contributions that sustain our high-performance AI infrastructure.
+## 🏗️ Design System
 
-**Support the Protocol:**
-- **UPI**: `vishwajeetsrk-1@okhdfcbank`
-- **Official Portal**: [Donate Hub](https://dreamssync.vercel.app/donate)
+DreamSync uses a **warm, human-centric design philosophy**:
+
+- **Color Palette**: Soft stone grays (Stone-50 to Stone-900) with accent blues
+- **Typography**: Inter font family for maximum readability
+- **Geometry**: Soft rounded corners (`rounded-[3rem]`) for approachability
+- **Spacing**: Consistent padding based on Tailwind's spacing scale
+- **Animation**: Subtle Framer Motion transitions for delight without distraction
+- **Accessibility**: WCAG 2.1 AA compliant, keyboard navigation, screen reader support
 
 ---
 
-© 2026 DREAMSYNC 
+## 🔒 Security & Privacy
+
+- **Authentication**: OAuth 2.0 (Google, GitHub) with zero password storage
+- **Database Security**: Firebase Security Rules restrict unauthorized access
+- **Data Encryption**: HTTPS-only communication, encrypted at rest
+- **Content Filtering**: `aiGuard` ensures all AI responses are ethical, supportive, and career-focused
+- **GDPR Compliant**: User data handling follows international privacy standards
+
+---
+
+## 📚 Documentation
+
+- **[Requirements Specification](./requirement_specification.md)** – Functional & non-functional requirements
+- **[UI/UX Guidelines](./ui_ux_guidelines.md)** – Design principles and component patterns
+- **[User Documentation](./user_documentation.md)** – Feature walkthroughs
+- **[Content Registry](./content_links.md)** – Information architecture and brand voice
+- **[Admin Planning](./admin_planning.md)** – Dashboard features
+
+---
+
+## 🧩 Recommended IDE Extensions
+
+For the best development experience:
+
+- **[Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)** – Design token suggestions
+- **[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)** – Code quality checks
+- **[Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)** – Code formatting
+- **[Firebase Explorer](https://marketplace.visualstudio.com/items?itemName=jsayol.firebase-explorer)** – Firestore management
+- **[Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)** – API testing
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📞 Support & Contact
+
+- **Email**: support@dreamssync.co.in
+- **LinkedIn**: [@vishwajeetsrk](https://www.linkedin.com/in/vishwajeetsrk/)
+- **GitHub Issues**: [Report bugs or request features](https://github.com/Vishwajeetsrk/dreamssync_test/issues)
+
+---
+
+## 📜 License
+
+This project is proprietary. All rights reserved © 2026 DreamSync.
+
+---
+
+## 🙏 Acknowledgments
+
+Built with ❤️ for students and care-experienced youth. Special thanks to the open-source community for incredible tools like Next.js, Tailwind CSS, and Firebase.
+
+---
+
+**DreamSync: Empowering Futures. Human-Centric. Identity-Secured.**
