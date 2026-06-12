@@ -278,4 +278,4 @@ Built with ❤️ for students and care-experienced youth. Special thanks to the
 
 ---
 
-**DreamSync: Empowering Futures. Human-Centric. Identity-Secured.**
+**DreamSync: Empowering Future.**
